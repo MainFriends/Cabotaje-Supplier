@@ -1,0 +1,10 @@
+POST http://localhost:4000/api/fees-pay
+Content-Type: application/json
+Authorization: Bearer 
+
+{
+    "COD_ACC_PAY" : 3,
+    "AMOUNT" : 100, 
+    "DATE_PAY" : "2022-03-22",
+    "COD_TYP_PAY" : 3
+}

@@ -1,0 +1,13 @@
+POST http://localhost:4000/api/pay-form
+Content-Type: application/json
+Authorization: Bearer 
+
+{
+    "COD_USER": 1,
+	"HOURS_WORKED": 5,
+    "AMO_GROSS": 20000.00,
+    "BONUS": 1500.00,
+    "TOT_DEDUCTIONS": 200.00,
+    "NET_SALARY": 19800.00,
+    "DAT_PAYMENT": "2021-05-02"
+}

@@ -1,0 +1,26 @@
+POST http://localhost:4001/api/purchase-detail
+Content-Type: application/json
+
+[
+    {
+        "COD_PRODUCT":"1",
+        "PRICE": 20,
+        "CANT_PRODUCTS": 100,
+        "DISCOUNT":50,
+        "TOTAL": 20000
+    },
+    {
+        "COD_PRODUCT":"2",
+        "PRICE": 20,
+        "CANT_PRODUCTS": 100,
+        "DISCOUNT":50,
+        "TOTAL": 20000
+    },
+    {
+        "COD_PRODUCT":"3",
+        "PRICE": 20,
+        "CANT_PRODUCTS": 100,
+        "DISCOUNT":50,
+        "TOTAL": 20000
+    }
+]

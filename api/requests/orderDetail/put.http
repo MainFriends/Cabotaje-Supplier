@@ -1,0 +1,8 @@
+PUT http://localhost:4000/api/order-detail/2
+Content-Type: application/json
+
+{
+    "COD_PRODUCT":5,
+    "DES_ORDER": "Huawei",
+    "CANT_PRODUCTS": 10
+}

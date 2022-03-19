@@ -1,0 +1,9 @@
+POST http://localhost:4000/api/fees-receivable
+Content-Type: application/json
+Authorization: Bearer 
+{
+    "COD_ACC_RECEIVABLE" : 2,
+    "AMOUNT" : 100, 
+    "DAT_PAY" : "2022-03-05",
+    "COD_TYP_PAY" : 2
+}

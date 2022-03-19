@@ -1,0 +1,10 @@
+PUT http://localhost:4000/api/accounts-pay/2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfUk9MRSI6MSwiRklSU1RfTkFNRSI6IlBlZHJvIiwiTEFTVF9OQU1FIjoiU2FuY2hleiIsImlhdCI6MTY0NzA1NDczOH0.P_mJn313Zuant1XDIhm6Y4Wfk2Pyko4797Z0HeBQVLM
+
+{
+    "COD_INVOICE": 1,
+	"DESCRIPTION": "Deuda",
+    "TOT_BALANCE": 500.00,
+    "DATE_LIMIT": "2022-03-04"
+}

@@ -1,0 +1,10 @@
+POST http://localhost:4000/api/accounts-pay
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfUk9MRSI6MSwiRklSU1RfTkFNRSI6IlBlZHJvIiwiTEFTVF9OQU1FIjoiU2FuY2hleiIsImlhdCI6MTY0NzA1NDczOH0.P_mJn313Zuant1XDIhm6Y4Wfk2Pyko4797Z0HeBQVLM
+
+{
+    "COD_INVOICE" : 1,
+    "DESCRIPTION" : "Deuda a pagar",
+    "TOT_BALANCE" : 2000.05,
+    "DATE_LIMIT" : "2022-03-22"
+}

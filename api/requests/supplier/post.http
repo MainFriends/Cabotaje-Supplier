@@ -1,0 +1,13 @@
+POST http://localhost:4000/api/supplier
+Content-Type:application/json
+
+{
+	"NAM_SUPPLIER": "quesos jutic",
+	"NAM_CONTACT": "alejandrta",
+	"LAST_NAM_CONTACT": "diaz",
+	"ADDRESS": "jutiapa danli",
+	"NUM_PHONE_ONE": 98745623,
+	"EMAIL":"quesosdanl@gmail.com",
+	"NAM_CITY": "juticapa",
+	"ZIP_CODE": 504
+}

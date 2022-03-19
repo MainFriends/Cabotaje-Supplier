@@ -1,0 +1,21 @@
+POST http://localhost:4000/api/order-detail
+Content-Type: application/json
+
+[
+    {
+    "COD_PRODUCT":1,
+    "DES_ORDER": "Samsung",
+    "CANT_PRODUCTS": 20
+    },
+    {
+    "COD_PRODUCT":5,
+    "DES_ORDER": "Huawei",
+    "CANT_PRODUCTS": 20
+    },
+    {
+    "COD_PRODUCT":6,
+    "DES_ORDER": "Xiaomi",
+    "CANT_PRODUCTS": 20
+    }
+
+]

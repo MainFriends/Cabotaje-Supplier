@@ -1,0 +1,12 @@
+POST http://localhost:4000/api/returnProduct
+Content-Type: application/json
+
+{
+    "COD_PRODUCT": 5,
+    "CONCEPT": "QUEBRADISIMO",
+    "CANT_PRODUCT" : 1,
+    "NUM_LOT": 1,
+    "COD_USER": null,
+    "MOVEMENT": "SALIDA",
+    "DES_RETURN": "QUEBRADITO"
+}

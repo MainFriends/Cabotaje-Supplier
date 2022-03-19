@@ -1,0 +1,12 @@
+POST http://localhost:4000/api/sales-returns
+Content-Type: application/json
+Authorization: Bearer 
+
+{
+    "COD_PRODUCT" : 2,
+    "DESCRIPTION" : "Devolución de unos refrescos de Coca-Cola",
+    "CANT" : 2,
+    "AMOUNT" : 130.00, 
+    "COD_USER" : 1,
+    "DAT_RETURN" : "2022-03-10"
+}

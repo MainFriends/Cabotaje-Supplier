@@ -1,0 +1,8 @@
+POST http://localhost:4000/api/order
+Content-Type: application/json
+
+{
+    "COD_SUPPLIER":1,
+    "DAT_REQUIRED": "2000-09-10",
+    "COD_USER":1
+}

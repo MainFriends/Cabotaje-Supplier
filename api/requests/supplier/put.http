@@ -1,0 +1,13 @@
+put http://localhost:4000/api/supplier/4
+Content-Type:application/json
+
+{
+	"NAM_SUPPLIER": "Quesos Jutiapa",
+	"NAM_CONTACT": "brenda",
+	"LAST_NAM_CONTACT": "diaz",
+	"ADDRESS": "Jutiapa,danli",
+	"NUM_PHONE_ONE": 98745623,
+	"EMAIL":"quesosbrendaA@gmail.com",
+	"NAM_CITY": "juticaplpa",
+	"ZIP_CODE": 504
+}

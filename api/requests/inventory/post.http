@@ -1,0 +1,19 @@
+POST http://localhost:4000/api/inventory
+Content-Type: application/json
+
+{
+    "COD_SUPPLIER" : 1,
+	"NAM_PRODUCT" : "FRIJOLES",
+    "DES_PRODUCT" : "BLANCO",
+    "ISV" : 10.0, 
+    "CANT_TOTAL": 1,
+    "NORMAL_UNIT_PRICE_1": 100.00,	
+    "NORMAL_UNIT_PRICE_2": 100.00,
+    "NORMAL_UNIT_PRICE_3": 100.00,
+    "WHOLESALE_CANT_1" : 105.00,
+    "WHOLESALE_CANT_2" : 105.00,
+    "WHOLESALE_PRICE_1" : 105.00,
+    "WHOLESALE_PRICE_2" : 105.00,
+    "PRICE_UNIT_PURCHASE": 90.00,
+    "COD_TYP_PRODUCT": 2
+}

@@ -1,0 +1,12 @@
+POST http://localhost:4000/api/inventoryDetail
+Content-Type: application/json
+
+{
+    "COD_PRODUCT" : 5, 
+	"DAT_PURCHASE" :"2022-01-27", 
+    "DAT_EXP" : "2023-01-27",
+    "CANT_PRODUCTS": 20,
+    "NUM_LOT": 1,
+    "COD_ORDER": null,
+    "COD_STATUS": null
+}

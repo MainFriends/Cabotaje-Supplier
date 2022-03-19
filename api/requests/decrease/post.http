@@ -1,0 +1,11 @@
+POST http://localhost:4000/api/decrease
+Content-Type: application/json
+
+{
+    "COD_PRODUCT": 5,
+    "CONCEPT": "QUEBRADO",
+    "CANT_PRODUCTS": 1,
+    "NUM_LOT": 1,
+    "COD_USER": null,
+    "DAT_DECREASE": "2022-03-11"
+}

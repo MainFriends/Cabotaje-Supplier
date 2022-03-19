@@ -1,0 +1,12 @@
+PUT http://localhost:4000/api/inventoryDetail/5
+Content-Type: application/json
+
+{
+    "COD_PRODUCT" : 5, 
+	"DAT_PURCHASE" :"2022-01-27", 
+    "DAT_EXP" : "2023-01-27",
+    "CANT_PRODUCTS": 100,
+    "NUM_LOT": 2,
+    "COD_ORDER": null,
+    "COD_STATUS": null
+}

@@ -1,0 +1,2 @@
+GET  http://Localhost:4000/api/client
+Content-Type: application/json

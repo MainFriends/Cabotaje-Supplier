@@ -1,0 +1,13 @@
+PUT http://localhost:4000/api/sales-returns/2
+Content-Type: application/json
+Authorization: Bearer 
+
+{
+    "COD_RETURN" : 2,
+    "COD_PRODUCT" : 3,
+    "DESCRIPTION" : "Devolución de unos lácteos",
+    "CANT" : 2,
+    "AMOUNT" : 110.00,
+    "COD_USER" : 2,
+    "DAT_RETURN" : "2022-03-16" 
+}
