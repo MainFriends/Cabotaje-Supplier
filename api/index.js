@@ -1,5 +1,6 @@
 /* IMPORTAR PAQUETES */
 const express = require('express');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 require('dotenv').config();
 
@@ -35,6 +36,9 @@ const returnProduct = require('./routes/returnProduct.js')
 
 /* CREAR SERVIDOR */
 const app = express();
+
+/* CORS */
+app.use(cors());
 
 /* BODY-PARSER */
 app.use(bodyParser.json());

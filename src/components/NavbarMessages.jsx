@@ -19,7 +19,7 @@ const NavbarMessages = () => {
                 </h6>
                 <a className="dropdown-item d-flex align-items-center" href="#">
                     <div className="dropdown-list-image mr-3">
-                        <img className="rounded-circle" src="assets/img/undraw_profile_1.svg"
+                        <img className="rounded-circle" src="../../src/assets/img/undraw_profile_1.svg"
                             alt="..."></img>
                         <div className="status-indicator bg-success"></div>
                     </div>
@@ -31,7 +31,7 @@ const NavbarMessages = () => {
                 </a>
                 <a className="dropdown-item d-flex align-items-center" href="#">
                     <div className="dropdown-list-image mr-3">
-                        <img className="rounded-circle" src="assets/img/undraw_profile_2.svg"
+                        <img className="rounded-circle" src="../../src/assets/img/undraw_profile_2.svg"
                             alt="..."></img>
                         <div className="status-indicator"></div>
                     </div>
@@ -43,7 +43,7 @@ const NavbarMessages = () => {
                 </a>
                 <a className="dropdown-item d-flex align-items-center" href="#">
                     <div className="dropdown-list-image mr-3">
-                        <img className="rounded-circle" src="assets/img/undraw_profile_3.svg"
+                        <img className="rounded-circle" src="../../src/assets/img/undraw_profile_3.svg"
                             alt="..."></img>
                         <div className="status-indicator bg-warning"></div>
                     </div>

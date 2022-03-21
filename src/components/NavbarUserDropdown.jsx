@@ -8,7 +8,7 @@ const NavbarUserDropdown = () => {
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span className="mr-2 d-none d-lg-inline text-gray-600 small">Lisandro Pereira</span>
                 <img className="img-profile rounded-circle"
-                    src={'../assets/img/undraw_profile_1.svg'}></img>
+                    src='../src/assets/img/undraw_profile_1.svg'></img>
             </a>
 
             <div className="dropdown-menu dropdown-menu-right shadow animated--grow-in"
