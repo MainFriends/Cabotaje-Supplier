@@ -1,47 +1,57 @@
-import { Link } from "react-router-dom";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import LoginForm from '../../components/LoginForm';
+import useForm from '../../hooks/useForm';
+import login from '../../services/login';
 
 const Login = () => {
     document.title = "Cabotaje Supplier - Login"
 
+    const [errorMessage, setErrorMessage] = useState('');
+    const navigate = useNavigate();
+
+    const [formLogin, setFormLogin] = useForm({
+        EMAIL: '',
+        PASSWORD: ''
+    });
+
+    const handleLoginSubmit = e => {
+        e.preventDefault();
+
+        //Validar formulario
+        const {EMAIL, PASSWORD} = formLogin;
+        if(EMAIL === '' || PASSWORD === ''){
+            setErrorMessage('Introduce un correo y contraseña válido.');
+            setTimeout(() => {
+                setErrorMessage('');
+            }, 3000);
+            return;
+        }
+
+        //Validar login
+        login(formLogin)
+            .then(data => {
+                //Guardamos información en el Local Storage
+                window.localStorage.setItem('loggedUser', JSON.stringify(data));
+                //redireccion
+                navigate('/dashboard');
+            })
+            .catch(err => {
+                const {message} = err.response.data;
+                setErrorMessage(message);
+                document.querySelector('#password').value = '';
+                setTimeout(() => {
+                    setErrorMessage('');
+                }, 3000);
+            })
+    }
+
     return (
-        <div className="container">
-            <div className="row justify-content-center">
-                <div className="col-xl-10 col-lg-12 col-md-9">
-                    <div className="card o-hidden border-0 shadow-lg my-5">
-                        <div className="card-body p-0">
-                            <div className="row">
-                                <div className="col-lg-6 d-none d-lg-block bg-login-image"></div>
-                                <div className="col-lg-6">
-                                    <div className="p-5">
-                                        <div className="text-center ">
-                                            <h2 className="font-weight-bold text-dark mb-4">Inicio de sesión</h2>
-                                        </div>
-                                        <form className="user">
-                                            <div className="form-group">
-                                                <input type="email" className="form-control form-control-user"
-                                                    id="exampleInputEmail" aria-describedby="emailHelp"
-                                                    placeholder="Correo electrónico o código de empleado">
-                                                </input>
-                                            </div>
-                                            <div className="form-group">
-                                                <input type="password" className="form-control form-control-user"
-                                                    id="exampleInputPassword" placeholder="Contraseña">
-                                                </input>
-                                            </div>
-                                            <hr/>
-                                            <Link to="/dashboard" className="btn btn-primary btn-user btn-block">
-                                                Iniciar sesión
-                                            </Link>
-                                            <div className="text-muted font-weight-light mt-3 small">¿Olvidaste tu contraseña? Informale a tu gerente o encargado.</div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <LoginForm 
+            setFormLogin={setFormLogin}
+            handleLoginSubmit={handleLoginSubmit}
+            errorMessage={errorMessage}
+        />
     )
 }
 
