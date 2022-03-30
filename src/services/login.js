@@ -1,7 +1,7 @@
 import axios from '../config/axios';
 
-const login = async credentials => {
-    const {data} = await axios.post('/login', credentials);
+const login = async config => {
+    const {data} = await axios.post('/login', config);
     return data;
 }
 
