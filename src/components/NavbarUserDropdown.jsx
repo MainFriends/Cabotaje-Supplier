@@ -1,9 +1,7 @@
 import { useLayoutEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 const NavbarUserDropdown = () => {
 
-    const navigate = useNavigate();
     const [userSession, setUserSession] = useState({});
 
     useLayoutEffect(() => {
@@ -17,7 +15,7 @@ const NavbarUserDropdown = () => {
     const handleLogout = () => {
         window.localStorage.removeItem('loggedUser');
         setUserSession(null);
-        navigate('/');
+        window.location.reload(true);
     }
 
     return (

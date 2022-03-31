@@ -1,11 +1,11 @@
 import {useEffect, useState, useMemo} from 'react';
 import DataTable from 'react-data-table-component';
 import Spinner from '../../../components/Spinner';
-import {get} from '../../../services/sale-invoice';
+import { getInvoices } from '../../../services/sale-invoice';
 import moment from 'moment';
 
 
-const FilterComponent = ({ filterText, onFilter, onClear }) => (
+const FilterComponent = ({ filterText, onFilter}) => (
 	<>
 		<input
 			id="search"
@@ -22,34 +22,25 @@ const FilterComponent = ({ filterText, onFilter, onClear }) => (
 const Facturas = () => {
     const [rows, setRows] = useState([]);
     const [filterText, setFilterText] = useState('');
-    const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
     const [pending, setPending] = useState(true);
-
-    const {token} = JSON.parse(window.localStorage.getItem('loggedUser'));
-    const config = {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    }
-
+  
     useEffect(async () => {
-        let unmounted = false;
-        if(!unmounted){
-            const res = await get(config);
-            setRows(res.map(invoice => {
-                const {COD_INVOICE} = invoice;
-                return {
-                    ...invoice,
-                    ACTIONS: <>
-                            <button className='btn btn-sm btn-primary me-1' onClick={() => handleDetail(COD_INVOICE)}><i className="fa-solid fa-eye"></i></button>
-                    </>
-                }
-            }));
-            setPending(false);
-        }
-        return () => {
-            unmounted = true;
-        }
+        const data = await getInvoices();
+
+        //agregar botones de accion a las filas
+        const rows = data.map(invoice => {
+            const {COD_INVOICE} = invoice;
+            return {
+                ...invoice,
+                ACTIONS: <>
+                        <button className='btn btn-sm btn-primary me-1' onClick={() => handleDetail(COD_INVOICE)}><i className="fa-solid fa-eye"></i></button>
+                </>
+            }
+        });
+
+        
+        setRows(rows);
+        setPending(false);
     },[]);
 
     const handleDetail = (COD_INVOICE) => {
@@ -127,17 +118,10 @@ const Facturas = () => {
     );
 
     const subHeaderComponentMemo = useMemo(() => {
-    	const handleClear = () => {
-    		if (filterText) {
-    			setResetPaginationToggle(!resetPaginationToggle);
-    			setFilterText('');
-    		}
-    	};
-
     	return (
-        		<FilterComponent onFilter={e => setFilterText(e.target.value)} onClear={handleClear} filterText={filterText} />
+        		<FilterComponent onFilter={e => setFilterText(e.target.value)} filterText={filterText} />
         	);
-    }, [filterText, resetPaginationToggle]);
+    }, [filterText]);
 
     return (
             pending
@@ -152,7 +136,6 @@ const Facturas = () => {
                     responsive
                     pagination
                     paginationComponentOptions={paginationComponentOptions}
-                    paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
                     subHeader
                     subHeaderComponent={subHeaderComponentMemo}
                     highlightOnHover

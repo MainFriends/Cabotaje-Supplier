@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import LoginForm from '../../components/LoginForm';
 import useForm from '../../hooks/useForm';
 import login from '../../services/login';
@@ -8,7 +7,6 @@ const Login = () => {
     document.title = "Cabotaje Supplier - Login"
 
     const [errorMessage, setErrorMessage] = useState('');
-    const navigate = useNavigate();
 
     const [formLogin, setFormLogin] = useForm({
         EMAIL: '',
@@ -33,8 +31,7 @@ const Login = () => {
             .then(data => {
                 //Guardamos información en el Local Storage
                 window.localStorage.setItem('loggedUser', JSON.stringify(data));
-                //redireccion
-                navigate('/dashboard');
+                window.location.reload(true);
             })
             .catch(err => {
                 const {message} = err.response.data;
