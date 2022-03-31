@@ -2,7 +2,7 @@ import axios from '../config/axios';
 
 const getInvoices = async () => {
     //token extractor
-    const {token} = JSON.parse(window.localStorage.getItem('loggedUser'));
+    const {token} = JSON.parse(window.localStorage.getItem('userSession'));
     const config = {
         headers: {
             Authorization: `Bearer ${token}`
