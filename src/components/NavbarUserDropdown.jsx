@@ -1,21 +1,12 @@
 import { useLayoutEffect, useState } from "react";
+import { useUser } from "../hooks/useUser";
 
 const NavbarUserDropdown = () => {
 
-    const [userSession, setUserSession] = useState({});
-
-    useLayoutEffect(() => {
-        const loggedUser = window.localStorage.getItem('loggedUser');
-        const user = JSON.parse(loggedUser);
-        setUserSession(user);
-    },[]);
-
-    const {FIRST_NAME, LAST_NAME} = userSession;
+    const {jwt: {FIRST_NAME, LAST_NAME}, logout} = useUser();
 
     const handleLogout = () => {
-        window.localStorage.removeItem('loggedUser');
-        setUserSession(null);
-        window.location.reload(true);
+        logout();
     }
 
     return (

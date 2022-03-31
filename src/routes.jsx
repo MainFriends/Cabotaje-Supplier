@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
+import { useUser } from "./hooks/useUser";
 
 //Pages
 import Login from "./pages/Login";
@@ -21,14 +22,14 @@ import Rebajas from "./pages/Dashboard/Contabilidad/Rebajas";
 import PlanillaPago from "./pages/Dashboard/Contabilidad/PlanillaPago";
 import Graficas from "./pages/Dashboard/Graficas";
 
-const isUserLogged = JSON.parse(window.localStorage.getItem('loggedUser'));
-
 const Pages = () => {
+
+    const {isLogged} = useUser();
 
     return (
     <Routes>
-        <Route path="/" element={isUserLogged ? (<Navigate to='/dashboard'/>) : (<Login />)}/>
-        <Route path="/dashboard" element={isUserLogged ? (<Dashboard />) : (<Navigate to='/'/>)}>
+        <Route path="/" element={isLogged ? (<Navigate to='/dashboard'/>) : (<Login />)}/>
+        <Route path="/dashboard" element={isLogged ? (<Dashboard />) : (<Navigate to='/'/>)}>
             <Route path="ventas" element={<Facturas />}/>
             <Route path="compras" element={<Compras />}/>
             <Route path="pedidos" element={<Pedidos />}/>

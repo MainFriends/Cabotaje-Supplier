@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import LoginForm from '../../components/LoginForm';
 import useForm from '../../hooks/useForm';
-import login from '../../services/login';
+import loginService from '../../services/login';
+import { useUser } from '../../hooks/useUser';
 
 const Login = () => {
     document.title = "Cabotaje Supplier - Login"
 
     const [errorMessage, setErrorMessage] = useState('');
+    const {login} = useUser();
 
     const [formLogin, setFormLogin] = useForm({
         EMAIL: '',
@@ -26,12 +28,11 @@ const Login = () => {
             return;
         }
 
-        //Validar login
-        login(formLogin)
+        //Validar loginService
+        loginService(formLogin)
             .then(data => {
                 //Guardamos información en el Local Storage
-                window.localStorage.setItem('loggedUser', JSON.stringify(data));
-                window.location.reload(true);
+                login(data);
             })
             .catch(err => {
                 const {message} = err.response.data;

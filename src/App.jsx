@@ -1,9 +1,12 @@
+import { UserContextProvider } from "./context/userContext";
 import Pages from "./routes";
 
 const App = () => {
 
   return (
-    <Pages />
+    <UserContextProvider>
+      <Pages />
+    </UserContextProvider>
   );
 };
 
