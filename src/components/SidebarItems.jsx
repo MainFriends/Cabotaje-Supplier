@@ -24,7 +24,7 @@ const SidebarItems = () => {
             </div>
 
             <li className={ "nav-item " + (pathname === '/dashboard/ventas' ? "active" : "")}>
-                <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVenta"
+                <a className="nav-link collapsed dinamic" href="#" data-toggle="collapse" data-target="#collapseVenta"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i className="mr-2 fas fa-hand-holding-usd"></i>
                     <span>Ventas</span>
@@ -38,7 +38,7 @@ const SidebarItems = () => {
             </li>
 
             <li className={ "nav-item " + (pathname === '/dashboard/compras' || pathname === '/dashboard/pedidos' ? "active" : "")}>
-                <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCompra"
+                <a className="nav-link collapsed dinamic" href="#" data-toggle="collapse" data-target="#collapseCompra"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i className="mr-2 fas fa-store-alt"></i>
                     <span>Compras</span>
@@ -53,7 +53,7 @@ const SidebarItems = () => {
             </li>
 
             <li className={ "nav-item " + (pathname === '/dashboard/usuarios' || pathname === '/dashboard/clientes' || pathname === '/dashboard/proveedores' ? "active" : "")}>
-                <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePersona"
+                <a className="nav-link collapsed dinamic" href="#" data-toggle="collapse" data-target="#collapsePersona"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i className="mr-2 fas fa-users"></i>
                     <span>Personas</span>
@@ -73,7 +73,7 @@ const SidebarItems = () => {
                     pathname === '/dashboard/movimientos-inventario' || 
                     pathname === '/dashboard/devoluciones-inventario' || 
                     pathname === '/dashboard/mermas' ? "active" : "")}>
-                <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProduccion"
+                <a className="nav-link collapsed dinamic" href="#" data-toggle="collapse" data-target="#collapseProduccion"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i className="mr-2 fas fa-boxes"></i>
                     <span>Producción</span>
@@ -95,7 +95,7 @@ const SidebarItems = () => {
                     pathname === '/dashboard/devoluciones' || 
                     pathname === '/dashboard/rebajas' ||
                     pathname === '/dashboard/planilla-pago' ? "active" : "")}>
-                <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseContabilidad"
+                <a className="nav-link collapsed dinamic" href="#" data-toggle="collapse" data-target="#collapseContabilidad"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i className="mr-2 fas fa-coins"></i>
                     <span>Contabilidad</span>

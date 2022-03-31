@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Sidebar from "../../components/Sidebar";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { Outlet, useLocation } from "react-router-dom";
+import runApp from '../../assets/js/app';
 
 const ContentDashboard = () => {
 
@@ -15,6 +16,10 @@ const Dashboard = () => {
   const {pathname} = useLocation();
   document.title = "Cabotaje Supplier - Dashboard"
   const [clickMenuOpen, setClickMenu] = useState(true);
+
+  useEffect(() => {
+    runApp();
+  },[]);
 
   return (
     <>

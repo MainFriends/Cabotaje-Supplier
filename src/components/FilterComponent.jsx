@@ -4,7 +4,7 @@ const FilterComponent = ({ filterText, onFilter}) => (
 			id="search"
             className='form-control form-control-sm filterInput'
 			type="text"
-			placeholder="Buscar cliente"
+			placeholder="Buscar"
 			aria-label="Search Input"
 			value={filterText}
 			onChange={onFilter}>
