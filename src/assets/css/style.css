@@ -29,16 +29,16 @@ body,
     }
   }
 
-  .card {
-    padding: 5px;
-  }
-
   .filterInput{
     width: 12rem !important;
   }
 
   ::placeholder{
   font-size: 0.8rem;
+}
+
+.card-body{
+  padding: 1px !important;
 }
 
 .col-form{
