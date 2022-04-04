@@ -15,7 +15,7 @@ const LoginForm = ({setFormLogin, handleLoginSubmit, errorMessage}) => {
                                         <div className="text-center ">
                                             <h2 className="font-weight-bold text-dark mb-4">Inicio de sesión</h2>
                                         </div>
-                                        <form className="user">
+                                        <form className="user" action='#'>
                                             <div className="form-group">
                                                 <input onChange={setFormLogin} type="email" className="form-control form-control-user"
                                                     name="EMAIL"

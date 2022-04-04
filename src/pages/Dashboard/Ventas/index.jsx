@@ -119,7 +119,7 @@ const Facturas = () => {
                     />
 
                     <Modal 
-                        id='viewDetail'
+                        idModal='viewDetail'
                         title='Detalle de venta'
                         content={<h1>Contenido</h1>}
                         disableButtonPost={true}

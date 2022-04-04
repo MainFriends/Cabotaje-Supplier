@@ -1,7 +1,9 @@
-const Modal = ({id, title, content, disableButtonPost = false, setSubmitRequest}) => {
+import AlertError from './AlertError';
+
+const Modal = ({idModal, title, content, messageError}) => {
 
     return (
-        <div className="modal fade text-dark" id={id} aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div className="modal fade text-dark" id={idModal} aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog modal-lg">
                 <div className="modal-content">
                 <div className="modal-header">
@@ -12,12 +14,7 @@ const Modal = ({id, title, content, disableButtonPost = false, setSubmitRequest}
                 </div>
                 <div className="modal-body">
                     {content}
-                </div>
-                <div className="modal-footer">
-                    <button type="button" className="btn btn-primary" data-dismiss="modal">Cerrar</button>
-                    {disableButtonPost
-                    ? null
-                    : <button type="button" onClick={setSubmitRequest(true)} className="btn btn-success">Guardar</button>}
+                    {messageError ? <AlertError message={messageError} /> : null}
                 </div>
                 </div>
             </div>
