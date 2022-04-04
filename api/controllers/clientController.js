@@ -9,7 +9,6 @@ const getClients=(req,res) => {
         res.status(500). send({message:'ERROR EN EL SERVIDOR'});
         }else{
         res.status(200).json(result[0]);
-        console.log(req.client);
         };
     });
 };
