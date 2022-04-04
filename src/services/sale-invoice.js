@@ -1,16 +1,9 @@
 import axios from '../config/axios';
+import token from '../helpers/getToken'
 
 const getInvoices = async () => {
-    //token extractor
-    const {token} = JSON.parse(window.localStorage.getItem('userSession'));
-    const config = {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    }
-
     //consultar api
-    const {data} = await axios.get('/sale-invoice', config);
+    const {data} = await axios.get('/sale-invoice', token);
     
     return data
 }

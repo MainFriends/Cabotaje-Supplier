@@ -1,11 +1,14 @@
-import {useEffect, useState, useMemo} from 'react';
 import DataTable from 'react-data-table-component';
+import moment from 'moment';
+
+import {useEffect, useState, useMemo} from 'react';
+
 import Spinner from '../../../components/Spinner';
 import FilterComponent from '../../../components/FilterComponent';
 import Modal from '../../../components/Modal';
+
 import { getInvoices } from '../../../services/sale-invoice';
 import {paginationComponentOptions} from '../../../helpers/datatablesOptions';
-import moment from 'moment';
 
 const Facturas = () => {
     const [rows, setRows] = useState([]);
@@ -122,8 +125,6 @@ const Facturas = () => {
                         idModal='viewDetail'
                         title='Detalle de venta'
                         content={<h1>Contenido</h1>}
-                        disableButtonPost={true}
-                        setSubmitRequest={setSubmitRequest}
                     />
                 </div>
             </div> 

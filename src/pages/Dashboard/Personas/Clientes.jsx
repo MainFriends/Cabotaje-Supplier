@@ -6,11 +6,11 @@ import Spinner from '../../../components/Spinner';
 import FilterComponent from '../../../components/FilterComponent';
 import Modal from '../../../components/Modal';
 import AddClientForm from '../../../components/client/AddClientForm';
+import EditClientForm from '../../../components/client/EditClientForm';
 
 import {paginationComponentOptions} from '../../../helpers/datatablesOptions';
 import axios from '../../../config/axios';
 import token from '../../../helpers/getToken';
-import EditClientForm from '../../../components/client/EditClientForm';
 
 const Clientes = () => {
     const [rows, setRows] = useState([]);
