@@ -14,16 +14,6 @@ const EditClientForm = ({rowCOD, setSendRequest, setMessageError}) => {
         RTN: ''
     })
 
-    const {
-        FIRST_NAME = '',
-        LAST_NAME = '',
-        IDENTITY = '',
-        NUM_PHONE_ONE = '',
-        NUM_PHONE_TWO = '',
-        ADDRESS = '',
-        RTN = ''
-    } = formEditClient;
-
     const handleInputChange = (e) => {
         setFormEditClient({
             ...formEditClient,
@@ -32,13 +22,14 @@ const EditClientForm = ({rowCOD, setSendRequest, setMessageError}) => {
     }
 
     useEffect(() => {
-        axios.get(`/client/${rowCOD}`, token)
+        if(rowCOD){
+            axios.get(`/client/${rowCOD}`, token)
             .then(res => setFormEditClient(res.data[0]))
+        }
     }, [rowCOD])
 
     const handleSubmitClient = (e) => {
         e.preventDefault();
-
         axios.put(`/client/${rowCOD}`,formEditClient, token )
             .then(res => {
                 document.querySelector('#idCloseEditForm').click();
@@ -59,31 +50,31 @@ const EditClientForm = ({rowCOD, setSendRequest, setMessageError}) => {
             <div className="row mb-4">
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="FIRST_NAME">Nombre</label>
-                    <input onChange={handleInputChange} value={FIRST_NAME} className='form-control' name='FIRST_NAME' type="text" required/>
+                    <input onChange={handleInputChange} value={formEditClient.FIRST_NAME} className='form-control' name='FIRST_NAME' type="text" required/>
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="LAST_NAME">Apellido</label>
-                    <input onChange={handleInputChange} value={LAST_NAME} className='form-control' name='LAST_NAME' type="text" required/>
+                    <input onChange={handleInputChange} value={formEditClient.LAST_NAME} className='form-control' name='LAST_NAME' type="text" required/>
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="IDENTITY">Identidad</label>
-                    <input onChange={handleInputChange} value={IDENTITY} className='form-control' name='IDENTITY' type="number" required/>
+                    <input onChange={handleInputChange} value={formEditClient.IDENTITY} className='form-control' name='IDENTITY' type="number" required/>
                 </div>
                 <div className="col-md-3 mt-2">
                     <label className='form-label' htmlFor="NUM_PHONE_ONE">Teléfono 1</label>
-                    <input onChange={handleInputChange} value={NUM_PHONE_ONE} className='form-control' name='NUM_PHONE_ONE' type="number" required/>
+                    <input onChange={handleInputChange} value={formEditClient.NUM_PHONE_ONE} className='form-control' name='NUM_PHONE_ONE' type="number" required/>
                 </div>
                 <div className="col-md-3 mt-2">
                     <label className='form-label' htmlFor="NUM_PHONE_TWO">Teléfono 2</label>
-                    <input onChange={handleInputChange} value={NUM_PHONE_TWO} className='form-control' name='NUM_PHONE_TWO' type="number" required/>
+                    <input onChange={handleInputChange} value={formEditClient.NUM_PHONE_TWO} className='form-control' name='NUM_PHONE_TWO' type="number" required/>
                 </div>
                 <div className="col-md-6 mt-2">
                     <label className='form-label' htmlFor="ADDRESS">Dirección</label>
-                    <textarea onChange={handleInputChange} value={ADDRESS} className='form-control' name='ADDRESS'  rows='3' cols='4' type="number" required/>
+                    <textarea onChange={handleInputChange} value={formEditClient.ADDRESS} className='form-control' name='ADDRESS'  rows='3' cols='4' type="number" required/>
                 </div>
                 <div className="col-md-6">
                     <label className='form-label' htmlFor="RTN">RTN</label>
-                    <input onChange={handleInputChange} value={RTN} className='form-control' name='RTN' type="number" required/>
+                    <input onChange={handleInputChange} value={formEditClient.RTN} className='form-control' name='RTN' type="number" required/>
                 </div>
             </div>
             
