@@ -104,7 +104,7 @@ const Facturas = () => {
             <Spinner />
             :
             <div className="card shadow rounded">
-                <div class="card-header text-dark">
+                <div className="card-header text-dark">
                     Detalle de venta
                 </div>
                 <div className="card-body">
