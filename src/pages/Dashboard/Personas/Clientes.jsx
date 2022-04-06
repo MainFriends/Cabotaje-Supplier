@@ -1,7 +1,6 @@
 import DataTable from 'react-data-table-component';
 
 import {useEffect, useState, useMemo} from 'react';
-import { useUser } from '../../../hooks/useUser';
 
 import Spinner from '../../../components/Spinner';
 import FilterComponent from '../../../components/FilterComponent';
@@ -12,7 +11,6 @@ import EditClientForm from '../../../components/client/EditClientForm';
 import {paginationComponentOptions} from '../../../helpers/datatablesOptions';
 import axios from '../../../config/axios';
 import token from '../../../helpers/getToken';
-import { sessionExpiredMessage } from '../../../helpers/userMessages';
 
 const Clientes = () => {
     const [rows, setRows] = useState([]);
@@ -21,7 +19,6 @@ const Clientes = () => {
     const [messageError, setMessageError] = useState('');
     const [sendRequest, setSendRequest] = useState(false);
     const [rowCOD, setRowCOD] = useState(null);
-    const {logout} = useUser();
     
     //definir las columnas
     const columns = [
@@ -94,12 +91,6 @@ const Clientes = () => {
                 setRows(data);
                 setLoading(false);
                 setSendRequest(false);
-            })
-            .catch(err => {
-                const {message} = err.response.data;
-                if(message === 'jwt expired'){
-                    logout(sessionExpiredMessage);
-                }
             })
     },[sendRequest]);
 

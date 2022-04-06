@@ -30,7 +30,7 @@ const login = (req, res) => {
                     if(err){
                         res.status(500).send({message: 'Error al generar token'});
                     }else{
-                        res.send({COD_ROLE, FIRST_NAME, LAST_NAME, token});
+                        res.send({FIRST_NAME, LAST_NAME, token});
                     }
                 })
             }else{

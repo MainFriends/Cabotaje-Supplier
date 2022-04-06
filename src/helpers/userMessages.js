@@ -1,4 +1,4 @@
-const sessionExpiredMessage = 'Tu sesión ha expirado, vuelve a iniciar sesión nuevamente.'
+const sessionExpiredMessage = 'Su sesión ha expirado. Por favor, inicie sesión nuevamente.'
 
 export {
     sessionExpiredMessage
