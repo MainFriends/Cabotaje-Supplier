@@ -26,7 +26,7 @@ const login = (req, res) => {
                     LAST_NAME
                 }
 
-                jwt.sign(payload, process.env.SECRET_KEY, (err, token) => {
+                jwt.sign(payload, process.env.SECRET_KEY, {expiresIn: '15h'}, (err, token) => {
                     if(err){
                         res.status(500).send({message: 'Error al generar token'});
                     }else{

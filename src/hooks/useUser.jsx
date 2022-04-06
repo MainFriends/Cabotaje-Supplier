@@ -9,9 +9,15 @@ export function useUser() {
         setJWT(data);
     }, [setJWT]);
 
-    const logout = useCallback(() => {
+    const logout = useCallback((message = '') => {
+        //removemos la sesion
         window.localStorage.removeItem('userSession');
         setJWT(null);
+
+        //enviamos mensaje
+        if(message){
+            window.localStorage.setItem('userMessage', message);
+        }
     }, [setJWT]);
 
     return{

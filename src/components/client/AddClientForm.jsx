@@ -23,7 +23,7 @@ const AddClientForm = ({setSendRequest, setMessageError}) => {
 
     const handleSubmitClient = (e) => {
         e.preventDefault();
-        axios.post('/client', formAddClien, token)
+        axios.post('/client', formAddClien, token())
             .then(res => {
                 document.querySelector('#idCloseAddForm').click();
                 e.target.reset();

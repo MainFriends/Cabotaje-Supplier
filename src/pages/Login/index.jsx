@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useUser } from '../../hooks/useUser';
 import useForm from '../../hooks/useForm';
 import LoginForm from '../../components/LoginForm';
@@ -14,6 +14,19 @@ const Login = () => {
         EMAIL: '',
         PASSWORD: ''
     });
+
+    //Comprabamos si existe mensaje de alerta.
+    useEffect(() => {
+        const message = window.localStorage.getItem('userMessage');
+
+        if(message){
+            setErrorMessage(message);
+            setTimeout(() => {
+                setErrorMessage('');
+                window.localStorage.removeItem('userMessage');
+            }, 5000);
+        }
+    },[])
 
     const handleLoginSubmit = e => {
         e.preventDefault();
