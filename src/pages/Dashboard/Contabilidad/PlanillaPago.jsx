@@ -87,7 +87,7 @@ const PlanillaPago = () => {
 
     useEffect(() => {
         //PETICION GET
-        axios.get('/pay-form', token)
+        axios.get('/pay-form', token())
             .then(res => {
                 const {data} = res;
                 console.log(data);

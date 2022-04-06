@@ -23,7 +23,7 @@ const AddPayForm = () => {
 
     const handleSubmitPayForm = (e) => {
         e.preventDefault();
-        axios.post('/pay-form', formAddPayForm, token)
+        axios.post('/pay-form', formAddPayForm, token())
            .then(res => console.log(res))
     }
 
