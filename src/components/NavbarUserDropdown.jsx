@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useUser } from "../hooks/useUser";
+import UserImageProfile from "./UserImageProfile";
 
 const NavbarUserDropdown = () => {
 
@@ -14,8 +15,10 @@ const NavbarUserDropdown = () => {
             <a className="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span className="mr-2 d-none d-lg-inline text-gray-600 small">{`${FIRST_NAME} ${LAST_NAME}`}</span>
-                <img className="img-profile rounded-circle"
-                    src='../src/assets/img/undraw_profile_1.svg'></img>
+                <UserImageProfile
+                    width={'40px'}
+                    height={'40px'}
+                />
             </a>
 
             <div className="dropdown-menu dropdown-menu-right shadow animated--grow-in"

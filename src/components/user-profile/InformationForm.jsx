@@ -1,8 +1,9 @@
 import UserImageProfile from "../UserImageProfile"
-import moment from "moment";
+import token from '../../helpers/getToken';
+import axios from '../../config/axios';
 
 
-const InformationForm = ({userInformation, setUserInformation}) => {
+const InformationForm = ({userInformation, setUserInformation, setAlertMessage}) => {
 
     const {
         FIRST_NAME,
@@ -21,10 +22,28 @@ const InformationForm = ({userInformation, setUserInformation}) => {
         })
     }
 
+    const handleChangeImg = (e) => {
+        let formData = new FormData();
+        formData.append('image', e.target.files[0])
+
+        setUserInformation({
+            ...userInformation,
+            IMG_USER: formData
+        })
+    }
+
     const handleSubmitForm = (e) => {
         e.preventDefault();
-        console.log(userInformation)
+        axios.put('/user-profile', userInformation, token())
+            .then(res => {
+                const {message} = res.data
+                setAlertMessage(message);
+                setTimeout(() => {
+                    setAlertMessage('');
+                }, 3000);
+            })
     }
+
     return (
         <>
             <h1 className="text-dark">Información del perfil</h1>
@@ -34,31 +53,30 @@ const InformationForm = ({userInformation, setUserInformation}) => {
                     <div className="col-md-6">
                         <div className="form-group">
                             <label>Nombre completo</label>
-                            <input onChange={handleChangeInput} className="form-control text-dark" type="text" value={`${FIRST_NAME} ${MIDDLE_NAME} ${LAST_NAME}`} name="" disabled />
+                            <input onChange={handleChangeInput} className="form-control text-dark" type="text" value={`${FIRST_NAME} ${MIDDLE_NAME} ${LAST_NAME}`} name="" disabled/>
                         </div>
                         <div className="form-group">
                             <label>Ciudad</label>
-                            <input onChange={handleChangeInput} className="form-control text-dark" type="text" value={NAM_CITY} name="NAM_CITY" />
+                            <input onChange={handleChangeInput} className="form-control text-dark" type="text" value={NAM_CITY} name="NAM_CITY" required/>
                         </div>
                         <div className="form-group">
                             <label>Dirección</label>
-                            <input onChange={handleChangeInput} className="form-control text-dark" type="text" value={ADDRESS} name="ADDRESS" />
+                            <input onChange={handleChangeInput} className="form-control text-dark" type="text" value={ADDRESS} name="ADDRESS" required/>
                         </div>
                         <div className="form-group">
                             <label>Fecha de nacimiento</label>
-                            <input onChange={handleChangeInput} className="form-control text-dark" type="date" value={moment(DAT_BIRTHDAY).format('YYYY-MM-DD')} name="DAT_BIRTHDAY" />
+                            <input onChange={handleChangeInput} className="form-control text-dark" type="date" value={DAT_BIRTHDAY} name="DAT_BIRTHDAY" required/>
                         </div>
                     </div>
                     <div className="col-md-6">
                         <h6>Foto de perfil</h6>
                         <div className="text-center">
                             <UserImageProfile
-                                    src={'https://avatars.githubusercontent.com/u/86571481?s=400&u=a7dd87caa77fe26d7b5e74191c47f38ceee0d325&v=4'}
                                     width={'300px'}
                                     height={'300px'}
                             />
                         </div>
-                        <input onChange={handleChangeInput} name="IMG_USER" className="mt-4 mb-2" type="file" />
+                        <input onChange={handleChangeImg} className="mt-4 mb-2" type="file"/>
                     </div>
                 </div>
                 <div className="modal-footer">

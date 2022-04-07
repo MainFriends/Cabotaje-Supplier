@@ -3,12 +3,15 @@ import {useState, useEffect} from 'react';
 import NavbarProfile from "../../components/NavbarProfile"
 import InformationForm from "../../components/user-profile/InformationForm"
 import UserImageProfile from "../../components/UserImageProfile"
+import AlertSuccess from '../../components/AlertSuccess';
 
 import axios from '../../config/axios';
 import token from '../../helpers/getToken';
+import moment from 'moment';
 
 
 const Profile = () => {
+    const [alertMessage, setAlertMessage] = useState('');
     const [userInformation, setUserInformation] = useState({
         FIRST_NAME: '',
         MIDDLE_NAME: '',
@@ -24,27 +27,30 @@ const Profile = () => {
         FIRST_NAME,
         LAST_NAME,
         IMG_USER,
-        NAM_ROLE,
+        NAM_ROLE
     } = userInformation;
 
     useEffect(() => {
         axios.get('/user-profile', token())
             .then(res => {
-                setUserInformation(res.data[0]);
+                setUserInformation({
+                    ...res.data[0],
+                    DAT_BIRTHDAY: moment(res.data[0].DAT_BIRTHDAY).format('YYYY-MM-DD')
+                });
             })
     }, [])
 
     return(
         <div className="container-fluid bg-light container-profile">
             <NavbarProfile/>
+            {alertMessage ? <AlertSuccess message={alertMessage}/> : null}
             <div className="row p-3 ">
                 <div className="col-md-3">
                     <div className="row mb-0">
                         <div className="col-md-4">
                             <UserImageProfile
-                                src={'https://avatars.githubusercontent.com/u/86571481?s=400&u=a7dd87caa77fe26d7b5e74191c47f38ceee0d325&v=4'}
-                                width={'100px'}
-                                height={'100px'}
+                                width={'120vw'}
+                                height={'120vw'}
                             />
                         </div>
                         <div className="col-md-8">
@@ -59,9 +65,11 @@ const Profile = () => {
                     </div>
                 </div>
                 <div className="col-md-8 mt-4">
+                    
                     <InformationForm 
                     userInformation={userInformation} 
                     setUserInformation={setUserInformation}
+                    setAlertMessage={setAlertMessage}
                     />
                 </div>
             </div>
