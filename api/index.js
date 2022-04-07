@@ -32,9 +32,11 @@ const purchaseDetail = require('./routes/purchaseDetail');
 const inventory = require('./routes/inventory')
 const inventoryDetail = require('./routes/inventoryDetail')
 const decrease = require('./routes/decrease')
-const returnProduct = require('./routes/returnProduct.js')
+const returnProduct = require('./routes/returnProduct')
 //sesion
-const userSession = require('./routes/userSession.js')
+const userSession = require('./routes/userSession')
+//user-profile
+const userProfile = require('./routes/userProfile')
 
 /* CREAR SERVIDOR */
 const app = express();
@@ -77,6 +79,8 @@ app.use('/api', decrease)
 app.use('/api', returnProduct)
 //sesion
 app.use('/api', userSession)
+//user-profile
+app.use('/api', userProfile)
 
 /* ASIGNAR PUERTO Y LEVANTAR SERVIDOR */
 const port = process.env.PORT;
