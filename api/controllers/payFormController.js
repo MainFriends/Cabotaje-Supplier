@@ -47,7 +47,8 @@ const addPayForm = (req, res) => {
         DAT_PAYMENT
     ], (err) => {
         if(err) {
-            res.status(400).send({message: err.message});
+            const message = err.message.split(': ')[1];
+            res.status(400).send({message});
         }else{
             res.status(201).send({message: 'La planilla se ha registrado correctamente'})
         }
@@ -94,7 +95,8 @@ const deletePayForm = (req, res) => {
 
     mysqlConnect.query(sp, [codPayForm], (err) => {
         if(err) {
-            res.status(304).send({message: err.message});
+            const message = err.message.split(': ')[1];
+            res.status(304).send({message});
         }else{
             res.status(200).send({message: 'La planilla fue eliminada correctamente'});
         }

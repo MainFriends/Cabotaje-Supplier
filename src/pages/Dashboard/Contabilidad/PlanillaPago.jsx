@@ -129,7 +129,7 @@ const PlanillaPago = () => {
                         idModal='addPayForm'
                         title='Agregar Planilla'
                         messageError={messageError}
-                        content={<AddPayForm setSendRequest={setSendRequest}/>}
+                        content={<AddPayForm setSendRequest={setSendRequest} setMessageError={setMessageError}/>}
                     />
                 </div>
             </div> 

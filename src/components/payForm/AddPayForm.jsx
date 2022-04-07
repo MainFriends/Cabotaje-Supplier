@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "../../config/axios";
 import token from "../../helpers/getToken";
 
-const AddPayForm = ({setSendRequest}) => {
+const AddPayForm = ({setSendRequest, setMessageError}) => {
     const [formAddPayForm, setFormAddPayForm] = useState({
         COD_USER: '',
         HOURS_WORKED: 0,
@@ -54,6 +54,13 @@ const AddPayForm = ({setSendRequest}) => {
                document.querySelector('#closeAddPayForm').click();
                e.target.reset();
                setSendRequest(true)
+           })
+           .catch(err => {
+               const {message} = err.response.data
+               setMessageError(message);
+               setTimeout(() => {
+                setMessageError('')
+               }, 3000);
            })
     }
 
