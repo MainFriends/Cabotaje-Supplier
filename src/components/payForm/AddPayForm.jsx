@@ -4,8 +4,7 @@ import token from "../../helpers/getToken";
 
 const AddPayForm = () => {
     const [formAddPayForm, setFormAddPayForm] = useState({
-        FIRST_NAME: '',
-        LAST_NAME: '',
+        COD_USER: '',
         HOURS_WORKED: '',
         AMO_GROSS: '',
         BONUS: '',
@@ -14,15 +13,31 @@ const AddPayForm = () => {
         DAT_PAYMENT: ''
     });
 
+    //Estado que maneja el nombre del empleado
+    const [employeeName, setEmployeeName] = useState('')
+
     const handleInputChange = (e) => {
         setFormAddPayForm({
             ...formAddPayForm,
             [e.target.name]: e.target.value
         })
-    } 
+    }
+
+    //get del usuario cada vez que cambia de foco el input COD_USER
+    const getUserInput = () => {
+        axios.get(`/user/${formAddPayForm.COD_USER}`, token())
+            .then(res => {
+                const {FIRST_NAME, LAST_NAME} = res.data[0];
+                setEmployeeName(`${FIRST_NAME} ${LAST_NAME}`)
+            })
+            .catch(err => {
+                setEmployeeName(`Empleado no encontrado`)
+            })
+    }
 
     const handleSubmitPayForm = (e) => {
         e.preventDefault();
+        console.log(formAddPayForm)
         axios.post('/pay-form', formAddPayForm, token())
            .then(res => console.log(res))
     }
@@ -31,36 +46,36 @@ const AddPayForm = () => {
     return(
         <form id='addPayForm' onSubmit={handleSubmitPayForm} action='#'>
         <div className="row mb-4">
-            <div className="col-md-6">
-                <label className='form-label' htmlFor="FIRST_NAME">Nombre</label>
-                <input onChange={handleInputChange} className='form-control' name='FIRST_NAME' type="text" required/>
+            <div className="col-md-4">
+                <label className='form-label' htmlFor="COD_USER">Código de empleado</label>
+                <input onBlur={() => getUserInput()} onChange={handleInputChange} className='form-control' name='COD_USER' type="number" required/>
             </div>
-            <div className="col-md-6">
-                <label className='form-label' htmlFor="LAST_NAME">Apellido</label>
-                <input onChange={handleInputChange} className='form-control' name='LAST_NAME' type="text" required/>
+            <div className="col-md-8">
+                <label className='form-label' htmlFor="EMPLOYEE">Empleado</label>
+                <input className='form-control' value={employeeName} name='EMPLOYEE' type="text" required disabled/>
             </div>
             <div className="col-md-3">
-                <label className='form-label' htmlFor="HOURS_WORKED">Horas Trabajadas</label>
+                <label className='form-label mt-2' htmlFor="HOURS_WORKED">Horas Trabajadas</label>
                 <input onChange={handleInputChange} className='form-control' name='HOURS_WORKED' type="number" required/>
             </div>
             <div className="col-md-3">
-                <label className='form-label' htmlFor="AMO_GROSS">Salario Base</label>
+                <label className='form-label mt-2' htmlFor="AMO_GROSS">Salario Base</label>
                 <input onChange={handleInputChange} className='form-control' name='AMO_GROSS' type="number" required/>
             </div>
             <div className="col-md-3">
-                <label className='form-label' htmlFor="BONUS">Bonificaciones</label>
+                <label className='form-label mt-2' htmlFor="BONUS">Bonificaciones</label>
                 <input onChange={handleInputChange} className='form-control' name='BONUS' type="number" required/>
             </div>
             <div className="col-md-3">
-                <label className='form-label' htmlFor="TOT_DEDUCTIONS">Deducciones</label>
-                <input className='form-control' name='TOT_DEDUCTIONS' type="number" required/>
+                <label className='form-label mt-2' htmlFor="TOT_DEDUCTIONS">Deducciones</label>
+                <input onChange={handleInputChange} className='form-control' name='TOT_DEDUCTIONS' type="number" required/>
             </div>
             <div className="col-md-3">
-                <label className='form-label' htmlFor="NET_SALARY">Salario Neto</label>
-                <input onChange={handleInputChange} className='form-control' name='NET_SALARY' type="number" required/>
+                <label className='form-label mt-2' htmlFor="NET_SALARY">Salario Neto</label>
+                <input onChange={handleInputChange} className='form-control' name='NET_SALARY' type="number" required disabled/>
             </div>
             <div className="col-md-4">
-                <label className='form-label' htmlFor="DAT_PAYMENT">Fecha de Pago</label>
+                <label className='form-label mt-2' htmlFor="DAT_PAYMENT">Fecha de Pago</label>
                 <input onChange={handleInputChange} className='form-control' name='DAT_PAYMENT' type="date" required/>
             </div>
         </div>
