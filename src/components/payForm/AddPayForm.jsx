@@ -5,16 +5,23 @@ import token from "../../helpers/getToken";
 const AddPayForm = () => {
     const [formAddPayForm, setFormAddPayForm] = useState({
         COD_USER: '',
-        HOURS_WORKED: '',
-        AMO_GROSS: '',
-        BONUS: '',
-        TOT_DEDUCTIONS: '',
-        NET_SALARY: '',
+        HOURS_WORKED: 0,
+        AMO_GROSS: 0,
+        BONUS: 0,
+        TOT_DEDUCTIONS: 0,
+        NET_SALARY: 0,
         DAT_PAYMENT: ''
     });
 
     //Estado que maneja el nombre del empleado
     const [employeeName, setEmployeeName] = useState('')
+    const [netSalary, setNetSalary] = useState(0);
+
+    const getNetSalary = () => {
+        const {HOURS_WORKED, AMO_GROSS, BONUS, TOT_DEDUCTIONS} = formAddPayForm
+        const totSalary = (parseFloat(HOURS_WORKED) * parseFloat(AMO_GROSS)) + parseFloat(BONUS) - parseFloat(TOT_DEDUCTIONS)
+        setNetSalary(totSalary);
+    }
 
     const handleInputChange = (e) => {
         setFormAddPayForm({
@@ -56,23 +63,23 @@ const AddPayForm = () => {
             </div>
             <div className="col-md-3">
                 <label className='form-label mt-2' htmlFor="HOURS_WORKED">Horas Trabajadas</label>
-                <input onChange={handleInputChange} className='form-control' name='HOURS_WORKED' type="number" required/>
+                <input onBlur={() => getNetSalary()}  onChange={handleInputChange} className='form-control' name='HOURS_WORKED' type="number" required/>
             </div>
             <div className="col-md-3">
                 <label className='form-label mt-2' htmlFor="AMO_GROSS">Salario Base</label>
-                <input onChange={handleInputChange} className='form-control' name='AMO_GROSS' type="number" required/>
+                <input onBlur={() => getNetSalary()} onChange={handleInputChange} className='form-control' name='AMO_GROSS' type="number" required/>
             </div>
             <div className="col-md-3">
                 <label className='form-label mt-2' htmlFor="BONUS">Bonificaciones</label>
-                <input onChange={handleInputChange} className='form-control' name='BONUS' type="number" required/>
+                <input onBlur={() => getNetSalary()} onChange={handleInputChange} className='form-control' name='BONUS' type="number" required/>
             </div>
             <div className="col-md-3">
                 <label className='form-label mt-2' htmlFor="TOT_DEDUCTIONS">Deducciones</label>
-                <input onChange={handleInputChange} className='form-control' name='TOT_DEDUCTIONS' type="number" required/>
+                <input onBlur={() => getNetSalary()} onChange={handleInputChange} className='form-control' name='TOT_DEDUCTIONS' type="number" required/>
             </div>
             <div className="col-md-3">
                 <label className='form-label mt-2' htmlFor="NET_SALARY">Salario Neto</label>
-                <input onChange={handleInputChange} className='form-control' name='NET_SALARY' type="number" required disabled/>
+                <input onChange={handleInputChange} className='form-control' value={netSalary} name='NET_SALARY' type="number" required disabled/>
             </div>
             <div className="col-md-4">
                 <label className='form-label mt-2' htmlFor="DAT_PAYMENT">Fecha de Pago</label>
