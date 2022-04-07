@@ -6,10 +6,13 @@ import Spinner from '../../../components/Spinner';
 import FilterComponent from '../../../components/FilterComponent';
 import Modal from '../../../components/Modal';
 import AddPayForm from '../../../components/payForm/AddPayForm';
+import EditPayForm from '../../../components/payForm/EditPayForm';
 
 import {paginationComponentOptions} from '../../../helpers/datatablesOptions';
 import axios from '../../../config/axios'
 import token from '../../../helpers/getToken';
+import moment from 'moment';
+
 
 
 const PlanillaPago = () => {
@@ -18,6 +21,7 @@ const PlanillaPago = () => {
     const [loading, setLoading] = useState(true);
     const [messageError, setMessageError] = useState('');
     const [sendRequest, setSendRequest] = useState(false);
+    const [rowCOD, setRowCOD] = useState(null);
     
     //definir las columnas
     const columns = [
@@ -45,33 +49,38 @@ const PlanillaPago = () => {
             name: 'SALARIO BASE',
             selector: row => row.AMO_GROSS,
             sortable: true,
+            format: row => `L ${row.AMO_GROSS.toFixed(2)}`
         },
         {
             name: 'BONIFICACIONES',
             selector: row => row.BONUS,
             sortable: true,
+            format: row => `L ${row.BONUS.toFixed(2)}`
         },
         {
             name: 'DEDUCCIONES',
             selector: row => row.TOT_DEDUCTIONS,
             sortable: true,
+            format: row => `L ${row.TOT_DEDUCTIONS.toFixed(2)}`
         },
         {
             name: 'SALARIO NETO',
             selector: row => row.NET_SALARY,
             sortable: true,
+            format: row => `L ${row.NET_SALARY.toFixed(2)}`
         },
         {
             name: 'FECHA DE PAGO',
             selector: row => row.DAT_PAYMENT,
             sortable: true,
+            format: row => moment(row.DAT_PAYMENT).format('DD-MM-YYYY')
         },
         {
             name: 'ACCIONES',
             button: true,
             cell: row => <>
-                <button className='btn btn-sm btn-warning mr-1' data-toggle="modal" data-target='#'><i className="fa-solid fa-pen-to-square"></i></button>
-                <button className='btn btn-sm btn-danger'><i className="fa-solid fa-trash"></i></button>
+                <button className='btn btn-sm btn-warning mr-1' onClick={() => {setRowCOD(row.COD_PAY_FORM)}} data-toggle="modal" data-target='#editPayForm'><i className="fa-solid fa-pen-to-square"></i></button>
+                <button className='btn btn-sm btn-danger' onClick={() => handleDelete(row.COD_PAY_FORM)}><i className="fa-solid fa-trash"></i></button>
             </>
         }
     ];
@@ -96,6 +105,11 @@ const PlanillaPago = () => {
                 setSendRequest(false)
             })
     },[sendRequest]);
+
+    const handleDelete = (cod) => {
+        axios.delete(`/pay-form/${cod}`, token())
+           .then(res => setSendRequest(true))
+    }
 
     return (
             loading
@@ -130,6 +144,13 @@ const PlanillaPago = () => {
                         title='Agregar Planilla'
                         messageError={messageError}
                         content={<AddPayForm setSendRequest={setSendRequest} setMessageError={setMessageError}/>}
+                    />
+
+                    <Modal 
+                        idModal='editPayForm'
+                        title='Actualizar Planilla'
+                        messageError={messageError}
+                        content={<EditPayForm rowCOD={rowCOD} setSendRequest={setSendRequest} setMessageError={setMessageError}/>}
                     />
                 </div>
             </div> 

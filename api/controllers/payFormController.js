@@ -58,7 +58,6 @@ const addPayForm = (req, res) => {
 const updatePayForm = (req, res) => {
     const {codPayForm} = req.params;
     const {
-        COD_USER,
         HOURS_WORKED,
         AMO_GROSS,
         BONUS,
@@ -67,11 +66,10 @@ const updatePayForm = (req, res) => {
         DAT_PAYMENT
     } = req.body
 
-    const sp = 'CALL SP_UPD_PAY_FORM(?,?,?,?,?,?,?,?)';
+    const sp = 'CALL SP_UPD_PAY_FORM(?,?,?,?,?,?,?)';
 
     mysqlConnect.query(sp, [
         codPayForm,
-        COD_USER,
         HOURS_WORKED,
         AMO_GROSS,
         BONUS,
