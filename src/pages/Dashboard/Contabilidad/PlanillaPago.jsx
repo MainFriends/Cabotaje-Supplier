@@ -17,6 +17,7 @@ const PlanillaPago = () => {
     const [filterText, setFilterText] = useState('');
     const [loading, setLoading] = useState(true);
     const [messageError, setMessageError] = useState('');
+    const [sendRequest, setSendRequest] = useState(false);
     
     //definir las columnas
     const columns = [
@@ -90,11 +91,11 @@ const PlanillaPago = () => {
         axios.get('/pay-form', token())
             .then(res => {
                 const {data} = res;
-                console.log(data);
                 setRows(data);
                 setLoading(false);
+                setSendRequest(false)
             })
-    },[]);
+    },[sendRequest]);
 
     return (
             loading
@@ -128,7 +129,7 @@ const PlanillaPago = () => {
                         idModal='addPayForm'
                         title='Agregar Planilla'
                         messageError={messageError}
-                        content={<AddPayForm />}
+                        content={<AddPayForm setSendRequest={setSendRequest}/>}
                     />
                 </div>
             </div> 

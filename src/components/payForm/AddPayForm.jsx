@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "../../config/axios";
 import token from "../../helpers/getToken";
 
-const AddPayForm = () => {
+const AddPayForm = ({setSendRequest}) => {
     const [formAddPayForm, setFormAddPayForm] = useState({
         COD_USER: '',
         HOURS_WORKED: 0,
@@ -21,6 +21,10 @@ const AddPayForm = () => {
         const {HOURS_WORKED, AMO_GROSS, BONUS, TOT_DEDUCTIONS} = formAddPayForm
         const totSalary = (parseFloat(HOURS_WORKED) * parseFloat(AMO_GROSS)) + parseFloat(BONUS) - parseFloat(TOT_DEDUCTIONS)
         setNetSalary(totSalary);
+        setFormAddPayForm({
+            ...formAddPayForm,
+            NET_SALARY: totSalary
+        })
     }
 
     const handleInputChange = (e) => {
@@ -46,7 +50,11 @@ const AddPayForm = () => {
         e.preventDefault();
         console.log(formAddPayForm)
         axios.post('/pay-form', formAddPayForm, token())
-           .then(res => console.log(res))
+           .then(res => {
+               document.querySelector('#closeAddPayForm').click();
+               e.target.reset();
+               setSendRequest(true)
+           })
     }
 
 
@@ -79,7 +87,7 @@ const AddPayForm = () => {
             </div>
             <div className="col-md-3">
                 <label className='form-label mt-2' htmlFor="NET_SALARY">Salario Neto</label>
-                <input onChange={handleInputChange} className='form-control' value={netSalary} name='NET_SALARY' type="number" required disabled/>
+                <input className='form-control' value={netSalary} name='NET_SALARY' type="number" required disabled/>
             </div>
             <div className="col-md-4">
                 <label className='form-label mt-2' htmlFor="DAT_PAYMENT">Fecha de Pago</label>
@@ -87,7 +95,7 @@ const AddPayForm = () => {
             </div>
         </div>
         <div className="modal-footer">
-            <button type="button" id='idClosePayForm' className="btn btn-primary" data-dismiss="modal">Cerrar</button>
+            <button type="button" id='closeAddPayForm' className="btn btn-primary" data-dismiss="modal">Cerrar</button>
             <button type='submit' className="btn btn-success">Guardar</button>
         </div>
     </form>
