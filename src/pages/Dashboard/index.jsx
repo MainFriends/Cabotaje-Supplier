@@ -4,11 +4,23 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { Outlet, useLocation } from "react-router-dom";
 import runApp from '../../assets/js/app';
+import PieChart from '../../components/ChartJS/PieChart'
 
 const ContentDashboard = () => {
 
   return (
-    <h1>Dashboard</h1>
+    <div className="row">
+      <div className="col-4">
+        <div class="card shadow">
+          <div class="card-header">
+            Colores
+          </div>
+          <div class="card-body grafica">
+            <PieChart />
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }
 
