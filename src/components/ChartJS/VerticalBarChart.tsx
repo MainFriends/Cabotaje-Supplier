@@ -12,7 +12,6 @@ import { Bar } from 'react-chartjs-2';
 import { useEffect, useState } from 'react';
 import axios from '../../config/axios';
 import token from '../../helpers/getToken';
-import moment from 'moment';
 
 ChartJS.register(
   CategoryScale,
@@ -47,7 +46,7 @@ export default function VerticalBarChart() {
   const [sales, setSales] = useState({});
 
   useEffect(() => {
-    axios.get('/sale-invoice', token)
+    axios.get('/sale-invoice', token())
       .then(res => {
         const {data} = res;
         const ventas = data.map(venta => venta.TOT_SALE)
@@ -63,7 +62,7 @@ export default function VerticalBarChart() {
     datasets: [
       {
         label: 'Ventas',
-        data: [sales.Abril],
+        data: [sales['Abril']],
         backgroundColor: 'rgba(255, 99, 132, 0.5)',
       }
     ],

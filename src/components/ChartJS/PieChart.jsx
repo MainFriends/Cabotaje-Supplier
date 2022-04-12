@@ -40,7 +40,7 @@ export default function PieChart() {
   };
 
   useEffect(() => {
-    axios.get('/roles', token)
+    axios.get('/roles', token())
       .then(res => {
         setRoles({
           administrador: res.data.filter(row => row.COD_ROLE === 1).length,
