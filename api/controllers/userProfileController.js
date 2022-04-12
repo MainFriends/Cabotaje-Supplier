@@ -1,4 +1,6 @@
 const mysqlConnect = require('../config');
+const fs = require('fs');
+const path = require('path');
 
 const getUser = (req, res) => {
     const {COD_USER} = req.user;
@@ -16,23 +18,22 @@ const getUser = (req, res) => {
 
 const updateUserInformation = (req, res) => {
     const {COD_USER} = req.user;
+    console.log('hola')
    
     const {
         NAM_CITY,
         ADDRESS,
-        DAT_BIRTHDAY,
-        IMG_USER
+        DAT_BIRTHDAY
     } = req.body;
 
-    const sp = 'CALL SP_UPD_PROFILE(?,?,?,?,?)';
+    const sp = 'CALL SP_UPD_PROFILE(?,?,?,?)';
 
     mysqlConnect.query(sp,
         [   
             COD_USER,
             NAM_CITY,
             ADDRESS,
-            DAT_BIRTHDAY,
-            IMG_USER
+            DAT_BIRTHDAY
         ], (err) => {
             if(err){
                 const message = err.message.split(': ')[1];
@@ -43,7 +44,28 @@ const updateUserInformation = (req, res) => {
         });
 }
 
+const updProfilePicture = (req, res) => {
+    const sp = 'CALL SP_UPD_IMG_PROFILE(?,?)';
+
+    const {COD_USER} = req.user;
+    const DATA =  fs.readFileSync('api/uploads/' + req.file.filename)
+    
+    mysqlConnect.query(sp,
+        [   
+            COD_USER,
+            DATA,
+        ], (err) => {
+            if(err){
+                const message = err.message.split(': ')[1];
+                res.status(400).send({message});
+            }else{
+                res.status(200).send({message: 'success'});
+            }
+        });
+}
+
 module.exports = {
     getUser,
-    updateUserInformation
+    updateUserInformation,
+    updProfilePicture
 }

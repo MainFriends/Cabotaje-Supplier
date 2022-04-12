@@ -1,9 +1,12 @@
 import UserImageProfile from "../UserImageProfile"
 import token from '../../helpers/getToken';
 import axios from '../../config/axios';
+import { useState } from "react";
 
 
 const InformationForm = ({userInformation, setUserInformation, setAlertMessage}) => {
+
+    const [file, setFile] = useState(null)
 
     const {
         FIRST_NAME,
@@ -11,8 +14,8 @@ const InformationForm = ({userInformation, setUserInformation, setAlertMessage})
         LAST_NAME,
         NAM_CITY,
         ADDRESS,
-        DAT_BIRTHDAY,
-        IMG_USER
+        IMG_USER,
+        DAT_BIRTHDAY
     } = userInformation;
 
     const handleChangeInput = (e) => {
@@ -23,13 +26,7 @@ const InformationForm = ({userInformation, setUserInformation, setAlertMessage})
     }
 
     const handleChangeImg = (e) => {
-        let formData = new FormData();
-        formData.append('image', e.target.files[0])
-
-        setUserInformation({
-            ...userInformation,
-            IMG_USER: formData
-        })
+        setFile(e.target.files[0]);
     }
 
     const handleSubmitForm = (e) => {
@@ -42,6 +39,17 @@ const InformationForm = ({userInformation, setUserInformation, setAlertMessage})
                     setAlertMessage('');
                 }, 3000);
             })
+
+        if(file){
+            const formData = new FormData();
+            formData.append('image', file);
+
+            axios.put('/profile-picture', formData, token())
+                .then(res => {
+                    document.querySelector('#changeProfilePic').value = '';
+                    setFile('');
+                })
+        }
     }
 
     return (
@@ -76,7 +84,7 @@ const InformationForm = ({userInformation, setUserInformation, setAlertMessage})
                                     height={'300px'}
                             />
                         </div>
-                        <input onChange={handleChangeImg} className="mt-4 mb-2" type="file"/>
+                        <input onChange={handleChangeImg} className="mt-4 mb-2" type="file" accept="image/*" id="changeProfilePic"/>
                     </div>
                 </div>
                 <div className="modal-footer">
