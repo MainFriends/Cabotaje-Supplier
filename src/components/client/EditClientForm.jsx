@@ -23,14 +23,14 @@ const EditClientForm = ({rowCOD, setSendRequest, setMessageError}) => {
 
     useEffect(() => {
         if(rowCOD){
-            axios.get(`/client/${rowCOD}`, token)
+            axios.get(`/client/${rowCOD}`, token())
             .then(res => setFormEditClient(res.data[0]))
         }
     }, [rowCOD])
 
     const handleSubmitClient = (e) => {
         e.preventDefault();
-        axios.put(`/client/${rowCOD}`,formEditClient, token )
+        axios.put(`/client/${rowCOD}`,formEditClient, token())
             .then(res => {
                 document.querySelector('#idCloseEditForm').click();
                 setSendRequest(true);

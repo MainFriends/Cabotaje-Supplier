@@ -85,7 +85,7 @@ const Clientes = () => {
 
     useEffect(() => {
         //PETICION GET
-        axios.get('/client', token)
+        axios.get('/client', token())
             .then(res => {
                 const {data} = res;
                 setRows(data);
@@ -95,7 +95,7 @@ const Clientes = () => {
     },[sendRequest]);
 
     const handleDelete = (cod) => {
-        axios.delete(`/client/${cod}`, token)
+        axios.delete(`/client/${cod}`, token())
             .then(res => setSendRequest(true))
     }
 

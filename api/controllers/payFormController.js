@@ -47,7 +47,7 @@ const addPayForm = (req, res) => {
         DAT_PAYMENT
     ], (err) => {
         if(err) {
-            res.status(4000).send({message: err.message});
+            res.status(400).send({message: err.message});
         }else{
             res.status(201).send({message: 'La planilla se ha registrado correctamente'})
         }
