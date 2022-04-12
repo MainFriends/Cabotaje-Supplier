@@ -5,20 +5,25 @@ import Footer from "../../components/Footer";
 import { Outlet, useLocation } from "react-router-dom";
 import runApp from '../../assets/js/app';
 import PieChart from '../../components/ChartJS/PieChart'
+import VerticalBarChart from "../../components/ChartJS/VerticalBarChart";
+import Card from "../../components/ChartJS/Card";
 
 const ContentDashboard = () => {
 
   return (
     <div className="row">
       <div className="col-4">
-        <div class="card shadow">
-          <div class="card-header">
-            Colores
-          </div>
-          <div class="card-body grafica">
-            <PieChart />
-          </div>
-        </div>
+        <Card 
+          titulo='Roles del sistema'
+          component={<PieChart />}
+        />
+      </div>
+      <div className="col-4">
+        <Card 
+          titulo='Otra grafica'
+          component={<VerticalBarChart />}
+          className="vertical"
+        />
       </div>
     </div>
   )

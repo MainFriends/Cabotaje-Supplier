@@ -44,3 +44,11 @@ body,
 .col-form{
   margin-top: 40px;
 }
+
+.grafica{
+  padding: 10px !important;
+}
+
+.vertical{
+  width: 700px;
+}
