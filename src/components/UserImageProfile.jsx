@@ -1,8 +1,8 @@
 
-const UserImageProfile = ({src ='../src/assets/img/undraw_profile.svg', width, height}) => {
+const UserImageProfile = ({src, width, height}) => {
 
   return (
-    <img className="rounded-circle" width={width} height={height} src={src} alt="Foto del usuario"/>
+    <img className="rounded-circle" width={width} height={height} src={src ? src : '../src/assets/img/undraw_profile.svg'} alt="Foto del usuario"/>
   )
 }
 

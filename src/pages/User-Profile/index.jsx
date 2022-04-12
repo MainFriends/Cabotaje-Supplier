@@ -8,10 +8,13 @@ import AlertSuccess from '../../components/AlertSuccess';
 import axios from '../../config/axios';
 import token from '../../helpers/getToken';
 import moment from 'moment';
+import {Buffer} from 'buffer';
 
 
 const Profile = () => {
     const [alertMessage, setAlertMessage] = useState('');
+    const [profilePicture, setProfilePicture] = useState(null);
+    const [sendRequest, setSendRequest] = useState(false);
     const [userInformation, setUserInformation] = useState({
         FIRST_NAME: '',
         MIDDLE_NAME: '',
@@ -19,14 +22,12 @@ const Profile = () => {
         NAM_CITY: '',
         ADDRESS: '',
         DAT_BIRTHDAY: '',
-        IMG_USER: '',
         NAM_ROLE: ''
     });
 
     const {
         FIRST_NAME,
         LAST_NAME,
-        IMG_USER,
         NAM_ROLE
     } = userInformation;
 
@@ -40,15 +41,25 @@ const Profile = () => {
             })
     }, [])
 
+    useEffect(() => {
+        axios.get('/profile-picture', token())
+            .then(res => {
+                const {IMG_USER} = res.data[0];
+                setProfilePicture(Buffer.from(IMG_USER).toString('base64'));
+                setSendRequest(false);
+            })
+    }, [sendRequest])
+
     return(
         <div className="container-fluid bg-light container-profile">
-            <NavbarProfile/>
+            <NavbarProfile profilePicture={profilePicture}/>
             {alertMessage ? <AlertSuccess message={alertMessage}/> : null}
             <div className="row p-3 ">
                 <div className="col-md-3">
                     <div className="row mb-0">
                         <div className="col-md-4">
                             <UserImageProfile
+                                src={profilePicture ? `data:image/*;base64, ${profilePicture}` : ''}
                                 width={'120vw'}
                                 height={'120vw'}
                             />
@@ -67,6 +78,8 @@ const Profile = () => {
                 <div className="col-md-8 mt-4">
                     
                     <InformationForm 
+                    setSendRequest={setSendRequest}
+                    profilePicture={profilePicture}
                     userInformation={userInformation} 
                     setUserInformation={setUserInformation}
                     setAlertMessage={setAlertMessage}

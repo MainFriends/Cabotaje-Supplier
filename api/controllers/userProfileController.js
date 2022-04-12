@@ -18,7 +18,6 @@ const getUser = (req, res) => {
 
 const updateUserInformation = (req, res) => {
     const {COD_USER} = req.user;
-    console.log('hola')
    
     const {
         NAM_CITY,
@@ -48,7 +47,8 @@ const updProfilePicture = (req, res) => {
     const sp = 'CALL SP_UPD_IMG_PROFILE(?,?)';
 
     const {COD_USER} = req.user;
-    const DATA =  fs.readFileSync('api/uploads/' + req.file.filename)
+    const DATA =  fs.readFileSync('api/uploads/' + req.file.filename);
+    fs.rmSync('api/uploads/' + req.file.filename);
     
     mysqlConnect.query(sp,
         [   
@@ -64,8 +64,27 @@ const updProfilePicture = (req, res) => {
         });
 }
 
+const getProfilePic = (req, res) => {
+    const sp = 'CALL SP_SEL_PROFILE_PIC(?)';
+
+    const {COD_USER} = req.user;
+    
+    mysqlConnect.query(sp,
+        [   
+            COD_USER
+        ], (err, result) => {
+            if(err){
+                const message = err.message.split(': ')[1];
+                res.status(400).send({message});
+            }else{
+                res.status(200).send(result[0]);
+            }
+        });
+}
+
 module.exports = {
     getUser,
     updateUserInformation,
-    updProfilePicture
+    updProfilePicture,
+    getProfilePic
 }

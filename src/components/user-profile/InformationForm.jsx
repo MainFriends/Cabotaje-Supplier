@@ -4,7 +4,7 @@ import axios from '../../config/axios';
 import { useState } from "react";
 
 
-const InformationForm = ({userInformation, setUserInformation, setAlertMessage}) => {
+const InformationForm = ({setSendRequest, profilePicture, userInformation, setUserInformation, setAlertMessage}) => {
 
     const [file, setFile] = useState(null)
 
@@ -14,7 +14,6 @@ const InformationForm = ({userInformation, setUserInformation, setAlertMessage})
         LAST_NAME,
         NAM_CITY,
         ADDRESS,
-        IMG_USER,
         DAT_BIRTHDAY
     } = userInformation;
 
@@ -35,6 +34,7 @@ const InformationForm = ({userInformation, setUserInformation, setAlertMessage})
             .then(res => {
                 const {message} = res.data
                 setAlertMessage(message);
+                setSendRequest(true);
                 setTimeout(() => {
                     setAlertMessage('');
                 }, 3000);
@@ -80,6 +80,7 @@ const InformationForm = ({userInformation, setUserInformation, setAlertMessage})
                         <h6>Foto de perfil</h6>
                         <div className="text-center">
                             <UserImageProfile
+                                    src={profilePicture ? `data:image/*;base64, ${profilePicture}` : ''}
                                     width={'300px'}
                                     height={'300px'}
                             />

@@ -2,7 +2,7 @@ import NavbarAlerts from "./NavbarAlerts";
 import NavbarMessages from "./NavbarMessages";
 import NavbarUserDropdown from "./NavbarUserDropdown";
 
-const NavbarProfile = ({clickMenuOpen, setClickMenu}) => {  
+const NavbarProfile = ({profilePicture, clickMenuOpen, setClickMenu}) => {  
     
 
     return (
@@ -16,7 +16,7 @@ const NavbarProfile = ({clickMenuOpen, setClickMenu}) => {
 
                 <div className="topbar-divider d-none d-sm-block"></div>
 
-                <NavbarUserDropdown />
+                <NavbarUserDropdown profilePicture={profilePicture}/>
 
             </ul>
 
