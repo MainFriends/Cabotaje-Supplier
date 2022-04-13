@@ -17,12 +17,23 @@ const ChangePassword = () => {
     }
 
     useEffect(() => {
-        const input = document.querySelector('#USER_PASSWORD');
-        if(NEW_USER_PASSWORD === USER_PASSWORD && USER_PASSWORD !== ''){
-            input.classList.remove('is-invalid');
-            input.classList.add('is-valid');
+        //validar input nueva contraseña
+        const inputNewPass = document.querySelector('#NEW_USER_PASSWORD');
+        const regex = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,16}$/
+        if(regex.test(NEW_USER_PASSWORD)){
+            inputNewPass.classList.remove('is-invalid');
+            inputNewPass.classList.add('is-valid');
         }else if(USER_PASSWORD !== ''){
-            input.classList.add('is-invalid');
+            inputNewPass.classList.add('is-invalid');
+        }
+
+        //validar input repetir contraseña
+        const inputPass = document.querySelector('#USER_PASSWORD');
+        if(NEW_USER_PASSWORD === USER_PASSWORD && USER_PASSWORD !== ''){
+            inputPass.classList.remove('is-invalid');
+            inputPass.classList.add('is-valid');
+        }else if(USER_PASSWORD !== ''){
+            inputPass.classList.add('is-invalid');
         }
     }, [passForm])
 
@@ -39,7 +50,8 @@ const ChangePassword = () => {
                     </div>
                     <div className="form-group">
                         <label>Contraseña nueva</label>
-                        <input onChange={handleInputChange} className="form-control text-dark" type="password" name="NEW_USER_PASSWORD"/>
+                        <input id='NEW_USER_PASSWORD' onChange={handleInputChange} className="form-control text-dark" type="password" name="NEW_USER_PASSWORD"/>
+                        <small id="emailHelp" className="form-text text-muted">La contraseña debe tener entre 6 y 16 caracteres, al menos un número, al menos una minúscula y al menos una mayúscula.</small>
                     </div>
                     <div className="form-group">
                         <label>Repetir contraseña nueva</label>
