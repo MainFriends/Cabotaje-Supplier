@@ -28,7 +28,7 @@ const NavbarUserDropdown = ({profilePicture}) => {
                 {pathname === '/profile' 
                 ?
                 <Link className="dropdown-item" to="/dashboard">
-                    <i class="fa-solid fa-chart-line mr-2 text-gray-800"></i>
+                    <i className="fa-solid fa-chart-line mr-2 text-gray-800"></i>
                     Dashboard
                 </Link>
                 :

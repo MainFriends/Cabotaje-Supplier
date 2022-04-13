@@ -49,3 +49,9 @@ body,
   padding: 0px !important;
   overflow-x: hidden;
 }
+
+.disabled
+{
+    cursor: not-allowed;
+    pointer-events: none;
+}

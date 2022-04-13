@@ -9,12 +9,14 @@ import axios from '../../config/axios';
 import token from '../../helpers/getToken';
 import moment from 'moment';
 import {Buffer} from 'buffer';
+import ChangePassword from '../../components/user-profile/ChangePassword';
 
 
 const Profile = () => {
     const [alertMessage, setAlertMessage] = useState('');
     const [profilePicture, setProfilePicture] = useState(null);
     const [sendRequest, setSendRequest] = useState(false);
+    const [pageActive, setPageActive] = useState('profileInformation');
     const [userInformation, setUserInformation] = useState({
         FIRST_NAME: '',
         MIDDLE_NAME: '',
@@ -71,12 +73,13 @@ const Profile = () => {
                     </div>
                     <hr />
                     <div className="list-group">
-                        <a href="#" className="list-group-item list-group-item-action active">Información del perfil</a>
-                        <a href="#" className="list-group-item list-group-item-action">Cambiar contraseña</a>
+                        <a href="#" onClick={() => setPageActive('profileInformation')} className={'list-group-item list-group-item-action ' + (pageActive === 'profileInformation' && 'active')}>Información del perfil</a>
+                        <a href="#" onClick={() => setPageActive('changePassword')} className={'list-group-item list-group-item-action ' + (pageActive === 'changePassword' && 'active')}>Cambiar contraseña</a>
                     </div>
                 </div>
                 <div className="col-md-8 mt-4">
-                    
+                    {pageActive === 'profileInformation'
+                    ?
                     <InformationForm 
                     setSendRequest={setSendRequest}
                     profilePicture={profilePicture}
@@ -84,6 +87,9 @@ const Profile = () => {
                     setUserInformation={setUserInformation}
                     setAlertMessage={setAlertMessage}
                     />
+                    :
+                    <ChangePassword />
+                    }
                 </div>
             </div>
         </div>
