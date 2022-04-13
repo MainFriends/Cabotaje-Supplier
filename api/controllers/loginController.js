@@ -14,13 +14,14 @@ const login = (req, res) => {
             res.status(400).send({message});
         }else{
             const [data] = result[0];
-            const {COD_ROLE, FIRST_NAME, LAST_NAME, USER_PASSWORD} = data;
+            const {COD_USER, COD_ROLE, FIRST_NAME, LAST_NAME, USER_PASSWORD} = data;
             
             const isPasswordCorrect = await bcrypt.compare(PASSWORD, USER_PASSWORD);
             
             if(isPasswordCorrect){
                 //generar token
                 const payload = {
+                    COD_USER,
                     COD_ROLE,
                     FIRST_NAME,
                     LAST_NAME

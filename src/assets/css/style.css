@@ -44,3 +44,14 @@ body,
 .col-form{
   margin-top: 40px;
 }
+
+.container-profile{
+  padding: 0px !important;
+  overflow-x: hidden;
+}
+
+.disabled
+{
+    cursor: not-allowed;
+    pointer-events: none;
+}
