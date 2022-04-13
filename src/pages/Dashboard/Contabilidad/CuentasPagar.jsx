@@ -72,9 +72,8 @@ const CuentasPagar = () => {
             button: true,
             cell: row => <>
                 <button className='btn btn-sm btn-warning mr-1' onClick={() => {setRowCOD(row.COD_ACC_PAY)}} data-toggle="modal" data-target='#editAccountPay'><i className="fa-solid fa-pen-to-square"></i></button>
-                <button className='btn btn-sm btn-danger'><i className="fa-solid fa-trash"></i></button>
-            </>,
-            allowOverflow: true
+                <button className='btn btn-sm btn-danger' onClick={() => handleDelete(row.COD_ACC_PAY)}><i className="fa-solid fa-trash"></i></button>
+            </>
         }
     ];
 
@@ -98,6 +97,11 @@ const CuentasPagar = () => {
                setSendRequest(false);
            })
     },[sendRequest]);
+
+    const handleDelete = (cod) => {
+        axios.delete(`/accounts-pay/${cod}`, token())
+           .then(res => setSendRequest(true))
+    }
 
     return (
             loading

@@ -1,4 +1,5 @@
-import { useState, useEffect} from "react";
+import { useState } from "react";
+import { useEffect } from "react/cjs/react.development";
 import axios from "../../config/axios";
 import token from "../../helpers/getToken";
 import moment from "moment";
@@ -19,7 +20,7 @@ const EditAccountPayForm = ({rowCOD, setSendRequest}) => {
 
     useEffect(() => {
         axios.get(`/accounts-pay/${rowCOD}`, token())
-           .then(res => setFormEditAccountPay(res.data[0]));
+           .then(res => setFormEditAccountPay(res.data[0]))
     }, [rowCOD])
 
     const handleSubmitAccountPayForm = (e) => {
@@ -27,13 +28,13 @@ const EditAccountPayForm = ({rowCOD, setSendRequest}) => {
 
         axios.put(`/accounts-pay/${rowCOD}`, formEditAccountPay, token())
            .then(res => {
-                document.querySelector('#idCloseEditAccountPayForm').click();
-                setSendRequest(true)
+            document.querySelector('#idCloseEditAccountPayForm').click();
+            setSendRequest(true)
            })
     }
 
     return(
-        <form id='EditAccountPayForm' onSubmit={handleSubmitAccountPayForm} action='#'>
+        <form id='AddAccountPayForm' onSubmit={handleSubmitAccountPayForm} action='#'>
             <div className="row mb-4">
                 <div className="col-md-8 mt-3">
                     <label className='form-label' htmlFor="DESCRIPTION">Descripción</label>
@@ -49,7 +50,7 @@ const EditAccountPayForm = ({rowCOD, setSendRequest}) => {
                 </div>
             </div>
             <div className="modal-footer">
-                <button type="button" id='idCloseAddAccountPayForm' className="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                <button type="button" id='idCloseEditAccountPayForm' className="btn btn-primary" data-dismiss="modal">Cerrar</button>
                 <button type='submit' className="btn btn-success">Guardar</button>
             </div>
         </form>
