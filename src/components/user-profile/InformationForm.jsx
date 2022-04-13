@@ -33,10 +33,16 @@ const InformationForm = ({setSendRequest, profilePicture, userInformation, setUs
         axios.put('/user-profile', userInformation, token())
             .then(res => {
                 const {message} = res.data
-                setAlertMessage(message);
+                setAlertMessage({
+                    message,
+                    ok: true
+                })
                 setSendRequest(true);
                 setTimeout(() => {
-                    setAlertMessage('');
+                    setAlertMessage({
+                        message: '',
+                        ok: ''
+                    });
                 }, 3000);
             })
 

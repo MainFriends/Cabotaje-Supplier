@@ -1,6 +1,6 @@
 const mysqlConnect = require('../config');
 const fs = require('fs');
-const path = require('path');
+const bcrypt = require('bcrypt');
 
 const getUser = (req, res) => {
     const {COD_USER} = req.user;
@@ -82,9 +82,27 @@ const getProfilePic = (req, res) => {
         });
 }
 
+const changePassword = async (req, res) => {
+    const {COD_USER} = req.user;
+    const {USER_PASSWORD} = req.body;
+    const USER_PASSWORD_HASH = await bcrypt.hash(USER_PASSWORD, 10);
+
+    const sp = 'CALL SP_UPD_PASSWORD(?,?)'
+
+    mysqlConnect.query(sp, [COD_USER, USER_PASSWORD_HASH], async (err, result) => {
+        if(err){
+            const message = err.message.split(': ')[1];
+            res.status(400).send({message});
+        }else{
+            res.status(201).send({message: 'Contraseña cambiada exitosamente.'});
+        }
+    })
+}
+
 module.exports = {
     getUser,
     updateUserInformation,
     updProfilePicture,
-    getProfilePic
+    getProfilePic,
+    changePassword
 }

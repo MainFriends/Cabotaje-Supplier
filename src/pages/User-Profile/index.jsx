@@ -10,10 +10,14 @@ import token from '../../helpers/getToken';
 import moment from 'moment';
 import {Buffer} from 'buffer';
 import ChangePassword from '../../components/user-profile/ChangePassword';
+import AlertError from '../../components/AlertError';
 
 
 const Profile = () => {
-    const [alertMessage, setAlertMessage] = useState('');
+    const [alertMessage, setAlertMessage] = useState({
+        message: '',
+        ok: ''
+    });
     const [profilePicture, setProfilePicture] = useState(null);
     const [sendRequest, setSendRequest] = useState(false);
     const [pageActive, setPageActive] = useState('profileInformation');
@@ -55,7 +59,8 @@ const Profile = () => {
     return(
         <div className="container-fluid bg-light container-profile">
             <NavbarProfile profilePicture={profilePicture}/>
-            {alertMessage ? <AlertSuccess message={alertMessage}/> : null}
+            {alertMessage.ok ? <AlertSuccess message={alertMessage.message}/> : null}
+            {alertMessage.ok === false ? <AlertError message={alertMessage.message}/> : null}
             <div className="row p-3 ">
                 <div className="col-md-3">
                     <div className="row mb-0">
@@ -88,7 +93,7 @@ const Profile = () => {
                     setAlertMessage={setAlertMessage}
                     />
                     :
-                    <ChangePassword />
+                    <ChangePassword setAlertMessage={setAlertMessage}/>
                     }
                 </div>
             </div>

@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import axios from '../../config/axios';
+import token from '../../helpers/getToken';
 
-const ChangePassword = () => {
+const ChangePassword = ({setAlertMessage}) => {
+
     const [passForm, setPassForm] = useState({
         LAST_USER_PASSWORD: '',
         NEW_USER_PASSWORD: '',
@@ -37,11 +40,46 @@ const ChangePassword = () => {
         }
     }, [passForm])
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        axios.put('/change-password', passForm, token())
+            .then(res => {
+                const {message} = res.data;
+
+                setAlertMessage({
+                    message,
+                    ok:true
+                });
+
+                setTimeout(() => {
+                    setAlertMessage({
+                        message: '',
+                        ok: ''
+                    });
+                }, 3000);
+            })
+            .catch(err => {
+                const {message} = err.response.data;
+
+                setAlertMessage({
+                    message,
+                    ok:false
+                });
+
+                setTimeout(() => {
+                    setAlertMessage({
+                        message: '',
+                        ok: ''
+                    });
+                }, 3000);
+            })
+    }
+
   return (
     <>
         <h1 className="text-dark">Cambiar contraseña</h1>
         <hr />
-        <form action="#">
+        <form onSubmit={handleSubmit} action="#">
             <div className="row">
                 <div className="col-6">
                     <div className="form-group">
