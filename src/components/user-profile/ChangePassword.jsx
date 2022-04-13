@@ -19,6 +19,15 @@ const ChangePassword = ({setAlertMessage}) => {
         })
     }
 
+    const cleanForm = (e) => {
+        setPassForm({
+            LAST_USER_PASSWORD: '',
+            NEW_USER_PASSWORD: '',
+            USER_PASSWORD: ''
+        })
+        e.target.reset()
+    }
+
     useEffect(() => {
         //validar input nueva contraseña
         const inputNewPass = document.querySelector('#NEW_USER_PASSWORD');
@@ -26,8 +35,9 @@ const ChangePassword = ({setAlertMessage}) => {
         if(regex.test(NEW_USER_PASSWORD)){
             inputNewPass.classList.remove('is-invalid');
             inputNewPass.classList.add('is-valid');
-        }else if(USER_PASSWORD !== ''){
-            inputNewPass.classList.add('is-invalid');
+        }else{
+            inputNewPass.classList.remove('is-valid');
+            USER_PASSWORD !== '' && inputNewPass.classList.add('is-invalid');
         }
 
         //validar input repetir contraseña
@@ -35,8 +45,9 @@ const ChangePassword = ({setAlertMessage}) => {
         if(NEW_USER_PASSWORD === USER_PASSWORD && USER_PASSWORD !== ''){
             inputPass.classList.remove('is-invalid');
             inputPass.classList.add('is-valid');
-        }else if(USER_PASSWORD !== ''){
-            inputPass.classList.add('is-invalid');
+        }else{
+            inputPass.classList.remove('is-valid');
+            USER_PASSWORD !== '' && inputPass.classList.add('is-invalid');
         }
     }, [passForm])
 
@@ -57,6 +68,8 @@ const ChangePassword = ({setAlertMessage}) => {
                         ok: ''
                     });
                 }, 3000);
+
+                cleanForm(e)
             })
             .catch(err => {
                 const {message} = err.response.data;
@@ -72,6 +85,9 @@ const ChangePassword = ({setAlertMessage}) => {
                         ok: ''
                     });
                 }, 3000);
+
+                e.target.LAST_USER_PASSWORD.value = ''
+                e.target.LAST_USER_PASSWORD.focus()
             })
     }
 
@@ -84,7 +100,7 @@ const ChangePassword = ({setAlertMessage}) => {
                 <div className="col-6">
                     <div className="form-group">
                         <label>Contraseña actual</label>
-                        <input onChange={handleInputChange} className="form-control text-dark" type="password" name="LAST_USER_PASSWORD"/>
+                        <input onChange={handleInputChange} className="form-control text-dark" type="password" name="LAST_USER_PASSWORD" required/>
                     </div>
                     <div className="form-group">
                         <label>Contraseña nueva</label>
