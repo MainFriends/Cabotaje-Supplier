@@ -50,17 +50,15 @@ const addAccPay = (req, res) => {
 const updateAccPay = (req, res) => {
     const {codAccPay} = req.params;
     const {
-        COD_INVOICE,
         DESCRIPTION,
         TOT_BALANCE,
         DATE_LIMIT
     } = req.body
 
-    const sp = 'CALL SP_UPD_ACCOUNTS_TO_PAY(?,?,?,?,?)';
+    const sp = 'CALL SP_UPD_ACCOUNTS_TO_PAY(?,?,?,?)';
 
     mysqlConnect.query(sp, [
         codAccPay,
-        COD_INVOICE,
         DESCRIPTION,
         TOT_BALANCE,
         DATE_LIMIT

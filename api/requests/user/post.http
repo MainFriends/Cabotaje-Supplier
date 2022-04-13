@@ -3,17 +3,17 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfUk9MRSI6MSwiRklSU1RfTkFNRSI6IlBlZHJvIiwiTEFTVF9OQU1FIjoiU2FuY2hleiIsImlhdCI6MTY0NzM5MDI1M30.cn1xro2BAtDzbgoNloL6o2j9sQpY4UI41kOH3mZ-_Q8
 
 {
-    "IDENTITY": "080119",
+    "IDENTITY": "08012000",
     "FIRST_NAME": "Mendel",
-    "MIDDLE_NAME": "Gerardo",
+    "MIDDLE_NAME": "Brez",
     "LAST_NAME": "Aguilar",
     "GENDER": "M",
-    "NUM_PHONE_ONE": 88795933,
-    "NUM_PHONE_REFERENCE": 78451211,
-    "DAT_BIRTHDAY": "1998-02-12",
+    "NUM_PHONE_ONE": 31511888,
+    "NUM_PHONE_REFERENCE": 22301972,
+    "DAT_BIRTHDAY": "1999-07-05",
     "NAM_CITY": "Tegucigalpa",
-    "ADDRESS": "Res. Plaza",
-    "COD_ROLE": 3,
-    "USER_EMAIL": "elmendel@hotmail.com",
-    "USER_PASSWORD": "123"
+    "ADDRESS": "Col. Kennedy",
+    "COD_ROLE": 1,
+    "USER_EMAIL": "mendel.aguilar@unah.hn",
+    "USER_PASSWORD": "Cooper123"
 }

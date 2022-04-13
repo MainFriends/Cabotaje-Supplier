@@ -5,16 +5,22 @@ import {useEffect, useState, useMemo} from 'react';
 import Spinner from '../../../components/Spinner';
 import FilterComponent from '../../../components/FilterComponent';
 import Modal from '../../../components/Modal';
+import AddAccountPayForm from '../../../components/accPay/AddAccountPayForm';
+import EditAccountPayForm from '../../../components/accPay/EditAccountPayForm';
 
 import {paginationComponentOptions} from '../../../helpers/datatablesOptions';
 import axios from '../../../config/axios';
 import token from '../../../helpers/getToken';
+import moment from 'moment';
+
 
 const CuentasPagar = () => {
     const [rows, setRows] = useState([]);
     const [filterText, setFilterText] = useState('');
     const [loading, setLoading] = useState(true);
     const [messageError, setMessageError] = useState('');
+    const [sendRequest, setSendRequest] = useState(false);
+    const [rowCOD, setRowCOD] = useState(null);
     
     //definir las columnas
     const columns = [
@@ -47,24 +53,28 @@ const CuentasPagar = () => {
             name: 'DESCRIPCION',
             selector: row => row.DESCRIPTION,
             sortable: true,
+            allowOverflow: true
         },
         {
-            name: 'DEUDA A PAGAR',
+            name: 'MONTO',
             selector: row => row.TOT_BALANCE,
             sortable: true,
+            format: row => `L ${row.TOT_BALANCE.toFixed(2)}`
         },
         {
             name: 'FECHA LIMITE',
             selector: row => row.DATE_LIMIT,
             sortable: true,
+            format: row => moment(row.DATE_LIMIT).format('DD-MM-YYYY')
         },
         {
             name: 'ACCIONES',
             button: true,
             cell: row => <>
-                <button className='btn btn-sm btn-warning mr-1' data-toggle="modal" data-target='#'><i className="fa-solid fa-pen-to-square"></i></button>
+                <button className='btn btn-sm btn-warning mr-1' onClick={() => {setRowCOD(row.COD_ACC_PAY)}} data-toggle="modal" data-target='#editAccountPay'><i className="fa-solid fa-pen-to-square"></i></button>
                 <button className='btn btn-sm btn-danger'><i className="fa-solid fa-trash"></i></button>
-            </>
+            </>,
+            allowOverflow: true
         }
     ];
 
@@ -80,13 +90,14 @@ const CuentasPagar = () => {
 
     useEffect(() => {
         //PETICION GET
-        axios.get('accounts-pay', token())
+        axios.get('/accounts-pay', token())
            .then(res => {
                const {data} = res;
                setRows(data);
                setLoading(false);
+               setSendRequest(false);
            })
-    },[]);
+    },[sendRequest]);
 
     return (
             loading
@@ -120,7 +131,13 @@ const CuentasPagar = () => {
                         idModal='addAccountPay'
                         title='Agregar Cuenta por Pagar'
                         messageError={messageError}
-                        content={<h1>Formulario</h1>}
+                        content={<AddAccountPayForm setSendRequest={setSendRequest} />}
+                    />
+                    <Modal 
+                        idModal='editAccountPay'
+                        title='Actualizar Cuenta por Pagar'
+                        messageError={messageError}
+                        content={<EditAccountPayForm rowCOD={rowCOD} setSendRequest={setSendRequest} />}
                     />
                 </div>
             </div> 
