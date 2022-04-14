@@ -8,5 +8,6 @@ router.get('/accounts-pay', [userExtractor, verifyRoleAccounting], accPayControl
 router.get('/accounts-pay/:codAccPay', [userExtractor, verifyRoleAccounting], accPayController.getAccPay);
 router.post('/accounts-pay', [userExtractor, verifyRoleAccounting], accPayController.addAccPay);
 router.put('/accounts-pay/:codAccPay', [userExtractor, verifyRoleAccounting], accPayController.updateAccPay);
+router.delete('/accounts-pay/:codAccPay',[userExtractor, verifyRoleAccounting], accPayController.deleteAccPay);
 
 module.exports = router;

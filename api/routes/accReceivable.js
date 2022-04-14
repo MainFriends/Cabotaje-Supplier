@@ -8,4 +8,5 @@ router.get('/accounts-receivable', [userExtractor, verifyRoleAccounting], accRec
 router.get('/accounts-receivable/:codAccReceivable',[userExtractor, verifyRoleAccounting], accReceivableController.getAccReceivable);
 router.post('/accounts-receivable',[userExtractor, verifyRoleAccounting], accReceivableController.addAccReceivable);
 
+
 module.exports = router;

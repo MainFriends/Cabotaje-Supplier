@@ -1,0 +1,2 @@
+DELETE http://localhost:4000/api/accounts-pay/6
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfUk9MRSI6MSwiRklSU1RfTkFNRSI6Ik1lbmRlbCIsIkxBU1RfTkFNRSI6IlJvbWVybyIsImlhdCI6MTY0OTIyMzc0OX0.4_lFWGfTx4pdRV3fN6trLo6xTvtDlONIjQ00HoATxS8
