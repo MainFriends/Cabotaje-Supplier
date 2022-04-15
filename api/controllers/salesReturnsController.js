@@ -31,9 +31,10 @@ const addSalesReturn = (req, res) => {
         DESCRIPTION,
         CANT,
         AMOUNT,
-        COD_USER,
         DAT_RETURN
     } = req.body;
+
+    const {COD_USER} = req.user;
 
     const sp = "CALL SP_INS_SALES_RETURNS(?,?,?,?,?,?)"
 
