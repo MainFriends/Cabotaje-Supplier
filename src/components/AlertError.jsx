@@ -2,7 +2,7 @@ const AlertError = ({message}) => {
 
     return (
         <div className="alert alert-danger text-center mx-4" role="alert">
-            {message}
+            <strong>¡Error! </strong>{message}
         </div>
     )
 }

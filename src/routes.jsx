@@ -21,6 +21,7 @@ import Devoluciones from "./pages/Dashboard/Contabilidad/Devoluciones";
 import Rebajas from "./pages/Dashboard/Contabilidad/Rebajas";
 import PlanillaPago from "./pages/Dashboard/Contabilidad/PlanillaPago";
 import Graficas from "./pages/Dashboard/Graficas";
+import Profile from './pages/User-Profile';
 
 const Pages = () => {
 
@@ -29,6 +30,7 @@ const Pages = () => {
     return (
     <Routes>
         <Route path="/" element={isLogged ? (<Navigate to='/dashboard'/>) : (<Login />)}/>
+        <Route path="/profile" element={isLogged ? (<Profile />) : (<Navigate to='/'/>)}/>
         <Route path="/dashboard" element={isLogged ? (<Dashboard />) : (<Navigate to='/'/>)}>
             <Route path="ventas" element={<Facturas />}/>
             <Route path="compras" element={<Compras />}/>

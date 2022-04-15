@@ -9,18 +9,18 @@ import Modal from '../../../components/Modal';
 
 import { getInvoices } from '../../../services/sale-invoice';
 import {paginationComponentOptions} from '../../../helpers/datatablesOptions';
+import SaleDetail from '../../../components/sale-detail/SaleDetail';
 
 const Facturas = () => {
     const [rows, setRows] = useState([]);
     const [filterText, setFilterText] = useState('');
     const [pending, setPending] = useState(true);
-    const [submitRequest, setSubmitRequest] = useState(false);
-    const [requestContent, setRequestContent] = useState(null);
+    const [rowCOD, setRowCOD] = useState(null);
     
     //definir las columnas
     const columns = [
         {
-            name: '# Factura',
+            name: '# FACTURA',
             selector: row => row.COD_INVOICE,
             sortable: true,
         },
@@ -49,6 +49,12 @@ const Facturas = () => {
             format: row => `L ${row.TOT_ISV.toFixed(2)}`
         },
         {
+            name: 'TOTAL VENTA',
+            selector: row => row.TOT_SALE,
+            sortable: true,
+            format: row => `L ${row.TOT_SALE.toFixed(2)}`
+        },
+        {
             name: 'TIPO DE TRANSACCIÓN',
             selector: row => row.TYP_TO_SALE,
             sortable: true,
@@ -75,7 +81,7 @@ const Facturas = () => {
             name: 'ACCIONES',
             button: true,
             cell: row => <>
-                <button className='btn btn-sm btn-primary me-1' data-toggle="modal" data-target='#viewDetail' onClick={() => handleDetail(row.COD_INVOICE)}><i className="fa-solid fa-eye"></i></button>
+                <button className='btn btn-sm btn-primary me-1' data-toggle="modal" data-target='#viewDetail' onClick={() => setRowCOD(row.COD_INVOICE)}><i className="fa-solid fa-eye"></i></button>
             </>
         },
     ];
@@ -93,10 +99,6 @@ const Facturas = () => {
         setRows(data);
         setPending(false);
     },[]);
-
-    const handleDetail = (COD_INVOICE) => {
-
-    }
 
     return (
             pending
@@ -124,7 +126,8 @@ const Facturas = () => {
                     <Modal 
                         idModal='viewDetail'
                         title='Detalle de venta'
-                        content={<h1>Contenido</h1>}
+                        content={<SaleDetail rowCOD={rowCOD}/>}
+                        modalSize='xl'
                     />
                 </div>
             </div> 
