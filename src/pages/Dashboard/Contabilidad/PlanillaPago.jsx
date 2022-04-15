@@ -118,7 +118,7 @@ const PlanillaPago = () => {
             :
             <div className="card shadow rounded">
                 <div className="card-header text-dark">
-                    Clientes
+                    Planillas de Pago
                 </div>
                 <div className="card-body">
                     <div className="row mt-2 ml-1">

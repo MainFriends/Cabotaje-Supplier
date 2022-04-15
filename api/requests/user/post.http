@@ -1,19 +1,19 @@
 POST http://localhost:4000/api/user
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfUk9MRSI6MSwiRklSU1RfTkFNRSI6IlBlZHJvIiwiTEFTVF9OQU1FIjoiU2FuY2hleiIsImlhdCI6MTY0NzM5MDI1M30.cn1xro2BAtDzbgoNloL6o2j9sQpY4UI41kOH3mZ-_Q8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfVVNFUiI6MSwiQ09EX1JPTEUiOjEsIkZJUlNUX05BTUUiOiJNZW5kZWwiLCJMQVNUX05BTUUiOiJBZ3VpbGFyIiwiaWF0IjoxNjQ5OTg2OTg2LCJleHAiOjE2NTAwNDA5ODZ9.JfK2J-MUwIl-tLYB2KCOVppKTDYP-HuS3706Q6Z2IwE
 
 {
-    "IDENTITY": "08012000",
-    "FIRST_NAME": "Mendel",
-    "MIDDLE_NAME": "Brez",
-    "LAST_NAME": "Aguilar",
+    "IDENTITY": "08012005",
+    "FIRST_NAME": "Jorge",
+    "MIDDLE_NAME": "Alejandro",
+    "LAST_NAME": "Fuentes",
     "GENDER": "M",
     "NUM_PHONE_ONE": 31511888,
     "NUM_PHONE_REFERENCE": 22301972,
-    "DAT_BIRTHDAY": "1999-07-05",
+    "DAT_BIRTHDAY": "2000-06-03",
     "NAM_CITY": "Tegucigalpa",
     "ADDRESS": "Col. Kennedy",
     "COD_ROLE": 1,
-    "USER_EMAIL": "mendel.aguilar@unah.hn",
-    "USER_PASSWORD": "Cooper123"
+    "USER_EMAIL": "jorge.fuentes@unah.hn",
+    "USER_PASSWORD": "jorge@123"
 }

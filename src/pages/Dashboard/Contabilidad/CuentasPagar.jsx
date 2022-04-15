@@ -110,7 +110,7 @@ const CuentasPagar = () => {
             :
             <div className="card shadow rounded">
                 <div className="card-header text-dark">
-                    Clientes
+                    Cuentas por Pagar
                 </div>
                 <div className="card-body">
                     <div className="row mt-2 ml-1">

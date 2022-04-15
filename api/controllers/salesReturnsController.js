@@ -71,23 +71,19 @@ const deleteSalesReturn = (req, res) => {
 const updateSalesReturn = (req, res) => {
     const {codReturn} = req.params;
     const {
-        COD_PRODUCT,
         DESCRIPTION,
         CANT,
         AMOUNT,
-        COD_USER,
         DAT_RETURN
     } = req.body;
 
-    const sp= "CALL SP_UPD_SALES_RETURNS(?,?,?,?,?,?,?)";
+    const sp= "CALL SP_UPD_SALES_RETURNS(?,?,?,?,?)";
 
     mysqlConnect.query(sp, [
         codReturn,
-        COD_PRODUCT,
         DESCRIPTION,
         CANT,
         AMOUNT,
-        COD_USER,
         DAT_RETURN
     ], (err) => {
         if(err){

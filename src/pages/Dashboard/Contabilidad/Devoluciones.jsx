@@ -6,10 +6,12 @@ import Spinner from '../../../components/Spinner';
 import FilterComponent from '../../../components/FilterComponent';
 import Modal from '../../../components/Modal';
 import AddSalesReturn from '../../../components/salesReturn/AddSalesReturn';
+import EditSalesReturn from '../../../components/salesReturn/EditSalesReturn';
 
 import {paginationComponentOptions} from '../../../helpers/datatablesOptions';
 import axios from '../../../config/axios';
 import token from '../../../helpers/getToken';
+import moment from 'moment';
 
 
 const Devoluciones = () => {
@@ -17,6 +19,8 @@ const Devoluciones = () => {
     const [filterText, setFilterText] = useState('');
     const [loading, setLoading] = useState(true);
     const [messageError, setMessageError] = useState('');
+    const [sendRequest, setSendRequest] = useState(false);
+    const [rowCOD, setRowCOD] = useState(null);
     
     //definir las columnas
     const columns = [
@@ -34,6 +38,7 @@ const Devoluciones = () => {
             name: 'DESCRIPCION',
             selector: row => row.DESCRIPTION,
             sortable: true,
+            allowOverflow: true
         },
         {
             name: 'CANTIDAD',
@@ -49,6 +54,7 @@ const Devoluciones = () => {
             name: 'MONTO',
             selector: row => row.AMOUNT,
             sortable: true,
+            format: row => `L ${row.AMOUNT.toFixed(2)}`
         },
         {
             name: 'USUARIO',
@@ -59,13 +65,14 @@ const Devoluciones = () => {
             name: 'FECHA',
             selector: row => row.DAT_RETURN,
             sortable: true,
+            format: row => moment(row.DAT_RETURN).format('DD-MM-YYYY')
         },
         {
             name: 'ACCIONES',
             button: true,
             cell: row => <>
-                <button className='btn btn-sm btn-warning mr-1' data-toggle="modal" data-target='#'><i className="fa-solid fa-pen-to-square"></i></button>
-                <button className='btn btn-sm btn-danger'><i className="fa-solid fa-trash"></i></button>
+                <button className='btn btn-sm btn-warning mr-1' onClick={() => {setRowCOD(row.COD_RETURN)}} data-toggle="modal" data-target='#editSalesReturn'><i className="fa-solid fa-pen-to-square"></i></button>
+                <button className='btn btn-sm btn-danger' onClick={() => handleDelete(row.COD_RETURN)}><i className="fa-solid fa-trash"></i></button>
             </>
         }
     ];
@@ -87,8 +94,14 @@ const Devoluciones = () => {
                const {data} = res;
                setRows(data);
                setLoading(false);
+               setSendRequest(false);
            })
-    },[]);
+    },[sendRequest]);
+
+    const handleDelete = (cod) => {
+        axios.delete(`/sales-returns/${cod}`, token())
+           .then(res => setSendRequest(true));
+    }
 
     return (
             loading
@@ -97,7 +110,7 @@ const Devoluciones = () => {
             :
             <div className="card shadow rounded">
                 <div className="card-header text-dark">
-                    Clientes
+                    Devoluciones
                 </div>
                 <div className="card-body">
                     <div className="row mt-2 ml-1">
@@ -122,7 +135,13 @@ const Devoluciones = () => {
                         idModal='addSalesReturn'
                         title='Agregar Devolución'
                         messageError={messageError}
-                        content={<AddSalesReturn/>}
+                        content={<AddSalesReturn setSendRequest={setSendRequest} />}
+                    />
+                    <Modal 
+                        idModal='editSalesReturn'
+                        title='Actualizar Devolución'
+                        messageError={messageError}
+                        content={<EditSalesReturn rowCOD={rowCOD} setSendRequest={setSendRequest} />}
                     />
                 </div>
             </div> 
