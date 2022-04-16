@@ -1,6 +1,42 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import axios from '../../config/axios';
+import token from '../../helpers/getToken';
+import moment from 'moment'
 
-const SaleInformation = ({setCurrentPage}) => {
+const SaleInformation = ({user, setUser, client, setClient, setCurrentPage}) => {
+
+  useEffect(() => {
+    if(user.code){
+      axios.get(`/user/${user.code}`, token())
+        .then(res => {
+          const {FIRST_NAME, LAST_NAME} = res.data[0];
+          setUser({
+            ...user,
+            name: `${FIRST_NAME} ${LAST_NAME}`
+          })
+        })
+        .catch(err => {
+          setUser({
+            ...user,
+            name: `Usuario no encontrado`
+          })
+        })
+    }
+  }, [user.code])
+
+  const handleUser = ({target}) => {
+    setUser({
+      ...user,
+      code: target.value
+    })
+  }
+  
+  const handleClient = ({target}) => {
+    setClient({
+      ...client,
+      [target.name]: target.value
+    })
+  }
 
   return (
     <div className="card text-dark card-facturar shadow">
@@ -32,6 +68,9 @@ const SaleInformation = ({setCurrentPage}) => {
                 <input
                   className="form-control form-control form-control-sm"
                   type="number"
+                  onChange={handleUser}
+                  value={user.code}
+                  name='code'
                 />
               </div>
               <div className="col-6">
@@ -39,6 +78,22 @@ const SaleInformation = ({setCurrentPage}) => {
                   className="form-control form-control form-control-sm"
                   type="text"
                   disabled
+                  value={user.name}
+                />
+              </div>
+            </div>
+            <div className="row mt-2">
+              <div className="col-3">
+                <label className="mt-1">
+                <i className="mr-1 fa-solid fa-calendar-days"></i> Fecha
+                </label>
+              </div>
+              <div className="col-4">
+                <input
+                  className="form-control form-control form-control-sm"
+                  type="text"
+                  disabled
+                  value={moment().format('DD-MM-YYYY')}
                 />
               </div>
             </div>
@@ -51,7 +106,13 @@ const SaleInformation = ({setCurrentPage}) => {
             <label className="mt-2">Cliente</label>
           </div>
           <div className="col-4">
-            <input className="form-control form-control" type="text" />
+            <input 
+            onChange={handleClient}
+            className="form-control form-control" 
+            type="text" 
+            value={client.name}
+            name='name'
+            />
           </div>
         </div>
         <div className="row mt-2">
@@ -59,7 +120,13 @@ const SaleInformation = ({setCurrentPage}) => {
             <label className="mt-2">RTN</label>
           </div>
           <div className="col-4">
-            <input className="form-control form-control" type="number" />
+            <input 
+            onChange={handleClient}
+            className="form-control form-control" 
+            type="number" 
+            value={client.RTN}
+            name='RTN'
+            />
           </div>
         </div>
       </div>
