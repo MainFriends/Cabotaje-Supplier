@@ -1,16 +1,16 @@
 POST http://localhost:4000/api/sale-invoice
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfVVNFUiI6MSwiQ09EX1JPTEUiOjEsIkZJUlNUX05BTUUiOiJNZW5kZWwiLCJMQVNUX05BTUUiOiJBZ3VpbGFyIiwiaWF0IjoxNjUwMDc1NDc0LCJleHAiOjE2NTAxMjk0NzR9.h2zG40wmetiTAI_TRU2UQtYwQHChcM9XMpFIGDSZLGs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfVVNFUiI6MSwiQ09EX1JPTEUiOjEsIkZJUlNUX05BTUUiOiJNZW5kZWwiLCJMQVNUX05BTUUiOiJBZ3VpbGFyIiwiaWF0IjoxNjUwMTU1MDYxLCJleHAiOjE2NTAyMDkwNjF9.8M2bRvmakkzsT9HBXvjCp9oEQ-5zniN3ruc5o5S_5Ns
 
 {
     "COD_CLIENT": 1,
     "COD_USER": 5, 
     "SUBTOTAL": 150.00,
-    "TOT_DISCOUNT": 50.00,
+    "TOT_DISCOUNT": 20.00,
     "TOT_ISV": 0.15,
-    "TOT_SALE": 120.00,
+    "TOT_SALE": 140.00,
     "TYP_TO_SALE": "Contado",
     "COD_TYP_PAY": 1,
     "DESCRIPTION": "Deuda por cobrar",
-    "DAT_LIMIT": "2022-05-16" 
+    "DAT_LIMIT": "2022-05-30" 
 }
