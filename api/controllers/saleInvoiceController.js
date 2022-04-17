@@ -59,8 +59,36 @@ const addInvoice = (req, res) => {
     })
 }
 
+const getCategories = (req, res) => {
+    const sp = `CALL SP_SEL_CATEGORIES()`;
+
+    mysqlConnect.query(sp, (err, result) => {
+        if(err){
+            res.status(500).send({message: "Error en el servidor."});
+        }else{
+            res.status(200).json(result[0]);
+        }
+    });
+}
+
+const getProducts = (req, res) => {
+    const {codCategory} = req.params;
+
+    const sp = `CALL SP_SEL_PRODUCTS(?)`;
+
+    mysqlConnect.query(sp, [codCategory], (err, result) => {
+        if(err){
+            res.status(500).send({message: "Error en el servidor."});
+        }else{
+            res.status(200).json(result[0]);
+        }
+    });
+}
+
 module.exports = {
     getInvoices,
     getInvoice,
-    addInvoice
+    addInvoice,
+    getCategories,
+    getProducts
 };

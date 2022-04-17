@@ -1,79 +1,48 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from '../../config/axios';
+import token from '../../helpers/getToken';
 
 const Inventory = () => {
-    const productsType = ['Carnes', 'Lacteos', 'Jugos', 'Embutidos'];
-    const productsList = [
-        {
-            codigo: 1,
-            producto: 'Carne molida',
-            descripcion: 'libra',
-            cantidad: 20,
-            precio: 50,
-            descuento: 0,
-            tipo: 'Carnes'
-        },
-        {
-            codigo: 2,
-            producto: 'Bistep',
-            descripcion: 'libra',
-            cantidad: 15,
-            precio: 75,
-            descuento: 0,
-            tipo: 'Carnes'
-        },
-        {
-            codigo: 3,
-            producto: 'Coca-Cola',
-            descripcion: '1 litro',
-            cantidad: 45,
-            precio: 35,
-            descuento: 0,
-            tipo: 'Jugos'
-        },
-        {
-            codigo: 4,
-            producto: 'Pepsi',
-            descripcion: '3 litros',
-            cantidad: 12,
-            precio: 50,
-            descuento: 0,
-            tipo: 'Jugos'
-        },
-        {
-            codigo: 5,
-            producto: 'Leche',
-            descripcion: '1 Litro',
-            cantidad: 20,
-            precio: 25,
-            descuento: 0,
-            tipo: 'Lacteos'
-        },
-        {
-            codigo: 6,
-            producto: 'Mantequilla',
-            descripcion: 'libra',
-            cantidad: 20,
-            precio: 10,
-            descuento: 0,
-            tipo: 'Lacteos'
-        },
-    ]
-    const [productTypeSelected, setProductTypeSelected] = useState(null);
+    const [categories, setCategories] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState(null);
+    const [productsList, setProductsList] = useState([]);
+    const [selectProduct, setSelectedProduct] = useState(null);
+
+    useEffect(() => {
+        axios.get('/categories', token())
+            .then(res => setCategories(res.data))
+    }, [])
+
+    useEffect(() => {
+        if(selectedCategory){
+            axios.get(`/products/${selectedCategory}`, token())
+            .then(res => setProductsList(res.data))
+        }
+    }, [selectedCategory])
+
+    useEffect(() => {
+        if(selectProduct){
+            axios.get(`/inventory/${selectProduct}`, token())
+            .then(res => console.log(res.data))
+        }
+    }, [selectProduct])
     
 
   return (
     <>
         <div className="row">
-            <div className="col-10">
+            <div className="col-8">
+                <h6>Productos</h6>
                 <div className="row">
-                    {productsType.map(product => <div onClick={() => setProductTypeSelected(product)} className="col-2 btn btn-success btn-lg mt-1 mr-1">{product}</div>)}
+                    {categories.map(({COD_CATEGORY, NAM_CATEGORY}) => <div key={COD_CATEGORY} className="col-3 mt-1 px-1"><div onClick={() => setSelectedCategory(COD_CATEGORY)} className="btn btn-success btn-block">{NAM_CATEGORY}</div></div>)}
                 </div>
                 <div className="row">
-                    {productsList.map(product => product.tipo === productTypeSelected && (<div className="col-2 btn btn-danger btn-lg mt-1 mr-1">{product.producto}</div>))}
+                    {productsList.map(({COD_PRODUCT, NAM_PRODUCT}) => <div key={COD_PRODUCT} className="col-3 mt-1 px-1"><div onClick={() => setSelectedProduct(COD_PRODUCT)} className="btn btn-danger btn-block">{NAM_PRODUCT}</div></div>)}
                 </div>
             </div>
-            <div className="col-2">
-                
+            <div className="col-4 px-1">
+                <h6 className='mb-1'>Cantidad</h6>
+                <input className='form-control form-control-lg' type="number" />
             </div>
         </div>
     </>

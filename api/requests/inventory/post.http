@@ -4,7 +4,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfUk9MRSI6MSwiR
 
 {
     "COD_SUPPLIER" : 1,
-	"NAM_PRODUCT" : "Carne molida",
+	"NAM_PRODUCT" : "Medallones",
     "DES_PRODUCT" : "BLANCO",
     "ISV" : 0.15, 
     "CANT_TOTAL": 1,
@@ -16,6 +16,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfUk9MRSI6MSwiR
     "WHOLESALE_PRICE_1" : 105.00,
     "WHOLESALE_PRICE_2" : 105.00,
     "PRICE_UNIT_PURCHASE": 90.00,
-    "COD_CATEGORY": 1,
+    "COD_CATEGORY": 2,
     "COD_TYP_PRODUCT": 2
 }
