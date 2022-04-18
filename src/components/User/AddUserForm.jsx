@@ -16,9 +16,9 @@ const AddUserForm = ({setSendRequest, setMessageError}) => {
         DAT_BIRTHDAY: '',
         NAM_CITY: '',
         ADDRESS: '',
-        COD_ROLE:'',
-        USER_EMAIL:'',
-        USER_PASSWORD:''
+        ROLES:'',
+        EMAIL:'',
+        PASSWORD:''
     })
 
     const handleInputChange = (e) => {
@@ -69,15 +69,16 @@ const AddUserForm = ({setSendRequest, setMessageError}) => {
                     <label className='form-label' htmlFor="GENDER">Genero</label>
                     <input onChange={handleInputChange} className='form-control' name='GENDER' type="text" required/>
                 </div>
-                <div className="col-md-3 mt-2">
+                <div className="col-md-4">
                     <label className='form-label' htmlFor="NUM_PHONE_ONE">Teléfono 1</label>
                     <input onChange={handleInputChange} className='form-control' name='NUM_PHONE_ONE' type="number" required/>
-                </div>
-                <div className="col-md-3 mt-2">
+                </div> 
+                
+                <div className="col-md-4">
                     <label className='form-label' htmlFor="NUM_PHONE_TWO">Teléfono 2</label>
                     <input onChange={handleInputChange} className='form-control' name='NUM_PHONE_TWO' type="number" required/>
                 </div>
-                <div className="col-md-3 mt-2">
+                <div className="col-md-4">
                     <label className='form-label' htmlFor="NUM_REFERENCE">REFERENCIA</label>
                     <input onChange={handleInputChange} className='form-control' name='NUM_REFERENCE' type="number" required/>
                 </div>
@@ -89,21 +90,21 @@ const AddUserForm = ({setSendRequest, setMessageError}) => {
                     <label className='form-label' htmlFor="NAM_CITY">Ciudad</label>
                     <input onChange={handleInputChange} className='form-control' name='NAM_CITY' type="text" required/>
                 </div>
-                <div className="col-md-6 mt-2">
+                <div className="col-md-8">
                     <label className='form-label' htmlFor="ADDRESS">Dirección</label>
                     <textarea onChange={handleInputChange} className='form-control' name='ADDRESS'  rows='3' cols='4' type="number" required/>
                 </div>
-                <div className="col-md-6">
-                    <label className='form-label' htmlFor="COD_ROLE">ROLES</label>
-                    <input onChange={handleInputChange} className='form-control' name='COD_ROLE' type="number" required/>
+                <div className="col-md-2">
+                    <label className='form-label' htmlFor="ROLE">ROLES</label>
+                    <input onChange={handleInputChange} className='form-control' name='ROLE' type="number" required/>
                 </div>
-                <div className="col-md-6 mt-2">
-                    <label className='form-label' htmlFor="USER_EMAIL">EMAIL</label>
-                    <textarea onChange={handleInputChange} className='form-control' name='USER_EMAIL'  type="number" required/>
+                <div className="col-md-5">
+                    <label className='form-label' htmlFor="EMAIL">EMAIL</label>
+                    <input onChange={handleInputChange} className='form-control' name='EMAIL'  type="number" required/>
                 </div>
-                <div className="col-md-6 mt-2">
-                    <label className='form-label' htmlFor="USER_PASSWORD">Contraseña</label>
-                    <textarea onChange={handleInputChange} className='form-control' name='USER_PASSWORD'   type="number" required/>
+                <div className="col-md-5">
+                    <label className='form-label' htmlFor="PASSWORD">Contraseña</label>
+                    <input onChange={handleInputChange} className='form-control' name='PASSWORD'   type="number" required/>
                 </div>
             </div>
             

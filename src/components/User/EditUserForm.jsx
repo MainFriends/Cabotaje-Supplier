@@ -72,7 +72,7 @@ const EditUserForm = ({rowCOD, setSendRequest, setMessageError}) => {
                     <input onChange={handleInputChange} value={formEditUser.LAST_NAME} className='form-control' name='LAST_NAME' type="text" required/>
                 </div>
                 <div className="col-md-4">
-                    <label className='form-label' htmlFor="GENDER">Apellido</label>
+                    <label className='form-label' htmlFor="GENDER">Genero</label>
                     <input onChange={handleInputChange} value={formEditUser.GENDER} className='form-control' name='GENDER' type="text" required/>
                 </div>
                 <div className="col-md-4 ">
@@ -87,17 +87,21 @@ const EditUserForm = ({rowCOD, setSendRequest, setMessageError}) => {
                     <label className='form-label' htmlFor="NUM_REFERENCE">TELEFONO DE REFERENCIA</label>
                     <input onChange={handleInputChange} value={formEditUser.NUM_REFERENCE} className='form-control' name='NUM_REFERENCE' type="number" required/>
                 </div>
-                <div className="col-md-6">
-                    <label className='form-label' htmlFor="NAM_CITY">CIudad</label>
+                <div className="col-md-4">
+                    <label className='form-label' htmlFor="DAT_BIRTHDAY">fecha de Nacimiento</label>
+                    <input onChange={handleInputChange} value={formEditUser.DAT_BIRTHDAY} className='form-control' name='DAT_BIRTHDAY'   type="DATE" required/>
+                </div>
+                <div className="col-md-4">
+                    <label className='form-label' htmlFor="NAM_CITY">Ciudad</label>
                     <input onChange={handleInputChange} value={formEditUser.NAM_CITY} className='form-control' name='NAM_CITY'   type="text" required/>
                 </div>
-                <div className="col-md-6 mt-1">
+                <div className="col-md-8 mt-1">
                     <label className='form-label' htmlFor="ADDRESS">Dirección</label>
                     <textarea onChange={handleInputChange} value={formEditUser.ADDRESS} className='form-control' name='ADDRESS'  rows='3' cols='4' type="text" required/>
                 </div>
                 <div className="col-md-2">
                     <label className='form-label' htmlFor="COD_ROLE">ROLES</label>
-                    <input onChange={handleInputChange} value={formEditUser.COD_ROLE} className='form-control' name='CODE_ROLE'  type="text" required/>
+                    <input onChange={handleInputChange} value={formEditUser.COD_ROLE} className='form-control' name='COD_ROLE'  type="text" required/>
                 </div>
                 <div className="col-md-5">
                     <label className='form-label' htmlFor="USER_EMAIL">EMAIL</label>

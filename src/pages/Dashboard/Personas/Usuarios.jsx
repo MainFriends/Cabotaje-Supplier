@@ -25,11 +25,7 @@ const Usuarios = () => {
     
     //definir las columnas
     const columns = [
-        {
-            name: 'CÓDIGO',
-            selector: row => row.COD_USER,
-            sortable: true,
-        },
+       
         {
             name: 'IDENTIDAD',
             selector: row => row.IDENTITY,
@@ -91,7 +87,7 @@ const Usuarios = () => {
             selector: row => row.USER_EMAIL,
             sortable: true,
         },
-
+ 
         {
             name: 'ACCIONES',
             button: true,
