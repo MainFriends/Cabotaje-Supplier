@@ -4,12 +4,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfUk9MRSI6MSwiR
 
 
 {
-	"NAM_SUPPLIER": "quesos juticalpa",
-	"NAM_CONTACT": "alejandrta",
-	"LAST_NAM_CONTACT": "diaz",
+	"NAM_SUPPLIER": "Pepsi",
+	"NAM_CONTACT": "Romeo",
+	"LAST_NAM_CONTACT": "Santos",
 	"ADDRESS": "jutiapa danli",
 	"NUM_PHONE_ONE": 98745623,
-	"EMAIL":"quesosdanl@gmail.com",
-	"NAM_CITY": "juticapa",
+	"EMAIL":"pepsi@gmail.com",
+	"NAM_CITY": "Tegucigalpa",
 	"ZIP_CODE": 504
 }
