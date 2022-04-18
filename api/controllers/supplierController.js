@@ -39,12 +39,7 @@ const addSupplier= (req,res) =>{
 								ZIP_CODE
 
     } = req.body
-
-    console.log(NUM_PHONE_TWO)
-
-
-
-
+    
     const sp= 'CALL SP_INS_SUPPLIER(?,?,?,?,?,?,?,?,?)';
     mysqlConnect.query(sp,[
 
