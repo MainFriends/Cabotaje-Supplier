@@ -95,6 +95,8 @@ const updateUser = (req, res) => {
         USER_PASSWORD
     } = req.body;
 
+    
+
     const sp = 'CALL SP_UPD_USER(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
 
     mysqlConnect.query(sp,

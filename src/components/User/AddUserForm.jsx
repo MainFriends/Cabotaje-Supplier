@@ -2,6 +2,8 @@ import { useState } from "react";
 import axios from '../../config/axios';
 import token from '../../helpers/getToken';
 
+
+
 const AddUserForm = ({setSendRequest, setMessageError}) => {
 
     const [formAddUser, setFormAddUser] = useState({
@@ -16,9 +18,9 @@ const AddUserForm = ({setSendRequest, setMessageError}) => {
         DAT_BIRTHDAY: '',
         NAM_CITY: '',
         ADDRESS: '',
-        ROLES:'',
-        EMAIL:'',
-        PASSWORD:''
+        COD_ROLES:'',
+        USER_EMAIL:'',
+        USER_PASSWORD:''
     })
 
     const handleInputChange = (e) => {
@@ -65,10 +67,12 @@ const AddUserForm = ({setSendRequest, setMessageError}) => {
                     <label className='form-label' htmlFor="LAST_NAME">Apellido</label>
                     <input onChange={handleInputChange} className='form-control' name='LAST_NAME' type="text" required/>
                 </div>
+
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="GENDER">Genero</label>
                     <input onChange={handleInputChange} className='form-control' name='GENDER' type="text" required/>
                 </div>
+                
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="NUM_PHONE_ONE">Teléfono 1</label>
                     <input onChange={handleInputChange} className='form-control' name='NUM_PHONE_ONE' type="number" required/>
@@ -94,17 +98,43 @@ const AddUserForm = ({setSendRequest, setMessageError}) => {
                     <label className='form-label' htmlFor="ADDRESS">Dirección</label>
                     <textarea onChange={handleInputChange} className='form-control' name='ADDRESS'  rows='3' cols='4' type="number" required/>
                 </div>
-                <div className="col-md-2">
-                    <label className='form-label' htmlFor="ROLE">ROLES</label>
-                    <input onChange={handleInputChange} className='form-control' name='ROLE' type="number" required/>
-                </div>
+                <br></br>
+                <br></br>
+                <br></br>
+                <div className="col-md-12"> ROLES </div>
+
+                <div className="form-check col-md-3" >
+                    <input onChange={handleInputChange} className="form-check-input" type="radio" name="COD_ROLE" id="exampleRadios1" value="1" rows='3' cols='4' required/>
+                    <label className="form-check-label" for="exampleRadios1">
+                        ADMINISTRADOR
+                    </label>
+                    </div>
+                    <div className="form-check col-md-3">
+                    <input onChange={handleInputChange} className="form-check-input" type="radio" name="COD_ROLE" id="exampleRadios2" value="2" required/>
+                    <label className="form-check-label" for="exampleRadios2">
+                        CONTROL DE CALIDAD
+                    </label>
+                    </div>
+                    <div className="form-check col-md-3">
+                    <input onChange={handleInputChange} className="form-check-input" type="radio" name="COD_ROLE" id="exampleRadios3" value="3" required/>
+                    <label className="form-check-label" for="exampleRadios3">
+                       CONTADOR
+                    </label>
+                    </div>
+                    <div className="form-check col-md-3">
+                    <input onChange={handleInputChange} className="form-check-input" type="radio" name="COD_ROLE" id="exampleRadios2" value="4" required/>
+                    <label className="form-check-label" for="exampleRadios2">
+                        CAJERO
+                    </label>
+                    </div>
+
                 <div className="col-md-5">
                     <label className='form-label' htmlFor="EMAIL">EMAIL</label>
-                    <input onChange={handleInputChange} className='form-control' name='EMAIL'  type="number" required/>
+                    <input onChange={handleInputChange} className='form-control' name='USER_EMAIL'  type="text" required/>
                 </div>
                 <div className="col-md-5">
                     <label className='form-label' htmlFor="PASSWORD">Contraseña</label>
-                    <input onChange={handleInputChange} className='form-control' name='PASSWORD'   type="number" required/>
+                    <input onChange={handleInputChange} className='form-control' name='USER_PASSWORD'   type="Text" required/>
                 </div>
             </div>
             

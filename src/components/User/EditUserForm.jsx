@@ -18,7 +18,7 @@ const EditUserForm = ({rowCOD, setSendRequest, setMessageError}) => {
         ADDRESS: '',
         COD_ROLE:'',
         USER_EMAIL:'',
-        USER_PASSWORD:''
+       
     })
 
     const handleInputChange = (e) => {
@@ -99,17 +99,39 @@ const EditUserForm = ({rowCOD, setSendRequest, setMessageError}) => {
                     <label className='form-label' htmlFor="ADDRESS">Dirección</label>
                     <textarea onChange={handleInputChange} value={formEditUser.ADDRESS} className='form-control' name='ADDRESS'  rows='3' cols='4' type="text" required/>
                 </div>
-                <div className="col-md-2">
-                    <label className='form-label' htmlFor="COD_ROLE">ROLES</label>
-                    <input onChange={handleInputChange} value={formEditUser.COD_ROLE} className='form-control' name='COD_ROLE'  type="text" required/>
-                </div>
+                <br></br>
+                <br></br>
+                <br></br>
+                <div className="col-md-12"> ROLES </div>
+
+                <div className="form-check col-md-3" >
+                    <input onChange={handleInputChange} className="form-check-input" type="radio" name="COD_ROLE" id="exampleRadios1" value="1" rows='3' cols='4' required/>
+                    <label className="form-check-label" for="exampleRadios1">
+                        ADMINISTRADOR
+                    </label>
+                    </div>
+                    <div className="form-check col-md-3">
+                    <input onChange={handleInputChange} className="form-check-input" type="radio" name="COD_ROLE" id="exampleRadios2" value="2" required/>
+                    <label className="form-check-label" for="exampleRadios2">
+                        CONTROL DE CALIDAD
+                    </label>
+                    </div>
+                    <div className="form-check col-md-3">
+                    <input onChange={handleInputChange} className="form-check-input" type="radio" name="COD_ROLE" id="exampleRadios3" value="3" required/>
+                    <label className="form-check-label" for="exampleRadios3">
+                       CONTADOR
+                    </label>
+                    </div>
+                    <div className="form-check col-md-3">
+                    <input onChange={handleInputChange} className="form-check-input" type="radio" name="COD_ROLE" id="exampleRadios2" value="4" required/>
+                    <label className="form-check-label" for="exampleRadios2">
+                        CAJERO
+                    </label>
+                    </div>
+
                 <div className="col-md-5">
                     <label className='form-label' htmlFor="USER_EMAIL">EMAIL</label>
                     <input onChange={handleInputChange} value={formEditUser.USER_EMAIL} className='form-control' name='USER_EMAIL'  type="text" required/>
-                </div>
-                <div className="col-md-5">
-                    <label className='form-label' htmlFor="USER_PASSWORD">Contraseña</label>
-                    <input onChange={handleInputChange} value={formEditUser.USER_PASSWORD} className='form-control' name='USER_PASSWORD'   type="text" required/>
                 </div>
             
             </div>
