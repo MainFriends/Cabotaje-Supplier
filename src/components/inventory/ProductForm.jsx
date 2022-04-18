@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import axios from '../../config/axios';
 import token from '../../helpers/getToken';
+import AlertSuccess from "../AlertSuccess";
 
 const ProductForm = ({setSendRequest, setMessageError}) => {
     const [btnWholesale, setBtnWholesale] = useState(false);
     const [suppliers, setSuppliers] = useState([]);
     const [categories, setCategories] = useState([]);
+    const [messageSuccess, setMessageSuccess] = useState('');
     const [formData, setFormData] = useState({
         NAM_PRODUCT: '',
         DES_PRODUCT: '',
@@ -43,11 +45,13 @@ const ProductForm = ({setSendRequest, setMessageError}) => {
         e.preventDefault();
         axios.post('/inventory', formData, token())
             .then(res => {
-                document.querySelector('#addProductInventory').click();
-                document.querySelector('#idCloseAddDetail').click();
                 handleOptionClose()
                 e.target.reset();
                 setSendRequest(true);
+                setMessageSuccess('Producto agregado correctamente.');
+                setTimeout(() => {
+                    setMessageSuccess('')
+                }, 3000);
             })
             .catch(err => {
                 const {message} = err.response.data;
@@ -158,6 +162,7 @@ const ProductForm = ({setSendRequest, setMessageError}) => {
                 <button id="addProductInventory" data-toggle="modal" data-target='#addDetailProduct' type="button" className="btn btn-primary" data-dismiss="modal">Volver</button>
                 <button type='submit' className="btn btn-success">Guardar</button>
             </div>
+            {messageSuccess ? <AlertSuccess message={messageSuccess}/> : null}
         </form>
     )
 } 

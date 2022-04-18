@@ -94,7 +94,7 @@ const Inventario = () => {
             cell: row => <>
                 <button className='btn btn-sm btn-primary mr-1' data-toggle="modal" data-target='#viewDetailProduct' onClick={() => setRowCOD(row.COD_PRODUCT)}><i className="fa-solid fa-eye"></i></button>
                 <button className='btn btn-sm btn-warning mr-1' data-toggle="modal" data-target='#'><i className="fa-solid fa-pen-to-square"></i></button>
-                <button className='btn btn-sm btn-danger'><i className="fa-solid fa-trash"></i></button>
+                <button onClick={() => handleDelete(row.COD_PRODUCT)} className='btn btn-sm btn-danger'><i className="fa-solid fa-trash"></i></button>
             </>
         }
     ];
@@ -118,6 +118,11 @@ const Inventario = () => {
                 setSendRequest(false);
             })
     },[sendRequest]);
+    
+    const handleDelete = (cod) => {
+        axios.delete(`/inventory/${cod}`, token())
+            .then(res => setSendRequest(true))
+    }
 
     return (
             loading
