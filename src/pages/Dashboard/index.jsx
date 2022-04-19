@@ -5,7 +5,6 @@ import { useUser } from "../../hooks/useUser";
 import Sidebar from "../../components/Sidebar";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-
 import runApp from '../../assets/js/app';
 import PieChart from '../../components/ChartJS/PieChart'
 import VerticalBarChart from "../../components/ChartJS/VerticalBarChart";
@@ -13,11 +12,19 @@ import Card from "../../components/ChartJS/Card";
 import axios from '../../config/axios';
 import token from '../../helpers/getToken';
 import { sessionExpiredMessage } from '../../helpers/userMessages';
+import PolarArea from "../../components/ChartJS/PolarArea";
+import DoughnutChart from "../../components/ChartJS/DoughnutChart";
+import SalesCard from "../../components/ChartJS/SalesCard";
+import LineChart from "../../components/ChartJS/LineChart";
 
 const ContentDashboard = () => {
 
   return (
-    <div className="row">
+    <div>
+      <div className='row'>
+        <SalesCard />
+      </div>
+     <div className="row">
       <div className="col-4">
         <Card 
           titulo='Roles del sistema'
@@ -26,12 +33,32 @@ const ContentDashboard = () => {
       </div>
       <div className="col-4">
         <Card 
-          titulo='Otra grafica'
-          component={<VerticalBarChart />}
+          titulo='Ventas del mes'
+          component={<LineChart />}
           className="vertical"
         />
       </div>
     </div>
+
+    <div className="row">
+    <div className="col-4 py-5">
+        <Card 
+          titulo='Grafica 3'
+          component={<PolarArea />}
+        />
+      </div>
+      <div className='col-4'>
+        <Card 
+          titulo='Productos mas vendidos'
+          component={<DoughnutChart />}
+        />
+      </div>
+    </div>
+    </div>
+
+
+
+
   )
 }
 

@@ -40,7 +40,7 @@ const addInventory = (req, res) => {
     COD_TYP_PRODUCT
     } = req.body
 
-    const sp = 'CALL SP_ADD_INVENTORY(?,?,?,?,?,?,?,?,?,?,?,?,?)';
+    const sp = 'CALL SP_INS_INVENTORY(?,?,?,?,?,?,?,?,?,?,?,?,?)';
 
     mysqlConnect.query(sp,[
     COD_SUPPLIER,

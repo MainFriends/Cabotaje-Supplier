@@ -1,12 +1,14 @@
 POST http://localhost:4000/api/inventory
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfUk9MRSI6MSwiRklSU1RfTkFNRSI6IlJvZHJpZ28iLCJMQVNUX05BTUUiOiJWYWxsZSIsImlhdCI6MTY0OTEzMzI1NH0.mr4fe_jAszIn54mBKnfaukZ-sEo7IyJW2CrrDWuQr9M
+
 
 {
-    "COD_SUPPLIER" : 1,
-	"NAM_PRODUCT" : "FRIJOLES",
-    "DES_PRODUCT" : "BLANCO",
+    "COD_SUPPLIER" : null,
+	"NAM_PRODUCT" : "Cuajada",
+    "DES_PRODUCT" : "1 Litro",
     "ISV" : 10.0, 
-    "CANT_TOTAL": 1,
+    "CANT_TOTAL": 10,
     "NORMAL_UNIT_PRICE_1": 100.00,	
     "NORMAL_UNIT_PRICE_2": 100.00,
     "NORMAL_UNIT_PRICE_3": 100.00,

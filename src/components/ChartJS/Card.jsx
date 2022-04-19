@@ -2,11 +2,11 @@ import React from 'react'
 
 const Card = ({titulo, component, className = ''}) => {
   return (
-    <div class={`card shadow ${className}`}>
-        <div class="card-header">
+    <div className={`card shadow ${className}`}>
+        <div className="card-header">
             {titulo}
         </div>
-        <div class="card-body grafica">
+        <div className="card-body grafica">
             {component}
         </div>
     </div>

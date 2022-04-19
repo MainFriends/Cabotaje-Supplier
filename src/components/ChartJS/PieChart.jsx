@@ -53,3 +53,4 @@ export default function PieChart() {
 
   return <Pie data={data} />;
 }
+
