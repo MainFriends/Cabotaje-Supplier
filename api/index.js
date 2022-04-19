@@ -37,6 +37,8 @@ const returnProduct = require('./routes/returnProduct')
 const userSession = require('./routes/userSession')
 //user-profile
 const userProfile = require('./routes/userProfile')
+//tablas parametricas
+const parametricTables = require('./routes/parametricTables')
 
 /* CREAR SERVIDOR */
 const app = express();
@@ -81,6 +83,8 @@ app.use('/api', returnProduct)
 app.use('/api', userSession)
 //user-profile
 app.use('/api', userProfile)
+//tablas parametricas
+app.use('/api', parametricTables)
 
 /* ASIGNAR PUERTO Y LEVANTAR SERVIDOR */
 const port = process.env.PORT;

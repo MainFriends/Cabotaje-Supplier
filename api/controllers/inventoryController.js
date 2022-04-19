@@ -29,33 +29,27 @@ const addInventory = (req, res) => {
 	NAM_PRODUCT,
     DES_PRODUCT,
     ISV,
-    NORMAL_UNIT_PRICE_1,	
-    NORMAL_UNIT_PRICE_2,
-    NORMAL_UNIT_PRICE_3,
-    WHOLESALE_CANT_1,
-    WHOLESALE_CANT_2,
-    WHOLESALE_PRICE_1, 
-    WHOLESALE_PRICE_2,
-    PRICE_UNIT_PURCHASE,
+    NORMAL_UNIT_PRICE,
+    WHOLESALE_CANT,
+    WHOLESALE_PRICE,
+    PURCHASE_PRICE,
+    COD_CATEGORY,
     COD_TYP_PRODUCT
     } = req.body
 
-    const sp = 'CALL SP_ADD_INVENTORY(?,?,?,?,?,?,?,?,?,?,?,?,?)';
+    const sp = 'CALL SP_INS_INVENTORY(?,?,?,?,?,?,?,?,?,?)';
 
     mysqlConnect.query(sp,[
-    COD_SUPPLIER,
-	NAM_PRODUCT,
-    DES_PRODUCT,
-    ISV,
-    NORMAL_UNIT_PRICE_1,	
-    NORMAL_UNIT_PRICE_2,
-    NORMAL_UNIT_PRICE_3,
-    WHOLESALE_CANT_1,
-    WHOLESALE_CANT_2,
-    WHOLESALE_PRICE_1, 
-    WHOLESALE_PRICE_2,
-    PRICE_UNIT_PURCHASE,
-    COD_TYP_PRODUCT
+        COD_SUPPLIER,
+        NAM_PRODUCT,
+        DES_PRODUCT,
+        ISV,
+        NORMAL_UNIT_PRICE,
+        WHOLESALE_CANT,
+        WHOLESALE_PRICE,
+        PURCHASE_PRICE,
+        COD_CATEGORY,
+        COD_TYP_PRODUCT
     ], (error, resultado) => {
         if(error){
             res.status(400).send({message: error.message});
@@ -72,36 +66,28 @@ const updateInventory = (req, res) =>{
         COD_SUPPLIER,
         NAM_PRODUCT,
         DES_PRODUCT,
-        CANT_TOTAL,
         ISV,
-        NORMAL_UNIT_PRICE_1,	
-        NORMAL_UNIT_PRICE_2,
-        NORMAL_UNIT_PRICE_3,
-        WHOLESALE_CANT_1,
-        WHOLESALE_CANT_2,
-        WHOLESALE_PRICE_1, 
-        WHOLESALE_PRICE_2,
-        PRICE_UNIT_PURCHASE,
+        NORMAL_UNIT_PRICE,
+        WHOLESALE_CANT,
+        WHOLESALE_PRICE,
+        PURCHASE_PRICE,
+        COD_CATEGORY,
         COD_TYP_PRODUCT
         } = req.body
     
-        const sp = 'CALL SP_UPD_INVENTORY(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+        const sp = 'CALL SP_UPD_INVENTORY(?,?,?,?,?,?,?,?,?,?,?)';
     
         mysqlConnect.query(sp,[
         codInventory,
         COD_SUPPLIER,
         NAM_PRODUCT,
         DES_PRODUCT,
-        CANT_TOTAL,
         ISV,
-        NORMAL_UNIT_PRICE_1,	
-        NORMAL_UNIT_PRICE_2,
-        NORMAL_UNIT_PRICE_3,
-        WHOLESALE_CANT_1,
-        WHOLESALE_CANT_2,
-        WHOLESALE_PRICE_1, 
-        WHOLESALE_PRICE_2,
-        PRICE_UNIT_PURCHASE,
+        NORMAL_UNIT_PRICE,
+        WHOLESALE_CANT,
+        WHOLESALE_PRICE,
+        PURCHASE_PRICE,
+        COD_CATEGORY,
         COD_TYP_PRODUCT
         ], (error, resultado) => {
             if(error){

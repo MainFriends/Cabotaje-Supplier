@@ -17,6 +17,13 @@ const SidebarItems = () => {
                 </NavLink>
             </li>
 
+            <li className={ "nav-item"}>
+                <NavLink className='nav-link' to="/facturar">
+                    <i className="mr-2 fa-solid fa-cash-register"></i>
+                    <span>Facturar</span>
+                </NavLink>
+            </li>
+
             <hr className="sidebar-divider"></hr>
 
             <div className="sidebar-heading">
@@ -26,7 +33,7 @@ const SidebarItems = () => {
             <li className={ "nav-item " + (pathname === '/dashboard/ventas' ? "active" : "")}>
                 <a className="nav-link collapsed dinamic" href="#" data-toggle="collapse" data-target="#collapseVenta"
                     aria-expanded="true" aria-controls="collapseTwo">
-                    <i className="mr-2 fas fa-hand-holding-usd"></i>
+                    <i className="mr-2 fa-solid fa-chart-line"></i>
                     <span>Ventas</span>
                 </a>
                 <div className="collapse" id="collapseVenta"  aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -40,7 +47,7 @@ const SidebarItems = () => {
             <li className={ "nav-item " + (pathname === '/dashboard/compras' || pathname === '/dashboard/pedidos' ? "active" : "")}>
                 <a className="nav-link collapsed dinamic" href="#" data-toggle="collapse" data-target="#collapseCompra"
                     aria-expanded="true" aria-controls="collapseTwo">
-                    <i className="mr-2 fas fa-store-alt"></i>
+                    <i className="mr-2 fa-solid fa-hand-holding-dollar"></i>
                     <span>Compras</span>
                 </a>
                 <div className="collapse" id="collapseCompra"  aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -118,8 +125,8 @@ const SidebarItems = () => {
                 Utilidades
             </div>
 
-            <li className={ "nav-item " + (pathname === '/graficas' ? "active" : "")}>
-                <NavLink className="nav-link" to="graficas">
+            <li className={ "nav-item " + (pathname === '/dashboard/graficas' ? "active" : "")}>
+                <NavLink className='nav-link' to="graficas">
                     <i className="mr-2 fas fa-chart-pie"></i>
                     <span>Gráficas</span></NavLink>
             </li>

@@ -4,24 +4,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfUk9MRSI6MSwiR
 
 [
     {
-        "COD_PRODUCT": 1,
+        "COD_PRODUCT": 10,
         "PRICE": 20,
         "CANT_PRODUCTS": 7,
         "DISCOUNT": 0,
         "TOTAL": 140
-    },
-    {
-        "COD_PRODUCT": 2,
-        "PRICE": 25,
-        "CANT_PRODUCTS": 4,
-        "DISCOUNT": 0,
-        "TOTAL": 100
-    },
-    {
-        "COD_PRODUCT": 3,
-        "PRICE": 25,
-        "CANT_PRODUCTS": 2,
-        "DISCOUNT": 0,
-        "TOTAL": 50
     }
 ]
