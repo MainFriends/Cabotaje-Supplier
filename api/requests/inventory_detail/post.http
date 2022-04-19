@@ -1,12 +1,13 @@
 POST http://localhost:4000/api/inventoryDetail
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfUk9MRSI6MSwiRklSU1RfTkFNRSI6IlBlZHJvIiwiTEFTVF9OQU1FIjoiU2FuY2hleiIsImlhdCI6MTY0NzM5MDI1M30.cn1xro2BAtDzbgoNloL6o2j9sQpY4UI41kOH3mZ-_Q8
 
 {
-    "COD_PRODUCT" : 5, 
+    "COD_PRODUCT" : 4, 
 	"DAT_PURCHASE" :"2022-01-27", 
     "DAT_EXP" : "2023-01-27",
     "CANT_PRODUCTS": 20,
     "NUM_LOT": 1,
     "COD_ORDER": null,
-    "COD_STATUS": null
+    "COD_STATUS": 1
 }

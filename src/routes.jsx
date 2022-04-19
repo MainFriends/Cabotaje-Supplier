@@ -5,6 +5,7 @@ import { useUser } from "./hooks/useUser";
 //Pages
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import Facturar from "./pages/Dashboard/Facturar-Venta";
 import Facturas from "./pages/Dashboard/Ventas";
 import Compras from "./pages/Dashboard/Compras";
 import Pedidos from "./pages/Dashboard/Compras/Pedidos";
@@ -31,6 +32,7 @@ const Pages = () => {
     <Routes>
         <Route path="/" element={isLogged ? (<Navigate to='/dashboard'/>) : (<Login />)}/>
         <Route path="/profile" element={isLogged ? (<Profile />) : (<Navigate to='/'/>)}/>
+        <Route path="/facturar" element={isLogged ? (<Facturar />) : (<Navigate to='/'/>)}/>
         <Route path="/dashboard" element={isLogged ? (<Dashboard />) : (<Navigate to='/'/>)}>
             <Route path="ventas" element={<Facturas />}/>
             <Route path="compras" element={<Compras />}/>

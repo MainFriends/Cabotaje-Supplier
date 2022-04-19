@@ -7,5 +7,8 @@ const verifyRoleSalesInvoice = require('../middlewares/verifyRoleSalesInvoice');
 router.get('/sale-invoice', [userExtractor, verifyRoleSalesInvoice], saleInvoiceController.getInvoices);
 router.get('/sale-invoice/:codInvoice', [userExtractor, verifyRoleSalesInvoice], saleInvoiceController.getInvoice);
 router.post('/sale-invoice', [userExtractor, verifyRoleSalesInvoice], saleInvoiceController.addInvoice);
+//caja
+router.get('/categories', [userExtractor, verifyRoleSalesInvoice], saleInvoiceController.getCategories);
+router.get('/products/:codCategory', [userExtractor, verifyRoleSalesInvoice], saleInvoiceController.getProducts);
 
 module.exports = router;

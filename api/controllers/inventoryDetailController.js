@@ -16,7 +16,7 @@ const getInventoryDetailS = (req, res) =>{
     const sp  = 'CALL SP_SEL_INVENTORY_DETAIL(?)';
     mysqlConnect.query(sp, [codInventoryDetail], (error, resultado) => {
         if(error){
-            res.status(500).send({message :' Error en el servidor'});
+            res.status(500).send({message : 'Error en el servidor'});
         }else{
             res.status(200).json(resultado[0]);
         };
@@ -30,11 +30,11 @@ const addInventoryDetail = (req, res) => {
     DAT_EXP,
     CANT_PRODUCTS,
     NUM_LOT,
-    COD_ORDER,
+    COD_ORDER = null,
     COD_STATUS
     } = req.body
 
-    const sp = 'CALL SP_ADD_INVENTORY_DETAIL(?,?,?,?,?,?,?)';
+    const sp = 'CALL SP_INS_INVENTORY_DETAIL(?,?,?,?,?,?,?)';
 
     mysqlConnect.query(sp,[
     COD_PRODUCT, 
