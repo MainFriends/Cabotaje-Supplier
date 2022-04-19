@@ -52,3 +52,20 @@ body,
 .vertical{
   width: 700px;
 }
+.container-profile{
+  padding: 0px !important;
+  overflow-x: hidden;
+}
+
+.disabled
+{
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.card-facturar{
+  margin: 100px;
+  width: 70vw;
+  margin-left: auto;
+  margin-right:auto;
+}

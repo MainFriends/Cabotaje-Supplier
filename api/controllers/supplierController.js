@@ -8,7 +8,6 @@ const getSuppliers=(req,res) => {
         res.status(500). send({message:'ERROR EN EL SERVIDOR'});
         }else{
         res.status(200).json(result[0]);
-        console.log(req.supplier);
         };
     });
 };
@@ -39,12 +38,7 @@ const addSupplier= (req,res) =>{
 								ZIP_CODE
 
     } = req.body
-
-    console.log(NUM_PHONE_TWO)
-
-
-
-
+    
     const sp= 'CALL SP_INS_SUPPLIER(?,?,?,?,?,?,?,?,?)';
     mysqlConnect.query(sp,[
 

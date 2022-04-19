@@ -1,10 +1,10 @@
 import AlertError from './AlertError';
 
-const Modal = ({idModal, title, content, messageError}) => {
+const Modal = ({idModal, title, content, messageError, modalSize = 'lg'}) => {
 
     return (
         <div className="modal fade text-dark" id={idModal} aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div className="modal-dialog modal-lg">
+            <div className={`modal-dialog modal-${modalSize}`}>
                 <div className="modal-content">
                 <div className="modal-header">
                     <h5 className="modal-title" id="exampleModalLabel">{title}</h5>

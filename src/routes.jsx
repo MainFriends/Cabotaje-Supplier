@@ -5,6 +5,7 @@ import { useUser } from "./hooks/useUser";
 //Pages
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import Facturar from "./pages/Dashboard/Facturar-Venta";
 import Facturas from "./pages/Dashboard/Ventas";
 import Compras from "./pages/Dashboard/Compras";
 import Pedidos from "./pages/Dashboard/Compras/Pedidos";
@@ -21,6 +22,7 @@ import Devoluciones from "./pages/Dashboard/Contabilidad/Devoluciones";
 import Rebajas from "./pages/Dashboard/Contabilidad/Rebajas";
 import PlanillaPago from "./pages/Dashboard/Contabilidad/PlanillaPago";
 import Graficas from "./pages/Dashboard/Graficas";
+import Profile from './pages/User-Profile';
 
 const Pages = () => {
 
@@ -29,6 +31,8 @@ const Pages = () => {
     return (
     <Routes>
         <Route path="/" element={isLogged ? (<Navigate to='/dashboard'/>) : (<Login />)}/>
+        <Route path="/profile" element={isLogged ? (<Profile />) : (<Navigate to='/'/>)}/>
+        <Route path="/facturar" element={isLogged ? (<Facturar />) : (<Navigate to='/'/>)}/>
         <Route path="/dashboard" element={isLogged ? (<Dashboard />) : (<Navigate to='/'/>)}>
             <Route path="ventas" element={<Facturas />}/>
             <Route path="compras" element={<Compras />}/>

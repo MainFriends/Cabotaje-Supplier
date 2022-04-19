@@ -1,5 +1,6 @@
 POST http://localhost:4000/api/inventory
 Content-Type: application/json
+<<<<<<< HEAD
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfUk9MRSI6MSwiRklSU1RfTkFNRSI6IlJvZHJpZ28iLCJMQVNUX05BTUUiOiJWYWxsZSIsImlhdCI6MTY0OTEzMzI1NH0.mr4fe_jAszIn54mBKnfaukZ-sEo7IyJW2CrrDWuQr9M
 
 
@@ -18,4 +19,19 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfUk9MRSI6MSwiR
     "WHOLESALE_PRICE_2" : 105.00,
     "PRICE_UNIT_PURCHASE": 90.00,
     "COD_TYP_PRODUCT": 2
+=======
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfUk9MRSI6MSwiRklSU1RfTkFNRSI6IlBlZHJvIiwiTEFTVF9OQU1FIjoiU2FuY2hleiIsImlhdCI6MTY0NzM5MDI1M30.cn1xro2BAtDzbgoNloL6o2j9sQpY4UI41kOH3mZ-_Q8
+
+{
+    "COD_SUPPLIER" : 1,
+	"NAM_PRODUCT" : "Medallones",
+    "DES_PRODUCT" : "Caja de medallos",
+    "ISV" : 0.15,
+    "NORMAL_UNIT_PRICE": 100.00,
+    "WHOLESALE_CANT" : 105.00,
+    "WHOLESALE_PRICE" : 105.00,
+    "PURCHASE_PRICE": 90.00,
+    "COD_CATEGORY": 1,
+    "COD_TYP_PRODUCT": 1
+>>>>>>> 6c459b2688b9ec6e1a677c403d2690f91fa3cb42
 }
