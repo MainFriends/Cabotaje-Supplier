@@ -60,7 +60,7 @@ const CuentasCobrar = () => {
             name: 'ACCIONES',
             button: true,
             cell: row => <>
-                <button className='btn btn-sm btn-primary me-1' data-toggle="modal" data-target='#'><i className="fa-solid fa-eye"></i></button>
+                <button className='btn btn-sm btn-primary me-1' data-toggle="modal" data-target='#idCobrar'><i className="fa-solid fa-eye"></i></button>
             </>
         }
     ];
@@ -109,8 +109,8 @@ const CuentasCobrar = () => {
                     />
 
                     <Modal 
-                        idModal='idModal'
-                        title='Titulo'
+                        idModal='idCobrar'
+                        title='Añadir Cuotas'
                         messageError={messageError}
                     />
                 </div>

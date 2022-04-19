@@ -7,6 +7,7 @@ import FilterComponent from '../../../components/FilterComponent';
 import Modal from '../../../components/Modal';
 import AddAccountPayForm from '../../../components/accPay/AddAccountPayForm';
 import EditAccountPayForm from '../../../components/accPay/EditAccountPayForm';
+import SelFeesPay from '../../../components/accPay/SelFeesPay';
 
 import {paginationComponentOptions} from '../../../helpers/datatablesOptions';
 import axios from '../../../config/axios';
@@ -73,6 +74,7 @@ const CuentasPagar = () => {
             cell: row => <>
                 <button className='btn btn-sm btn-warning mr-1' onClick={() => {setRowCOD(row.COD_ACC_PAY)}} data-toggle="modal" data-target='#editAccountPay'><i className="fa-solid fa-pen-to-square"></i></button>
                 <button className='btn btn-sm btn-danger' onClick={() => handleDelete(row.COD_ACC_PAY)}><i className="fa-solid fa-trash"></i></button>
+                <button className='btn btn-sm btn-primary m-1' onClick={() => setRowCOD(row.COD_ACC_PAY)} data-toggle="modal" data-target='#idCobrar'><i className="fa-solid fa-eye"></i></button>
             </>
         }
     ];
@@ -142,6 +144,12 @@ const CuentasPagar = () => {
                         title='Actualizar Cuenta por Pagar'
                         messageError={messageError}
                         content={<EditAccountPayForm rowCOD={rowCOD} setSendRequest={setSendRequest} />}
+                    />
+                    <Modal 
+                        idModal='idCobrar'
+                        title='Cuotas de Pago'
+                        messageError={messageError}
+                        content={<SelFeesPay rowCOD={rowCOD}/>}
                     />
                 </div>
             </div> 
