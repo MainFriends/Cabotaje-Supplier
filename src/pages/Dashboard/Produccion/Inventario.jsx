@@ -12,6 +12,7 @@ import token from '../../../helpers/getToken';
 import DetailForm from '../../../components/inventory/DetailForm';
 import ViewDetail from '../../../components/inventory/ViewDetail';
 import ProductForm from '../../../components/inventory/ProductForm';
+import EditProductForm from '../../../components/inventory/EditProductForm';
 
 const Inventario = () => {
     const [rows, setRows] = useState([]);
@@ -93,7 +94,7 @@ const Inventario = () => {
             button: true,
             cell: row => <>
                 <button className='btn btn-sm btn-primary mr-1' data-toggle="modal" data-target='#viewDetailProduct' onClick={() => setRowCOD(row.COD_PRODUCT)}><i className="fa-solid fa-eye"></i></button>
-                <button className='btn btn-sm btn-warning mr-1' data-toggle="modal" data-target='#'><i className="fa-solid fa-pen-to-square"></i></button>
+                <button onClick={() => setRowCOD(row.COD_PRODUCT)} className='btn btn-sm btn-warning mr-1' data-toggle="modal" data-target='#editProduct'><i className="fa-solid fa-pen-to-square"></i></button>
                 <button onClick={() => handleDelete(row.COD_PRODUCT)} className='btn btn-sm btn-danger'><i className="fa-solid fa-trash"></i></button>
             </>
         }
@@ -172,7 +173,14 @@ const Inventario = () => {
                         title='Agregar nuevo producto'
                         messageError={messageError}
                         content={<ProductForm setSendRequest={setSendRequest} setMessageError={setMessageError}/>}
-                    />  
+                    />
+
+                    <Modal 
+                        idModal='editProduct'
+                        title='Editar producto'
+                        messageError={messageError}
+                        content={<EditProductForm sendRequest={sendRequest} rowCOD={rowCOD} setSendRequest={setSendRequest} setMessageError={setMessageError}/>}
+                    /> 
                 </div>
             </div> 
     )
