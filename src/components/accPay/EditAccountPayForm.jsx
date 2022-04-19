@@ -20,8 +20,10 @@ const EditAccountPayForm = ({rowCOD, setSendRequest}) => {
     }
 
     useEffect(() => {
-        axios.get(`/accounts-pay/${rowCOD}`, token())
+        if(rowCOD){
+            axios.get(`/accounts-pay/${rowCOD}`, token())
            .then(res => setFormEditAccountPay(res.data[0]))
+        }
     }, [rowCOD])
 
     const handleSubmitAccountPayForm = (e) => {

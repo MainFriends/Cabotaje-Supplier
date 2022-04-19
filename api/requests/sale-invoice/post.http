@@ -3,14 +3,14 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfVVNFUiI6MSwiQ09EX1JPTEUiOjEsIkZJUlNUX05BTUUiOiJNZW5kZWwiLCJMQVNUX05BTUUiOiJBZ3VpbGFyIiwiaWF0IjoxNjUwMzE3OTc5LCJleHAiOjE2NTAzNzE5Nzl9.jn8QnEBHPlFtsx-HFHYsaUkumWsB0fXdNAw3YLgn9mM
 
 {
-    "COD_CLIENT": 2,
-    "COD_USER": 5, 
+    "COD_CLIENT": 1,
+    "COD_USER": 1, 
     "SUBTOTAL": 150.00,
     "TOT_DISCOUNT": 20.00,
     "TOT_ISV": 0.15,
     "TOT_SALE": 140.00,
-    "TYP_TO_SALE": "Contado",
+    "TYP_TO_SALE": "Crédito",
     "COD_TYP_PAY": 1,
     "DESCRIPTION": "Deuda por cobrar",
-    "DAT_LIMIT": "2022-04-18" 
+    "DAT_LIMIT": "2022-04-30" 
 }

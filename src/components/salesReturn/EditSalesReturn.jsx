@@ -20,8 +20,10 @@ const EditSalesReturn = ({setSendRequest, rowCOD}) => {
     }
 
     useEffect(() => {
-        axios.get(`/sales-returns/${rowCOD}`, token())
-           .then(res => setFormEditSalesReturn(res.data[0]))
+        if(rowCOD){
+            axios.get(`/sales-returns/${rowCOD}`, token())
+            .then(res => setFormEditSalesReturn(res.data[0]))
+        }
     }, [rowCOD])
 
     const handleSubmitSalesReturn = (e) => {

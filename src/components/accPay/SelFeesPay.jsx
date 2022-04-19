@@ -19,6 +19,7 @@ const CuotasCobrar = ({rowCOD}) => {
         {
             name: 'MONTO',
             selector: row => row.AMOUNT,
+            format: row => `L ${row.AMOUNT.toFixed(2)}`
         },
         {
             name: 'FECHA',
@@ -52,16 +53,22 @@ const CuotasCobrar = ({rowCOD}) => {
     }, [rowCOD])
 
   return (
-    <DataTable
-        columns={columns}
-        data={rowsCuotas}
-        responsive
-        pagination
-        paginationComponentOptions={paginationComponentOptions}
-        highlightOnHover
-        striped
-        persistTableHead 
-    />
+    <>  <div className="row">
+            <div className="col-12 text-right">
+                <button className='btn btn-sm btn-success'>+</button>
+            </div>
+        </div>
+        <DataTable
+            columns={columns}
+            data={rowsCuotas}
+            responsive
+            pagination
+            paginationComponentOptions={paginationComponentOptions}
+            highlightOnHover
+            striped
+            persistTableHead 
+        />
+    </>
   )
 }
 

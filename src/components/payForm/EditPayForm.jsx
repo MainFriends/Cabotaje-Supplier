@@ -60,23 +60,23 @@ const EditPayForm = ({rowCOD, setSendRequest, setMessageError}) => {
         <div className="row mb-4">
             <div className="col-md-8">
                 <label className='form-label' htmlFor="EMPLOYEE">Empleado</label>
-                <input className='form-control' value={`${formEditPayForm.FIRST_NAME} ${formEditPayForm.LAST_NAME}`} name='EMPLOYEE' type="text" required disabled/>
+                <input className='form-control' value={`${formEditPayForm?.FIRST_NAME} ${formEditPayForm?.LAST_NAME}`} name='EMPLOYEE' type="text" required disabled/>
             </div>
             <div className="col-md-3">
                 <label className='form-label mt-2' htmlFor="HOURS_WORKED">Dias Trabajados</label>
-                <input onBlur={() => getNetSalary()}  onChange={handleInputChange} value={formEditPayForm.HOURS_WORKED} className='form-control' name='HOURS_WORKED' type="number" required/>
+                <input onBlur={() => getNetSalary()}  onChange={handleInputChange} value={formEditPayForm?.HOURS_WORKED} className='form-control' name='HOURS_WORKED' type="number" required/>
             </div>
             <div className="col-md-3">
                 <label className='form-label mt-2' htmlFor="AMO_GROSS">Salario Base</label>
-                <input onBlur={() => getNetSalary()} onChange={handleInputChange} value={formEditPayForm.AMO_GROSS} className='form-control' name='AMO_GROSS' type="number" required/>
+                <input onBlur={() => getNetSalary()} onChange={handleInputChange} value={formEditPayForm?.AMO_GROSS} className='form-control' name='AMO_GROSS' type="number" required/>
             </div>
             <div className="col-md-3">
                 <label className='form-label mt-2' htmlFor="BONUS">Bonificaciones</label>
-                <input onBlur={() => getNetSalary()} onChange={handleInputChange} value={formEditPayForm.BONUS} className='form-control' name='BONUS' type="number" required/>
+                <input onBlur={() => getNetSalary()} onChange={handleInputChange} value={formEditPayForm?.BONUS} className='form-control' name='BONUS' type="number" required/>
             </div>
             <div className="col-md-3">
                 <label className='form-label mt-2' htmlFor="TOT_DEDUCTIONS">Deducciones</label>
-                <input onBlur={() => getNetSalary()} onChange={handleInputChange} value={formEditPayForm.TOT_DEDUCTIONS} className='form-control' name='TOT_DEDUCTIONS' type="number" required/>
+                <input onBlur={() => getNetSalary()} onChange={handleInputChange} value={formEditPayForm?.TOT_DEDUCTIONS} className='form-control' name='TOT_DEDUCTIONS' type="number" required/>
             </div>
             <div className="col-md-3">
                 <label className='form-label mt-2' htmlFor="NET_SALARY">Salario Neto</label>
@@ -84,7 +84,7 @@ const EditPayForm = ({rowCOD, setSendRequest, setMessageError}) => {
             </div>
             <div className="col-md-4">
                 <label className='form-label mt-2' htmlFor="DAT_PAYMENT">Fecha de Pago</label>
-                <input onChange={handleInputChange} value={moment(formEditPayForm.DAT_PAYMENT).format('YYYY-MM-DD')} className='form-control' name='DAT_PAYMENT' type="date" required/>
+                <input onChange={handleInputChange} value={moment(formEditPayForm?.DAT_PAYMENT).format('YYYY-MM-DD')} className='form-control' name='DAT_PAYMENT' type="date" required/>
             </div>
         </div>
         <div className="modal-footer">
