@@ -51,6 +51,7 @@ const Pages = () => {
             <Route path="planilla-pago" element={<PlanillaPago />}/>
             <Route path="graficas" element={<Graficas />}/>
         </Route>
+        <Route path="/*" element={isLogged ? (<Navigate to='/dashboard'/>) : (<Navigate to='/'/>)}></Route>
     </Routes>
     )
 };
