@@ -1,2 +1,2 @@
-GET http://localhost:4000/api/fees-pay/3
-Authorization: Bearer 
+GET http://localhost:4000/api/fees-pay/4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfVVNFUiI6MSwiQ09EX1JPTEUiOjEsIkZJUlNUX05BTUUiOiJNZW5kZWwiLCJMQVNUX05BTUUiOiJBZ3VpbGFyIiwiaWF0IjoxNjUwNDI4MTgxLCJleHAiOjE2NTA0ODIxODF9.Aq-6T8LFFpjwiBzhbSKQtH1vyPX19uRahxROMEcIMxU

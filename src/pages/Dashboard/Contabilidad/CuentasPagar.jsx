@@ -8,6 +8,7 @@ import Modal from '../../../components/Modal';
 import AddAccountPayForm from '../../../components/accPay/AddAccountPayForm';
 import EditAccountPayForm from '../../../components/accPay/EditAccountPayForm';
 import SelFeesPay from '../../../components/accPay/SelFeesPay';
+import AddFeesPay from '../../../components/accPay/AddFeesPay';
 
 import {paginationComponentOptions} from '../../../helpers/datatablesOptions';
 import axios from '../../../config/axios';
@@ -149,7 +150,13 @@ const CuentasPagar = () => {
                         idModal='idCobrar'
                         title='Cuotas de Pago'
                         messageError={messageError}
-                        content={<SelFeesPay rowCOD={rowCOD}/>}
+                        content={<SelFeesPay rowCOD={rowCOD} setSendRequest={setSendRequest}/>}
+                    />
+                    <Modal
+                        idModal='addCuota'
+                        title='Añadir Cuota'
+                        messageError={messageError}
+                        content={<AddFeesPay rowCOD={rowCOD} setSendRequest={setSendRequest}/>}
                     />
                 </div>
             </div> 

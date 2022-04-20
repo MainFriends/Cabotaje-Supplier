@@ -7,9 +7,12 @@ import axios from "../../config/axios";
 import token from "../../helpers/getToken";
 import moment from 'moment';
 
+
 const CuotasCobrar = ({rowCOD}) => {
     const [rowsCuotas, setRowsCuotas] = useState([]);
     const [rowCODCuotas, setRowCODCuotas] = useState(null);
+    const [messageError, setMessageError] = useState('');
+    const [sendRequest, setSendRequest] = useState(false);
 
     const columns = [
         {
@@ -42,20 +45,22 @@ const CuotasCobrar = ({rowCOD}) => {
     ];
     
     useEffect(() => {
-        console.log(rowCODCuotas)
-    }, [rowCODCuotas])
-    
-    useEffect(() => {
         if(rowCOD){
             axios.get(`/fees-pay/${rowCOD}`, token())
            .then(res => setRowsCuotas(res.data))
+           setSendRequest(false);
         }
-    }, [rowCOD])
+    }, [rowCOD]);
+
+    const closeModal = () => {
+        document.querySelector('#idCloseSelCuotas').click();
+    }
 
   return (
-    <>  <div className="row">
+    <>  
+    <div className="row">
             <div className="col-12 text-right">
-                <button className='btn btn-sm btn-success'>+</button>
+                <button onClick={() => closeModal()} className='btn btn-sm btn-success' data-toggle="modal" data-target='#addCuota'>+</button>
             </div>
         </div>
         <DataTable
@@ -68,6 +73,9 @@ const CuotasCobrar = ({rowCOD}) => {
             striped
             persistTableHead 
         />
+        <div className="modal-footer">
+                <button type="button" id='idCloseSelCuotas' className="btn btn-primary" data-dismiss="modal">Cerrar</button>
+        </div>
     </>
   )
 }

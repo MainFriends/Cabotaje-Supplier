@@ -23,7 +23,7 @@ const AddAccountPayForm = ({setSendRequest}) => {
            .then(res => {
                document.querySelector('#idCloseAddAccountPayForm').click();
                e.target.reset()
-               setSendRequest(true)
+               setSendRequest(true);
            })
     }
 

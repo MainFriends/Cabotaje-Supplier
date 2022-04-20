@@ -14,8 +14,9 @@ const getFeesPay = (req, res) => {
 }
 
 const addFeesPay = (req, res) => {
+    const {codAccPay} = req.params;
+    console.log(codAccPay);
     const {
-        COD_ACC_PAY,
         AMOUNT,
         DATE_PAY,
         COD_TYP_PAY
@@ -24,7 +25,7 @@ const addFeesPay = (req, res) => {
     const sp = "CALL SP_INS_FEES_TO_PAY(?,?,?,?)";
 
     mysqlConnect.query(sp, [
-        COD_ACC_PAY,
+        codAccPay,
         AMOUNT,
         DATE_PAY,
         COD_TYP_PAY
