@@ -3,30 +3,30 @@ import {useState, useEffect} from 'react';
 import axios from '../../config/axios';
 import token from '../../helpers/getToken';
 
-const AddFeesPay = ({rowCOD, setMessageError}) => {
-    const [formAddFeesPay, setFormAddFeesPay] = useState({
+const AddFeesReceivable = ({rowCOD, setMessageError}) => {
+    const [formAddFeesReceivable, setFormAddFeesReceivable] = useState({
         AMOUNT: 0,
-        DATE_PAY: '',
+        DAT_PAY: '',
         COD_TYP_PAY: 0
     });
 
     const [rowsCuotas, setRowsCuotas] = useState([]);
-    const [sendRequestFeesPay, setSendRequestFeesPay] = useState(false);
+    const [sendRequestFeesReceivable, setSendRequestFeesReceivable] = useState(false);
 
     const handleInputChange = (e) => {
-        setFormAddFeesPay({
-            ...formAddFeesPay,
+        setFormAddFeesReceivable({
+            ...formAddFeesReceivable,
             [e.target.name]: e.target.value
         })
     }
 
-    const handleSubmitFeesPay = (e) => {
+    const handleSubmitFeesReceivable = (e) => {
         e.preventDefault();
-        axios.post(`/fees-pay/${rowCOD}`, formAddFeesPay, token())
+        axios.post(`/fees-receivable/${rowCOD}`, formAddFeesReceivable, token())
            .then(res => {
-                document.querySelector('#idCloseFeesPay').click();
+                document.querySelector('#idCloseFeesReceivable').click();
                 e.target.reset();
-                setSendRequestFeesPay(true);
+                setSendRequestFeesReceivable(true);
            })
            .catch(err => {
                const {message} = err.response.data;
@@ -40,25 +40,25 @@ const AddFeesPay = ({rowCOD, setMessageError}) => {
 
     useEffect(() => {
         if(rowCOD){
-            axios.get(`/fees-pay/${rowCOD}`, token())
+            axios.get(`/fees-receivable/${rowCOD}`, token())
            .then(res => {
                const {data} = res;
                setRowsCuotas(data);
-               setSendRequestFeesPay(false);
+               setSendRequestFeesReceivable(false);
            })
         }
-    }, [rowCOD, sendRequestFeesPay]);
+    }, [rowCOD, sendRequestFeesReceivable]);
 
     return(
-        <form id='AddFormCuota' onSubmit={handleSubmitFeesPay} action='#'>
+        <form id='AddFormCuota' onSubmit={handleSubmitFeesReceivable} action='#'>
             <div className="row mb-4">
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="AMOUNT">Monto</label>
                     <input onChange={handleInputChange} className='form-control' name='AMOUNT' type="number" required/>
                 </div>
                 <div className="col-md-4">
-                    <label className='form-label' htmlFor="DATE_PAY">Fecha</label>
-                    <input onChange={handleInputChange} className='form-control' name='DATE_PAY' type="date" required/>
+                    <label className='form-label' htmlFor="DAT_PAY">Fecha</label>
+                    <input onChange={handleInputChange} className='form-control' name='DAT_PAY' type="date" required/>
                 </div>
                 <div className="col-md-3">
                     <label className='form-label' htmlFor="COD_TYP_PAY">Tipo</label>
@@ -66,11 +66,11 @@ const AddFeesPay = ({rowCOD, setMessageError}) => {
                 </div>
             </div>
             <div className="modal-footer">
-                <button type="button" id='idCloseFeesPay' className="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                <button type="button" id='idCloseFeesReceivable' className="btn btn-primary" data-dismiss="modal">Cerrar</button>
                 <button type='submit' className="btn btn-success">Guardar</button>
             </div>
         </form>
     )
 }
 
-export default AddFeesPay;
+export default AddFeesReceivable;

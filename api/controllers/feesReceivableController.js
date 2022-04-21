@@ -14,8 +14,8 @@ const getFeesReceivable = (req, res) => {
 }
 
 const addFeesReceivable = (req, res) => {
+    const {codAccReceivable} = req.params;
     const {
-        COD_ACC_RECEIVABLE,
         AMOUNT,
         DAT_PAY,
         COD_TYP_PAY
@@ -24,7 +24,7 @@ const addFeesReceivable = (req, res) => {
     const sp = "CALL SP_INS_FEES_RECEIVABLE(?,?,?,?)";
 
     mysqlConnect.query(sp, [
-        COD_ACC_RECEIVABLE,
+        codAccReceivable,
         AMOUNT,
         DAT_PAY,
         COD_TYP_PAY

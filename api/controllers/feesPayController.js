@@ -15,7 +15,6 @@ const getFeesPay = (req, res) => {
 
 const addFeesPay = (req, res) => {
     const {codAccPay} = req.params;
-    console.log(codAccPay);
     const {
         AMOUNT,
         DATE_PAY,

@@ -5,6 +5,8 @@ import {useEffect, useState, useMemo} from 'react';
 import Spinner from '../../../components/Spinner';
 import FilterComponent from '../../../components/FilterComponent';
 import Modal from '../../../components/Modal';
+import SelFeesReceivable from '../../../components/accReceivable/SelFeesReceivable';
+import AddFeesReceivable from '../../../components/accReceivable/AddFeesReceivable';
 
 import {paginationComponentOptions} from '../../../helpers/datatablesOptions';
 import axios from '../../../config/axios';
@@ -16,6 +18,8 @@ const CuentasCobrar = () => {
     const [filterText, setFilterText] = useState('');
     const [loading, setLoading] = useState(true);
     const [messageError, setMessageError] = useState('');
+    const [sendRequest, setSendRequest] = useState(false);
+    const [rowCOD, setRowCOD] = useState(null);
     
     //definir las columnas
     const columns = [
@@ -42,7 +46,7 @@ const CuentasCobrar = () => {
         {
             name: 'DESCRIPCION',
             selector: row => row.DESCRIPTION,
-            sortable: true,
+            sortable: true
         },
         {
             name: 'MONTO',
@@ -60,7 +64,7 @@ const CuentasCobrar = () => {
             name: 'ACCIONES',
             button: true,
             cell: row => <>
-                <button className='btn btn-sm btn-primary me-1' data-toggle="modal" data-target='#idCobrar'><i className="fa-solid fa-eye"></i></button>
+                <button className='btn btn-sm btn-primary me-1' onClick={() => setRowCOD(row.COD_ACC_RECEIVABLE)} data-toggle="modal" data-target='#idCobrar'><i className="fa-solid fa-eye"></i></button>
             </>
         }
     ];
@@ -83,7 +87,7 @@ const CuentasCobrar = () => {
                 setRows(data);
                 setLoading(false);
             })
-    },[]);
+    },[sendRequest]);
 
     return (
             loading
@@ -107,11 +111,17 @@ const CuentasCobrar = () => {
                         striped
                         persistTableHead 
                     />
-
                     <Modal 
                         idModal='idCobrar'
-                        title='Añadir Cuotas'
+                        title='Cuotas de Cobro'
                         messageError={messageError}
+                        content={<SelFeesReceivable rowCOD={rowCOD} setSendRequest={setSendRequest}/>}
+                    />
+                    <Modal 
+                        idModal='addCuota'
+                        title='Añadir Cuota'
+                        messageError={messageError}
+                        content={<AddFeesReceivable rowCOD={rowCOD} setSendRequest={setSendRequest} setMessageError={setMessageError} />}
                     />
                 </div>
             </div> 

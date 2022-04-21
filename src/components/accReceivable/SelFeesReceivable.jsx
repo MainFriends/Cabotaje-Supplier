@@ -27,8 +27,8 @@ const CuotasCobrar = ({rowCOD}) => {
         },
         {
             name: 'FECHA',
-            selector: row => row.DATE_PAY,
-            format: row => moment(row.DATE_PAY).format('DD-MM-YYYY')
+            selector: row => row.DAT_PAY,
+            format: row => moment(row.DAT_PAY).format('DD-MM-YYYY')
         },
         {
             name: 'METODO',
@@ -47,7 +47,7 @@ const CuotasCobrar = ({rowCOD}) => {
     
     useEffect(() => {
         if(rowCOD){
-            axios.get(`/fees-pay/${rowCOD}`, token())
+            axios.get(`/fees-receivable/${rowCOD}`, token())
            .then(res => setRowsCuotas(res.data))
            setLoading(false);
            setSendRequest(false);
@@ -55,7 +55,7 @@ const CuotasCobrar = ({rowCOD}) => {
     }, [rowCOD]);
 
     const handleDelete = (cod) => {
-        axios.delete(`/fees-pay/${cod}`, token())
+        axios.delete(`/fees-receivable/${cod}`, token())
             .then(res => setSendRequest(true))
     }
 
