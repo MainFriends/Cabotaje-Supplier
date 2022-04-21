@@ -23,6 +23,7 @@ import Rebajas from "./pages/Dashboard/Contabilidad/Rebajas";
 import PlanillaPago from "./pages/Dashboard/Contabilidad/PlanillaPago";
 import Graficas from "./pages/Dashboard/Graficas";
 import Profile from './pages/User-Profile';
+import Roles from "./pages/Dashboard/Roles";
 
 const Pages = () => {
 
@@ -50,6 +51,7 @@ const Pages = () => {
             <Route path="rebajas" element={<Rebajas />}/>
             <Route path="planilla-pago" element={<PlanillaPago />}/>
             <Route path="graficas" element={<Graficas />}/>
+            <Route path="roles-permisos" element={<Roles />}/>
         </Route>
         <Route path="/*" element={isLogged ? (<Navigate to='/dashboard'/>) : (<Navigate to='/'/>)}></Route>
     </Routes>

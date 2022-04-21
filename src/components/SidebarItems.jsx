@@ -125,11 +125,18 @@ const SidebarItems = () => {
                 Utilidades
             </div>
 
+            <li className={ "nav-item " + (pathname === '/dashboard/roles-permisos' ? "active" : "")}>
+                <NavLink className='nav-link' to="roles-permisos">
+                <i className="mr-2 fa-solid fa-user-lock"></i>
+                <span>Roles y permisos</span></NavLink>
+            </li>
+
             <li className={ "nav-item " + (pathname === '/dashboard/graficas' ? "active" : "")}>
                 <NavLink className='nav-link' to="graficas">
-                    <i className="mr-2 fas fa-chart-pie"></i>
-                    <span>Gráficas</span></NavLink>
+                <i className="mr-2 fas fa-chart-pie"></i>
+                <span>Gráficas</span></NavLink>
             </li>
+
         </>
     )
 }
