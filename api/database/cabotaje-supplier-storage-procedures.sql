@@ -559,13 +559,14 @@ DELIMITER //
 CREATE PROCEDURE SP_SEL_USER(
 							IN _COD_USER BIGINT
 )BEGIN
-	IF _COD_USER = 0 THEN
-	 select (USER_EMAIL)EMAIL from login left JOIN USER ON LOGIN.COD_USER= USER.COD_USER;
-		SELECT * FROM USER;
+	IF _COD_USER = 0  THEN
+  select * from User inner join login on user.cod_user= login.cod_user inner join role on login.cod_role = role.cod_role;                     
 	ELSE
-		SELECT * FROM USER
-        WHERE COD_USER = _COD_USER;
+  select * from User inner join login on user.cod_user= login.cod_user inner join role on login.cod_role = role.cod_role where _cod_user= user.cod_user;  
+                  
+
     END IF;
+    
 END;
 //
 

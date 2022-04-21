@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from '../../config/axios';
 import token from '../../helpers/getToken';
+import moment from "moment";
+
 
 const EditUserForm = ({rowCOD, setSendRequest, setMessageError}) => {
 
@@ -20,6 +22,9 @@ const EditUserForm = ({rowCOD, setSendRequest, setMessageError}) => {
         USER_EMAIL:'',
        
     })
+
+    
+
 
     const handleInputChange = (e) => {
         setFormEditUser({
@@ -71,10 +76,16 @@ const EditUserForm = ({rowCOD, setSendRequest, setMessageError}) => {
                     <label className='form-label' htmlFor="LAST_NAME">Apellido</label>
                     <input onChange={handleInputChange} value={formEditUser.LAST_NAME} className='form-control' name='LAST_NAME' type="text" required/>
                 </div>
+            
                 <div className="col-md-4">
-                    <label className='form-label' htmlFor="GENDER">Genero</label>
-                    <input onChange={handleInputChange} value={formEditUser.GENDER} className='form-control' name='GENDER' type="text" required/>
-                </div>
+                    <label classname="form-label" htmlfor="GENDER">GENERO</label>
+                    <select onChange={handleInputChange} value={formEditUser.GENDER} className="form-control" name="GENDER" type="text" required>
+                    <option selected>-seleccionar-</option> 
+                    <option value="M">MASCULINO</option>
+                    <option value="F">FEMENINO</option>
+                    <option value="O">PREFIERO NO DECIRLO</option>
+                    </select>   
+                    </div>
                 <div className="col-md-4 ">
                     <label className='form-label' htmlFor="NUM_PHONE_ONE">Teléfono 1</label>
                     <input onChange={handleInputChange} value={formEditUser.NUM_PHONE_ONE} className='form-control' name='NUM_PHONE_ONE' type="number" required/>
@@ -89,11 +100,12 @@ const EditUserForm = ({rowCOD, setSendRequest, setMessageError}) => {
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="DAT_BIRTHDAY">fecha de Nacimiento</label>
-                    <input onChange={handleInputChange} value={formEditUser.DAT_BIRTHDAY} className='form-control' name='DAT_BIRTHDAY'   type="DATE" required/>
+                    <input onChange={handleInputChange} value={moment(formEditUser.DAT_BIRTHDAY).format('YYYY-MM-DD')} className='form-control' name='DAT_BIRTHDAY'   type="date" min="1950-01-01" required/>
                 </div>
+            
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="NAM_CITY">Ciudad</label>
-                    <input onChange={handleInputChange} value={formEditUser.NAM_CITY} className='form-control' name='NAM_CITY'   type="text" required/>
+                    <input onChange={handleInputChange.DAT_BIRTHDAY} value={formEditUser.NAM_CITY} className='form-control' name='NAM_CITY'   type="text" required/>
                 </div>
                 <div className="col-md-8 mt-1">
                     <label className='form-label' htmlFor="ADDRESS">Dirección</label>
@@ -102,32 +114,21 @@ const EditUserForm = ({rowCOD, setSendRequest, setMessageError}) => {
                 <br></br>
                 <br></br>
                 <br></br>
-                <div className="col-md-12"> ROLES </div>
+              
+                    <div className="col-md-4">
+                        <label classname="form-label" htmlfor="COD_ROLE">ROLES</label>
+                        <select onChange={handleInputChange} value={formEditUser.COD_ROLE} className="form-control" name="COD_ROLE" type="text" required>
+                        <option selected>-seleccionar-</option> 
+                        <option value="1">administrador</option>
+                        <option value="2">control de calidad</option>
+                        <option value="3">contador</option>
+                        <option value="4">cajero</option>
+                        </select>
+                        </div>
 
-                <div className="form-check col-md-3" >
-                    <input onChange={handleInputChange} className="form-check-input" type="radio" name="COD_ROLE" id="exampleRadios1" value="1" rows='3' cols='4' required/>
-                    <label className="form-check-label" for="exampleRadios1">
-                        ADMINISTRADOR
-                    </label>
-                    </div>
-                    <div className="form-check col-md-3">
-                    <input onChange={handleInputChange} className="form-check-input" type="radio" name="COD_ROLE" id="exampleRadios2" value="2" required/>
-                    <label className="form-check-label" for="exampleRadios2">
-                        CONTROL DE CALIDAD
-                    </label>
-                    </div>
-                    <div className="form-check col-md-3">
-                    <input onChange={handleInputChange} className="form-check-input" type="radio" name="COD_ROLE" id="exampleRadios3" value="3" required/>
-                    <label className="form-check-label" for="exampleRadios3">
-                       CONTADOR
-                    </label>
-                    </div>
-                    <div className="form-check col-md-3">
-                    <input onChange={handleInputChange} className="form-check-input" type="radio" name="COD_ROLE" id="exampleRadios2" value="4" required/>
-                    <label className="form-check-label" for="exampleRadios2">
-                        CAJERO
-                    </label>
-                    </div>
+
+  
+
 
                 <div className="col-md-5">
                     <label className='form-label' htmlFor="USER_EMAIL">EMAIL</label>

@@ -69,10 +69,14 @@ const AddUserForm = ({setSendRequest, setMessageError}) => {
                 </div>
 
                 <div className="col-md-4">
-                    <label className='form-label' htmlFor="GENDER">Genero</label>
-                    <input onChange={handleInputChange} className='form-control' name='GENDER' type="text" required/>
-                </div>
-                
+                    <label classname="form-label" htmlfor="GENDER">GENERO</label>
+                    <select onChange={handleInputChange}  className="form-control" name="GENDER" type="text" required>
+                    <option selected>-seleccionar-</option> 
+                    <option value="M">MASCULINO</option>
+                    <option value="F">FEMENINO</option>
+                    <option value="O">PREFIERO NO DECIRLO</option>
+                    </select>
+                    </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="NUM_PHONE_ONE">Teléfono 1</label>
                     <input onChange={handleInputChange} className='form-control' name='NUM_PHONE_ONE' type="number" required/>
@@ -101,38 +105,23 @@ const AddUserForm = ({setSendRequest, setMessageError}) => {
                 <br></br>
                 <br></br>
                 <br></br>
-                <div className="col-md-12"> ROLES </div>
-
-                <div className="form-check col-md-3" >
-                    <input onChange={handleInputChange} className="form-check-input" type="radio" name="COD_ROLE" id="exampleRadios1" value="1" rows='3' cols='4' required/>
-                    <label className="form-check-label" for="exampleRadios1">
-                        ADMINISTRADOR
-                    </label>
-                    </div>
-                    <div className="form-check col-md-3">
-                    <input onChange={handleInputChange} className="form-check-input" type="radio" name="COD_ROLE" id="exampleRadios2" value="2" required/>
-                    <label className="form-check-label" for="exampleRadios2">
-                        CONTROL DE CALIDAD
-                    </label>
-                    </div>
-                    <div className="form-check col-md-3">
-                    <input onChange={handleInputChange} className="form-check-input" type="radio" name="COD_ROLE" id="exampleRadios3" value="3" required/>
-                    <label className="form-check-label" for="exampleRadios3">
-                       CONTADOR
-                    </label>
-                    </div>
-                    <div className="form-check col-md-3">
-                    <input onChange={handleInputChange} className="form-check-input" type="radio" name="COD_ROLE" id="exampleRadios2" value="4" required/>
-                    <label className="form-check-label" for="exampleRadios2">
-                        CAJERO
-                    </label>
+               
+                    <div className="col-md-4">
+                    <label classname="form-label" htmlfor="COD_ROLE">ROLES</label>
+                    <select onChange={handleInputChange}  className="form-control" name="COD_ROLE" type="text" required>
+                    <option selected>-seleccionar-</option> 
+                    <option value="1">administrador</option>
+                    <option value="2">control de calidad</option>
+                    <option value="3">contador</option>
+                    <option value="4">cajero</option>
+                    </select>
                     </div>
 
-                <div className="col-md-5">
+                <div className="col-md-4">
                     <label className='form-label' htmlFor="EMAIL">EMAIL</label>
                     <input onChange={handleInputChange} className='form-control' name='USER_EMAIL'  type="text" required/>
                 </div>
-                <div className="col-md-5">
+                <div className="col-md-4">
                     <label className='form-label' htmlFor="PASSWORD">Contraseña</label>
                     <input onChange={handleInputChange} className='form-control' name='USER_PASSWORD'   type="Text" required/>
                 </div>
