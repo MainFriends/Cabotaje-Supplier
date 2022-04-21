@@ -4,12 +4,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfUk9MRSI6MSwiR
 
 
 {
-	"NAM_SUPPLIER": "Pepsi",
-	"NAM_CONTACT": "Romeo",
-	"LAST_NAM_CONTACT": "Santos",
-	"ADDRESS": "jutiapa danli",
+	"NAM_SUPPLIER": "Quesos Olancho",
+	"NAM_CONTACT": "Pedro",
+	"LAST_NAM_CONTACT": "Torres",
+	"ADDRESS": "Juticalpa",
 	"NUM_PHONE_ONE": 98745623,
-	"EMAIL":"pepsi@gmail.com",
+	"EMAIL":"quesosolancho@gmail.com",
 	"NAM_CITY": "Tegucigalpa",
-	"ZIP_CODE": 504
+	"ZIP_CODE": 11101
 }

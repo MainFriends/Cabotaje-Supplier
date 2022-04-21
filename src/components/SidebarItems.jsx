@@ -79,6 +79,7 @@ const SidebarItems = () => {
                     (pathname === '/dashboard/inventario' || 
                     pathname === '/dashboard/movimientos-inventario' || 
                     pathname === '/dashboard/devoluciones-inventario' || 
+                    pathname === '/dashboard/categorias-inventario' || 
                     pathname === '/dashboard/mermas' ? "active" : "")}>
                 <a className="nav-link collapsed dinamic" href="#" data-toggle="collapse" data-target="#collapseProduccion"
                     aria-expanded="true" aria-controls="collapseTwo">
@@ -89,6 +90,7 @@ const SidebarItems = () => {
                     <div className="bg-white py-2 collapse-inner rounded">
                         <h6 className="collapse-header">Tablas</h6>
                         <NavLink className="collapse-item" to="inventario">Inventario</NavLink>
+                        <NavLink className="collapse-item" to="categorias-inventario">Categorías</NavLink>
                         <NavLink className="collapse-item" to="movimientos-inventario">Movimientos</NavLink>
                         <NavLink className="collapse-item" to="devoluciones-inventario">Devoluciones</NavLink>
                         <NavLink className="collapse-item" to="mermas">Mermas</NavLink>
