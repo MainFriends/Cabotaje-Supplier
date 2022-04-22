@@ -23,6 +23,7 @@ import Rebajas from "./pages/Dashboard/Contabilidad/Rebajas";
 import PlanillaPago from "./pages/Dashboard/Contabilidad/PlanillaPago";
 import Graficas from "./pages/Dashboard/Graficas";
 import Profile from './pages/User-Profile';
+import Categorias from "./pages/Dashboard/Produccion/Categorias";
 
 const Pages = () => {
 
@@ -40,6 +41,7 @@ const Pages = () => {
             <Route path="usuarios" element={<Usuarios />}/>
             <Route path="clientes" element={<Clientes />}/>
             <Route path="proveedores" element={<Proveedores />}/>
+            <Route path="categorias-inventario" element={<Categorias />}/>
             <Route path="inventario" element={<Inventario />}/>
             <Route path="movimientos-inventario" element={<MovimientosInventario />}/>
             <Route path="devoluciones-inventario" element={<DevolucionesInv />}/>

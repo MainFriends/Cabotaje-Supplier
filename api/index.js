@@ -33,6 +33,8 @@ const inventory = require('./routes/inventory')
 const inventoryDetail = require('./routes/inventoryDetail')
 const decrease = require('./routes/decrease')
 const returnProduct = require('./routes/returnProduct')
+const inventoryTransactions = require('./routes/inventoryTransactions')
+const inventoryCategory = require ('./routes/inventoryCategory')
 //sesion
 const userSession = require('./routes/userSession')
 //user-profile
@@ -79,6 +81,8 @@ app.use('/api', inventory)
 app.use('/api', inventoryDetail)
 app.use('/api', decrease)
 app.use('/api', returnProduct)
+app.use('/api', inventoryTransactions)
+app.use('/api', inventoryCategory)
 //sesion
 app.use('/api', userSession)
 //user-profile

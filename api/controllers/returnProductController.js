@@ -34,7 +34,7 @@ const addReturnProduct = (req, res) => {
     DES_RETURN
     } = req.body
 
-    const sp = 'CALL SP_ADD_RETURN_PRODUCT(?,?,?,?,?,?,?)';
+    const sp = 'CALL SP_INS_RETURN_PRODUCT(?,?,?,?,?,?,?)';
 
     mysqlConnect.query(sp,[
     COD_PRODUCT,

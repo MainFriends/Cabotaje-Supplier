@@ -1,0 +1,3 @@
+GET http://localhost:4000/api/inventory
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfVVNFUiI6MSwiQ09EX1JPTEUiOjEsIkZJUlNUX05BTUUiOiJEYXZpZCIsIkxBU1RfTkFNRSI6IlJpdmFzIiwiaWF0IjoxNjUwMTU0MDc2LCJleHAiOjE2NTAyMDgwNzZ9.XXIxGRyzcTzd1g3IMlLBnv9Vckxhu2DL55hd5i0f6vg
