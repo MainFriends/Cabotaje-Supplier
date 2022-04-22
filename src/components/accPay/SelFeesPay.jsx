@@ -1,6 +1,8 @@
 import DataTable from 'react-data-table-component';
 
 import { useEffect, useState } from 'react';
+import Modal from '../Modal';
+import AddFeesPay from './AddFeesPay';
 
 import {paginationComponentOptions} from '../../helpers/datatablesOptions';
 import axios from "../../config/axios";
@@ -8,12 +10,12 @@ import token from "../../helpers/getToken";
 import moment from 'moment';
 
 
+
+
 const CuotasCobrar = ({rowCOD}) => {
     const [rowsCuotas, setRowsCuotas] = useState([]);
-    const [rowCODCuotas, setRowCODCuotas] = useState(null);
     const [messageError, setMessageError] = useState('');
-    const [sendRequest, setSendRequest] = useState(false);
-    const [loading, setLoading] = useState(true);
+    const [sendRequestFeesPay, setSendRequestFeesPay] = useState(false);
 
     const columns = [
         {
@@ -49,10 +51,9 @@ const CuotasCobrar = ({rowCOD}) => {
         if(rowCOD){
             axios.get(`/fees-pay/${rowCOD}`, token())
            .then(res => setRowsCuotas(res.data))
-           setLoading(false);
-           setSendRequest(false);
+           setSendRequestFeesPay(false);
         }
-    }, [rowCOD]);
+    }, [rowCOD, sendRequestFeesPay]);
 
     const handleDelete = (cod) => {
         axios.delete(`/fees-pay/${cod}`, token())
@@ -79,6 +80,12 @@ const CuotasCobrar = ({rowCOD}) => {
             highlightOnHover
             striped
             persistTableHead 
+        />
+        <Modal
+            idModal='addCuota'
+            title='Añadir Cuota'
+            messageError={messageError}
+            content={<AddFeesPay rowCOD={rowCOD} setSendRequestFeesPay={setSendRequestFeesPay} setMessageError={setMessageError} />}
         />
         <div className="modal-footer">
                 <button type="button" id='idCloseSelCuotas' className="btn btn-primary" data-dismiss="modal">Cerrar</button>

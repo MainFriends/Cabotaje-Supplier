@@ -152,12 +152,6 @@ const CuentasPagar = () => {
                         messageError={messageError}
                         content={<SelFeesPay rowCOD={rowCOD} setSendRequest={setSendRequest}/>}
                     />
-                    <Modal
-                        idModal='addCuota'
-                        title='Añadir Cuota'
-                        messageError={messageError}
-                        content={<AddFeesPay rowCOD={rowCOD} setSendRequest={setSendRequest} setMessageError={setMessageError} />}
-                    />
                 </div>
             </div> 
     )

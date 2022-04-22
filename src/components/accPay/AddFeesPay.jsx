@@ -1,17 +1,14 @@
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 
 import axios from '../../config/axios';
 import token from '../../helpers/getToken';
 
-const AddFeesPay = ({rowCOD, setMessageError}) => {
+const AddFeesPay = ({rowCOD, setMessageError, setSendRequestFeesPay}) => {
     const [formAddFeesPay, setFormAddFeesPay] = useState({
         AMOUNT: 0,
         DATE_PAY: '',
         COD_TYP_PAY: 0
     });
-
-    const [rowsCuotas, setRowsCuotas] = useState([]);
-    const [sendRequestFeesPay, setSendRequestFeesPay] = useState(false);
 
     const handleInputChange = (e) => {
         setFormAddFeesPay({
@@ -37,17 +34,6 @@ const AddFeesPay = ({rowCOD, setMessageError}) => {
                }, 3000);
            })
     }
-
-    useEffect(() => {
-        if(rowCOD){
-            axios.get(`/fees-pay/${rowCOD}`, token())
-           .then(res => {
-               const {data} = res;
-               setRowsCuotas(data);
-               setSendRequestFeesPay(false);
-           })
-        }
-    }, [rowCOD, sendRequestFeesPay]);
 
     return(
         <form id='AddFormCuota' onSubmit={handleSubmitFeesPay} action='#'>
