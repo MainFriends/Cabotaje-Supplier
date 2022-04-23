@@ -3,7 +3,7 @@ import {useState} from 'react';
 import axios from '../../config/axios';
 import token from '../../helpers/getToken';
 
-const AddFeesPay = ({rowCOD, setMessageError, setSendRequestFeesPay}) => {
+const AddFeesPay = ({rowCOD, setMessageError, setSendRequest}) => {
     const [formAddFeesPay, setFormAddFeesPay] = useState({
         AMOUNT: 0,
         DATE_PAY: '',
@@ -23,7 +23,9 @@ const AddFeesPay = ({rowCOD, setMessageError, setSendRequestFeesPay}) => {
            .then(res => {
                 document.querySelector('#idCloseFeesPay').click();
                 e.target.reset();
-                setSendRequestFeesPay(true);
+                setSendRequest(true);
+                document.querySelector('#viewDetailFeesPay').click();
+                
            })
            .catch(err => {
                const {message} = err.response.data;

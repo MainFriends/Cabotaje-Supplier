@@ -8,12 +8,12 @@ import Modal from '../../../components/Modal';
 import AddAccountPayForm from '../../../components/accPay/AddAccountPayForm';
 import EditAccountPayForm from '../../../components/accPay/EditAccountPayForm';
 import SelFeesPay from '../../../components/accPay/SelFeesPay';
-import AddFeesPay from '../../../components/accPay/AddFeesPay';
 
 import {paginationComponentOptions} from '../../../helpers/datatablesOptions';
 import axios from '../../../config/axios';
 import token from '../../../helpers/getToken';
 import moment from 'moment';
+import AddFeesPay from '../../../components/accPay/AddFeesPay';
 
 
 const CuentasPagar = () => {
@@ -73,9 +73,9 @@ const CuentasPagar = () => {
             name: 'ACCIONES',
             button: true,
             cell: row => <>
+                <button id="viewDetailFeesPay" className='btn btn-sm btn-primary m-1' onClick={() => setRowCOD(row.COD_ACC_PAY)} data-toggle="modal" data-target='#idCobrar'><i className="fa-solid fa-eye"></i></button>
                 <button className='btn btn-sm btn-warning mr-1' onClick={() => {setRowCOD(row.COD_ACC_PAY)}} data-toggle="modal" data-target='#editAccountPay'><i className="fa-solid fa-pen-to-square"></i></button>
                 <button className='btn btn-sm btn-danger' onClick={() => handleDelete(row.COD_ACC_PAY)}><i className="fa-solid fa-trash"></i></button>
-                <button className='btn btn-sm btn-primary m-1' onClick={() => setRowCOD(row.COD_ACC_PAY)} data-toggle="modal" data-target='#idCobrar'><i className="fa-solid fa-eye"></i></button>
             </>
         }
     ];
@@ -150,7 +150,14 @@ const CuentasPagar = () => {
                         idModal='idCobrar'
                         title='Cuotas de Pago'
                         messageError={messageError}
-                        content={<SelFeesPay rowCOD={rowCOD} setSendRequest={setSendRequest}/>}
+                        content={<SelFeesPay rowCOD={rowCOD} setSendRequest={setSendRequest} sendRequest={sendRequest}/>}
+                    />
+                    
+                    <Modal
+                        idModal='addCuotaPay'
+                        title='Añadir Cuota'
+                        messageError={messageError}
+                        content={<AddFeesPay rowCOD={rowCOD} setSendRequest={setSendRequest} setMessageError={setMessageError} />}
                     />
                 </div>
             </div> 

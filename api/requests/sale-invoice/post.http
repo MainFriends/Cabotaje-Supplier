@@ -1,6 +1,6 @@
 POST http://localhost:4000/api/sale-invoice
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfVVNFUiI6MSwiQ09EX1JPTEUiOjEsIkZJUlNUX05BTUUiOiJNZW5kZWwiLCJMQVNUX05BTUUiOiJBZ3VpbGFyIiwiaWF0IjoxNjUwNTA1MzUwLCJleHAiOjE2NTA1NTkzNTB9.MLtgzxqjzyPPGCBoWro0aB9nGnBk6RIyO_84CBCpbIA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfVVNFUiI6MSwiQ09EX1JPTEUiOjEsIkZJUlNUX05BTUUiOiJNZW5kZWwiLCJMQVNUX05BTUUiOiJBZ3VpbGFyIiwiaWF0IjoxNjUwNjY2OTcyLCJleHAiOjE2NTA3MjA5NzJ9.j1KvqfowkQyZ-NCpgDeinFtV3fVxsffRBM0JAAmAkZ4
 
 {
     "COD_CLIENT": 1,
@@ -11,6 +11,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfVVNFUiI6MSwiQ
     "TOT_SALE": 140.00,
     "TYP_TO_SALE": "Crédito",
     "COD_TYP_PAY": 1,
-    "DESCRIPTION": "Deuda por cobrar",
+    "DESCRIPTION": "Deuda",
     "DAT_LIMIT": "2022-04-30" 
 }

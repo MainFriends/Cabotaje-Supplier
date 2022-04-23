@@ -1,21 +1,14 @@
 import DataTable from 'react-data-table-component';
 
 import { useEffect, useState } from 'react';
-import Modal from '../Modal';
-import AddFeesPay from './AddFeesPay';
 
 import {paginationComponentOptions} from '../../helpers/datatablesOptions';
 import axios from "../../config/axios";
 import token from "../../helpers/getToken";
 import moment from 'moment';
 
-
-
-
-const CuotasCobrar = ({rowCOD}) => {
+const CuotasCobrar = ({rowCOD, sendRequest, setSendRequest}) => {
     const [rowsCuotas, setRowsCuotas] = useState([]);
-    const [messageError, setMessageError] = useState('');
-    const [sendRequestFeesPay, setSendRequestFeesPay] = useState(false);
 
     const columns = [
         {
@@ -51,9 +44,9 @@ const CuotasCobrar = ({rowCOD}) => {
         if(rowCOD){
             axios.get(`/fees-pay/${rowCOD}`, token())
            .then(res => setRowsCuotas(res.data))
-           setSendRequestFeesPay(false);
+           setSendRequest(false);
         }
-    }, [rowCOD, sendRequestFeesPay]);
+    }, [rowCOD, sendRequest]);
 
     const handleDelete = (cod) => {
         axios.delete(`/fees-pay/${cod}`, token())
@@ -68,7 +61,7 @@ const CuotasCobrar = ({rowCOD}) => {
     <>  
     <div className="row">
             <div className="col-12 text-right">
-                <button onClick={() => closeModal()} className='btn btn-sm btn-success' data-toggle="modal" data-target='#addCuota'>+</button>
+                <button onClick={() => closeModal()} className='btn btn-sm btn-success' data-toggle="modal" data-target='#addCuotaPay'>+</button>
             </div>
     </div>
         <DataTable
@@ -80,12 +73,6 @@ const CuotasCobrar = ({rowCOD}) => {
             highlightOnHover
             striped
             persistTableHead 
-        />
-        <Modal
-            idModal='addCuota'
-            title='Añadir Cuota'
-            messageError={messageError}
-            content={<AddFeesPay rowCOD={rowCOD} setSendRequestFeesPay={setSendRequestFeesPay} setMessageError={setMessageError} />}
         />
         <div className="modal-footer">
                 <button type="button" id='idCloseSelCuotas' className="btn btn-primary" data-dismiss="modal">Cerrar</button>

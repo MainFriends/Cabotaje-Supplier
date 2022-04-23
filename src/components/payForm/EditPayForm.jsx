@@ -14,13 +14,14 @@ const EditPayForm = ({rowCOD, setSendRequest, setMessageError}) => {
     });
     const [netSalary, setNetSalary] = useState(0);
 
+    const {HOURS_WORKED, AMO_GROSS, BONUS, TOT_DEDUCTIONS} = formEditPayForm
+
     const getNetSalary = () => {
-        const {HOURS_WORKED, AMO_GROSS, BONUS, TOT_DEDUCTIONS} = formEditPayForm
         const totSalary = (parseFloat(HOURS_WORKED) * parseFloat(AMO_GROSS)) + parseFloat(BONUS) - parseFloat(TOT_DEDUCTIONS)
         setNetSalary(totSalary);
         setFormEditPayForm({
             ...formEditPayForm,
-            NET_SALARY: totSalary
+            NET_SALARY: totSalary   
         })
     }
 
@@ -32,13 +33,24 @@ const EditPayForm = ({rowCOD, setSendRequest, setMessageError}) => {
     }
 
     useEffect(() => {
-        axios.get(`/pay-form/${rowCOD}`, token())
-           .then(res => setFormEditPayForm(res.data[0]));
+        getNetSalary()
+    }, [HOURS_WORKED, AMO_GROSS, BONUS, TOT_DEDUCTIONS])
+
+    useEffect(() => {
+        if(rowCOD){
+            axios.get(`/pay-form/${rowCOD}`, token())
+               .then(res => {
+                setNetSalary(res.data[0].NET_SALARY)
+                setFormEditPayForm({
+                    ...res.data[0],
+                    DAT_PAYMENT: moment(res.data[0].DAT_PAYMENT).format('YYYY-MM-DD')
+                })
+               });
+        }
     }, [rowCOD])
 
     const handleSubmitPayForm = (e) => {
         e.preventDefault();
-        console.log(formEditPayForm)
 
         axios.put(`/pay-form/${rowCOD}`, formEditPayForm, token())
            .then(res => {
@@ -64,19 +76,19 @@ const EditPayForm = ({rowCOD, setSendRequest, setMessageError}) => {
             </div>
             <div className="col-md-3">
                 <label className='form-label mt-2' htmlFor="HOURS_WORKED">Dias Trabajados</label>
-                <input onBlur={() => getNetSalary()}  onChange={handleInputChange} value={formEditPayForm?.HOURS_WORKED} className='form-control' name='HOURS_WORKED' type="number" required/>
+                <input  onChange={handleInputChange} value={formEditPayForm?.HOURS_WORKED} className='form-control' name='HOURS_WORKED' type="number" required/>
             </div>
             <div className="col-md-3">
                 <label className='form-label mt-2' htmlFor="AMO_GROSS">Salario Base</label>
-                <input onBlur={() => getNetSalary()} onChange={handleInputChange} value={formEditPayForm?.AMO_GROSS} className='form-control' name='AMO_GROSS' type="number" required/>
+                <input onChange={handleInputChange} value={formEditPayForm?.AMO_GROSS} className='form-control' name='AMO_GROSS' type="number" required/>
             </div>
             <div className="col-md-3">
                 <label className='form-label mt-2' htmlFor="BONUS">Bonificaciones</label>
-                <input onBlur={() => getNetSalary()} onChange={handleInputChange} value={formEditPayForm?.BONUS} className='form-control' name='BONUS' type="number" required/>
+                <input onChange={handleInputChange} value={formEditPayForm?.BONUS} className='form-control' name='BONUS' type="number" required/>
             </div>
             <div className="col-md-3">
                 <label className='form-label mt-2' htmlFor="TOT_DEDUCTIONS">Deducciones</label>
-                <input onBlur={() => getNetSalary()} onChange={handleInputChange} value={formEditPayForm?.TOT_DEDUCTIONS} className='form-control' name='TOT_DEDUCTIONS' type="number" required/>
+                <input onChange={handleInputChange} value={formEditPayForm?.TOT_DEDUCTIONS} className='form-control' name='TOT_DEDUCTIONS' type="number" required/>
             </div>
             <div className="col-md-3">
                 <label className='form-label mt-2' htmlFor="NET_SALARY">Salario Neto</label>
