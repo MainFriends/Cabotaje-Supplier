@@ -57,3 +57,15 @@
   margin-left: auto;
   margin-right:auto;
 }
+
+.errorPage{
+  font-size: 300px;
+  color: #000;
+  margin: 0 auto;
+}
+
+.warningPage{
+  font-size: 7vh;
+  color: #000;
+  margin: 0 auto;
+}

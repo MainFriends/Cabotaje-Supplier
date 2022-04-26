@@ -68,7 +68,13 @@ const ViewPermissions = ({rowCOD, sendRequestPermissions, setSendRequestPermissi
       <>
       <div className="row">
           <div className="col-12 text-right">
-              <button data-dismiss="modal" className='btn btn-sm btn-success' data-toggle="modal" data-target='#addPermissions'><i className="fa-solid fa-plus"></i> Agregar permisos</button>
+              {
+                rowCOD > 2
+                ?
+                <button data-dismiss="modal" className='btn btn-sm btn-success' data-toggle="modal" data-target='#addPermissions'><i className="fa-solid fa-plus"></i> Agregar permisos</button>
+                :
+                null
+              }
           </div>
       </div>
         <DataTable

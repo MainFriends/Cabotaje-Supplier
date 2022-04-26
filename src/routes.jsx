@@ -1,6 +1,8 @@
-import React from "react";
+import {useEffect, useState} from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useUser } from "./hooks/useUser";
+import axios from './config/axios';
+import token from './helpers/getToken';
 
 //Pages
 import Login from "./pages/Login";
@@ -24,16 +26,54 @@ import PlanillaPago from "./pages/Dashboard/Contabilidad/PlanillaPago";
 import Graficas from "./pages/Dashboard/Graficas";
 import Profile from './pages/User-Profile';
 import Roles from "./pages/Dashboard/Roles";
+import Page401 from "./pages/Error-Pages/Page401";
+import Page404 from "./pages/Error-Pages/Page404";
 
 const Pages = () => {
 
     const {isLogged} = useUser();
+    const [userRole, setUserRole] = useState(null);
+    const [modules, setModules] = useState({
+        ventas: false,
+        compras: false,
+        personas: false,
+        produccion: false,
+        contabilidad: false
+    });
+
+    const {
+        ventas,
+        compras,
+        personas,
+        produccion,
+        contabilidad
+    } = modules;
+
+    useEffect(() => {
+        if(isLogged){
+            axios.get('/user-permissions', token())
+                .then(res => {
+                    setModules({
+                        ventas: res.data.some(row => row.COD_MODULE === 1),
+                        compras: res.data.some(row => row.COD_MODULE === 2),
+                        personas: res.data.some(row => row.COD_MODULE === 3),
+                        produccion: res.data.some(row => row.COD_MODULE === 4),
+                        contabilidad: res.data.some(row => row.COD_MODULE === 5)
+                    })
+                })
+        }
+    }, [isLogged])
+
+    useEffect(() => {
+        axios.get('/user-profile', token())
+            .then(res => setUserRole(res.data[0].COD_ROLE))
+    }, [])
 
     return (
     <Routes>
         <Route path="/" element={isLogged ? (<Navigate to='/dashboard'/>) : (<Login />)}/>
         <Route path="/profile" element={isLogged ? (<Profile />) : (<Navigate to='/'/>)}/>
-        <Route path="/facturar" element={isLogged ? (<Facturar />) : (<Navigate to='/'/>)}/>
+        <Route path="/facturar" element={isLogged ? (ventas ? <Facturar /> : <Page401 />) : (<Navigate to='/'/>)}/>
         <Route path="/dashboard" element={isLogged ? (<Dashboard />) : (<Navigate to='/'/>)}>
             <Route path="ventas" element={<Facturas />}/>
             <Route path="compras" element={<Compras />}/>
@@ -51,9 +91,9 @@ const Pages = () => {
             <Route path="rebajas" element={<Rebajas />}/>
             <Route path="planilla-pago" element={<PlanillaPago />}/>
             <Route path="graficas" element={<Graficas />}/>
-            <Route path="roles-permisos" element={<Roles />}/>
+            <Route path="roles-permisos" element={userRole === 1 ? <Roles /> : <Page401 />}/>
         </Route>
-        <Route path="/*" element={isLogged ? (<Navigate to='/dashboard'/>) : (<Navigate to='/'/>)}></Route>
+        <Route path="/*" element={isLogged ? (<Page404 />) : (<Navigate to='/'/>)}></Route>
     </Routes>
     )
 };
