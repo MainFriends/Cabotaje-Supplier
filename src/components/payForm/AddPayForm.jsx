@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "../../config/axios";
 import token from "../../helpers/getToken";
 
@@ -17,8 +17,9 @@ const AddPayForm = ({setSendRequest, setMessageError}) => {
     const [employeeName, setEmployeeName] = useState('')
     const [netSalary, setNetSalary] = useState(0);
 
+    const {HOURS_WORKED, AMO_GROSS, BONUS, TOT_DEDUCTIONS} = formAddPayForm;
+
     const getNetSalary = () => {
-        const {HOURS_WORKED, AMO_GROSS, BONUS, TOT_DEDUCTIONS} = formAddPayForm
         const totSalary = (parseFloat(HOURS_WORKED) * parseFloat(AMO_GROSS)) + parseFloat(BONUS) - parseFloat(TOT_DEDUCTIONS)
         setNetSalary(totSalary);
         setFormAddPayForm({
@@ -26,6 +27,10 @@ const AddPayForm = ({setSendRequest, setMessageError}) => {
             NET_SALARY: totSalary
         })
     }
+
+    useEffect(() => {
+        getNetSalary()
+    }, [HOURS_WORKED, AMO_GROSS, BONUS, TOT_DEDUCTIONS])
 
     const handleInputChange = (e) => {
         setFormAddPayForm({
@@ -48,7 +53,6 @@ const AddPayForm = ({setSendRequest, setMessageError}) => {
 
     const handleSubmitPayForm = (e) => {
         e.preventDefault();
-        console.log(formAddPayForm)
         axios.post('/pay-form', formAddPayForm, token())
            .then(res => {
                document.querySelector('#closeAddPayForm').click();
@@ -68,29 +72,29 @@ const AddPayForm = ({setSendRequest, setMessageError}) => {
     return(
         <form id='addPayForm' onSubmit={handleSubmitPayForm} action='#'>
         <div className="row mb-4">
-            <div className="col-md-4">
+            <div className="col-md-3">
                 <label className='form-label' htmlFor="COD_USER">Código de empleado</label>
                 <input onBlur={() => getUserInput()} onChange={handleInputChange} className='form-control' name='COD_USER' type="number" required/>
             </div>
-            <div className="col-md-8">
+            <div className="col-md-7">
                 <label className='form-label' htmlFor="EMPLOYEE">Empleado</label>
                 <input className='form-control' value={employeeName} name='EMPLOYEE' type="text" required disabled/>
             </div>
             <div className="col-md-3">
                 <label className='form-label mt-2' htmlFor="HOURS_WORKED">Dias Trabajados</label>
-                <input onBlur={() => getNetSalary()}  onChange={handleInputChange} className='form-control' name='HOURS_WORKED' type="number" required/>
+                <input onChange={handleInputChange} value={formAddPayForm?.HOURS_WORKED} className='form-control' name='HOURS_WORKED' type="number" required/>
             </div>
             <div className="col-md-3">
                 <label className='form-label mt-2' htmlFor="AMO_GROSS">Salario Base</label>
-                <input onBlur={() => getNetSalary()} onChange={handleInputChange} className='form-control' name='AMO_GROSS' type="number" required/>
+                <input onChange={handleInputChange} value={formAddPayForm?.AMO_GROSS} className='form-control' name='AMO_GROSS' type="number" required/>
             </div>
             <div className="col-md-3">
                 <label className='form-label mt-2' htmlFor="BONUS">Bonificaciones</label>
-                <input onBlur={() => getNetSalary()} onChange={handleInputChange} className='form-control' name='BONUS' type="number" required/>
+                <input onChange={handleInputChange} value={formAddPayForm?.BONUS} className='form-control' name='BONUS' type="number" required/>
             </div>
             <div className="col-md-3">
                 <label className='form-label mt-2' htmlFor="TOT_DEDUCTIONS">Deducciones</label>
-                <input onBlur={() => getNetSalary()} onChange={handleInputChange} className='form-control' name='TOT_DEDUCTIONS' type="number" required/>
+                <input onChange={handleInputChange} value={formAddPayForm?.TOT_DEDUCTIONS} className='form-control' name='TOT_DEDUCTIONS' type="number" required/>
             </div>
             <div className="col-md-3">
                 <label className='form-label mt-2' htmlFor="NET_SALARY">Salario Neto</label>

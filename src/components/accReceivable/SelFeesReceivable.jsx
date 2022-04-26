@@ -8,12 +8,8 @@ import token from "../../helpers/getToken";
 import moment from 'moment';
 
 
-const CuotasCobrar = ({rowCOD}) => {
+const CuotasCobrar = ({rowCOD, sendRequest, setSendRequest}) => {
     const [rowsCuotas, setRowsCuotas] = useState([]);
-    const [rowCODCuotas, setRowCODCuotas] = useState(null);
-    const [messageError, setMessageError] = useState('');
-    const [sendRequest, setSendRequest] = useState(false);
-    const [loading, setLoading] = useState(true);
 
     const columns = [
         {
@@ -48,11 +44,10 @@ const CuotasCobrar = ({rowCOD}) => {
     useEffect(() => {
         if(rowCOD){
             axios.get(`/fees-receivable/${rowCOD}`, token())
-           .then(res => setRowsCuotas(res.data))
-           setLoading(false);
-           setSendRequest(false);
+            .then(res => setRowsCuotas(res.data))
+            setSendRequest(false);
         }
-    }, [rowCOD]);
+    }, [rowCOD, sendRequest]);
 
     const handleDelete = (cod) => {
         axios.delete(`/fees-receivable/${cod}`, token())

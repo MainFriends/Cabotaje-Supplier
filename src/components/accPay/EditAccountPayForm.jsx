@@ -8,7 +8,6 @@ import moment from "moment";
 const EditAccountPayForm = ({rowCOD, setSendRequest}) => {
     const [formEditAccountPay, setFormEditAccountPay] = useState({
         DESCRIPTION: '',
-        TOT_BALANCE: '',
         DATE_LIMIT: ''
     });
 
@@ -23,6 +22,18 @@ const EditAccountPayForm = ({rowCOD, setSendRequest}) => {
         if(rowCOD){
             axios.get(`/accounts-pay/${rowCOD}`, token())
            .then(res => setFormEditAccountPay(res.data[0]))
+        }
+    }, [rowCOD])
+
+    useEffect(() => {
+        if(rowCOD){
+            axios.get(`/accounts-pay/${rowCOD}`, token())
+               .then(res => {
+                setFormEditAccountPay({
+                    ...res.data[0],
+                    DATE_LIMIT: moment(res.data[0].DATE_LIMIT).format('YYYY-MM-DD')
+                })
+               });
         }
     }, [rowCOD])
 
@@ -42,10 +53,6 @@ const EditAccountPayForm = ({rowCOD, setSendRequest}) => {
                 <div className="col-md-8 mt-3">
                     <label className='form-label' htmlFor="DESCRIPTION">Descripción</label>
                     <textarea onChange={handleInputChange} value={formEditAccountPay.DESCRIPTION} className='form-control' name='DESCRIPTION' type="text" required/>
-                </div>
-                <div className="col-md-3 mt-3">
-                    <label className='form-label' htmlFor="TOT_BALANCE">Monto</label>
-                    <input onChange={handleInputChange} value={formEditAccountPay.TOT_BALANCE} className='form-control' name='TOT_BALANCE' type="number" required/>
                 </div>
                 <div className="col-md-3 mt-3">
                     <label className='form-label' htmlFor="DATE_LIMIT">Fecha Límite</label>

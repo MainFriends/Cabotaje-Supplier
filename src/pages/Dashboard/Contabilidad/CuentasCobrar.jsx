@@ -86,6 +86,7 @@ const CuentasCobrar = () => {
                 const {data} = res;
                 setRows(data);
                 setLoading(false);
+                setSendRequest(false);
             })
     },[sendRequest]);
 
@@ -115,7 +116,7 @@ const CuentasCobrar = () => {
                         idModal='idCobrar'
                         title='Cuotas de Cobro'
                         messageError={messageError}
-                        content={<SelFeesReceivable rowCOD={rowCOD} setSendRequest={setSendRequest}/>}
+                        content={<SelFeesReceivable rowCOD={rowCOD} setSendRequest={setSendRequest} sendRequest={sendRequest}/>}
                     />
                     <Modal 
                         idModal='addCuota'

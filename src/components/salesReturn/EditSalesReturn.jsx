@@ -22,7 +22,12 @@ const EditSalesReturn = ({setSendRequest, rowCOD}) => {
     useEffect(() => {
         if(rowCOD){
             axios.get(`/sales-returns/${rowCOD}`, token())
-            .then(res => setFormEditSalesReturn(res.data[0]))
+            .then(res => {
+                setFormEditSalesReturn({
+                    ...res.data[0],
+                    DAT_RETURN: moment(res.data[0].DAT_RETURN).format('YYYY-MM-DD')
+                })        
+            })
         }
     }, [rowCOD])
 

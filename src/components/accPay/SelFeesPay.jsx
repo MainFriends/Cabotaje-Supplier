@@ -43,8 +43,8 @@ const CuotasCobrar = ({rowCOD, sendRequest, setSendRequest}) => {
     useEffect(() => {
         if(rowCOD){
             axios.get(`/fees-pay/${rowCOD}`, token())
-           .then(res => setRowsCuotas(res.data))
-           setSendRequest(false);
+               .then(res => setRowsCuotas(res.data))
+               setSendRequest(false);
         }
     }, [rowCOD, sendRequest]);
 

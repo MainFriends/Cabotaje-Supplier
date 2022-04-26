@@ -7,7 +7,7 @@ const AddFeesPay = ({rowCOD, setMessageError, setSendRequest}) => {
     const [formAddFeesPay, setFormAddFeesPay] = useState({
         AMOUNT: 0,
         DATE_PAY: '',
-        COD_TYP_PAY: 0
+        COD_TYP_PAY: ''
     });
 
     const handleInputChange = (e) => {
@@ -24,7 +24,6 @@ const AddFeesPay = ({rowCOD, setMessageError, setSendRequest}) => {
                 document.querySelector('#idCloseFeesPay').click();
                 e.target.reset();
                 setSendRequest(true);
-                document.querySelector('#viewDetailFeesPay').click();
                 
            })
            .catch(err => {
@@ -44,19 +43,24 @@ const AddFeesPay = ({rowCOD, setMessageError, setSendRequest}) => {
                     <label className='form-label' htmlFor="AMOUNT">Monto</label>
                     <input onChange={handleInputChange} className='form-control' name='AMOUNT' type="number" required/>
                 </div>
+                <div className='col-md-4'>
+                    <label className='form-label' htmlFor='COD_TYP_PAY'>Forma de Pago</label>
+                    <select onChange={handleInputChange} value={formAddFeesPay.COD_TYP_PAY} className='form-control' name='COD_TYP_PAY' required>
+                        <option selected>-Seleccionar-</option>
+                            <option value="1">Efectivo</option>
+                            <option value="2">Tarjeta</option>
+                            <option value="3">Transferencia</option>
+                    </select>
+                </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="DATE_PAY">Fecha</label>
                     <input onChange={handleInputChange} className='form-control' name='DATE_PAY' type="date" required/>
                 </div>
-                <div className="col-md-3">
-                    <label className='form-label' htmlFor="COD_TYP_PAY">Tipo</label>
-                    <input onChange={handleInputChange} className='form-control' name='COD_TYP_PAY' type="number" required/>
+            </div>
+                <div className="modal-footer">
+                    <button type="button" id='idCloseFeesPay' className="btn btn-primary" data-toggle="modal" data-target='#idCobrar' data-dismiss="modal">Atrás</button>
+                    <button type='submit' className="btn btn-success">Guardar</button>
                 </div>
-            </div>
-            <div className="modal-footer">
-                <button type="button" id='idCloseFeesPay' className="btn btn-primary" data-dismiss="modal">Cerrar</button>
-                <button type='submit' className="btn btn-success">Guardar</button>
-            </div>
         </form>
     )
 }
