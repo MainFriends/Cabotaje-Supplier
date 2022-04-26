@@ -5,6 +5,7 @@ import SaleInformation from '../../../components/invoice-sale/SaleInformation'
 
 const Facturar = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [correlativeInvoice, setCorrelativeInvoice] = useState('');
   const [user, setUser] = useState({
     code: '',
     name: ''
@@ -12,7 +13,7 @@ const Facturar = () => {
   const [client, setClient] = useState({
     name: 'CF',
     RTN: 0
-  })
+  });
 
   return (
     <div className="container-fluid">
@@ -25,6 +26,8 @@ const Facturar = () => {
           client={client} 
           setClient={setClient} 
           setCurrentPage={setCurrentPage}
+          setCorrelativeInvoice={setCorrelativeInvoice}
+          correlativeInvoice={correlativeInvoice}
           />}
           {currentPage === 2 && 
           <ProductsList 
@@ -33,6 +36,7 @@ const Facturar = () => {
           client={client} 
           setClient={setClient} 
           setCurrentPage={setCurrentPage}
+          correlativeInvoice={correlativeInvoice}
           />}
         </div>
         <div className="col-12 text-right">

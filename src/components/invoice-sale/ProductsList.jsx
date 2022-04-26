@@ -1,46 +1,61 @@
 import React from 'react'
 import DataTable from 'react-data-table-component';
+import { useState } from 'react/cjs/react.development';
 import Modal from '../Modal';
 import Inventory from './Inventory';
 
-const ProductsList = ({user, client, setCurrentPage}) => {
+const ProductsList = ({user, client, setCurrentPage, correlativeInvoice}) => {
+
+    const [productListSale, setproductListSale] = useState([]);
 
     const columns = [
         {
             name: 'Código',
-            selector: row => row.title,
+            selector: row => row.COD_PRODUCT,
         },
-        {
+        {   
             name: 'Producto',
-            selector: row => row.year,
+            selector: row => row.NAM_PRODUCT,
         },
         {
             name: 'Descripción',
-            selector: row => row.year,
+            selector: row => row.DES_PRODUCT,
         },
         {
             name: 'Cantidad',
-            selector: row => row.year,
+            selector: row => row.CANT_PRODUCT,
         },
         {
             name: 'Precio',
-            selector: row => row.year,
+            selector: row => row.PRICE,
+            format: row => `L ${row.PRICE.toFixed(2)}`
         },
         {
-            name: 'Descuento',
-            selector: row => row.year,
+            name: 'ISV',
+            selector: row => row.ISV,
+            format: row => `L ${row.ISV.toFixed(2)}`
         },
         {
             name: 'Total',
-            selector: row => row.year,
+            selector: row => row.TOTAL,
+            format: row => `L ${row.TOTAL.toFixed(2)}`
         },
         {
             name: 'Eliminar',
-            selector: row => row.year,
+            button: true,
+            cell: row => <>
+                <button className='btn btn-sm btn-danger' onClick={() => handleDelete(row.COD_PRODUCT)}><i className="fa-solid fa-trash"></i></button>
+            </>
         }
     ];
 
-    const data = []
+    const data = productListSale;
+
+    const handleDelete = cod => {
+        const findProduct = productListSale.filter(product => product.COD_PRODUCT !== cod);
+
+        setproductListSale(findProduct);
+    }
 
   return (
     <div className="card text-dark card-facturar shadow">
@@ -52,6 +67,7 @@ const ProductsList = ({user, client, setCurrentPage}) => {
                     <input 
                     type="number" 
                     className="form-control form-control-sm" 
+                    value={correlativeInvoice}
                     disabled
                     />
                 </div>
@@ -94,7 +110,10 @@ const ProductsList = ({user, client, setCurrentPage}) => {
         <Modal 
             idModal='sale-inventory'
             title='Inventario'
-            content={<Inventory />}
+            content={<Inventory
+                productListSale={productListSale} 
+                setproductListSale={setproductListSale}
+            />}
             modalSize='xl'
         />
         <hr />

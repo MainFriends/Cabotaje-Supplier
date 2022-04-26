@@ -10,5 +10,6 @@ router.post('/sale-invoice', [userExtractor, verifyRoleSalesInvoice], saleInvoic
 //caja
 router.get('/categories', [userExtractor, verifyRoleSalesInvoice], saleInvoiceController.getCategories);
 router.get('/products/:codCategory', [userExtractor, verifyRoleSalesInvoice], saleInvoiceController.getProducts);
+router.get('/correlative', [userExtractor, verifyRoleSalesInvoice], saleInvoiceController.getCorrelative);
 
 module.exports = router;

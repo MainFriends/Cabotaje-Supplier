@@ -85,10 +85,24 @@ const getProducts = (req, res) => {
     });
 }
 
+const getCorrelative = (req, res) => {
+
+    const sp = `CALL SP_SEL_CORRELATIVE()`;
+
+    mysqlConnect.query(sp, (err, result) => {
+        if(err){
+            res.status(500).send({message: "Error en el servidor."});
+        }else{
+            res.status(200).json(result[0]);
+        }
+    });
+}
+
 module.exports = {
     getInvoices,
     getInvoice,
     addInvoice,
     getCategories,
-    getProducts
+    getProducts,
+    getCorrelative
 };

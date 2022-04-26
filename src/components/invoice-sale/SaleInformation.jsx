@@ -2,8 +2,11 @@ import React, {useState, useEffect} from "react";
 import axios from '../../config/axios';
 import token from '../../helpers/getToken';
 import moment from 'moment'
+import AlertError from "../AlertError";
 
-const SaleInformation = ({user, setUser, client, setClient, setCurrentPage}) => {
+const SaleInformation = ({user, setUser, client, setClient, setCurrentPage, setCorrelativeInvoice, correlativeInvoice }) => {
+
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     if(user.code){
@@ -24,6 +27,18 @@ const SaleInformation = ({user, setUser, client, setClient, setCurrentPage}) => 
     }
   }, [user.code])
 
+  useEffect(() => {
+    axios.get('/correlative', token())
+      .then(res => {
+        const {CORRELATIVO} = res.data[0];
+        if(CORRELATIVO){
+          setCorrelativeInvoice(CORRELATIVO + 1)
+        }else{
+          setCorrelativeInvoice(1)
+        }
+      })
+  }, [])
+
   const handleUser = ({target}) => {
     setUser({
       ...user,
@@ -36,6 +51,30 @@ const SaleInformation = ({user, setUser, client, setClient, setCurrentPage}) => 
       ...client,
       [target.name]: target.value
     })
+  }
+
+  const handleClick = () => {
+    if(user.name === ''){
+      setErrorMessage('Ingrese su código de usuario.');
+
+      setTimeout(() => {
+        setErrorMessage('')
+      }, 3000);
+      
+      return;
+    }
+
+    if(user.name === `Usuario no encontrado`){
+      setErrorMessage('Ingrese un código de usuario válido.');
+
+      setTimeout(() => {
+        setErrorMessage('')
+      }, 3000);
+
+      return;
+    }
+
+    setCurrentPage(2)
   }
 
   return (
@@ -54,6 +93,7 @@ const SaleInformation = ({user, setUser, client, setClient, setCurrentPage}) => 
                 <input
                   className="form-control form-control-sm"
                   type="text"
+                  value={correlativeInvoice}
                   disabled
                 />
               </div>
@@ -70,6 +110,7 @@ const SaleInformation = ({user, setUser, client, setClient, setCurrentPage}) => 
                   type="number"
                   onChange={handleUser}
                   value={user.code}
+                  autoFocus
                   name='code'
                 />
               </div>
@@ -131,10 +172,11 @@ const SaleInformation = ({user, setUser, client, setClient, setCurrentPage}) => 
         </div>
       </div>
       <div className="modal-footer">
-        <button onClick={() => setCurrentPage(2)} className="btn btn-dark">
+        <button onClick={() => handleClick()} className="btn btn-dark">
           <i className="fa-solid fa-chevron-right"></i>
         </button>
       </div>
+      {errorMessage ? <AlertError message={errorMessage}/> : null}
     </div>
   );
 };
