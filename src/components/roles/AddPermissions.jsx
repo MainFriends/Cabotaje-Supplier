@@ -2,10 +2,8 @@ import React, { useState } from 'react'
 import axios from '../../config/axios';
 import token from '../../helpers/getToken';
 
-const AddRoleForm = ({setSendRequest, setMessageError}) => {
-    const [formData, setFormData] = useState({
-        NAM_ROLE: '',
-        DES_ROLE: '',
+const AddPermissions = ({rowCOD, setSendRequestPermissions, setMessageError}) => {
+    const [formDataPermissions, setFormDataPermissions] = useState({
         COD_MODULE: '',
         QUE: 0,
         INS: 0,
@@ -16,19 +14,19 @@ const AddRoleForm = ({setSendRequest, setMessageError}) => {
     const handleInputChange = (e) => {
         if(e.target.name === 'INS' || e.target.name === 'QUE' || e.target.name === 'UPD' || e.target.name === 'DEL'){
             if(e.target.checked){
-                setFormData({
-                    ...formData,
+                setFormDataPermissions({
+                    ...formDataPermissions,
                     [e.target.name]: e.target.value
                 })
             }else{
-                setFormData({
-                    ...formData,
+                setFormDataPermissions({
+                    ...formDataPermissions,
                     [e.target.name]: 0
                 })
             }
         }else{
-            setFormData({
-                ...formData,
+            setFormDataPermissions({
+                ...formDataPermissions,
                 [e.target.name]: e.target.value
             })
         }
@@ -36,12 +34,13 @@ const AddRoleForm = ({setSendRequest, setMessageError}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(rowCOD)
 
-        axios.post('/roles', formData, token())
+        axios.post(`/permissions/${rowCOD}`, formDataPermissions, token())
             .then(res => {
                 e.target.reset();
-                document.querySelector('#idCloseAddRole').click();
-                setSendRequest(true)
+                document.querySelector('#closeModalPermissions').click();
+                setSendRequestPermissions(true);
             })
             .catch(err => {
                 const {message} = err.response.data;
@@ -55,21 +54,9 @@ const AddRoleForm = ({setSendRequest, setMessageError}) => {
 
   return (
     <form onSubmit={handleSubmit} action='#'>
-        <h6 className='text-muted mb-4'>Agregar nuevo rol</h6>
-        <div className="row mb-4">
-            <div className="col-md-5">
-                <label className='form-label'>Nombre del rol</label>
-                <input onChange={handleInputChange} className='form-control' name='NAM_ROLE' type="text" required/>
-            </div>
-            <div className="col-md-7">
-                <label className='form-label'>Descripción del rol</label>
-                <textarea onChange={handleInputChange} className='form-control' rows={2} name='DES_ROLE' type="text" required/>
-            </div>
-        </div>
-        <h6 className='text-muted mb-4'>Otorgar permisos</h6>
         <div className="row">
             <div className="col-6">
-                <select onChange={handleInputChange} defaultValue='' className="custom-select" name='COD_MODULE' required>
+            <select onChange={handleInputChange} defaultValue='' className="custom-select" name='COD_MODULE' required>
                     <option value='' disabled>Seleccionar...</option>
                     <option value="1">Módulo de ventas</option>
                     <option value="2">Módulo de compras</option>
@@ -99,11 +86,11 @@ const AddRoleForm = ({setSendRequest, setMessageError}) => {
         </div>
 
         <div className="modal-footer">
-            <button type="button" id='idCloseAddRole' className="btn btn-primary" data-dismiss="modal">Cerrar</button>
+            <button type="button" id='closeModalPermissions' data-toggle="modal" data-target='#viewModules' className="btn btn-primary" data-dismiss="modal">Atrás</button>
             <button type='submit' className="btn btn-success">Guardar</button>
         </div>
     </form>
   )
 }
 
-export default AddRoleForm
+export default AddPermissions

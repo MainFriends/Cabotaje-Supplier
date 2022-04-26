@@ -1,11 +1,30 @@
+import { useEffect, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
+import axios from '../config/axios';
+import token from '../helpers/getToken';
 
 const SidebarItems = () => {
 
     const {pathname} = useLocation();
+    const [role, setRole] = useState(null);
+    const [permissions, setPermissions] = useState([]);
 
     const handleActive = isActive => {
         return "nav-link" + (isActive && " active");
+    }
+
+    useEffect(() => {
+        axios.get('/user-profile', token())
+            .then(res => setRole(res.data[0].COD_ROLE))
+    }, [])
+
+    useEffect(() => {
+        axios.get('/user-permissions', token())
+        .then(res => setPermissions(res.data))
+    }, [])
+
+    const viewFacturar = () => {
+        return permissions.some(row => row.COD_MODULE === 1);
     }
 
     return (
@@ -17,12 +36,18 @@ const SidebarItems = () => {
                 </NavLink>
             </li>
 
-            <li className={ "nav-item"}>
+            {
+                viewFacturar()
+                ?
+                <li className={ "nav-item"}>
                 <NavLink className='nav-link' to="/facturar">
                     <i className="mr-2 fa-solid fa-cash-register"></i>
                     <span>Facturar</span>
                 </NavLink>
-            </li>
+                </li>
+                :
+                null
+            }
 
             <hr className="sidebar-divider"></hr>
 
@@ -125,11 +150,17 @@ const SidebarItems = () => {
                 Utilidades
             </div>
 
-            <li className={ "nav-item " + (pathname === '/dashboard/roles-permisos' ? "active" : "")}>
-                <NavLink className='nav-link' to="roles-permisos">
-                <i className="mr-2 fa-solid fa-user-lock"></i>
-                <span>Roles y permisos</span></NavLink>
-            </li>
+            {
+                role === 1
+                ?
+                <li className={ "nav-item " + (pathname === '/dashboard/roles-permisos' ? "active" : "")}>
+                    <NavLink className='nav-link' to="roles-permisos">
+                    <i className="mr-2 fa-solid fa-user-lock"></i>
+                    <span>Roles y permisos</span></NavLink>
+                </li>
+                :
+                null
+            }   
 
             <li className={ "nav-item " + (pathname === '/dashboard/graficas' ? "active" : "")}>
                 <NavLink className='nav-link' to="graficas">

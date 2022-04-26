@@ -10,6 +10,8 @@ import {paginationComponentOptions} from '../../../helpers/datatablesOptions';
 import axios from '../../../config/axios';
 import token from '../../../helpers/getToken';
 import AddRoleForm from '../../../components/roles/AddRoleForm';
+import ViewPermissions from '../../../components/roles/ViewPermissions';
+import AddPermissions from '../../../components/roles/AddPermissions';
 
 const Roles = () => {
     const [rows, setRows] = useState([]);
@@ -17,11 +19,18 @@ const Roles = () => {
     const [loading, setLoading] = useState(true);
     const [messageError, setMessageError] = useState('');
     const [sendRequest, setSendRequest] = useState(false);
+    const [sendRequestPermissions, setSendRequestPermissions] = useState(false);
+    const [rowCOD, setRowCOD] = useState(null);
     
     //definir las columnas
     const columns = [
         {
-            name: 'NOMBRE',
+            name: 'CÓDIGO',
+            selector: row => row.COD_ROLE,
+            sortable: true,
+        },
+        {
+            name: 'ROL',
             selector: row => row.NAM_ROLE,
             sortable: true,
         },
@@ -32,40 +41,11 @@ const Roles = () => {
             wrap:true
         },
         {
-            name: 'MÓDULO',
-            selector: row => row.NAM_MODULE,
-            sortable: true,
-        },
-        {
-            name: 'LECTURA',
-            selector: row => row.QUE,
-            sortable: true,
-            format: row => (row.QUE ? <i class="fa-solid fa-check"></i> : <i class="fa-solid fa-ban"></i>)
-        },
-        {
-            name: 'INSERTAR',
-            selector: row => row.INS,
-            sortable: true,
-            format: row => (row.INS ? <i class="fa-solid fa-check"></i> : <i class="fa-solid fa-ban"></i>)
-        },
-        {
-            name: 'ACTUALIZAR',
-            selector: row => row.UPD,
-            sortable: true,
-            format: row => (row.UPD ? <i class="fa-solid fa-check"></i> : <i class="fa-solid fa-ban"></i>)
-        },
-        {
-            name: 'ELIMINAR',
-            selector: row => row.DEL,
-            sortable: true,
-            format: row => (row.DEL ? <i class="fa-solid fa-check"></i> : <i class="fa-solid fa-ban"></i>)
-        },
-        {
             name: 'ACCIONES',
             button: true,
             cell: row => <>
-                <button className='btn btn-sm btn-warning mr-1' data-toggle="modal" data-target='#'><i className="fa-solid fa-pen-to-square"></i></button>
-                <button onClick={() => handleDelete(row.COD_ROLE)} className='btn btn-sm btn-danger'><i className="fa-solid fa-trash"></i></button>
+                <button onClick={() => setRowCOD(row.COD_ROLE)} className='btn btn-sm btn-primary mr-1' data-toggle="modal" data-target='#viewModules'><i className="fa-solid fa-eye"></i></button>
+                <button onClick={() => handleDelete(row.COD_ROLE)} className={'btn btn-sm btn-danger ' + ((row.COD_ROLE === 1 || row.COD_ROLE === 2) && 'disabled')}><i className="fa-solid fa-trash"></i></button>
             </>
         }
     ];
@@ -83,25 +63,15 @@ const Roles = () => {
     useEffect(() => {
         axios.get('/roles', token())
             .then(res => {
-                const admin = {
-                    NAM_ROLE: res.data[0].NAM_ROLE,
-                    DES_ROLE: res.data[0].DES_ROLE,
-                    NAM_MODULE: 'Todos',
-                    INS: 1,
-                    QUE: 1,
-                    UPD: 1,
-                    DEL: 1
-                }
-                const rolesDatabase = res.data.filter(row => row.COD_ROLE != 1 && (row));
-                const roles = [admin, ...rolesDatabase]
-                setRows(roles);
+                setRows(res.data);
                 setLoading(false);
                 setSendRequest(false);
             })
     }, [sendRequest])
 
     const handleDelete = (cod) => {
-        
+        axios.delete(`/roles/${cod}`, token())
+            .then(res => setSendRequest(true))
     }
 
     return (
@@ -138,6 +108,28 @@ const Roles = () => {
                         messageError={messageError}
                         content={<AddRoleForm setSendRequest={setSendRequest} setMessageError={setMessageError}/>}
                     />
+
+                    <Modal 
+                        idModal='viewModules'
+                        title='Permisos'
+                        content={<ViewPermissions 
+                            rowCOD={rowCOD} 
+                            sendRequestPermissions={sendRequestPermissions}
+                            setSendRequestPermissions={setSendRequestPermissions}
+                        />}
+                        modalSize='xl'
+                    />
+
+                    <Modal 
+                        idModal='addPermissions'
+                        title='Agregar permisos'
+                        messageError={messageError}
+                        content={<AddPermissions 
+                            rowCOD={rowCOD}
+                            setSendRequestPermissions={setSendRequestPermissions}
+                            setMessageError={setMessageError}
+                        />}
+                    />  
                 </div>
             </div> 
     )
