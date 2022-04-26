@@ -3,17 +3,17 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfUk9MRSI6MSwiRklSU1RfTkFNRSI6IlBlZHJvIiwiTEFTVF9OQU1FIjoiU2FuY2hleiIsImlhdCI6MTY0NzM5MDI1M30.cn1xro2BAtDzbgoNloL6o2j9sQpY4UI41kOH3mZ-_Q8
 
 {
-    "IDENTITY": "0801199902538",
-    "FIRST_NAME": "Luis",
+    "IDENTITY": "0801199902531",
+    "FIRST_NAME": "Mendel",
     "MIDDLE_NAME": "Eduardo",
-    "LAST_NAME": "Garcia",
+    "LAST_NAME": "Aguilar",
     "GENDER": "M",
     "NUM_PHONE_ONE": 88795933,
     "NUM_PHONE_REFERENCE": 78451211,
     "DAT_BIRTHDAY": "1998-02-12",
     "NAM_CITY": "Tegucigalpa",
     "ADDRESS": "Res. Plaza",
-    "COD_ROLE": 1,
-    "USER_EMAIL": "luis@hotmail.com",
+    "COD_ROLE": 6,
+    "USER_EMAIL": "mendel@hotmail.com",
     "USER_PASSWORD": "Hook23"
 }

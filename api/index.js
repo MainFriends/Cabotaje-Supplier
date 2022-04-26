@@ -39,6 +39,8 @@ const userSession = require('./routes/userSession')
 const userProfile = require('./routes/userProfile')
 //tablas parametricas
 const parametricTables = require('./routes/parametricTables')
+//roles y permisos
+const rolesAndPermissions = require('./routes/rolesAndPermissions');
 
 /* CREAR SERVIDOR */
 const app = express();
@@ -85,6 +87,8 @@ app.use('/api', userSession)
 app.use('/api', userProfile)
 //tablas parametricas
 app.use('/api', parametricTables)
+// roles y permisos
+app.use('/api', rolesAndPermissions)
 
 /* ASIGNAR PUERTO Y LEVANTAR SERVIDOR */
 const port = process.env.PORT;

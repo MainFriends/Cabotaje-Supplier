@@ -52,7 +52,7 @@ const EditProductForm = ({sendRequest, rowCOD, setSendRequest, setMessageError})
             axios.get(`/inventory/${rowCOD}`, token())
                 .then(res => {
                     setFormDataEdit(res.data[0])
-                    if(res.data[0].WHOLESALE_CANT > 0){
+                    if(res.data[0]?.WHOLESALE_CANT > 0){
                         setBtnWhosaleEdit(true)
                     }else{
                         setBtnWhosaleEdit(false)
