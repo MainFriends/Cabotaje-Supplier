@@ -68,7 +68,7 @@ const addUser = async (req, res) => {
     ], (err) => {
         if(err){
             const message = err.message.split(': ')[1];
-            res.status(400).send({message:'el Usuario ya existe,  verifique su informacion'});
+            res.status(400).send({message});
         }else{
             res.status(201).send({message: 'El usuario ha sido creado correctamente.'});
         }

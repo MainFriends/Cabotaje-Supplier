@@ -47,11 +47,11 @@ const AddClientForm = ({setSendRequest, setMessageError}) => {
             <div className="row mb-4">
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="FIRST_NAME">Nombre</label>
-                    <input onChange={handleInputChange} className='form-control' name='FIRST_NAME' type="text " onInput={toUpperCase}  required/>
+                    <input onChange={handleInputChange} className='form-control' name='FIRST_NAME' type="text " pattern="[A-Z]{1}[a-z]{2,15}" onInput={toUpperCase}  required/>
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="LAST_NAME">Apellido</label>
-                    <input onChange={handleInputChange} className='form-control' name='LAST_NAME' type="text" onInput={toUpperCase} required/>
+                    <input onChange={handleInputChange} className='form-control' name='LAST_NAME' type="text" pattern="[A-Z]{1}[a-z]{2,15}"  onInput={toUpperCase} required/>
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="IDENTITY">Identidad</label>

@@ -106,7 +106,7 @@ const EditUserForm = ({rowCOD, setSendRequest, setMessageError}) => {
             
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="NAM_CITY">Ciudad</label>
-                    <input onChange={handleInputChange.DAT_BIRTHDAY} value={formEditUser.NAM_CITY} className='form-control' name='NAM_CITY'   type="text" pattern="[A-Z]{1}[a-z]{1,20}"  placeholder="Domicilio" onInput={toUpperCase} required/>
+                    <input onChange={handleInputChange.DAT_BIRTHDAY} value={formEditUser.NAM_CITY} className='form-control' name='NAM_CITY'   type="text" onInput={toUpperCase} pattern="[A-Z]{1}[a-z]{1,20}"  placeholder="Domicilio"  required/>
                 </div>
                 <div className="col-md-8 mt-1">
                     <label className='form-label' htmlFor="ADDRESS">Dirección</label>

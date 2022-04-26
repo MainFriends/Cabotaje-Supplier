@@ -59,15 +59,15 @@ const AddUserForm = ({setSendRequest, setMessageError}) => {
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="FIRST_NAME">Nombre</label>
-                    <input onChange={handleInputChange}  className='form-control'  name='FIRST_NAME' type="text" pattern="[A-Z]{1}[a-z]{2,15}" title="La primera letra debe ser MAYUSCULA" placeholder="Ingrese Nombre" onInput={toUpperCase} required/>
+                    <input onChange={handleInputChange}  className='form-control'  name='FIRST_NAME' type="text" pattern="[A-Z]{1}[a-z]{2,30}"  placeholder="Ingrese Nombre" onInput={toUpperCase} required/>
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="MIDDLE_NAME">Segundo Nombre</label>
-                    <input onChange={handleInputChange} className='form-control' name='MIDDLE_NAME' type="text" pattern="[A-Z]{1}[a-z]{1,15}" title="La primera letra debe ser MAYUSCULA" placeholder="Ingrese segundo Nombre"  min={0} onInput={toUpperCase} required/>
+                    <input onChange={handleInputChange} className='form-control' name='MIDDLE_NAME' type="text" pattern="[A-Z]{1}[a-z]{1,15}"  placeholder="Ingrese segundo Nombre"   onInput={toUpperCase} required/>
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="LAST_NAME">Apellido</label>
-                    <input onChange={handleInputChange} className='form-control' name='LAST_NAME'  type="text" pattern="[A-Z]{1}[a-z]{1,15}" title="La primera letra debe ser MAYUSCULA" placeholder="Ingrese Apellido"  onInput={toUpperCase} required/>
+                    <input onChange={handleInputChange} className='form-control' name='LAST_NAME'  type="text" pattern="[A-Z]{1}[a-z]{1,15}" placeholder="Ingrese Apellido"  onInput={toUpperCase} required/>
                 </div>
 
                 <div className="col-md-4">
