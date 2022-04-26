@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from '../../config/axios';
 import token from '../../helpers/getToken';
-import { toUpperCase } from "../../helpers/Mayusuclas";
+import { toUpperCase } from "../../helpers/Mayusculas";
 
 const EditClientForm = ({rowCOD, setSendRequest, setMessageError}) => {
 
@@ -51,11 +51,11 @@ const EditClientForm = ({rowCOD, setSendRequest, setMessageError}) => {
             <div className="row mb-4">
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="FIRST_NAME">Nombre</label>
-                    <input onChange={handleInputChange} value={formEditClient.FIRST_NAME} className='form-control' name='FIRST_NAME' type="text" onInput={toUpperCase} required/>
+                    <input onChange={handleInputChange} value={formEditClient.FIRST_NAME} className='form-control' name='FIRST_NAME' type="text" pattern="[A-Z]{1}[a-z]{2,15}" onInput={toUpperCase} required/>
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="LAST_NAME">Apellido</label>
-                    <input onChange={handleInputChange} value={formEditClient.LAST_NAME} className='form-control' name='LAST_NAME' type="text"  onInput={toUpperCase}required/>
+                    <input onChange={handleInputChange} value={formEditClient.LAST_NAME} className='form-control' name='LAST_NAME' type="text" pattern="[A-Z]{1}[a-z]{2,15}" onInput={toUpperCase}required/>
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="IDENTITY">Identidad</label>
