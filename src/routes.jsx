@@ -66,9 +66,11 @@ const Pages = () => {
     }, [isLogged])
 
     useEffect(() => {
-        axios.get('/user-profile', token())
+        if(isLogged){
+            axios.get('/user-profile', token())
             .then(res => setUserRole(res.data[0].COD_ROLE))
-    }, [])
+        }
+    }, [isLogged])
 
     return (
     <Routes>
