@@ -1,6 +1,7 @@
 import { useEffect,useState } from "react";
 import axios from '../../config/axios';
 import token from '../../helpers/getToken';
+import { toUpperCase } from "../../helpers/Mayusculas";
 
 const EditSupplierForm = ({rowCOD, setSendRequest, setMessageError}) => {
 
@@ -50,41 +51,41 @@ const EditSupplierForm = ({rowCOD, setSendRequest, setMessageError}) => {
         <div className="row mb-4">
             <div className="col-md-4">
                 <label className='form-label' htmlFor="NAM_SUPPLIER">Nombre del Proveedor</label>
-                <input onChange={handleInputChange} value={formEditSupplier.NAM_SUPPLIER} className='form-control' name='FIRST_NAME' type="text" required/>
+                <input onChange={handleInputChange} value={formEditSupplier.NAM_SUPPLIER} className='form-control' name='FIRST_NAME' type="text" onInput={toUpperCase} required/>
             </div>
             <div className="col-md-4">
                 <label className='form-label' htmlFor="NAM_CONTACT">Nombre del Contacto</label>
-                <input onChange={handleInputChange} value={formEditSupplier.NAM_CONTACT} className='form-control' name='NAM_CONTACT' type="text" required/>
+                <input onChange={handleInputChange} value={formEditSupplier.NAM_CONTACT} className='form-control' name='NAM_CONTACT' type="text" onInput={toUpperCase} required/>
             </div>
             <div className="col-md-4">
                 <label className='form-label' htmlFor="LAST_NAM_CONTACT">Apellido del contacto</label>
-                <input onChange={handleInputChange} value={formEditSupplier.NUM_PHONE_ONE} className='form-control' name='LAST_NAM_CONTACT' type="Text" required/>
+                <input onChange={handleInputChange} value={formEditSupplier.NUM_PHONE_ONE} className='form-control'  name='LAST_NAM_CONTACT' type="Text" onInput={toUpperCase} required/>
             </div>
             <div className="col-md-4 mt-2">
                 <label className='form-label' htmlFor="ADDRESS">Dirección</label>
-                <textarea onChange={handleInputChange} value={formEditSupplier.ADDRESS} className='form-control' name='ADDRESS'  rows='3' cols='4' type="text" required/>
+                <textarea onChange={handleInputChange} value={formEditSupplier.ADDRESS} className='form-control' name='ADDRESS'  rows='3' cols='4' type="text" onInput={toUpperCase} required/>
             </div>
             <div className="col-md-4">
                 <label className='form-label' htmlFor="NUM_PHONE_ONE">Teléfono 1</label>
-                <input onChange={handleInputChange} value={formEditSupplier.NUM_PHONE_ONE} className='form-control' name='NUM_PHONE_ONE' type="number" required/>
+                <input onChange={handleInputChange} value={formEditSupplier.NUM_PHONE_ONE} className='form-control' name='NUM_PHONE_ONE' type="tel" pattern="[0-9]{8}" placeholder="####-####"   minLength={8} maxLength={8} title="El numero telfono debe contener 8 caracteres" required/>
             </div>
             <div className="col-md-4">
                 <label className='form-label' htmlFor="NUM_PHONE_TWO">Teléfono 2</label>
-                <input onChange={handleInputChange} value={formEditSupplier.NUM_PHONE_TWO} className='form-control' name='NUM_PHONE_TWO' type="number" required/>
+                <input onChange={handleInputChange} value={formEditSupplier.NUM_PHONE_TWO} className='form-control' name='NUM_PHONE_TWO'  type="tel"  pattern="[0-9]{1,8}" placeholder="####-####" title="OPCIONAL"  min={0} maxLength={8} required/>
             </div>
             <div className="col-md-4">
                 <label className='form-label' htmlFor="EMAIL">Correo Electronico</label>
-                <input onChange={handleInputChange} value={formEditSupplier.EMAIL} className='form-control' name='EMAIL' type="Text" required/>
+                <input onChange={handleInputChange} value={formEditSupplier.EMAIL} className='form-control' name='EMAIL' type="email" required/>
             </div>
             
             <div className="col-md-4">
                 <label className='form-label' htmlFor="NAM_CITY">Ciudad</label>
-                <input onChange={handleInputChange} value={formEditSupplier.NAM_CITY} className='form-control' name='NAM_CITY' type="text" required/>
+                <input onChange={handleInputChange} value={formEditSupplier.NAM_CITY} className='form-control' name='NAM_CITY' type="text" onInput={toUpperCase} required/>
             </div>
          
             <div className="col-md-2">
                 <label className='form-label' htmlFor="ZIP_CODE">CP</label>
-                <input onChange={handleInputChange} value={formEditSupplier.ZIP_CODE} className='form-control' name='ZIP_CODE' type="number" required/>
+                <input onChange={handleInputChange} value={formEditSupplier.ZIP_CODE} className='form-control' name='ZIP_CODE' type="text" minLength={5} maxLength={7} required/>
             </div>
 
         </div>

@@ -68,7 +68,7 @@ const addUser = async (req, res) => {
     ], (err) => {
         if(err){
             const message = err.message.split(': ')[1];
-            res.status(400).send({message});
+            res.status(400).send({message:'el Usuario ya existe,  verifique su informacion'});
         }else{
             res.status(201).send({message: 'El usuario ha sido creado correctamente.'});
         }
@@ -120,7 +120,7 @@ const updateUser = (req, res) => {
         ], (err) => {
             if(err){
                 const message = err.message.split(': ')[1];
-                res.status(400).send({message});
+                res.status(400).send({message:'El usuario no pudo ser modificado, verifique su informacion'});
             }else{
                 res.status(200).send({message: 'El usuario ha sido modificado.'});
             }

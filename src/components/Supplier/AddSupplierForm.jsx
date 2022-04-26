@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from '../../config/axios';
 import token from '../../helpers/getToken';
+import { toUpperCase } from "../../helpers/Mayusculas";
 
 const AddSupplierForm = ({setSendRequest, setMessageError}) => {
 
@@ -46,39 +47,39 @@ const AddSupplierForm = ({setSendRequest, setMessageError}) => {
             <div className="row mb-4">
             <div className="col-md-4">
                     <label className='form-label' htmlFor="NAM_CONTACT ">Nombre del Proveedor</label>
-                    <input onChange={handleInputChange} className='form-control' name='NAM_SUPPLIER' type="text" required/>
+                    <input onChange={handleInputChange} className='form-control' name='NAM_SUPPLIER' type="text" onInput={toUpperCase}required/>
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="NAM_CONTACT ">Nombre del contacto</label>
-                    <input onChange={handleInputChange} className='form-control' name='NAM_CONTACT' type="text" required/>
+                    <input onChange={handleInputChange} className='form-control' name='NAM_CONTACT' type="text" onInput={toUpperCase} required/>
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="LAST_NAM_CONTACT">Apellido del contacto</label>
-                    <input onChange={handleInputChange} className='form-control' name='LAST_NAM_CONTACT' type="text" required/>
+                    <input onChange={handleInputChange} className='form-control' name='LAST_NAM_CONTACT' type="text" onInput={toUpperCase} required/>
                 </div>
                 <div className="col-md-4 mt-2">
                     <label className='form-label' htmlFor="ADDRESS">Dirección</label>
-                    <textarea onChange={handleInputChange} className='form-control' name='ADDRESS'  rows='3' cols='4' type="text" required/>
+                    <textarea onChange={handleInputChange} className='form-control' name='ADDRESS'  rows='3' cols='4' type="text" onInput={toUpperCase} required/>
                 </div>           
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="NUM_PHONE_ONE">Teléfono 1</label>
-                    <input onChange={handleInputChange} className='form-control' name='NUM_PHONE_ONE' type="number" required/>
+                    <input onChange={handleInputChange} className='form-control' name='NUM_PHONE_ONE' type="tel"  pattern="[0-9]{8}" placeholder="####-####"   minLength={8} maxLength={8} title="El numero telfonico debe contener 8 caracteres" required/>
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="NUM_PHONE_TWO">Teléfono 2</label>
-                    <input onChange={handleInputChange} className='form-control' name='NUM_PHONE_TWO' type="number" required/>
+                    <input onChange={handleInputChange} className='form-control' name='NUM_PHONE_TWO' type="tel"  pattern="[0-9]{1,8}" placeholder="####-####" title="OPCIONAL"  min={0} maxLength={8} required/>
                 </div>  
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="EMAIL">Correo Electronico</label>
-                    <input onChange={handleInputChange} className='form-control' name='EMAIL' type="text" required/>
+                    <input onChange={handleInputChange} className='form-control' name='EMAIL' type="email" required/>
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="NAM_CITY">Ciudad</label>
-                    <input onChange={handleInputChange} className='form-control' name='NAM_CITY' type="text" required/>
+                    <input onChange={handleInputChange} className='form-control' name='NAM_CITY' type="text" onInput={toUpperCase} required/>
                 </div>
                 <div className="col-md-2">
                     <label className='form-label' htmlFor="ZIP_CODE">CP</label>
-                    <input   onChange={handleInputChange} className='form-control' name='ZIP_CODE' type="text" required/>
+                    <input   onChange={handleInputChange} className='form-control' name='ZIP_CODE' type="text" minLength={5} maxLength={7} required/>
                 </div>
             </div>
                
