@@ -135,7 +135,7 @@ const Devoluciones = () => {
                         idModal='addSalesReturn'
                         title='Agregar Devolución'
                         messageError={messageError}
-                        content={<AddSalesReturn setSendRequest={setSendRequest} />}
+                        content={<AddSalesReturn setSendRequest={setSendRequest} setMessageError={setMessageError} />}
                     />
                     <Modal 
                         idModal='editSalesReturn'

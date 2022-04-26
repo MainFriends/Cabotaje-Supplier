@@ -40,7 +40,8 @@ const addAccPay = (req, res) => {
         DATE_LIMIT
     ],(err) => {
         if(err) {
-            res.status(500).send({message: err.message});
+            const message = err.message.split(': ')[1];
+            res.status(500).send({message});
         }else{
             res.status(201).send({message: 'La cuenta por pagar se ha añadido correctamente'});
         }

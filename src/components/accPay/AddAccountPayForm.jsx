@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "../../config/axios";
 import token from "../../helpers/getToken";
 
-const AddAccountPayForm = ({setSendRequest}) => {
+const AddAccountPayForm = ({setSendRequest, setMessageError}) => {
     const [formAddAccountPay, setFormAddAccountPay] = useState({
         COD_INVOICE: '',
         DESCRIPTION: '',
@@ -24,6 +24,13 @@ const AddAccountPayForm = ({setSendRequest}) => {
                document.querySelector('#idCloseAddAccountPayForm').click();
                e.target.reset()
                setSendRequest(true);
+           })
+           .catch(err => {
+               const {message} = err.response.data
+               setMessageError(message);
+               setTimeout(() => {
+                   setMessageError('')
+               }, 3000);
            })
     }
 

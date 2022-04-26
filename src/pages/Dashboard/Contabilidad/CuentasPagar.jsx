@@ -138,7 +138,7 @@ const CuentasPagar = () => {
                         idModal='addAccountPay'
                         title='Agregar Cuenta por Pagar'
                         messageError={messageError}
-                        content={<AddAccountPayForm setSendRequest={setSendRequest} />}
+                        content={<AddAccountPayForm setSendRequest={setSendRequest} setMessageError={setMessageError} />}
                     />
                     <Modal 
                         idModal='editAccountPay'

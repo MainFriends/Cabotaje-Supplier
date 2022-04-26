@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "../../config/axios";
 import token from "../../helpers/getToken";
 
-const AddSalesReturn = ({setSendRequest}) => {
+const AddSalesReturn = ({setSendRequest, setMessageError}) => {
     const [formAddSalesReturn, setFormAddSalesReturn] = useState({
         COD_PRODUCT: '',
         CANT: 0,
@@ -25,6 +25,13 @@ const AddSalesReturn = ({setSendRequest}) => {
                 document.querySelector('#idCloseAddSalesReturn').click();
                 e.target.reset();
                 setSendRequest(true);
+            })
+            .catch(err => {
+                const {message} = err.response.data;
+                setMessageError(message);
+                setTimeout(() => {
+                    setMessageError('');
+                }, 3000);
             })
     }
 
