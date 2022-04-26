@@ -6,6 +6,19 @@ import SaleInformation from '../../../components/invoice-sale/SaleInformation'
 const Facturar = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [correlativeInvoice, setCorrelativeInvoice] = useState('');
+  const [saleInvoice, setsaleInvoice] = useState({
+    COD_CLIENT: '',
+    NAM_CLIENT: 'CF',
+    COD_USER: '', 
+    NAM_USER: '',
+    SUBTOTAL: 0,
+    TOT_DISCOUNT: 0,
+    TOT_ISV: 0,
+    TOT_SALE: 0,
+    TYP_TO_SALE: '',
+    COD_TYP_PAY: '',
+    RTN: 0
+  })
   const [user, setUser] = useState({
     code: '',
     name: ''
@@ -21,20 +34,16 @@ const Facturar = () => {
         <div className="col-12">
           {currentPage === 1 && 
           <SaleInformation 
-          user={user} 
-          setUser={setUser} 
-          client={client} 
-          setClient={setClient} 
+          setsaleInvoice={setsaleInvoice} 
+          saleInvoice={saleInvoice}
           setCurrentPage={setCurrentPage}
           setCorrelativeInvoice={setCorrelativeInvoice}
           correlativeInvoice={correlativeInvoice}
           />}
           {currentPage === 2 && 
           <ProductsList 
-          user={user} 
-          setUser={setUser} 
-          client={client} 
-          setClient={setClient} 
+          saleInvoice={saleInvoice}
+          setsaleInvoice={setsaleInvoice}
           setCurrentPage={setCurrentPage}
           correlativeInvoice={correlativeInvoice}
           />}

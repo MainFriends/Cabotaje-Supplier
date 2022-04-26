@@ -18,8 +18,6 @@ const Inventory = ({productListSale, setproductListSale}) => {
         NAM_TYPE_PRODUCT: ''
     });
 
-    console.log(selectProduct)
-
     const {
         COD_PRODUCT,
         NAM_PRODUCT,
@@ -135,7 +133,7 @@ const Inventory = ({productListSale, setproductListSale}) => {
                         </div>
                     </div>
                     <div className="modal-footer mt-3 px-0">
-                        <button data-dismiss="modal" onClick={() => addProduct()} className={'btn btn-secondary btn-block mx-0 ' + (cant < 1 ? ' disabled' : '')}>Agregar</button>
+                        <button data-dismiss="modal" onClick={() => addProduct()} className={'btn btn-primary btn-block mx-0 ' + (cant < 1 ? ' disabled' : '')}>Agregar</button>
                     </div>
                 </div>
                 :

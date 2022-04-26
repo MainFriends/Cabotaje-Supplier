@@ -4,28 +4,28 @@ import token from '../../helpers/getToken';
 import moment from 'moment'
 import AlertError from "../AlertError";
 
-const SaleInformation = ({user, setUser, client, setClient, setCurrentPage, setCorrelativeInvoice, correlativeInvoice }) => {
+const SaleInformation = ({setsaleInvoice, saleInvoice, setCurrentPage, setCorrelativeInvoice, correlativeInvoice }) => {
 
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
-    if(user.code){
-      axios.get(`/user/${user.code}`, token())
+    if(saleInvoice.COD_USER){
+      axios.get(`/user/${saleInvoice.COD_USER}`, token())
         .then(res => {
           const {FIRST_NAME, LAST_NAME} = res.data[0];
-          setUser({
-            ...user,
-            name: `${FIRST_NAME} ${LAST_NAME}`
+          setsaleInvoice({
+            ...saleInvoice,
+            NAM_USER: `${FIRST_NAME} ${LAST_NAME}`
           })
         })
         .catch(err => {
-          setUser({
-            ...user,
-            name: `Usuario no encontrado`
+          setsaleInvoice({
+            ...saleInvoice,
+            NAM_USER: `Usuario no encontrado`
           })
         })
     }
-  }, [user.code])
+  }, [saleInvoice.COD_USER])
 
   useEffect(() => {
     axios.get('/correlative', token())
@@ -39,22 +39,15 @@ const SaleInformation = ({user, setUser, client, setClient, setCurrentPage, setC
       })
   }, [])
 
-  const handleUser = ({target}) => {
-    setUser({
-      ...user,
-      code: target.value
-    })
-  }
-  
-  const handleClient = ({target}) => {
-    setClient({
-      ...client,
+  const handleInputChange = ({target}) => {
+    setsaleInvoice({
+      ...saleInvoice,
       [target.name]: target.value
     })
   }
 
   const handleClick = () => {
-    if(user.name === ''){
+    if(saleInvoice.NAM_USER === ''){
       setErrorMessage('Ingrese su código de usuario.');
 
       setTimeout(() => {
@@ -64,7 +57,7 @@ const SaleInformation = ({user, setUser, client, setClient, setCurrentPage, setC
       return;
     }
 
-    if(user.name === `Usuario no encontrado`){
+    if(saleInvoice.NAM_USER === `Usuario no encontrado`){
       setErrorMessage('Ingrese un código de usuario válido.');
 
       setTimeout(() => {
@@ -108,10 +101,10 @@ const SaleInformation = ({user, setUser, client, setClient, setCurrentPage, setC
                 <input
                   className="form-control form-control form-control-sm"
                   type="number"
-                  onChange={handleUser}
-                  value={user.code}
+                  onChange={handleInputChange}
+                  value={saleInvoice.COD_USER}
                   autoFocus
-                  name='code'
+                  name='COD_USER'
                 />
               </div>
               <div className="col-6">
@@ -119,7 +112,7 @@ const SaleInformation = ({user, setUser, client, setClient, setCurrentPage, setC
                   className="form-control form-control form-control-sm"
                   type="text"
                   disabled
-                  value={user.name}
+                  value={saleInvoice.NAM_USER}
                 />
               </div>
             </div>
@@ -148,11 +141,11 @@ const SaleInformation = ({user, setUser, client, setClient, setCurrentPage, setC
           </div>
           <div className="col-4">
             <input 
-            onChange={handleClient}
+            onChange={handleInputChange}
             className="form-control form-control" 
             type="text" 
-            value={client.name}
-            name='name'
+            value={saleInvoice.NAM_CLIENT}
+            name='NAM_CLIENT'
             />
           </div>
         </div>
@@ -162,10 +155,10 @@ const SaleInformation = ({user, setUser, client, setClient, setCurrentPage, setC
           </div>
           <div className="col-4">
             <input 
-            onChange={handleClient}
+            onChange={handleInputChange}
             className="form-control form-control" 
             type="number" 
-            value={client.RTN}
+            value={saleInvoice.RTN}
             name='RTN'
             />
           </div>

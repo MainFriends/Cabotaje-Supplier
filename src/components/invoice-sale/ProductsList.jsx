@@ -1,32 +1,46 @@
 import React from 'react'
 import DataTable from 'react-data-table-component';
-import { useState } from 'react/cjs/react.development';
+import { useEffect, useState } from 'react/cjs/react.development';
 import Modal from '../Modal';
 import Inventory from './Inventory';
 
-const ProductsList = ({user, client, setCurrentPage, correlativeInvoice}) => {
+const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeInvoice}) => {
 
     const [productListSale, setproductListSale] = useState([]);
 
+    useEffect(() => {
+        console.log(productListSale)
+        setsaleInvoice({
+            ...saleInvoice,
+            SUBTOTAL: productListSale.reduce((prev, current) => prev.PRECIO + current.PRECIO, 0)
+        })
+    }, [productListSale]);
+
+    
+    const {
+        SUBTOTAL
+    } = saleInvoice;
     const columns = [
         {
-            name: 'Código',
+            name: 'CÓDIGO',
             selector: row => row.COD_PRODUCT,
         },
         {   
-            name: 'Producto',
+            name: 'PRODUCTO',
             selector: row => row.NAM_PRODUCT,
+            wrap: true
         },
         {
-            name: 'Descripción',
+            name: 'DESCRIPCIÓN',
             selector: row => row.DES_PRODUCT,
+            wrap: true
         },
         {
-            name: 'Cantidad',
+            name: 'CANTIDAD',
             selector: row => row.CANT_PRODUCT,
         },
         {
-            name: 'Precio',
+            name: 'PRECIO',
             selector: row => row.PRICE,
             format: row => `L ${row.PRICE.toFixed(2)}`
         },
@@ -36,12 +50,12 @@ const ProductsList = ({user, client, setCurrentPage, correlativeInvoice}) => {
             format: row => `L ${row.ISV.toFixed(2)}`
         },
         {
-            name: 'Total',
+            name: 'TOTAL',
             selector: row => row.TOTAL,
             format: row => `L ${row.TOTAL.toFixed(2)}`
         },
         {
-            name: 'Eliminar',
+            name: 'ELIMINAR',
             button: true,
             cell: row => <>
                 <button className='btn btn-sm btn-danger' onClick={() => handleDelete(row.COD_PRODUCT)}><i className="fa-solid fa-trash"></i></button>
@@ -77,7 +91,7 @@ const ProductsList = ({user, client, setCurrentPage, correlativeInvoice}) => {
                     type="text" 
                     className="form-control form-control-sm" 
                     disabled
-                    value={user.name}
+                    value={saleInvoice.NAM_USER}
                     />
                 </div>
                 <label className="col-sm-1 col-form-label pr-0">Cliente</label>
@@ -86,7 +100,7 @@ const ProductsList = ({user, client, setCurrentPage, correlativeInvoice}) => {
                     type="text" 
                     className="form-control form-control-sm" 
                     disabled
-                    value={client.name}
+                    value={saleInvoice.NAM_CLIENT}
                     />
                 </div>
             </div>
@@ -97,7 +111,7 @@ const ProductsList = ({user, client, setCurrentPage, correlativeInvoice}) => {
                 <h6 className='ml-2'>Productos</h6>
             </div>
             <div className="col-6 text-right">
-                <div className="btn btn-success mr-3" data-toggle="modal" data-target='#sale-inventory'><i className="fa-solid fa-plus"></i></div>
+                <button autoFocus className="btn btn-success mr-3" data-toggle="modal" data-target='#sale-inventory'><i className="fa-solid fa-plus"></i></button>
             </div>
         </div>
         <DataTable
@@ -125,7 +139,7 @@ const ProductsList = ({user, client, setCurrentPage, correlativeInvoice}) => {
                 <h4>Total</h4>
             </div>
             <div className="col-2">
-                <h6>L. 0.00</h6>
+                <h6>{SUBTOTAL}</h6>
                 <h6>L. 0.00</h6>
                 <h6>L. 0.00</h6>
                 <h4>L. 0.00</h4>
