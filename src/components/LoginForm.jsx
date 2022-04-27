@@ -19,7 +19,7 @@ const LoginForm = ({setFormLogin, handleLoginSubmit, errorMessage}) => {
                                             <div className="form-group">
                                                 <input onChange={setFormLogin} type="email" className="form-control form-control-user"
                                                     name="EMAIL"
-                                                    placeholder="Correo electrónico o código de empleado" required>
+                                                    placeholder="Correo electrónico" required>
                                                 </input>
                                             </div>
                                             <div className="form-group">

@@ -1,19 +1,18 @@
-POST http://localhost:4002/api/user
+POST http://localhost:4000/api/user
 Content-Type: application/json
-Authorization: BearereyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfVVNFUiI6MywiQ09EX1JPTEUiOjMsIkZJUlNUX05BTUUiOiJNZW5kZWwiLCJMQVNUX05BTUUiOiJBZ3VpbGFyIiwiaWF0IjoxNjUwMjIwMDA3LCJleHAiOjE2NTAyNzQwMDd9.CfbUrIKPANSKIFvS9rDu8WTgdh9W2FHK1D_vhqa_NVM
 
 {
     "IDENTITY": "0801199902531",
-    "FIRST_NAME": "Mendel",
+    "FIRST_NAME": "Luis",
     "MIDDLE_NAME": "Eduardo",
-    "LAST_NAME": "Aguilar",
+    "LAST_NAME": "Eduardo",
     "GENDER": "M",
     "NUM_PHONE_ONE": 31511888,
-    "NUM_PHONE_REFERENCE": 22301972,
+    "NUM_REFERENCE": 22301972,
     "DAT_BIRTHDAY": "1999-07-05",
     "NAM_CITY": "Tegucigalpa",
     "ADDRESS": "Res. Plaza",
-    "COD_ROLE": 6,
-    "USER_EMAIL": "mendel@hotmail.com",
+    "COD_ROLE": 1,
+    "USER_EMAIL": "luis@hotmail.com",
     "USER_PASSWORD": "Hook23"
 }

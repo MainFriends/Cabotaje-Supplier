@@ -126,7 +126,7 @@ const EditUserForm = ({rowCOD, setSendRequest, setMessageError}) => {
                     <div className="col-md-4 mt-2">
                         <label className="form-label" htmlFor="COD_ROLE">Rol</label>
                         <select onChange={handleInputChange} value={formEditUser.COD_ROLE} className="form-control" name="COD_ROLE" type="text" required>
-                        <option value=''>-seleccionar-</option> 
+                        <option value=''>-Seleccionar-</option> 
                         {rolesEdit.map(rol => {
                             return <option key={rol.COD_ROLE} value={rol.COD_ROLE}>{rol.NAM_ROLE}</option>
                         })}
