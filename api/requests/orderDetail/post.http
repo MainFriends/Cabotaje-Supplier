@@ -1,5 +1,7 @@
-POST http://localhost:4000/api/order-detail
+POST http://localhost:4000/api/order-detail/
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfVVNFUiI6MSwiQ09EX1JPTEUiOjEsIkZJUlNUX05BTUUiOiJSb2RyaWdvIiwiTEFTVF9OQU1FIjoiVmFsbGUiLCJpYXQiOjE2NTA5ODYwNTMsImV4cCI6MTY1MTA0MDA1M30.7khUPnhtM4lm_A8Iggt9kman3MKK3dMgOmxwkRrPGlg
+
 
 [
     {

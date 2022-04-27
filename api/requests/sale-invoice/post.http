@@ -4,9 +4,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfUk9MRSI6MSwiR
 
 
 {
-    "COD_CLIENT": 4,
+    "COD_CLIENT": 1,
     "COD_USER": 1, 
-    "SUBTOTAL": 1500.8142,
+    "SUBTOTAL": 100,
     "TOT_DISCOUNT": 0,
     "TOT_ISV": 25,
     "TOT_SALE": 290,

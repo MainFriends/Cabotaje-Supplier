@@ -15,16 +15,16 @@ ChartJS.register(RadialLinearScale, ArcElement, Tooltip, Legend);
 
 
 
-export default function PolarAreaChart() {
+export default function PolarAreaSupplier() {
 
-  const [typePay, setTypePay] = useState([]);
+  const [supplierNam, setSupplier] = useState([]);
 
   const data = {
-    labels: typePay.map(row => row.NAM_TYPE_PAY),
+    labels: supplierNam.map(row => row.SUPPLIER),
     datasets: [
       {
         label: '# of Votes',
-        data: typePay.map(row => row.NUM),
+        data: supplierNam.map(row => row.TOTAL_COMPRA),
         backgroundColor: [
           'rgba(255, 99, 132, 0.5)',
           'rgba(54, 162, 235, 0.5)',
@@ -39,9 +39,9 @@ export default function PolarAreaChart() {
   };
 
   useEffect( () =>{
-    axios.get('/type-pay', token())
+    axios.get('/purchase-supplier', token())
     .then(res => {
-      setTypePay(res.data)
+      setSupplier(res.data)
     })
   }, [])
 

@@ -1,14 +1,15 @@
-POST http://localhost:4001/api/purchase-invoice
+POST http://localhost:4000/api/purchase-invoice
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfUk9MRSI6MSwiRklSU1RfTkFNRSI6IlJvZHJpZ28iLCJMQVNUX05BTUUiOiJWYWxsZSIsImlhdCI6MTY0OTEzMzI1NH0.mr4fe_jAszIn54mBKnfaukZ-sEo7IyJW2CrrDWuQr9M
 
 {
     "SUBTOTAL": 500,
     "TOT_DISCOUNT": 900 ,
     "TOT_ISV": 1000,
-    "TOT_PURCHASE": 1000,
+    "TOT_PURCHASE": 500,
     "TYP_TO_PURCHASE": "Credito",
     "COD_TYP_PAY": 2,
-    "DAT_INVOICE": "2022-07-13",
-    "COD_ORDER": "2",
+    "DAT_INVOICE": "2022-04-27",
+    "COD_ORDER": 6,
     "COD_USER": 1
 }

@@ -1,15 +1,14 @@
 POST http://localhost:4000/api/supplier
 Content-Type:application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfUk9MRSI6MSwiRklSU1RfTkFNRSI6IlBlZHJvIiwiTEFTVF9OQU1FIjoiU2FuY2hleiIsImlhdCI6MTY0NzM5MDI1M30.cn1xro2BAtDzbgoNloL6o2j9sQpY4UI41kOH3mZ-_Q8
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfVVNFUiI6MSwiQ09EX1JPTEUiOjEsIkZJUlNUX05BTUUiOiJSb2RyaWdvIiwiTEFTVF9OQU1FIjoiVmFsbGUiLCJpYXQiOjE2NTEwNDY2NjMsImV4cCI6MTY1MTEwMDY2M30.5HwmeGdno-4_c7o49-C1EGMJJ--RlW2a-z1OBQZZrWQ
 
 {
-	"NAM_SUPPLIER": "Pepsi",
-	"NAM_CONTACT": "Romeo",
-	"LAST_NAM_CONTACT": "Santos",
+	"NAM_SUPPLIER": "Bimbo",
+	"NAM_CONTACT": "Jose",
+	"LAST_NAM_CONTACT": "Lozano",
 	"ADDRESS": "jutiapa danli",
-	"NUM_PHONE_ONE": 98745623,
-	"EMAIL":"pepsi@gmail.com",
+	"NUM_PHONE_ONE": 98745656,
+	"EMAIL":"lacerve@gmail.com",
 	"NAM_CITY": "Tegucigalpa",
 	"ZIP_CODE": 504
 }

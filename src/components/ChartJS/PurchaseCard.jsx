@@ -4,22 +4,22 @@ import axios from '../../config/axios';
 
 
 
-const SalesCard = () => {
+const PurchaseCard = () => {
     const [dateRankSelected, setDateRankSelected] = useState('week');
     const [week, setWeek] = useState(0);
     const [month, setMonth] = useState(0);
 
     useEffect(() => {
-      axios.get('/sales-invoices-week', token())
+      axios.get('/purchase-invoice-week', token())
         .then(({data}) => {
-          const {TOTAL_VENTAS} = data[0];
-          setWeek(TOTAL_VENTAS)
+          const {TOTAL_COMPRAS} = data[0];
+          setWeek(TOTAL_COMPRAS)
         })
 
-        axios.get('/sales-invoices-month', token())
+        axios.get('/purchase-invoice-month', token())
         .then(({data}) => {
-          const {TOTAL_VENTAS} = data[0];
-          setMonth(TOTAL_VENTAS)
+          const {TOTAL_COMPRAS} = data[0];
+          setMonth(TOTAL_COMPRAS)
         })
     }, [])
 
@@ -30,7 +30,7 @@ const SalesCard = () => {
             <div className="row">
                 <div className="col-8">
                   <div className="text-xs font-weight-bold text-primary text-uppercase mb-1 ml-2">
-                    Ventas {dateRankSelected === 'week' ? ('semanales') : ('mensuales')}
+                    Compras {dateRankSelected === 'week' ? ('semanales') : ('mensuales')}
                   </div>
                 </div>
                 <div className="col-4 text-right">
@@ -59,7 +59,7 @@ const SalesCard = () => {
                           </h4>
                     </div>
                     <div className="col-auto">
-                    <i className="fa-solid fa-piggy-bank fa-2x mr-2 mt-2"></i>
+                    <i class="fa-solid fa-cart-shopping fa-2x mr-2 mt-2"></i>
                     </div>
                 </div>
             </div>
@@ -68,4 +68,4 @@ const SalesCard = () => {
     )
 }
 
-export default SalesCard
+export default PurchaseCard

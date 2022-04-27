@@ -1,11 +1,12 @@
 POST http://localhost:4000/api/decrease
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfVVNFUiI6MSwiQ09EX1JPTEUiOjEsIkZJUlNUX05BTUUiOiJSb2RyaWdvIiwiTEFTVF9OQU1FIjoiVmFsbGUiLCJpYXQiOjE2NTEwNDY2NjMsImV4cCI6MTY1MTEwMDY2M30.5HwmeGdno-4_c7o49-C1EGMJJ--RlW2a-z1OBQZZrWQ
 
 {
-    "COD_PRODUCT": 5,
-    "CONCEPT": "QUEBRADO",
-    "CANT_PRODUCTS": 1,
+    "COD_PRODUCT": 3,
+    "CONCEPT": "Sin soda",
+    "CANT_PRODUCTS": 7,
     "NUM_LOT": 1,
-    "COD_USER": null,
-    "DAT_DECREASE": "2022-03-11"
+    "COD_USER": 1,
+    "DAT_DECREASE": "2022-04-27"
 }

@@ -1,30 +1,25 @@
 import React from 'react';
-import {
-  Chart as ChartJS,
-  RadialLinearScale,
-  ArcElement,
-  Tooltip,
-  Legend,
-} from 'chart.js';
-import { PolarArea } from 'react-chartjs-2';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Doughnut } from 'react-chartjs-2';
 import { useEffect, useState } from 'react';
 import axios from '../../config/axios';
 import token from '../../helpers/getToken';
 
-ChartJS.register(RadialLinearScale, ArcElement, Tooltip, Legend);
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 
 
-export default function PolarAreaChart() {
 
-  const [typePay, setTypePay] = useState([]);
+export default function DoughnutChartEmployee() {
+
+  const [employee, setEmployee] = useState([]);
 
   const data = {
-    labels: typePay.map(row => row.NAM_TYPE_PAY),
+    labels: employee.map(row => row.NOMBRE),
     datasets: [
       {
         label: '# of Votes',
-        data: typePay.map(row => row.NUM),
+        data: employee.map(row => row.TOTAL),
         backgroundColor: [
           'rgba(255, 99, 132, 0.5)',
           'rgba(54, 162, 235, 0.5)',
@@ -39,11 +34,11 @@ export default function PolarAreaChart() {
   };
 
   useEffect( () =>{
-    axios.get('/type-pay', token())
+    axios.get('/sales-employee', token())
     .then(res => {
-      setTypePay(res.data)
+      setEmployee(res.data)
     })
   }, [])
-
-  return <PolarArea data={data} />;
+    
+  return <Doughnut data={data} />;
 }

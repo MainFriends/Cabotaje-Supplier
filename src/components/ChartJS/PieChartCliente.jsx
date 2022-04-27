@@ -8,16 +8,16 @@ import token from '../../helpers/getToken';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 
-export default function PieChart() {
+export default function PieChartCliente() {
 
-  const [roles, setRoles] = useState([]);
+  const [client, setClient] = useState([]);
 
   const data = {
-    labels: roles.map(nombre => nombre.NAM_ROLE),
+    labels: client.map(row => row.NAM_CLIENT),
     datasets: [
       {
         label: '# of Votes',
-        data: roles.map(cant => cant.CANT),
+        data: client.map(row => row.CANT),
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',
@@ -40,9 +40,9 @@ export default function PieChart() {
   };
 
   useEffect(() => {
-    axios.get('/roles', token())
+    axios.get('/cant-client', token())
       .then(res => {
-        setRoles(res.data)
+        setClient(res.data)
       })
   }, [])
 

@@ -5,31 +5,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfUk9MRSI6MSwiR
 
 [
     {
-<<<<<<< HEAD
-        "COD_PRODUCT": 5,
-=======
-        "COD_PRODUCT": 10,
->>>>>>> 6c459b2688b9ec6e1a677c403d2690f91fa3cb42
-        "PRICE": 20,
-        "CANT_PRODUCTS": 2,
-        "DISCOUNT": 0,
-        "TOTAL": 140
-<<<<<<< HEAD
-    },
-    {
-        "COD_PRODUCT": 6,
-        "PRICE": 25,
-        "CANT_PRODUCTS": 2,
-        "DISCOUNT": 0,
-        "TOTAL": 100
-    },
-    {
-        "COD_PRODUCT": 7,
+        "COD_PRODUCT": 8,
         "PRICE": 25,
         "CANT_PRODUCTS": 2,
         "DISCOUNT": 0,
         "TOTAL": 50
-=======
->>>>>>> 6c459b2688b9ec6e1a677c403d2690f91fa3cb42
     }
+ 
 ]

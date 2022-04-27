@@ -13,6 +13,7 @@ import { Line } from 'react-chartjs-2';
 import { useEffect, useState } from 'react';
 import axios from '../../config/axios';
 import token from '../../helpers/getToken';
+import moment from 'moment';
 
 ChartJS.register(
   CategoryScale,
@@ -32,41 +33,35 @@ export const options = {
     },
     title: {
       display: true,
-      text: 'Chart.js Line Chart',
+      text: 'Cabotaje Supplier',
     },
   },
 };
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 
 export default function App() {
 
-    const [productos, setProductos] = useState([]);
+  const [salesDay, setSalesDay] = useState([]);
 
  const data = {
-  labels,
+  labels: salesDay.map(row => moment(row.DAT_INVOICE).format('DD-MM-YYYY')),
   datasets: [
     {
-      label: 'Queso',
-      data: productos.map(row => row.TOT_PRODUCTS),
+      label: 'Ventas',
+      data: salesDay.map(row => row.TOT_DAY),
       borderColor: 'rgb(255, 99, 132)',
       backgroundColor: 'rgba(255, 99, 132, 0.5)',
     },
-    {
-      label: 'Mantequilla',
-      data: productos.map(row => row.TOT_PRODUCTS),
-      borderColor: 'rgb(53, 162, 235)',
-      backgroundColor: 'rgba(53, 162, 235, 0.5)',
-    },
+
   ],
 };
 
 useEffect( () =>{
-    axios.get('/sales-products', token())
-    .then(res => {
-      setProductos(res.data)
-    })
-  }, [])
+  axios.get('/tot-sales-day', token())
+  .then(res => {
+    setSalesDay(res.data)
+  })
+}, [])
 
 
   return <Line options={options} data={data} />;
