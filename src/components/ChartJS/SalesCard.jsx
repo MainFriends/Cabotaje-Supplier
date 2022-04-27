@@ -57,10 +57,10 @@ const SalesCard = () => {
                 <div className="row no-gutters align-items-center">
                     <div className="col mr-2">
                         
-                        <h4 className="h5 mb-0 font-weight-bold text-gray-800 ml-2">
+                        <h5 className="mb-0 font-weight-bold text-gray-800 ml-2">
                           {dateRankSelected === 'week' && `L. ${week.toFixed(2)}`}
                           {dateRankSelected === 'month' && `L. ${month.toFixed(2)}`}
-                          </h4>
+                          </h5>
                     </div>
                     <div className="col-auto">
                     <i className="fa-solid fa-piggy-bank fa-2x mr-2 mt-2"></i>

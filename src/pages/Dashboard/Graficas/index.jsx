@@ -1,8 +1,4 @@
 import Card from "../../../components/ChartJS/Card";
-import SalesCard from "../../../components/ChartJS/SalesCard";
-import PurchaseCard from "../../../components/ChartJS/PurchaseCard";
-import CardOrder from "../../../components/ChartJS/CardOrder";
-import SalesDayCard from "../../../components/ChartJS/SalesDayCard";
 import PieChartCategory from "../../../components/ChartJS/PieChartCategory";
 import DoughnutChartEmployee from "../../../components/ChartJS/DoughnutChartEmployee";
 import PolarAreaSupplier from "../../../components/ChartJS/PolarAreaSupplier";
@@ -14,12 +10,6 @@ const Graphics = () => {
     return (
     <div>
         <div className='row'>
-          <SalesCard />
-          <PurchaseCard />
-          <CardOrder />
-          <SalesDayCard />
-        </div>
-        <div className='row'>
           <div className="col-4">
             <Card 
           titulo='Ventas por categoria de producto'
@@ -28,7 +18,7 @@ const Graphics = () => {
           </div>
           <div className="col-4">
             <Card 
-          titulo='Ventas por empleado'
+          titulo='Usuarios con más ventas'
           component={<DoughnutChartEmployee />}
             />  
           </div>
@@ -49,7 +39,7 @@ const Graphics = () => {
           </div>
           <div className="col-4 py-5">
             <Card 
-          titulo='Productos que más mermas'
+          titulo='Productos mermados'
           component={<DoughnutChartDecrease />}
             />  
           </div>

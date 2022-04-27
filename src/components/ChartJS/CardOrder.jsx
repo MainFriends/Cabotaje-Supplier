@@ -19,11 +19,11 @@ const CardOrder = () => {
 
     return (
         <div className="col-xl-3 col-md-6 mb-4">
-        <div className="card border-left-primary shadow h-100 py-2">
+        <div className="card border-left-warning shadow h-100 py-2">
           <div className="card-header p-0">
             <div className="row">
                 <div className="col-8">
-                  <div className="text-xs font-weight-bold text-primary text-uppercase mb-1 ml-2">
+                  <div className="text-xs font-weight-bold text-warning text-uppercase mb-1 ml-2">
                     Ordenes en proceso
                   </div>
                 </div>
@@ -41,9 +41,9 @@ const CardOrder = () => {
                 <div className="row no-gutters align-items-center">
                     <div className="col mr-2">
                         
-                        <h4 className="mb-0 font-weight-bold text-gray-800 ml-2">
+                        <h5 className="mb-0 font-weight-bold text-gray-800 ml-2">
                           {`${orders}`}
-                          </h4>
+                          </h5>
                     </div>
                     <div className="col-auto">
                     <i className="fa-solid fa-clipboard-list fa-2x mr-2 mt-2"></i>

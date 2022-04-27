@@ -29,11 +29,11 @@ const PurchaseCard = () => {
 
     return (
         <div className="col-xl-3 col-md-6 mb-4">
-        <div className="card border-left-primary shadow h-100 py-2">
+        <div className="card border-left-danger shadow h-100 py-2">
           <div className="card-header p-0">
             <div className="row">
                 <div className="col-8">
-                  <div className="text-xs font-weight-bold text-primary text-uppercase mb-1 ml-2">
+                  <div className="text-xs font-weight-bold text-danger text-uppercase mb-1 ml-2">
                     Compras {dateRankSelected === 'week' ? ('semanales') : ('mensuales')}
                   </div>
                 </div>
@@ -57,13 +57,13 @@ const PurchaseCard = () => {
                 <div className="row no-gutters align-items-center">
                     <div className="col mr-2">
                         
-                        <h4 className="h5 mb-0 font-weight-bold text-gray-800 ml-2">
+                        <h5 className="mb-0 font-weight-bold text-gray-800 ml-2">
                           {dateRankSelected === 'week' && `L. ${week.toFixed(2)}`}
                           {dateRankSelected === 'month' && `L. ${month.toFixed(2)}`}
-                          </h4>
+                          </h5>
                     </div>
                     <div className="col-auto">
-                    <i className="fa-solid fa-cart-shopping fa-2x mr-2 mt-2"></i>
+                      <i class="fa-solid fa-bag-shopping fa-2x mr-2 mt-2"></i>
                     </div>
                 </div>
             </div>
