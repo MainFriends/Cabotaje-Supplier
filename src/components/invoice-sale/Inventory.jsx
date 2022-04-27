@@ -58,7 +58,6 @@ const Inventory = ({productListSale, setproductListSale}) => {
         let PRICE;
 
         const isExistProduct = productListSale.some(product => product.COD_PRODUCT === COD_PRODUCT);
-        console.log(isExistProduct)
         if(isExistProduct){
             setErrorMessage('El producto ya ha sido agregado a lista.');
 
@@ -80,7 +79,7 @@ const Inventory = ({productListSale, setproductListSale}) => {
             NAM_PRODUCT,
             DES_PRODUCT,
             PRICE: PRICE - (PRICE * ISV),
-            CANT_PRODUCT: cant,
+            CANT_PRODUCTS: cant,
             ISV: ISV * PRICE,
             TOTAL: cant * PRICE
         }
@@ -90,7 +89,8 @@ const Inventory = ({productListSale, setproductListSale}) => {
             product
         ])
 
-        clearStates()
+        clearStates();
+        document.querySelector('#closeModalInventory').click();
     }
 
     const clearStates = () => {
@@ -148,6 +148,7 @@ const Inventory = ({productListSale, setproductListSale}) => {
                     </div>
                     <div className="modal-footer mt-3 px-0">
                         <button onClick={() => addProduct()} className={'btn btn-primary btn-block mx-0 ' + (cant < 1 ? ' disabled' : '')}>Agregar</button>
+                        <button id='closeModalInventory' className={'btn btn-dark btn-block mx-0'} data-dismiss="modal">Cancelar</button>
                         {errorMessage ? <AlertError message={errorMessage}/> : null}
                     </div>
                 </div>

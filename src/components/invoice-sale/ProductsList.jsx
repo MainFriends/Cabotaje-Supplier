@@ -2,17 +2,18 @@ import React from 'react'
 import DataTable from 'react-data-table-component';
 import { useEffect, useState } from 'react/cjs/react.development';
 import Modal from '../Modal';
-import Inventory from './Inventory';
+import Inventory from './Inventory';9
+import moment from 'moment';
+import AlertError from '../AlertError';
 
-const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeInvoice}) => {
-
-    const [productListSale, setproductListSale] = useState([]);
+const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeInvoice, productListSale, setproductListSale}) => {
+    const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
         setsaleInvoice({
             ...saleInvoice,
-            SUBTOTAL: productListSale.reduce((acum, current) => acum + (current.PRICE * current.CANT_PRODUCT), 0),
-            TOT_ISV: productListSale.reduce((acum, current) => acum + (current.ISV * current.CANT_PRODUCT), 0),
+            SUBTOTAL: productListSale.reduce((acum, current) => acum + (current.PRICE * current.CANT_PRODUCTS), 0),
+            TOT_ISV: productListSale.reduce((acum, current) => acum + (current.ISV * current.CANT_PRODUCTS), 0),
             TOT_SALE: productListSale.reduce((acum, current) => acum + current.TOTAL, 0)
         })
     }, [productListSale]);
@@ -40,7 +41,7 @@ const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeI
         },
         {
             name: 'CANTIDAD',
-            selector: row => row.CANT_PRODUCT,
+            selector: row => row.CANT_PRODUCTS,
         },
         {
             name: 'PRECIO',
@@ -66,12 +67,27 @@ const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeI
         }
     ];
 
-    const data = productListSale;
-
     const handleDelete = cod => {
         const findProduct = productListSale.filter(product => product.COD_PRODUCT !== cod);
 
         setproductListSale(findProduct);
+    }
+
+    const handleNextComponent = () => {
+        if(!productListSale.length){
+            setErrorMessage('No se ha ingresado ningún producto en la lista.');
+
+            setTimeout(() => {
+                setErrorMessage('');
+            }, 3000);
+            return;
+        }
+
+        setCurrentPage(3)
+    }
+    
+    const clearProductsList = () => {
+        setproductListSale([])
     }
 
   return (
@@ -106,20 +122,30 @@ const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeI
                     value={saleInvoice.NAM_CLIENT}
                     />
                 </div>
+                <label className="col-sm-1 col-form-label pr-0">Fecha</label>
+                <div className="col-sm-2 pl-0 pr-4">
+                    <input 
+                    type="text" 
+                    className="form-control form-control-sm" 
+                    disabled
+                    value={moment().format('YYYY-MM-DD')}
+                    />
+                </div>
             </div>
         </div>
         <hr className='mt-0'/>
         <div className="row">
             <div className="col-6">
-                <h6 className='ml-2'>Productos</h6>
+                <h6 className='ml-3 text-gray-700'>Lista de productos</h6>
             </div>
             <div className="col-6 text-right">
-                <button autoFocus className="btn btn-success mr-3" data-toggle="modal" data-target='#sale-inventory'><i className="fa-solid fa-plus"></i></button>
+                <button autoFocus className="btn btn-success mr-2" data-toggle="modal" data-target='#sale-inventory' data-placement="bottom" title="Agregar producto"><i className="fa-solid fa-plus"></i></button>
+                <button onClick={() => clearProductsList()} className="btn btn-info mr-3" data-toggle="tooltip" data-placement="bottom" title="Limpiar lista"><i class="fa-solid fa-broom"></i></button>
             </div>
         </div>
         <DataTable
             columns={columns}
-            data={data}
+            data={productListSale}
             persistTableHead
             striped
             className='bg-light'
@@ -150,10 +176,11 @@ const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeI
         <button onClick={() => setCurrentPage(1)} className="btn btn-dark">
           <i className="fa-solid fa-chevron-left"></i>
         </button>
-        <button onClick={() => setCurrentPage(3)} className="btn btn-dark">
+        <button onClick={() => handleNextComponent()} className="btn btn-dark">
           <i className="fa-solid fa-chevron-right"></i>
         </button>
       </div>
+        {errorMessage ? <AlertError message={errorMessage}/> : null}
     </div>
   )
 }
