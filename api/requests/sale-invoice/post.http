@@ -1,14 +1,16 @@
 POST http://localhost:4000/api/sale-invoice
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfUk9MRSI6MSwiRklSU1RfTkFNRSI6IlBlZHJvIiwiTEFTVF9OQU1FIjoiU2FuY2hleiIsImlhdCI6MTY0NzM5MDI1M30.cn1xro2BAtDzbgoNloL6o2j9sQpY4UI41kOH3mZ-_Q8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfVVNFUiI6MSwiQ09EX1JPTEUiOjEsIkZJUlNUX05BTUUiOiJNZW5kZWwiLCJMQVNUX05BTUUiOiJBZ3VpbGFyIiwiaWF0IjoxNjUwNjY2OTcyLCJleHAiOjE2NTA3MjA5NzJ9.j1KvqfowkQyZ-NCpgDeinFtV3fVxsffRBM0JAAmAkZ4
 
 {
-    "COD_CLIENT": 25,
-    "COD_USER": 9, 
-    "SUBTOTAL": 1500.8142,
-    "TOT_DISCOUNT": 0,
-    "TOT_ISV": 25,
-    "TOT_SALE": 290,
-    "TYP_TO_SALE": "Contado",
-    "COD_TYP_PAY": 1 
+    "COD_CLIENT": 1,
+    "COD_USER": 1, 
+    "SUBTOTAL": 150.00,
+    "TOT_DISCOUNT": 20.00,
+    "TOT_ISV": 0.15,
+    "TOT_SALE": 140.00,
+    "TYP_TO_SALE": "Crédito",
+    "COD_TYP_PAY": 1,
+    "DESCRIPTION": "Deuda",
+    "DAT_LIMIT": "2022-04-30" 
 }

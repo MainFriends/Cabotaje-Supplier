@@ -40,7 +40,8 @@ const addAccPay = (req, res) => {
         DATE_LIMIT
     ],(err) => {
         if(err) {
-            res.status(500).send({message: err.message});
+            const message = err.message.split(': ')[1];
+            res.status(500).send({message});
         }else{
             res.status(201).send({message: 'La cuenta por pagar se ha añadido correctamente'});
         }
@@ -50,19 +51,15 @@ const addAccPay = (req, res) => {
 const updateAccPay = (req, res) => {
     const {codAccPay} = req.params;
     const {
-        COD_INVOICE,
         DESCRIPTION,
-        TOT_BALANCE,
         DATE_LIMIT
     } = req.body
 
-    const sp = 'CALL SP_UPD_ACCOUNTS_TO_PAY(?,?,?,?,?)';
+    const sp = 'CALL SP_UPD_ACCOUNTS_TO_PAY(?,?,?)';
 
     mysqlConnect.query(sp, [
         codAccPay,
-        COD_INVOICE,
         DESCRIPTION,
-        TOT_BALANCE,
         DATE_LIMIT
     ], (err) => {
         if(err){
@@ -74,9 +71,25 @@ const updateAccPay = (req, res) => {
     })
 }
 
+const deleteAccPay = (req, res) => {
+    const {codAccPay} = req.params;
+
+    const sp = "CALL SP_DEL_ACCOUNTS_TO_PAY(?)";
+
+    mysqlConnect.query(sp, [codAccPay], err => {
+        if(err){
+            const message = err.message.split(': ')[1];
+            res.status(304).send({message});
+        }else{
+            res.status(200).send({message: 'La cuenta por pagar fue eliminada correctamente'});
+        }
+    })
+}
+
 module.exports = {
     getAccPays,
     getAccPay,
     addAccPay,
-    updateAccPay
+    updateAccPay,
+    deleteAccPay
 }

@@ -1,10 +1,9 @@
-POST http://localhost:4000/api/fees-pay
+POST http://localhost:4000/api/fees-pay/5
 Content-Type: application/json
-Authorization: Bearer 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfVVNFUiI6MSwiQ09EX1JPTEUiOjEsIkZJUlNUX05BTUUiOiJNZW5kZWwiLCJMQVNUX05BTUUiOiJBZ3VpbGFyIiwiaWF0IjoxNjUwNDM5MzAyLCJleHAiOjE2NTA0OTMzMDJ9.mmOM-HxZONXWr3w8OWnLsnfVTR-IvhbfZUuIl51bYgc
 
 {
-    "COD_ACC_PAY" : 3,
     "AMOUNT" : 100, 
-    "DATE_PAY" : "2022-03-22",
+    "DATE_PAY" : "2022-04-24",
     "COD_TYP_PAY" : 3
 }
