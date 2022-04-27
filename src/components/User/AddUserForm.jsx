@@ -55,7 +55,7 @@ const AddUserForm = ({setSendRequest, setMessageError}) => {
             <div className="row mb-4">
             <div className="col-md-4">
                     <label className='form-label' htmlFor="IDENTITY">Identidad</label>
-                    <input onChange={handleInputChange} className='form-control' name='IDENTITY' minlenght={13} maxLength={13}  type="text" pattern="[0-9]{13}" title="Debe cumplir con el limite de caracteres de su DNI"  placeholder="####-####-######" required/>
+                    <input onChange={handleInputChange} className='form-control' name='IDENTITY' minlenght={13} maxLength={13}  type="text" pattern="[0-9]{1,13}" title="Debe cumplir con el limite de caracteres de su DNI"  placeholder="####-####-######" required/>
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="FIRST_NAME">Nombre</label>
@@ -73,7 +73,7 @@ const AddUserForm = ({setSendRequest, setMessageError}) => {
                 <div className="col-md-4">
                     <label classname="form-label" htmlfor="GENDER">GENERO</label>
                     <select onChange={handleInputChange}  className="form-control" name="GENDER" type="text" required>
-                    <option required selected>-seleccionar-</option> 
+                    <option selected>-seleccionar-</option> 
                     <option value="M">MASCULINO</option>
                     <option value="F">FEMENINO</option>
                     <option value="O">PREFIERO NO DECIRLO</option>
@@ -112,7 +112,7 @@ const AddUserForm = ({setSendRequest, setMessageError}) => {
                     <div className="col-md-4">
                     <label classname="form-label" htmlfor="COD_ROLE">ROLES</label>
                     <select onChange={handleInputChange}  className="form-control" name="COD_ROLE" type="text" required>
-                    <option required selected>-seleccionar- </option> 
+                    <option selected>-seleccionar- </option> 
                     <option value="1">ADMINISTRADOR</option>
                     <option value="2">CONTROL DE CALIDAD</option>
                     <option value="3">CONTADOR</option>
@@ -126,7 +126,7 @@ const AddUserForm = ({setSendRequest, setMessageError}) => {
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="PASSWORD">Contraseña</label>
-                    <input onChange={handleInputChange} className='form-control form-control-user' name='USER_PASSWORD'   type="password" minLength={8} maxLength={20} pattern="[A-Z]{1,20}[a-z]{1,20}[0-9]{1,20}" title="la contraseña debe contener : mayusculas,numero,minusculas por su seguridad"  required/>
+                    <input onChange={handleInputChange} className='form-control form-control-user' name='USER_PASSWORD'   type="password" minLength={8} maxLength={20} pattern="[A-Z]{1,20}[a-z]{1,20}[0-9]{1,20}"  title="la contraseña debe contener : mayusculas,numero,minusculas por su seguridad"  required/>
                 </div>
             </div>
             

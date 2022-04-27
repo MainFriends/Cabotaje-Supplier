@@ -51,15 +51,15 @@ const EditSupplierForm = ({rowCOD, setSendRequest, setMessageError}) => {
         <div className="row mb-4">
             <div className="col-md-4">
                 <label className='form-label' htmlFor="NAM_SUPPLIER">Nombre del Proveedor</label>
-                <input onChange={handleInputChange} value={formEditSupplier.NAM_SUPPLIER} className='form-control' name='NAM_SUPPLIER' type="text" pattern="[A-Z]{1}[a-z]{2,30}" onInput={toUpperCase} required/>
+                <input onChange={handleInputChange} value={formEditSupplier.NAM_SUPPLIER} className='form-control' name='NAM_SUPPLIER' type="text"  onInput={toUpperCase} required/>
             </div>
             <div className="col-md-4">
                 <label className='form-label' htmlFor="NAM_CONTACT">Nombre del Contacto</label>
-                <input onChange={handleInputChange} value={formEditSupplier.NAM_CONTACT} className='form-control' name='NAM_CONTACT' type="text"  pattern="[A-Z]{1}[a-z]{2,30}" onInput={toUpperCase} required/>
+                <input onChange={handleInputChange} value={formEditSupplier.NAM_CONTACT} className='form-control' name='NAM_CONTACT' type="text"  pattern="[A-Z]{1}[a-z]{2,30}"  onInput={toUpperCase} required/>
             </div>
             <div className="col-md-4">
                 <label className='form-label' htmlFor="LAST_NAM_CONTACT">Apellido del contacto</label>
-                <input onChange={handleInputChange} value={formEditSupplier.NUM_PHONE_ONE} className='form-control'  name='LAST_NAM_CONTACT' type="Text"  pattern="[A-Z]{1}[a-z]{2,30}" onInput={toUpperCase} required/>
+                <input onChange={handleInputChange} value={formEditSupplier.LAST_NAM_CONTACT} className='form-control'  name='LAST_NAM_CONTACT' type="Text"  pattern="[A-Z]{1}[a-z]{2,30}"   onInput={toUpperCase} required/>
             </div>
             <div className="col-md-4 mt-2">
                 <label className='form-label' htmlFor="ADDRESS">Dirección</label>
@@ -79,13 +79,13 @@ const EditSupplierForm = ({rowCOD, setSendRequest, setMessageError}) => {
             </div>
             
             <div className="col-md-4">
-                <label className='form-label' htmlFor="NAM_CITY">Ciudad</label>
-                <input onChange={handleInputChange} value={formEditSupplier.NAM_CITY} className='form-control' name='NAM_CITY' type="text" pattern="[A-Z]{1}[a-z]{2,15}" onInput={toUpperCase} required/>
+                <label className='form-label' htmlFor="NAM_CITY">Ciudad</label> 
+                <input onChange={handleInputChange} value={formEditSupplier.NAM_CITY} className='form-control' name='NAM_CITY' type="text" pattern="[A-Z]{1}[a-z]{2,15}" placeholder="Domicilio" onInput={toUpperCase} required/>
             </div>
          
             <div className="col-md-2">
                 <label className='form-label' htmlFor="ZIP_CODE">CP</label>
-                <input onChange={handleInputChange} value={formEditSupplier.ZIP_CODE} className='form-control' name='ZIP_CODE' type="text" minLength={5} maxLength={7} required/>
+                <input onChange={handleInputChange} value={formEditSupplier.ZIP_CODE} className='form-control' name='ZIP_CODE' type="text" pattern="[0-9]{5,7}" minLength={5} maxLength={7} required/>
             </div>
 
         </div>

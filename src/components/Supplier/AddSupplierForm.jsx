@@ -47,15 +47,15 @@ const AddSupplierForm = ({setSendRequest, setMessageError}) => {
             <div className="row mb-4">
             <div className="col-md-4">
                     <label className='form-label' htmlFor="NAM_CONTACT ">Nombre del Proveedor</label>
-                    <input onChange={handleInputChange} className='form-control' name='NAM_SUPPLIER' type="text" pattern="[A-Z]{1}[a-z]{2,30}" onInput={toUpperCase}required/>
+                    <input onChange={handleInputChange} className='form-control' name='NAM_SUPPLIER' type="text"    onInput={toUpperCase}required/>
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="NAM_CONTACT ">Nombre del contacto</label>
-                    <input onChange={handleInputChange} className='form-control' name='NAM_CONTACT' type="text" pattern="[A-Z]{1}[a-z]{2,30}"onInput={toUpperCase} required/>
+                    <input onChange={handleInputChange} className='form-control' name='NAM_CONTACT' type="text" pattern="[A-Z]{1}[a-z]{2,30}"  onInput={toUpperCase} required/>
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="LAST_NAM_CONTACT">Apellido del contacto</label>
-                    <input onChange={handleInputChange} className='form-control' name='LAST_NAM_CONTACT' type="text" pattern="[A-Z]{1}[a-z]{2,30}" onInput={toUpperCase} required/>
+                    <input onChange={handleInputChange} className='form-control' name='LAST_NAM_CONTACT' type="text" pattern="[A-Z]{1}[a-z]{2,30}"   onInput={toUpperCase} required/>
                 </div>
                 <div className="col-md-4 mt-2">
                     <label className='form-label' htmlFor="ADDRESS">Dirección</label>
@@ -75,11 +75,11 @@ const AddSupplierForm = ({setSendRequest, setMessageError}) => {
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="NAM_CITY">Ciudad</label>
-                    <input onChange={handleInputChange} className='form-control' name='NAM_CITY' type="text" onInput={toUpperCase} required/>
+                    <input onChange={handleInputChange} className='form-control' name='NAM_CITY' type="text" placeholder="Domicilio"  onInput={toUpperCase} required/>
                 </div>
                 <div className="col-md-2">
                     <label className='form-label' htmlFor="ZIP_CODE">CP</label>
-                    <input   onChange={handleInputChange} className='form-control' name='ZIP_CODE' type="text" minLength={5} maxLength={7} required/>
+                    <input   onChange={handleInputChange} className='form-control' name='ZIP_CODE' type="text" pattern="[0-9]{1,5}"  minLength={5} maxLength={7} required/>
                 </div>
             </div>
                
