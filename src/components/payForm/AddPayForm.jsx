@@ -51,6 +51,22 @@ const AddPayForm = ({setSendRequest, setMessageError}) => {
             })
     }
 
+    const resetState = () => {
+        setFormAddPayForm({
+            COD_USER: '',
+            HOURS_WORKED: 0,
+            AMO_GROSS: 0,
+            BONUS: 0,
+            TOT_DEDUCTIONS: 0,
+            NET_SALARY: 0,
+            DAT_PAYMENT: ''
+        });
+
+        setEmployeeName('')
+
+        setNetSalary(0)
+    }
+
     const handleSubmitPayForm = (e) => {
         e.preventDefault();
         axios.post('/pay-form', formAddPayForm, token())
@@ -58,6 +74,7 @@ const AddPayForm = ({setSendRequest, setMessageError}) => {
                document.querySelector('#closeAddPayForm').click();
                e.target.reset();
                setSendRequest(true)
+               resetState()
            })
            .catch(err => {
                const {message} = err.response.data

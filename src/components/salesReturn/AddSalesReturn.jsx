@@ -25,6 +25,7 @@ const AddSalesReturn = ({setSendRequest, setMessageError}) => {
                 document.querySelector('#idCloseAddSalesReturn').click();
                 e.target.reset();
                 setSendRequest(true);
+                setProductName('');
             })
             .catch(err => {
                 const {message} = err.response.data;
