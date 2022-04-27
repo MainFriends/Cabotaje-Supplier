@@ -1,5 +1,6 @@
-PUT http://localhost:4001/api/purchase-invoice/2
+PUT http://localhost:4001/api/purchase-invoice/1
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfUk9MRSI6MSwiRklSU1RfTkFNRSI6IlJvZHJpZ28iLCJMQVNUX05BTUUiOiJWYWxsZSIsImlhdCI6MTY0OTEzMzI1NH0.mr4fe_jAszIn54mBKnfaukZ-sEo7IyJW2CrrDWuQr9M
 
 {
     "SUBTOTAL": 100,
@@ -8,7 +9,7 @@ Content-Type: application/json
     "TOT_PURCHASE": 100,
     "TYP_TO_PURCHASE": "Contado",
     "COD_TYP_PAY": 1,
-    "DAT_INVOICE": "2022-12-10",
-    "COD_ORDER": "2",
-    "COD_USER": "1"
+    "DAT_INVOICE": "2022-04-19",
+    "COD_ORDER": 1,
+    "COD_USER": 1
 }

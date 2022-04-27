@@ -33,7 +33,7 @@ const addDecrease = (req, res) => {
     DAT_DECREASE
     } = req.body
 
-    const sp = 'CALL SP_ADD_DECREASE(?,?,?,?,?,?)';
+    const sp = 'CALL SP_INS_DECREASE(?,?,?,?,?,?)';
 
     mysqlConnect.query(sp,[
     COD_PRODUCT,

@@ -6,7 +6,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfVVNFUiI6MSwiQ
     "SUBTOTAL": 500,
     "TOT_DISCOUNT": 900 ,
     "TOT_ISV": 1000,
-    "TOT_PURCHASE": 1000,
+    "TOT_PURCHASE": 500,
     "TYP_TO_PURCHASE": "Credito",
     "COD_TYP_PAY": 2,
     "DAT_INVOICE": "2022-07-13",

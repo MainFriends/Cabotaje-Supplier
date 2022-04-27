@@ -4,13 +4,13 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfVVNFUiI6MSwiQ
 
 {
     "COD_SUPPLIER" : 1,
-	"NAM_PRODUCT" : "Medallones",
-    "DES_PRODUCT" : "Caja de medallos",
+	"NAM_PRODUCT" : "Requeson",
+    "DES_PRODUCT" : "Salado",
     "ISV" : 0.15,
     "NORMAL_UNIT_PRICE": 100.00,
     "WHOLESALE_CANT" : 105.00,
     "WHOLESALE_PRICE" : 105.00,
     "PURCHASE_PRICE": 90.00,
-    "COD_CATEGORY": 1,
+    "COD_CATEGORY": 2,
     "COD_TYP_PRODUCT": 1
 }

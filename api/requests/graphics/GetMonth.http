@@ -1,10 +1,2 @@
-POST http://localhost:4000/api/order
-Content-Type: application/json
+GET http://localhost:4000/api/sales-invoices-month
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfUk9MRSI6MSwiRklSU1RfTkFNRSI6IlJvZHJpZ28iLCJMQVNUX05BTUUiOiJWYWxsZSIsImlhdCI6MTY0OTEzMzI1NH0.mr4fe_jAszIn54mBKnfaukZ-sEo7IyJW2CrrDWuQr9M
-
-
-{
-    "COD_SUPPLIER":4,
-    "DAT_REQUIRED": "2022-04-25",
-    "COD_USER":1
-}

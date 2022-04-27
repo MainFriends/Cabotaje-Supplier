@@ -40,6 +40,13 @@
   margin-top: 40px;
 }
 
+.grafica{
+  padding: 10px !important;
+}
+
+.vertical{
+  width: 700px;
+}
 .container-profile{
   padding: 0px !important;
   overflow-x: hidden;

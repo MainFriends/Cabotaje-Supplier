@@ -1,1 +1,4 @@
-DELETE http://localhost:4001/api/purchase-invoice/2
+DELETE http://localhost:4000/api/purchase-invoice/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfUk9MRSI6MSwiRklSU1RfTkFNRSI6IlJvZHJpZ28iLCJMQVNUX05BTUUiOiJWYWxsZSIsImlhdCI6MTY0OTEzMzI1NH0.mr4fe_jAszIn54mBKnfaukZ-sEo7IyJW2CrrDWuQr9M
+
+

@@ -1,11 +1,12 @@
 POST http://Localhost:4000/api/client
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfUk9MRSI6MSwiRklSU1RfTkFNRSI6IlJvZHJpZ28iLCJMQVNUX05BTUUiOiJWYWxsZSIsImlhdCI6MTY0OTEzMzI1NH0.mr4fe_jAszIn54mBKnfaukZ-sEo7IyJW2CrrDWuQr9M
 
 {
-    "IDENTITY":"080119992072",
-    "FIRST_NAME":"Carlos",
-    "LAST_NAME":"Roguez",
-    "ADDRESS":"Villanueva",
-    "NUM_PHONE_ONE":89754123,
-    "RTN": "08180361089"
+    "IDENTITY":"080119992156",
+    "FIRST_NAME":"Harry",
+    "LAST_NAME":"Maguire",
+    "ADDRESS":"Manchester",
+    "NUM_PHONE_ONE":88741231,
+    "RTN": "08180361045"
 }
