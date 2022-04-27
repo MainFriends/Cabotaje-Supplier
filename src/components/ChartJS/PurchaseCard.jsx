@@ -13,13 +13,17 @@ const PurchaseCard = () => {
       axios.get('/purchase-invoice-week', token())
         .then(({data}) => {
           const {TOTAL_COMPRAS} = data[0];
-          setWeek(TOTAL_COMPRAS)
+          if(TOTAL_COMPRAS){
+            setWeek(TOTAL_COMPRAS)
+          }
         })
 
         axios.get('/purchase-invoice-month', token())
         .then(({data}) => {
           const {TOTAL_COMPRAS} = data[0];
-          setMonth(TOTAL_COMPRAS)
+          if(TOTAL_COMPRAS){
+            setMonth(TOTAL_COMPRAS)
+          }
         })
     }, [])
 
@@ -59,7 +63,7 @@ const PurchaseCard = () => {
                           </h4>
                     </div>
                     <div className="col-auto">
-                    <i class="fa-solid fa-cart-shopping fa-2x mr-2 mt-2"></i>
+                    <i className="fa-solid fa-cart-shopping fa-2x mr-2 mt-2"></i>
                     </div>
                 </div>
             </div>

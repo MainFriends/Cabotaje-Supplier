@@ -11,10 +11,11 @@ const CardSalesDay = () => {
         axios.get('/sales-day', token())
         .then(({data}) => {
           const {SALES_DAY} = data[0];
-          setSalesDay(SALES_DAY)
+          if(SALES_DAY){
+            setSalesDay(SALES_DAY)
+          }
         })
     }, [])
-    console.log(salesDay)
 
     return (
         <div className="col-xl-3 col-md-6 mb-4">
@@ -45,7 +46,7 @@ const CardSalesDay = () => {
                           </h4>
                     </div>
                     <div className="col-auto">
-                    <i class="fa-solid fa-cart-arrow-down fa-2x mr-2 mt-2"></i>
+                    <i className="fa-solid fa-cart-arrow-down fa-2x mr-2 mt-2"></i>
                     </div>
                 </div>
             </div>

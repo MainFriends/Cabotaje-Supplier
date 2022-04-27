@@ -13,13 +13,17 @@ const SalesCard = () => {
       axios.get('/sales-invoices-week', token())
         .then(({data}) => {
           const {TOTAL_VENTAS} = data[0];
-          setWeek(TOTAL_VENTAS)
+          if(TOTAL_VENTAS){
+            setWeek(TOTAL_VENTAS)
+          }
         })
 
         axios.get('/sales-invoices-month', token())
         .then(({data}) => {
           const {TOTAL_VENTAS} = data[0];
-          setMonth(TOTAL_VENTAS)
+          if(TOTAL_VENTAS){
+            setMonth(TOTAL_VENTAS)
+          }
         })
     }, [])
 

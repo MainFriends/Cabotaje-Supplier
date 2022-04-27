@@ -11,7 +11,9 @@ const CardOrder = () => {
         axios.get('/orders-process', token())
         .then(({data}) => {
           const {TOT_ORDERS} = data[0];
-          setOrders(TOT_ORDERS)
+          if(TOT_ORDERS){
+            setOrders(TOT_ORDERS)
+          }
         })
     }, [])
 
@@ -44,7 +46,7 @@ const CardOrder = () => {
                           </h4>
                     </div>
                     <div className="col-auto">
-                    <i class="fa-solid fa-clipboard-list fa-2x mr-2 mt-2"></i>
+                    <i className="fa-solid fa-clipboard-list fa-2x mr-2 mt-2"></i>
                     </div>
                 </div>
             </div>
