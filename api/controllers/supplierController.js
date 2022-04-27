@@ -55,7 +55,8 @@ const addSupplier= (req,res) =>{
     ], (err)=> {
 
         if(err){
-            res.status(400). send({message: err.message});
+            const message = err.message.split(': ')[1];
+            res.status(400). send({message});
         }else{
             res.status(201).send({message:'El proveedor ha sido registrado correctamente'});
         }
@@ -94,7 +95,8 @@ const updateSupplier= (req,res) =>{
     ], (err)=> {
 
         if(err){
-            res.status(400). send({message: err.message});
+            const message = err.message.split(': ')[1];
+            res.status(400). send({message});
         }else{
             res.status(201).send({message:'El proveedor ha sido actualizado correctamente'});
         }

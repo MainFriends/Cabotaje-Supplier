@@ -89,7 +89,7 @@ const updateClient= (req,res) =>{
 
         if(err){
             const message = err.message.split(': ')[1];
-            res.status(400). send({message});
+            res.status(400). send({message:'El cliente no se pudo modificar, verifique su Informacion e intentelos de nuevo'});
         }else{
             res.status(201).send({message:'El cliente  ha sido actualizado correctamente'});
         }

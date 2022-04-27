@@ -34,7 +34,7 @@ const addUser = async (req, res) => {
         GENDER,
         NUM_PHONE_ONE,
         NUM_PHONE_TWO = null,
-        NUM_PHONE_REFERENCE,
+        NUM_REFERENCE,
         DAT_BIRTHDAY,
         NAM_CITY,
         ADDRESS,
@@ -57,7 +57,7 @@ const addUser = async (req, res) => {
         GENDER,
         NUM_PHONE_ONE,
         NUM_PHONE_TWO,
-        NUM_PHONE_REFERENCE,
+        NUM_REFERENCE,
         DAT_BIRTHDAY,
         NAM_CITY,
         ADDRESS,
@@ -85,7 +85,7 @@ const updateUser = (req, res) => {
         GENDER,
         NUM_PHONE_ONE,
         NUM_PHONE_TWO = null,
-        NUM_PHONE_REFERENCE,
+        NUM_REFERENCE,
         DAT_BIRTHDAY,
         NAM_CITY,
         ADDRESS,
@@ -94,6 +94,8 @@ const updateUser = (req, res) => {
         USER_EMAIL,
         USER_PASSWORD
     } = req.body;
+
+    
 
     const sp = 'CALL SP_UPD_USER(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
 
@@ -107,7 +109,7 @@ const updateUser = (req, res) => {
             GENDER,
             NUM_PHONE_ONE,
             NUM_PHONE_TWO,
-            NUM_PHONE_REFERENCE,
+            NUM_REFERENCE,
             DAT_BIRTHDAY,
             NAM_CITY,
             ADDRESS,
@@ -118,7 +120,7 @@ const updateUser = (req, res) => {
         ], (err) => {
             if(err){
                 const message = err.message.split(': ')[1];
-                res.status(400).send({message});
+                res.status(400).send({message:'El usuario no pudo ser modificado, verifique su informacion'});
             }else{
                 res.status(200).send({message: 'El usuario ha sido modificado.'});
             }

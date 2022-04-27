@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from '../../config/axios';
 import token from '../../helpers/getToken';
+import { toUpperCase } from "../../helpers/Mayusculas";
 
 const EditClientForm = ({rowCOD, setSendRequest, setMessageError}) => {
 
@@ -50,31 +51,31 @@ const EditClientForm = ({rowCOD, setSendRequest, setMessageError}) => {
             <div className="row mb-4">
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="FIRST_NAME">Nombre</label>
-                    <input onChange={handleInputChange} value={formEditClient.FIRST_NAME} className='form-control' name='FIRST_NAME' type="text" required/>
+                    <input onChange={handleInputChange} value={formEditClient.FIRST_NAME} className='form-control' name='FIRST_NAME' type="text" pattern="[A-Z]{1}[a-z]{2,15}" onInput={toUpperCase} required/>
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="LAST_NAME">Apellido</label>
-                    <input onChange={handleInputChange} value={formEditClient.LAST_NAME} className='form-control' name='LAST_NAME' type="text" required/>
+                    <input onChange={handleInputChange} value={formEditClient.LAST_NAME} className='form-control' name='LAST_NAME' type="text" pattern="[A-Z]{1}[a-z]{2,15}" onInput={toUpperCase}required/>
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="IDENTITY">Identidad</label>
-                    <input onChange={handleInputChange} value={formEditClient.IDENTITY} className='form-control' name='IDENTITY' type="number" required/>
+                    <input onChange={handleInputChange} value={formEditClient.IDENTITY} className='form-control' name='IDENTITY'  minlenght={13} maxLength={13}  type="text" pattern="[0-9]{13}"  title="IDENTIDAD debe contener 13 caracteres" placeholder="####-####-######" required/>
                 </div>
                 <div className="col-md-3 mt-2">
                     <label className='form-label' htmlFor="NUM_PHONE_ONE">Teléfono 1</label>
-                    <input onChange={handleInputChange} value={formEditClient.NUM_PHONE_ONE} className='form-control' name='NUM_PHONE_ONE' type="number" required/>
+                    <input onChange={handleInputChange} value={formEditClient.NUM_PHONE_ONE} className='form-control' name='NUM_PHONE_ONE' type="tel" pattern="[0-9]{8}"  placeholder="####-####" minLength={8}  maxLength={8}  required/>
                 </div>
                 <div className="col-md-3 mt-2">
                     <label className='form-label' htmlFor="NUM_PHONE_TWO">Teléfono 2</label>
-                    <input onChange={handleInputChange} value={formEditClient.NUM_PHONE_TWO} className='form-control' name='NUM_PHONE_TWO' type="number" required/>
+                    <input onChange={handleInputChange} value={formEditClient.NUM_PHONE_TWO} className='form-control' name='NUM_PHONE_TWO' type="tel" pattern="[0-9]{1,8}"  placeholder="####-####" min={0}  maxLength={8} title="OPCIONAL" required/>
                 </div>
                 <div className="col-md-6 mt-2">
                     <label className='form-label' htmlFor="ADDRESS">Dirección</label>
-                    <textarea onChange={handleInputChange} value={formEditClient.ADDRESS} className='form-control' name='ADDRESS'  rows='3' cols='4' type="number" required/>
+                    <textarea onChange={handleInputChange} value={formEditClient.ADDRESS} className='form-control' name='ADDRESS'  rows='3' cols='4' type="text" onInput={toUpperCase} required/>
                 </div>
                 <div className="col-md-6">
                     <label className='form-label' htmlFor="RTN">RTN</label>
-                    <input onChange={handleInputChange} value={formEditClient.RTN} className='form-control' name='RTN' type="number" required/>
+                    <input onChange={handleInputChange} value={formEditClient.RTN} className='form-control' name='RTN' type="text" minLength={14}  maxLength={14}  pattern="[0-9]{14}"  placeholder="####-####-######" title="RTN debe contener 14 caracteres" required/>
                 </div>
             </div>
             
