@@ -11,6 +11,7 @@ import EditUserForm from '../../../components/User/EditUserForm';
 import {paginationComponentOptions} from '../../../helpers/datatablesOptions';
 import axios from '../../../config/axios';
 import token from '../../../helpers/getToken';
+import moment from 'moment';
 
 const Usuarios = () => {
     const [rows, setRows] = useState([]);
@@ -25,11 +26,16 @@ const Usuarios = () => {
     
     //definir las columnas
     const columns = [
-       
+        {
+            name: 'CÓDIGO',
+            selector: row => row.COD_USER,
+            sortable: true
+        },
         {
             name: 'IDENTIDAD',
             selector: row => row.IDENTITY,
             sortable: true,
+            grow: 2
         },
         {
             name: 'NOMBRE',
@@ -44,6 +50,18 @@ const Usuarios = () => {
         {
             name: 'APELLIDO',
             selector: row => row.LAST_NAME,
+            sortable: true,
+        },
+        {
+            name: 'EMAIL',
+            selector: row => row.USER_EMAIL,
+            sortable: true,
+            wrap: true,
+            grow: 2
+        },
+        {
+            name: 'ROL',
+            selector: row => row.NAM_ROLE,
             sortable: true,
         },
         {
@@ -71,6 +89,8 @@ const Usuarios = () => {
             name: 'FECHA DE NACIMIENTO',
             selector: row => row.DAT_BIRTHDAY,
             sortable: true,
+            grow: 2,
+            format: row => moment(row.DAT_BIRTHDAY).format('YYYY-MM-DD')
         },
         {
             name: 'CIUDAD',
@@ -82,18 +102,6 @@ const Usuarios = () => {
             selector: row => row.ADDRESS,
             sortable: true,
         },
-        {
-            name: 'ROL',
-            selector: row => row.NAM_ROLE,
-            sortable: true,
-        },
-        {
-            name: 'EMAIL',
-            selector: row => row.USER_EMAIL,
-            sortable: true,
-            wrap: true
-        },
- 
         {
             name: 'ACCIONES',
             button: true,

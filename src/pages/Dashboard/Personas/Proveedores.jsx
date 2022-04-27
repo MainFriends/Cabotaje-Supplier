@@ -24,6 +24,7 @@ const Proveedor= () => {
             name: 'NOMBRE DEL PROVEEDOR ',
             selector: row => row.NAM_SUPPLIER,
             sortable: true,
+            grow: 2
         },
         {
             name: 'NOMBRE DEL CONTACTO',
@@ -63,7 +64,7 @@ const Proveedor= () => {
             sortable: true,
         },
         {
-            name: 'CODIGO POSTAL',
+            name: 'CÓDIGO POSTAL',
             selector: row => row.ZIP_CODE,
             sortable: true,
         },
@@ -134,14 +135,14 @@ const Proveedor= () => {
 
                     <Modal 
                         idModal='addSupplier'
-                        title='Agregar Proveedor'
+                        title='Agregar proveedor'
                         messageError={messageError}
                         content={<AddSupplierForm setSendRequest={setSendRequest} setMessageError={setMessageError}/>}
                     />
 
                     <Modal 
                         idModal='editSupplier'
-                        title='Actualizar Proveedor'
+                        title='Editar proveedor'
                         messageError={messageError}
                         content={<EditSupplierForm rowCOD={rowCOD} setSendRequest={setSendRequest} setMessageError={setMessageError}/>}
                     />  
