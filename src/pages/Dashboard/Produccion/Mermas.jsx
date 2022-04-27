@@ -10,6 +10,7 @@ import EditDecreaseForm from '../../../components/decrease/EditDecreaseForm';
 
 import {paginationComponentOptions} from '../../../helpers/datatablesOptions';
 import axios from '../../../config/axios'
+import moment from 'moment';
 
 
 import token from '../../../../src/helpers/getToken';
@@ -58,6 +59,7 @@ const mermas = () => {
             name: 'FECHA MERMA',
             selector: row => row.DAT_DECREASE,
             sortable: true,
+            format : row => moment(row.DAT_DECREASE).format('DD-MM-YYYY')
         },
         {
             name: 'ACCIONES',

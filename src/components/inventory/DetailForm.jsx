@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from '../../config/axios';
 import token from '../../helpers/getToken';
+import { toUpperCase } from "../../helpers/Mayusculas";
+
 
 const DetailForm = ({setSendRequest, setMessageError}) => {
     const [formData, setFormData] = useState({
@@ -93,7 +95,7 @@ const DetailForm = ({setSendRequest, setMessageError}) => {
                 </div>
                 <div className="col-6">
                     <label className='form-label'>Producto</label>
-                    <input id='nameProduct' value={nameProduct} className='form-control' type="text" disabled/>
+                    <input id='nameProduct' value={nameProduct} className='form-control' type="text" onInput={toUpperCase} disabled/>
                 </div>
                 <div className="col-4 text-right">
                     <small className='form-label text-secondary'><i className="mr-1 fa-solid fa-circle-info"></i>¿No encuentras el producto?</small><br />

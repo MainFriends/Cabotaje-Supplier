@@ -1,6 +1,7 @@
 import { useState } from "react"
 import axios from '../../config/axios'
 import token from '../../../src/helpers/getToken'
+import { toUpperCase } from "../../helpers/Mayusculas";
 
 const AddDecreaseForm = ({setSendRequest, setMessageError}) => {
  
@@ -47,7 +48,7 @@ const AddDecreaseForm = ({setSendRequest, setMessageError}) => {
             </div>
             <div className="col-md-6">
                 <label className='form-label' htmlFor="CONCEPT">Concepto</label>
-                <textarea onChange={handleInputChange} className='form-control' name='CONCEPT' type="text" required/>
+                <textarea onChange={handleInputChange} className='form-control' name='CONCEPT' type="text" onInput={toUpperCase} required/>
             </div>
             <div className="col-md-3 mt-2">
                 <label className='form-label' htmlFor="CANT_PRODUCTS">Cantidad Productos</label>
@@ -55,7 +56,7 @@ const AddDecreaseForm = ({setSendRequest, setMessageError}) => {
             </div>
             <div className="col-md-3 mt-2">
                 <label className='form-label' htmlFor="NUM_LOT">Número de lote</label>
-                <input onChange={handleInputChange} className='form-control' name='NUM_LOT' type="text" required/>
+                <input onChange={handleInputChange} className='form-control' name='NUM_LOT' type="number" required/>
             </div>
             <div className="col-md-3 mt-2">
                 <label className='form-label' htmlFor="COD_USER">Codigo usuario</label>

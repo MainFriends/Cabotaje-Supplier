@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import axios from '../../config/axios';
 import token from '../../helpers/getToken';
 import AlertSuccess from "../AlertSuccess";
+import { toUpperCase } from "../../helpers/Mayusculas";
+
 
 const ProductForm = ({setSendRequest, setMessageError}) => {
     const [btnWholesale, setBtnWholesale] = useState(false);
@@ -77,11 +79,11 @@ const ProductForm = ({setSendRequest, setMessageError}) => {
             <div className="row mb-4">
                 <div className="col-4">
                     <label className='form-label' htmlFor="NAM_PRODUCT">Nombre del producto</label>
-                    <input onChange={handleInputChange} className='form-control' name='NAM_PRODUCT' type="text" required/>
+                    <input onChange={handleInputChange} className='form-control' name='NAM_PRODUCT' type="text" onInput={toUpperCase} required/>
                 </div>
                 <div className="col-8">
                     <label className='form-label' htmlFor="DES_PRODUCT">Descripción</label>
-                    <textarea onChange={handleInputChange} className='form-control' rows='2' name='DES_PRODUCT' type="text" required/>
+                    <textarea onChange={handleInputChange} className='form-control' rows='2' name='DES_PRODUCT' type="text" onInput={toUpperCase} required/>
                 </div>
             </div>
             <div className="row mb-4">

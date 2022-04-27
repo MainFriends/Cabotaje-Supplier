@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from '../../config/axios';
 import token from '../../helpers/getToken';
+import { toUpperCase } from "../../helpers/Mayusculas";
 
 const AddCategoryForm = ({setSendRequest, setMessageError}) => {
 
@@ -39,11 +40,11 @@ const AddCategoryForm = ({setSendRequest, setMessageError}) => {
             <div className="row mb-4">
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="NAM_CATEGORY">Nombre categoría</label>
-                    <input onChange={handleInputChange} className='form-control' name='NAM_CATEGORY' type="text" required/>
+                    <input onChange={handleInputChange} className='form-control' name='NAM_CATEGORY' type="text" onInput={toUpperCase} required/>
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="DESCRIPTION">Descripción</label>
-                    <input onChange={handleInputChange} className='form-control' name='DESCRIPTION' type="text" required/>
+                    <input onChange={handleInputChange} className='form-control' name='DESCRIPTION' type="text" onInput={toUpperCase} required/>
                 </div>
             </div>
             

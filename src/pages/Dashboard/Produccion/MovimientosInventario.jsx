@@ -9,6 +9,7 @@ import Modal from '../../../components/Modal';
 
 import {paginationComponentOptions} from '../../../helpers/datatablesOptions';
 import axios from '../../../config/axios'
+import moment from 'moment';
 
 
 import token from '../../../../src/helpers/getToken';
@@ -52,6 +53,7 @@ const MovimientosInventario = () => {
             name: 'FECHA MERMA',
             selector: row => row.DAT_TRANSACTION,
             sortable: true,
+            format : row => moment(row.DAT_TRANSACTION).format('DD-MM-YYYY')
         },
     ];
 

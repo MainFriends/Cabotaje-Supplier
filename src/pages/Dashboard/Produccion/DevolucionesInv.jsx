@@ -12,6 +12,7 @@ import EditReturnProductForm from '../../../components/ReturnProduct/EditReturnP
 import {paginationComponentOptions} from '../../../helpers/datatablesOptions';
 import axios from '../../../config/axios';
 import token from '../../../helpers/getToken';
+import moment from 'moment';
 
 const DevolucionesInv = () => {
     const [rows, setRows] = useState([]);
@@ -67,6 +68,7 @@ const DevolucionesInv = () => {
             name: 'FECHA DEVOLUCIÓN',
             selector: row => row.DAT_RETURN,
             sortable: true,
+            format : row => moment(row.DAT_RETURN).format('DD-MM-YYYY')
         },
         {
             name: 'ACCIONES',

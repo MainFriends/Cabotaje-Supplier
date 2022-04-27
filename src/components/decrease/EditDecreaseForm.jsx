@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import axios from '../../config/axios'
 import token from '../../../src/helpers/getToken'
 import moment from 'moment'
+import { toUpperCase } from "../../helpers/Mayusculas";
 
 const EditDecreaseForm = ({rowCOD, setSendRequest, setMessageError}) => {
  
@@ -54,7 +55,7 @@ const EditDecreaseForm = ({rowCOD, setSendRequest, setMessageError}) => {
             </div>
             <div className="col-md-6">
                 <label className='form-label' htmlFor="CONCEPT">Concepto</label>
-                <textarea onChange={handleInputChange} value = {formEditDecreas.CONCEPT} className='form-control' name='CONCEPT' type="text" required/>
+                <textarea onChange={handleInputChange} value = {formEditDecreas.CONCEPT} className='form-control' name='CONCEPT' type="text" onInput={toUpperCase} required/>
             </div>
             <div className="col-md-3 mt-2">
                 <label className='form-label' htmlFor="CANT_PRODUCTS">Cantidad Productos</label>
@@ -62,7 +63,7 @@ const EditDecreaseForm = ({rowCOD, setSendRequest, setMessageError}) => {
             </div>
             <div className="col-md-3 mt-2">
                 <label className='form-label' htmlFor="NUM_LOT">Número de lote</label>
-                <input onChange={handleInputChange} value = {formEditDecreas.NUM_LOT} className='form-control' name='NUM_LOT' type="text" required/>
+                <input onChange={handleInputChange} value = {formEditDecreas.NUM_LOT} className='form-control' name='NUM_LOT' type="number" required/>
             </div>
             <div className="col-md-3 mt-2">
                 <label className='form-label' htmlFor="COD_USER">Codigo usuario</label>
