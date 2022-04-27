@@ -141,14 +141,14 @@ const PlanillaPago = () => {
 
                     <Modal 
                         idModal='addPayForm'
-                        title='Agregar Planilla'
+                        title='Agregar planilla'
                         messageError={messageError}
                         content={<AddPayForm setSendRequest={setSendRequest} setMessageError={setMessageError}/>}
                     />
 
                     <Modal 
                         idModal='editPayForm'
-                        title='Actualizar Planilla'
+                        title='Editar planilla'
                         messageError={messageError}
                         content={<EditPayForm rowCOD={rowCOD} setSendRequest={setSendRequest} setMessageError={setMessageError}/>}
                     />

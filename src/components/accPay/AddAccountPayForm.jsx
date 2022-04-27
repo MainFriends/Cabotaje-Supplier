@@ -37,7 +37,7 @@ const AddAccountPayForm = ({setSendRequest, setMessageError}) => {
     return(
         <form id='AddAccountPayForm' onSubmit={handleSubmitAccountPayForm} action='#'>
             <div className="row mb-4">
-                <div className="col-md-2 mt-3">
+                <div className="col-md-4 mt-3">
                     <label className='form-label' htmlFor="COD_INVOICE">Código de la Factura</label>
                     <input onChange={handleInputChange} className='form-control' name='COD_INVOICE' type="number" required/>
                 </div>
