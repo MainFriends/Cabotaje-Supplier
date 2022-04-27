@@ -51,7 +51,7 @@ const AddUserForm = ({setSendRequest, setMessageError}) => {
     }
 
     return(
-        <form id='addFormUser' onSubmit={handleSubmitUser} action='#'>
+<form id='addFormUser' onSubmit={handleSubmitUser} action='#'>
             <div className="row mb-4">
             <div className="col-md-4">
                     <label className='form-label' htmlFor="IDENTITY">Identidad</label>

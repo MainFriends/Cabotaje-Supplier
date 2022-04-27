@@ -45,7 +45,7 @@ const AddSupplierForm = ({setSendRequest, setMessageError}) => {
     return(
         <form id='addFormSupplier' onSubmit={handleSubmitSupplier} action='#'>
             <div className="row mb-4">
-            <div className="col-md-4">
+                <div className="col-md-4">
                     <label className='form-label' htmlFor="NAM_CONTACT ">Nombre del Proveedor</label>
                     <input onChange={handleInputChange} className='form-control' name='NAM_SUPPLIER' type="text"    onInput={toUpperCase}required/>
                 </div>
@@ -82,12 +82,13 @@ const AddSupplierForm = ({setSendRequest, setMessageError}) => {
                     <input   onChange={handleInputChange} className='form-control' name='ZIP_CODE' type="text" pattern="[0-9]{1,5}"  minLength={5} maxLength={7} required/>
                 </div>
             </div>
-               
+           
             <div className="modal-footer">
                 <button type="button" id='idCloseAddForm' className="btn btn-primary" data-dismiss="modal">Cerrar</button>
                 <button type='submit' className="btn btn-success">Guardar</button>
             </div>
         </form>
+
     )
 }
 

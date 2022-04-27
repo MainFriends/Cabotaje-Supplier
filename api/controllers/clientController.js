@@ -52,7 +52,7 @@ const sp= 'CALL SP_INS_CLIENT(?,?,?,?,?,?,?)';
 
         if(err){
             const message = err.message.split(': ')[1];
-            res.status(400). send({message:"el cliente se encuentra registrado"});
+            res.status(400). send({message});
         }else{
             res.status(201).send({message:'El cliente   ha sido registrado correctamente'});
         }
