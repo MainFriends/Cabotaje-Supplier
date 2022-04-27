@@ -63,7 +63,7 @@ const SalesCard = () => {
                           </h5>
                     </div>
                     <div className="col-auto">
-                    <i className="fa-solid fa-piggy-bank fa-2x mr-2 mt-2"></i>
+                      <i className="fa-solid fa-piggy-bank fa-2x mr-2 mt-2"></i>
                     </div>
                 </div>
             </div>

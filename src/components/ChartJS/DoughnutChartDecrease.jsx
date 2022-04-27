@@ -34,7 +34,7 @@ export default function DoughnutChartDecrease() {
   };
 
   useEffect( () =>{
-    axios.get('/drecrease-graphics', token())
+    axios.get('/decrease-graphics', token())
     .then(res => {
       setDecrease(res.data)
     })

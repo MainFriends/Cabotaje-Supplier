@@ -210,9 +210,9 @@ const getCantClient = (req, res) => {
 }
 
 //Lugares de donde nos visitan los clientes
-const getDrecrease = (req, res) => {
+const getDecrease = (req, res) => {
     
-    const sp = 'CALL SP_DRECREASE()'
+    const sp = 'CALL SP_DECREASE()'
 
     mysqlConnect.query(sp, [], (error, resultado) => {
         if(error){
@@ -245,5 +245,5 @@ module.exports = {
     getOrdesPro,
     getDaySales,
     getCantClient,
-    getDrecrease
+    getDecrease
 }

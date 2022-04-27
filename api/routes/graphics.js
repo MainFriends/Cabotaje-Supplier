@@ -18,6 +18,6 @@ router.get('/purchase-per-week', userExtractor, graphicsControler.getPurchaseToD
 router.get('/orders-process', userExtractor, graphicsControler.getOrdesPro);
 router.get('/sales-day', userExtractor, graphicsControler.getDaySales);
 router.get('/cant-client', userExtractor, graphicsControler.getCantClient);
-router.get('/drecrease-graphics', userExtractor, graphicsControler.getDrecrease);
+router.get('/decrease-graphics', userExtractor, graphicsControler.getDecrease);
 
 module.exports = router;
