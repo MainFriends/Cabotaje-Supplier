@@ -47,7 +47,7 @@ const Usuarios = () => {
             sortable: true,
         },
         {
-            name: 'GENDER',
+            name: 'GÉNERO',
             selector: row => row.GENDER,
             sortable: true,
         },
@@ -63,7 +63,7 @@ const Usuarios = () => {
             format: row => row.NUM_PHONE_TWO === 0 ? ('Sin número') : row.NUM_PHONE_TWO
         },
         {
-            name: 'REFERENCIA',
+            name: 'TEL REF',
             selector: row => row.NUM_REFERENCE,
             sortable: true,
         },
@@ -88,7 +88,7 @@ const Usuarios = () => {
             sortable: true,
         },
         {
-            name: 'Email',
+            name: 'EMAIL',
             selector: row => row.USER_EMAIL,
             sortable: true,
             wrap: true
@@ -160,14 +160,14 @@ const Usuarios = () => {
 
                     <Modal 
                         idModal='addUser'
-                        title='Agregar Usuario'
+                        title='Agregar usuario'
                         messageError={messageError}
                         content={<AddUserForm setSendRequest={setSendRequest} setMessageError={setMessageError}/>}
                     />
 
                     <Modal 
                         idModal='editUser'
-                        title='Actualizar Usuario'
+                        title='Editar usuario'
                         messageError={messageError}
                         content={<EditUserForm rowCOD={rowCOD} setSendRequest={setSendRequest} setMessageError={setMessageError}/>}
                     />  

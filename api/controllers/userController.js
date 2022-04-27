@@ -94,10 +94,7 @@ const updateUser = (req, res) => {
         USER_EMAIL,
         USER_PASSWORD
     } = req.body;
-    console.log(DAT_BIRTHDAY)
-
     
-
     const sp = 'CALL SP_UPD_USER(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
 
     mysqlConnect.query(sp,

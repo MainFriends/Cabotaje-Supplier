@@ -70,70 +70,70 @@ const EditUserForm = ({rowCOD, setSendRequest, setMessageError}) => {
             <div className="row mb-4">
             <div className="col-md-4">
                     <label className='form-label' htmlFor="IDENTITY">Identidad</label>
-                    <input onChange={handleInputChange} value={formEditUser.IDENTITY} className='form-control' name='IDENTITY' minlenght={13} maxLength={13}  type="tel" pattern="[0-9]{1,13}" placeholder="####-####-######" required/>
+                    <input onChange={handleInputChange} value={formEditUser.IDENTITY} className='form-control' name='IDENTITY' minlenght={13} maxLength={13}  type="tel" pattern="[0-9]{1,13}" required/>
                 </div>
                 <div className="col-md-4">
-                    <label className='form-label' htmlFor="FIRST_NAME">Nombre</label>
-                    <input onChange={handleInputChange} value={formEditUser.FIRST_NAME} className='form-control' name='FIRST_NAME' type="text" pattern="[A-Z]{1}[a-z]{2,15}" title="La primera letra debe ser MAYUSCULA" placeholder="Ingrese Nombre" onInput={toUpperCase} required/>
+                    <label className='form-label' htmlFor="FIRST_NAME">Primer nombre</label>
+                    <input onChange={handleInputChange} value={formEditUser.FIRST_NAME} className='form-control' name='FIRST_NAME' type="text" pattern="[A-Z]{1}[a-z]{2,15}" title="La primera letra debe ser MAYUSCULA" onInput={toUpperCase} required/>
                 </div>
                 <div className="col-md-4">
-                    <label className='form-label' htmlFor="MIDDLE_NAME">Segundo Nombre</label>
-                    <input onChange={handleInputChange} value={formEditUser.MIDDLE_NAME} className='form-control' name='MIDDLE_NAME' type="text" pattern="[A-Z]{1}[a-z]{2,15}" title="La primera letra debe ser MAYUSCULA"placeholder="Ingrese segundo Nombre" onInput={toUpperCase} required/>
+                    <label className='form-label' htmlFor="MIDDLE_NAME">Segundo nombre</label>
+                    <input onChange={handleInputChange} value={formEditUser.MIDDLE_NAME} className='form-control' name='MIDDLE_NAME' type="text" pattern="[A-Z]{1}[a-z]{2,15}" title="La primera letra debe ser MAYUSCULA" onInput={toUpperCase} required/>
                 </div>
-                <div className="col-md-4">
+                <div className="col-md-4 mt-2">
                     <label className='form-label' htmlFor="LAST_NAME">Apellido</label>
-                    <input onChange={handleInputChange} value={formEditUser.LAST_NAME} className='form-control' name='LAST_NAME' type="text" pattern="[A-Z]{1}[a-z]{2,15}" title="La primera letra debe ser MAYUSCULA" placeholder="Ingrese Apellido" onInput={toUpperCase} required/>
+                    <input onChange={handleInputChange} value={formEditUser.LAST_NAME} className='form-control' name='LAST_NAME' type="text" pattern="[A-Z]{1}[a-z]{2,15}" title="La primera letra debe ser MAYUSCULA" onInput={toUpperCase} required/>
                 </div>
             
-                <div className="col-md-4">
-                    <label classname="form-label" htmlfor="GENDER">GENERO</label>
+                <div className="col-md-4 mt-2">
+                    <label className="form-label" htmlFor="GENDER">Género</label>
                     <select onChange={handleInputChange} value={formEditUser.GENDER} className="form-control" name="GENDER" type="text" required>
-                    <option selected>-seleccionar-</option> 
-                    <option value="M">MASCULINO</option>
-                    <option value="F">FEMENINO</option>
-                    <option value="O">PREFIERO NO DECIRLO</option>
+                        <option value=''>-Seleccionar-</option> 
+                        <option value="M">Masculino</option>
+                        <option value="F">Femenino</option>
+                        <option value="O">Prefiero no decirlo</option>
                     </select>   
-                    </div>
-                <div className="col-md-4 ">
+                </div>
+                <div className="col-md-4 mt-2">
                     <label className='form-label' htmlFor="NUM_PHONE_ONE">Teléfono 1</label>
-                    <input onChange={handleInputChange} value={formEditUser.NUM_PHONE_ONE} className='form-control' name='NUM_PHONE_ONE' type="tel"  pattern="[0-9]{8}" placeholder="########"   minLength={8} maxLength={8} title="El numero telfonico debe contener 8 caracteres" required/>
+                    <input onChange={handleInputChange} value={formEditUser.NUM_PHONE_ONE} className='form-control' name='NUM_PHONE_ONE' type="tel"  pattern="[0-9]{8}" minLength={8} maxLength={8} title="El numero telfonico debe contener 8 caracteres" required/>
                 </div>
-                <div className="col-md-4">
+                <div className="col-md-4 mt-2">
                     <label className='form-label' htmlFor="NUM_PHONE_TWO">Teléfono 2</label>
-                    <input onChange={handleInputChange} value={formEditUser.NUM_PHONE_TWO} className='form-control' name='NUM_PHONE_TWO' type="tel" pattern="[0-9]{1,8}"  placeholder="########" minLength={8}  maxLength={8} title="OPCIONAL" required/>
+                    <input onChange={handleInputChange} value={formEditUser.NUM_PHONE_TWO} className='form-control' name='NUM_PHONE_TWO' type="tel" pattern="[0-9]{1,8}" minLength={8}  maxLength={8} title="OPCIONAL" required/>
                 </div>
-                <div className="col-md-4">
-                    <label className='form-label' htmlFor="NUM_REFERENCE">TELEFONO DE REFERENCIA</label>
-                    <input onChange={handleInputChange} value={formEditUser.NUM_REFERENCE} className='form-control' name='NUM_REFERENCE' type="tel" pattern="[0-9]{8}"  placeholder="########" minLength={8}  maxLength={8} required/>
+                <div className="col-md-4 mt-2">
+                    <label className='form-label' htmlFor="NUM_REFERENCE">Télefono de referencia</label>
+                    <input onChange={handleInputChange} value={formEditUser.NUM_REFERENCE} className='form-control' name='NUM_REFERENCE' type="tel" pattern="[0-9]{8}" minLength={8}  maxLength={8} required/>
                 </div>
-                <div className="col-md-4">
-                    <label className='form-label' htmlFor="DAT_BIRTHDAY">fecha de Nacimiento</label>
-                    <input onChange={handleInputChange} value={moment(formEditUser.DAT_BIRTHDAY).format('YYYY-MM-DD')} className='form-control' name='DAT_BIRTHDAY'   type="date" min="1950-01-01" required/>
+                <div className="col-md-4 mt-2">
+                    <label className='form-label' htmlFor="DAT_BIRTHDAY">Fecha de nacimiento</label>
+                    <input onChange={handleInputChange} value={moment(formEditUser.DAT_BIRTHDAY).format('YYYY-MM-DD')} className='form-control' name='DAT_BIRTHDAY' type="date" min="1950-01-01" required/>
                 </div>
             
-                <div className="col-md-4">
+                <div className="col-md-4 mt-2">
                     <label className='form-label' htmlFor="NAM_CITY">Ciudad</label>
-                    <input onChange={handleInputChange.DAT_BIRTHDAY} value={formEditUser.NAM_CITY} className='form-control' name='NAM_CITY'   type="text" onInput={toUpperCase} pattern="[A-Z]{1}[a-z]{1,20}"  placeholder="Domicilio"  required/>
+                    <input onChange={handleInputChange.DAT_BIRTHDAY} value={formEditUser.NAM_CITY} className='form-control' name='NAM_CITY'   type="text" onInput={toUpperCase} pattern="[A-Z]{1}[a-z]{1,20}" required/>
                 </div>
-                <div className="col-md-8 mt-1">
+                <div className="col-md-8 mt-2">
                     <label className='form-label' htmlFor="ADDRESS">Dirección</label>
-                    <textarea onChange={handleInputChange} value={formEditUser.ADDRESS} className='form-control' name='ADDRESS'  rows='3' cols='4' type="text" placeholder="Direccion de su Domicilio" required/>
+                    <textarea onChange={handleInputChange} value={formEditUser.ADDRESS} className='form-control' name='ADDRESS'  rows='3' cols='4' type="text" required/>
                 </div>
                 <br></br>
                 <br></br>
                 <br></br>
               
-                    <div className="col-md-4">
-                        <label classname="form-label" htmlfor="COD_ROLE">ROLES</label>
+                    <div className="col-md-4 mt-2">
+                        <label className="form-label" htmlFor="COD_ROLE">Rol</label>
                         <select onChange={handleInputChange} value={formEditUser.COD_ROLE} className="form-control" name="COD_ROLE" type="text" required>
                         <option value=''>-seleccionar-</option> 
                         {rolesEdit.map(rol => {
-                            return <option value={rol.COD_ROLE}>{rol.NAM_ROLE}</option>
+                            return <option key={rol.COD_ROLE} value={rol.COD_ROLE}>{rol.NAM_ROLE}</option>
                         })}
                         </select>
                         </div>
-                <div className="col-md-5">
-                    <label className='form-label' htmlFor="USER_EMAIL">EMAIL</label>
+                <div className="col-md-5 mt-2">
+                    <label className='form-label' htmlFor="USER_EMAIL">Correo electrónico</label>
                     <input onChange={handleInputChange} value={formEditUser.USER_EMAIL} className='form-control' name='USER_EMAIL'  type="email" required/>
                 </div>
             
