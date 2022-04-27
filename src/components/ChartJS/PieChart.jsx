@@ -40,7 +40,7 @@ export default function PieChart() {
   };
 
   useEffect(() => {
-    axios.get('/roles', token())
+    axios.get('/roles-graphics', token())
       .then(res => {
         setRoles(res.data)
       })
