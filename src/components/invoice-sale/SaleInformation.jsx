@@ -105,6 +105,7 @@ const SaleInformation = ({setsaleInvoice, saleInvoice, setCurrentPage, setCorrel
                   value={saleInvoice.COD_USER}
                   autoFocus
                   name='COD_USER'
+                  min={1}
                 />
               </div>
               <div className="col-6">

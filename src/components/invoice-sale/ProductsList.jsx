@@ -9,17 +9,20 @@ const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeI
     const [productListSale, setproductListSale] = useState([]);
 
     useEffect(() => {
-        console.log(productListSale)
         setsaleInvoice({
             ...saleInvoice,
-            SUBTOTAL: productListSale.reduce((prev, current) => prev.PRECIO + current.PRECIO, 0)
+            SUBTOTAL: productListSale.reduce((acum, current) => acum + (current.PRICE * current.CANT_PRODUCT), 0),
+            TOT_ISV: productListSale.reduce((acum, current) => acum + (current.ISV * current.CANT_PRODUCT), 0),
+            TOT_SALE: productListSale.reduce((acum, current) => acum + current.TOTAL, 0)
         })
     }, [productListSale]);
 
-    
     const {
-        SUBTOTAL
+        SUBTOTAL,
+        TOT_ISV,
+        TOT_SALE
     } = saleInvoice;
+    
     const columns = [
         {
             name: 'CÓDIGO',
@@ -134,15 +137,13 @@ const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeI
         <div className="row">
             <div className="col-10 text-right">
                 <h6>Subtotal</h6>
-                <h6>Descuento total</h6>
                 <h6>ISV 15%</h6>
                 <h4>Total</h4>
             </div>
             <div className="col-2">
-                <h6>{SUBTOTAL}</h6>
-                <h6>L. 0.00</h6>
-                <h6>L. 0.00</h6>
-                <h4>L. 0.00</h4>
+                <h6>{`L. ${SUBTOTAL.toFixed(2)}`}</h6>
+                <h6>{`L. ${TOT_ISV.toFixed(2)}`}</h6>
+                <h4>{`L. ${TOT_SALE.toFixed(2)}`}</h4>
             </div>
         </div>
         <div className="modal-footer">

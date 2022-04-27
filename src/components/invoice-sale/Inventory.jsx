@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import AlertError from '../AlertError';
 import axios from '../../config/axios';
 import token from '../../helpers/getToken';
 
@@ -8,6 +9,7 @@ const Inventory = ({productListSale, setproductListSale}) => {
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [cant, setCant] = useState(0);
     const [codProduct, setCodProduct] = useState(null);
+    const [errorMessage, setErrorMessage] = useState('');
     const [selectProduct, setSelectedProduct] = useState({
         COD_PRODUCT: 0,
         NAM_PRODUCT: '',
@@ -54,6 +56,18 @@ const Inventory = ({productListSale, setproductListSale}) => {
     
     const addProduct = () => {
         let PRICE;
+
+        const isExistProduct = productListSale.some(product => product.COD_PRODUCT === COD_PRODUCT);
+        console.log(isExistProduct)
+        if(isExistProduct){
+            setErrorMessage('El producto ya ha sido agregado a lista.');
+
+            setTimeout(() => {
+                setErrorMessage('')
+            }, 3000);
+            
+            return;
+        }
 
         if(cant < WHOLESALE_CANT){
             PRICE = NORMAL_UNIT_PRICE
@@ -133,7 +147,8 @@ const Inventory = ({productListSale, setproductListSale}) => {
                         </div>
                     </div>
                     <div className="modal-footer mt-3 px-0">
-                        <button data-dismiss="modal" onClick={() => addProduct()} className={'btn btn-primary btn-block mx-0 ' + (cant < 1 ? ' disabled' : '')}>Agregar</button>
+                        <button onClick={() => addProduct()} className={'btn btn-primary btn-block mx-0 ' + (cant < 1 ? ' disabled' : '')}>Agregar</button>
+                        {errorMessage ? <AlertError message={errorMessage}/> : null}
                     </div>
                 </div>
                 :

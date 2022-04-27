@@ -19,14 +19,6 @@ const Facturar = () => {
     COD_TYP_PAY: '',
     RTN: 0
   })
-  const [user, setUser] = useState({
-    code: '',
-    name: ''
-  });
-  const [client, setClient] = useState({
-    name: 'CF',
-    RTN: 0
-  });
 
   return (
     <div className="container-fluid">
