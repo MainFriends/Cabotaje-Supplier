@@ -6,6 +6,7 @@ import { toUpperCase } from "../../helpers/Mayusculas";
 
 
 const EditUserForm = ({rowCOD, setSendRequest, setMessageError}) => {
+    const [rolesEdit, setRolesEdit] = useState([]);
 
     const [formEditUser, setFormEditUser] = useState({
         IDENTITY: '',
@@ -21,11 +22,12 @@ const EditUserForm = ({rowCOD, setSendRequest, setMessageError}) => {
         ADDRESS: '',
         COD_ROLE:'',
         USER_EMAIL:'',
-       
     })
 
-    
-
+    useEffect(() => {
+        axios.get('/roles', token())
+            .then(res => setRolesEdit(res.data))
+    }, [])
 
     const handleInputChange = (e) => {
         setFormEditUser({
@@ -37,7 +39,12 @@ const EditUserForm = ({rowCOD, setSendRequest, setMessageError}) => {
     useEffect(() => {
         if(rowCOD){
             axios.get(`/User/${rowCOD}`, token())
-            .then(res => setFormEditUser(res.data[0]))
+            .then(res => {
+                setFormEditUser({
+                    ...res.data[0],
+                    DAT_BIRTHDAY: moment(res.data[0].DAT_BIRTHDAY).format('YYYY-MM-DD')
+                })
+            })
         }
     }, [rowCOD])
 
@@ -119,11 +126,10 @@ const EditUserForm = ({rowCOD, setSendRequest, setMessageError}) => {
                     <div className="col-md-4">
                         <label classname="form-label" htmlfor="COD_ROLE">ROLES</label>
                         <select onChange={handleInputChange} value={formEditUser.COD_ROLE} className="form-control" name="COD_ROLE" type="text" required>
-                        <option selected>-seleccionar-</option> 
-                        <option value="1">administrador</option>
-                        <option value="2">control de calidad</option>
-                        <option value="3">contador</option>
-                        <option value="4">cajero</option>
+                        <option value=''>-seleccionar-</option> 
+                        {rolesEdit.map(rol => {
+                            return <option value={rol.COD_ROLE}>{rol.NAM_ROLE}</option>
+                        })}
                         </select>
                         </div>
                 <div className="col-md-5">

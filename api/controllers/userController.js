@@ -94,6 +94,7 @@ const updateUser = (req, res) => {
         USER_EMAIL,
         USER_PASSWORD
     } = req.body;
+    console.log(DAT_BIRTHDAY)
 
     
 
@@ -120,7 +121,7 @@ const updateUser = (req, res) => {
         ], (err) => {
             if(err){
                 const message = err.message.split(': ')[1];
-                res.status(400).send({message:'El usuario no pudo ser modificado, verifique su informacion'});
+                res.status(400).send({message});
             }else{
                 res.status(200).send({message: 'El usuario ha sido modificado.'});
             }

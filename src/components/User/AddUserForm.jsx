@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from '../../config/axios';
 import token from '../../helpers/getToken';
 import { toUpperCase } from "../../helpers/Mayusculas";
@@ -7,6 +7,7 @@ import { toUpperCase } from "../../helpers/Mayusculas";
 
 
 const AddUserForm = ({setSendRequest, setMessageError}) => {
+    const [roles, setRoles] = useState([]);
 
     const [formAddUser, setFormAddUser] = useState({
         IDENTITY: '',
@@ -24,6 +25,11 @@ const AddUserForm = ({setSendRequest, setMessageError}) => {
         USER_EMAIL:'',
         USER_PASSWORD:''
     })
+
+    useEffect(() => {
+        axios.get('/roles', token())
+            .then(res => setRoles(res.data))
+    }, [])
 
     const handleInputChange = (e) => {
         setFormAddUser({
@@ -71,9 +77,9 @@ const AddUserForm = ({setSendRequest, setMessageError}) => {
                 </div>
 
                 <div className="col-md-4">
-                    <label classname="form-label" htmlfor="GENDER">GENERO</label>
-                    <select onChange={handleInputChange}  className="form-control" name="GENDER" type="text" required>
-                    <option selected>-seleccionar-</option> 
+                    <label className="form-label" htmlFor="GENDER">GENERO</label>
+                    <select onChange={handleInputChange} defaultValue={''} className="form-control" name="GENDER" type="text" required>
+                    <option value=''>-Seleccionar-</option> 
                     <option value="M">MASCULINO</option>
                     <option value="F">FEMENINO</option>
                     <option value="O">PREFIERO NO DECIRLO</option>
@@ -108,15 +114,13 @@ const AddUserForm = ({setSendRequest, setMessageError}) => {
                 <br></br>
                 <br></br>
                 <br></br>
-               
                     <div className="col-md-4">
-                    <label classname="form-label" htmlfor="COD_ROLE">ROLES</label>
-                    <select onChange={handleInputChange}  className="form-control" name="COD_ROLE" type="text" required>
-                    <option selected>-seleccionar- </option> 
-                    <option value="1">ADMINISTRADOR</option>
-                    <option value="2">CONTROL DE CALIDAD</option>
-                    <option value="3">CONTADOR</option>
-                    <option value="4">CAJERO</option>
+                    <label className="form-label" htmlFor="COD_ROLE">ROLES</label>
+                    <select onChange={handleInputChange} defaultValue={''} className="form-control" name="COD_ROLE" type="text" required>
+                        <option value=''>-seleccionar- </option> 
+                        {roles.map(rol => {
+                            return <option value={rol.COD_ROLE}>{rol.NAM_ROLE}</option>
+                        })}
                     </select>
                     </div>
 

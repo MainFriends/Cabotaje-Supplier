@@ -91,6 +91,7 @@ const Usuarios = () => {
             name: 'Email',
             selector: row => row.USER_EMAIL,
             sortable: true,
+            wrap: true
         },
  
         {
