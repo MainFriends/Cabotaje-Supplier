@@ -18,10 +18,10 @@ const AddFacturaForm = ({setSendRequest}) => {
         TOT_PURCHASE: 0,
         TYP_TO_PURCHASE: '',
         COD_TYP_PAY: '',
-        DAT_INVOICE: ''
+        DAT_INVOICE: '',
+        DESCRIPTION: '',
+        DATE_LIMIT: ''
     });
-
-    console.log(formAddFactura)
 
     const {
         SUBTOTAL,
@@ -29,7 +29,9 @@ const AddFacturaForm = ({setSendRequest}) => {
         TOT_PURCHASE,
         TYP_TO_PURCHASE,
         COD_TYP_PAY,
-        DAT_INVOICE
+        DAT_INVOICE,
+        DESCRIPTION,
+        DATE_LIMIT
     } = formAddFactura
 
     const {
@@ -212,7 +214,9 @@ const AddFacturaForm = ({setSendRequest}) => {
                     TOT_PURCHASE: 0,
                     TYP_TO_PURCHASE: '',
                     COD_TYP_PAY: '',
-                    DAT_INVOICE: ''
+                    DAT_INVOICE: '',
+                    DESCRIPTION: '',
+                    DATE_LIMIT: ''
                 })
                 setSendRequest(true);
                 document.querySelector('#closeModalAddPurchase').click()
@@ -256,15 +260,31 @@ const AddFacturaForm = ({setSendRequest}) => {
                             <option value={3}>Transferencia</option>
                     </select>
                 </div>
-                <div className="col-md-4 mt-2">
+                <div className="col-md-3 mt-2">
                     <label className='form-label' htmlFor="DAT_INVOICE">Fecha</label>
                     <input value={DAT_INVOICE} onChange={handleInputChange} className='form-control' name='DAT_INVOICE' type="date" required/>
                 </div>
-                <div className="col-md-4">
+                <div className="col-md-1">
                     <div className="mt-3">
                         <button onClick={() => addProduct()} type="button" className="btn btn-success mt-4" title="Agregar producto">+</button>
                     </div>
                 </div>
+                {
+                    TYP_TO_PURCHASE === 'Crédito'
+                    ?
+                    <>
+                        <div className="col-md-4 mt-2">
+                            <label className='form-label' htmlFor="DESCRIPTION">Descripción</label>
+                            <textarea onChange={handleInputChange} value={DESCRIPTION} onChange={handleInputChange} rows={3} className='form-control' name='DESCRIPTION' type="text" placeholder="Descripción de la cuenta por pagar" required/>
+                        </div>
+                        <div className="col-md-3 mt-2">
+                            <label className='form-label' htmlFor="DATE_LIMIT">Fecha limite CP</label>
+                            <input value={DATE_LIMIT} onChange={handleInputChange} className='form-control' name='DATE_LIMIT' type="date" required/>
+                        </div>
+                    </>
+                    :
+                    null
+                }
                 <DataTable
                     columns={columns}
                     data={productList}

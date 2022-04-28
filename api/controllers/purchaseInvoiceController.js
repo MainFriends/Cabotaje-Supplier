@@ -34,10 +34,12 @@ const addPurchase = (req,res)=>{
         TYP_TO_PURCHASE,
         COD_TYP_PAY,
         DAT_INVOICE,
-        COD_ORDER = 0
+        COD_ORDER = 0,
+        DESCRIPTION,
+        DATE_LIMIT
     }= req.body;
 
-    const sp = 'CALL SP_INS_PURCHASE_INVOICE(?,?,?,?,?,?,?,?,?)';
+    const sp = 'CALL SP_INS_PURCHASE_INVOICE(?,?,?,?,?,?,?,?,?,?,?)';
 
     mysqlConnect.query(sp,
     [
@@ -49,7 +51,9 @@ const addPurchase = (req,res)=>{
         COD_TYP_PAY,
         DAT_INVOICE,
         COD_ORDER,
-        COD_USER
+        COD_USER,
+        DESCRIPTION,
+        DATE_LIMIT
     ], (err) => {
         if(err){
             const message = err.message.split(': ')[1];
