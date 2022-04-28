@@ -28,7 +28,8 @@ const Inventory = ({productListSale, setproductListSale}) => {
         WHOLESALE_PRICE,
         WHOLESALE_CANT,
         NAM_TYPE_PRODUCT,
-        ISV
+        ISV,
+        CANT_TOTAL
     } = selectProduct
 
     useEffect(() => {
@@ -60,6 +61,16 @@ const Inventory = ({productListSale, setproductListSale}) => {
         const isExistProduct = productListSale.some(product => product.COD_PRODUCT === COD_PRODUCT);
         if(isExistProduct){
             setErrorMessage('El producto ya ha sido agregado a lista.');
+
+            setTimeout(() => {
+                setErrorMessage('')
+            }, 3000);
+            
+            return;
+        }
+
+        if(cant > CANT_TOTAL){
+            setErrorMessage('No hay suficientes stocks del producto en inventario.');
 
             setTimeout(() => {
                 setErrorMessage('')
@@ -128,10 +139,10 @@ const Inventory = ({productListSale, setproductListSale}) => {
                         <div className="col-12">
                             <h3 className='mb-0'>{NAM_PRODUCT}</h3>
                         </div>
-                        <div className="col-6">
+                        <div className="col-8">
                             <small className='text-small text-secondary'>{DES_PRODUCT}</small>
                         </div>
-                        <div className="col-6 text-right">
+                        <div className="col-4 text-right">
                             <small className='text-small text-secondary'>{NAM_TYPE_PRODUCT}</small>
                         </div>
                     </div>
@@ -140,6 +151,7 @@ const Inventory = ({productListSale, setproductListSale}) => {
                         <div className="col-6">
                             <h6 className='mb-1'>Cantidad</h6>
                             <input onChange={handleCant} min={0} value={cant} className='form-control form-control-lg' type="number" />
+                            <small className='text-small text-secondary'>Existencias: {CANT_TOTAL}</small>
                         </div>
                         <div className="col-6">
                             <h6 className='mb-1'>Precio</h6>
