@@ -155,7 +155,7 @@ const Inventory = ({productListSale, setproductListSale}) => {
                         </div>
                         <div className="col-6">
                             <h6 className='mb-1'>Precio</h6>
-                            <input className='form-control form-control-lg' value={cant < WHOLESALE_CANT ? `L. ${NORMAL_UNIT_PRICE.toFixed(2)}` : `L. ${WHOLESALE_PRICE.toFixed(2)}`} disabled/>
+                            <input className='form-control form-control-lg' value={WHOLESALE_CANT > 0 ? (cant < WHOLESALE_CANT ? `L. ${NORMAL_UNIT_PRICE.toFixed(2)}` : `L. ${WHOLESALE_PRICE.toFixed(2)}`) : `L. ${NORMAL_UNIT_PRICE.toFixed(2)}`} disabled/>
                         </div>
                     </div>
                     <div className="modal-footer mt-3 px-0">
