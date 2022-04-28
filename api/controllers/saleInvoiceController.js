@@ -31,13 +31,13 @@ const addInvoice = (req, res) => {
         COD_CLIENT,
         COD_USER, 
         SUBTOTAL,
-        TOT_DISCOUNT,
+        TOT_DISCOUNT = 0,
         TOT_ISV,
         TOT_SALE,
         TYP_TO_SALE,
         COD_TYP_PAY,
-        DESCRIPTION,
-        DAT_LIMIT 
+        DESCRIPTION = null,
+        DAT_LIMIT = null
     } = req.body;
 
     const sp = 'CALL SP_INS_SALE_INVOICE(?,?,?,?,?,?,?,?,?,?)';

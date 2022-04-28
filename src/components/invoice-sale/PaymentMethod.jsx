@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component';
+import axios from '../../config/axios';
+import token from '../../helpers/getToken';
 import moment from 'moment';
 
-export const PaymentMethod = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeInvoice, productListSale, setproductListSale}) => {
+export const PaymentMethod = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeInvoice, productListSale}) => {
     const [efectivoRecibido, setEfectivoRecibido] = useState(0);
     const [cambio, setCambio] = useState(0);
 
@@ -62,6 +64,21 @@ export const PaymentMethod = ({saleInvoice, setsaleInvoice, setCurrentPage, corr
     useEffect(() => {
         setCambio(saleInvoice.TOT_SALE - efectivoRecibido)
     }, [efectivoRecibido])
+
+    const onSubmit = () => {
+        axios.post('/sale-invoice', saleInvoice, token())
+            .then(res => {
+                console.log(res.data)
+                sendDetail()
+            })
+    }
+
+    const sendDetail = () => {
+        axios.post('/sale-detail', productListSale, token())
+            .then(res => {
+                console.log(res.data)
+            })
+    }
 
   return (
     <div className="card text-dark card-facturar shadow">
@@ -158,7 +175,7 @@ export const PaymentMethod = ({saleInvoice, setsaleInvoice, setCurrentPage, corr
         <button onClick={() => setCurrentPage(2)} className="btn btn-dark">
           <i className="fa-solid fa-chevron-left"></i>
         </button>
-        <button className="btn btn-primary">
+        <button onClick={() => onSubmit()} className="btn btn-primary">
             <i class="fa-solid fa-circle-check mr-2"></i>Finalizar venta
         </button>
     </div>

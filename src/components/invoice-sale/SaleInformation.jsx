@@ -44,7 +44,15 @@ const SaleInformation = ({setsaleInvoice, saleInvoice, setCurrentPage, setCorrel
   useEffect(() => {
     if(RTN.length === 14){
       axios.get(`/find-client/${RTN}`, token())
-        .then(res => console.log(res.data[0]))
+        .then(res => {
+          const {COD_CLIENT, FIRST_NAME, LAST_NAME} = res.data[0];
+          setsaleInvoice({
+            ...saleInvoice,
+            COD_CLIENT,
+            NAM_CLIENT: `${FIRST_NAME} ${LAST_NAME}`
+          })
+        })
+      return
     }
   }, [RTN])
 
@@ -64,6 +72,13 @@ const SaleInformation = ({setsaleInvoice, saleInvoice, setCurrentPage, setCorrel
       }, 3000);
       
       return;
+    }
+
+    if(saleInvoice.NAM_CLIENT === ''){
+      setsaleInvoice({
+        ...saleInvoice,
+        NAM_CLIENT: 'CF'
+      })
     }
 
     if(saleInvoice.NAM_USER === `Usuario no encontrado`){

@@ -35,7 +35,8 @@ const Usuarios = () => {
             name: 'IDENTIDAD',
             selector: row => row.IDENTITY,
             sortable: true,
-            grow: 2
+            grow: 2,
+            format: row => `0${row.IDENTITY}`
         },
         {
             name: 'NOMBRE',

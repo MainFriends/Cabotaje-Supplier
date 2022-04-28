@@ -31,6 +31,8 @@ const Clientes = () => {
             name: 'IDENTIDAD',
             selector: row => row.IDENTITY,
             sortable: true,
+            format: row => `0${row.IDENTITY}`,
+            grow: 2
         },
         {
             name: 'NOMBRE',
@@ -62,6 +64,8 @@ const Clientes = () => {
             name: 'RTN',
             selector: row => row.RTN,
             sortable: true,
+            format: row => `0${row.RTN}`,
+            grow: 2
         },
         {
             name: 'ACCIONES',
