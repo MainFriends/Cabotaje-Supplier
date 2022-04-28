@@ -59,7 +59,7 @@ const Facturar = () => {
             />
           }
         </div>
-        <div className="col-12 text-right">
+        <div className="col-12 text-right mb-5">
             <Link to='/dashboard' className='btn btn-danger'><i className="mr-2 fa-solid fa-circle-chevron-left"></i>Dashboard</Link>
         </div>
       </div>

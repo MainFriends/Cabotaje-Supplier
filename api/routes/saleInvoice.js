@@ -11,5 +11,6 @@ router.post('/sale-invoice', [userExtractor, verifyRoleSalesInvoice], saleInvoic
 router.get('/categories', [userExtractor, verifyRoleSalesInvoice], saleInvoiceController.getCategories);
 router.get('/products/:codCategory', [userExtractor, verifyRoleSalesInvoice], saleInvoiceController.getProducts);
 router.get('/correlative', [userExtractor, verifyRoleSalesInvoice], saleInvoiceController.getCorrelative);
+router.get('/find-client/:rtn', [userExtractor, verifyRoleSalesInvoice], saleInvoiceController.getClient);
 
 module.exports = router;

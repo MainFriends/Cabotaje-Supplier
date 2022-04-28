@@ -8,6 +8,8 @@ const SaleInformation = ({setsaleInvoice, saleInvoice, setCurrentPage, setCorrel
 
   const [errorMessage, setErrorMessage] = useState('');
 
+  const {RTN} = saleInvoice;
+
   useEffect(() => {
     if(saleInvoice.COD_USER){
       axios.get(`/user/${saleInvoice.COD_USER}`, token())
@@ -38,6 +40,13 @@ const SaleInformation = ({setsaleInvoice, saleInvoice, setCurrentPage, setCorrel
         }
       })
   }, [])
+
+  useEffect(() => {
+    if(RTN.length === 14){
+      axios.get(`/find-client/${RTN}`, token())
+        .then(res => console.log(res.data[0]))
+    }
+  }, [RTN])
 
   const handleInputChange = ({target}) => {
     setsaleInvoice({

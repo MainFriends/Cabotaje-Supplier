@@ -128,7 +128,7 @@ const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeI
                     type="text" 
                     className="form-control form-control-sm" 
                     disabled
-                    value={moment().format('YYYY-MM-DD')}
+                    value={moment().format('DD-MM-YYYY')}
                     />
                 </div>
             </div>

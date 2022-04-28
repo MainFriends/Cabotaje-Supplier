@@ -101,7 +101,7 @@ export const PaymentMethod = ({saleInvoice, setsaleInvoice, setCurrentPage, corr
                 type="text" 
                 className="form-control form-control-sm" 
                 disabled
-                value={moment().format('YYYY-MM-DD')}
+                value={moment().format('DD-MM-YYYY')}
                 />
             </div>
         </div>

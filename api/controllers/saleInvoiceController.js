@@ -98,11 +98,27 @@ const getCorrelative = (req, res) => {
     });
 }
 
+const getClient = (req, res) => {
+
+    const {rtn} = req.params
+
+    const sp = `CALL SP_SEL_FINDCLIENT(?)`;
+
+    mysqlConnect.query(sp, [rtn], (err, result) => {
+        if(err){
+            res.status(500).send({message: "Error en el servidor."});
+        }else{
+            res.status(200).json(result[0]);
+        }
+    });
+}
+
 module.exports = {
     getInvoices,
     getInvoice,
     addInvoice,
     getCategories,
     getProducts,
-    getCorrelative
+    getCorrelative,
+    getClient
 };
