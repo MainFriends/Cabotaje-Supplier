@@ -79,11 +79,17 @@ const Inventory = ({productListSale, setproductListSale}) => {
             return;
         }
 
-        if(cant < WHOLESALE_CANT){
-            PRICE = NORMAL_UNIT_PRICE
+        if(WHOLESALE_CANT>0){
+            if(cant < WHOLESALE_CANT){
+                PRICE = NORMAL_UNIT_PRICE
+            }else{
+                PRICE = WHOLESALE_PRICE
+            }
         }else{
-            PRICE = WHOLESALE_PRICE
+            PRICE = NORMAL_UNIT_PRICE
         }
+
+
 
         const product = {
             COD_PRODUCT,
