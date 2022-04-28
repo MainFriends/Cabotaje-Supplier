@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import axios from '../../config/axios';
 import token from '../../helpers/getToken';
 import AlertSuccess from "../AlertSuccess";
+import { toUpperCase } from "../../helpers/Mayusculas";
+
 
 const EditProductForm = ({sendRequest, rowCOD, setSendRequest, setMessageError}) => {
     const [btnWhosaleEdit, setBtnWhosaleEdit] = useState(false);
@@ -104,11 +106,11 @@ const EditProductForm = ({sendRequest, rowCOD, setSendRequest, setMessageError})
             <div className="row mb-4">
                 <div className="col-4">
                     <label className='form-label' htmlFor="NAM_PRODUCT">Nombre del producto</label>
-                    <input value={NAM_PRODUCT} onChange={handleInputChange} className='form-control' name='NAM_PRODUCT' type="text" required/>
+                    <input value={NAM_PRODUCT} onChange={handleInputChange} className='form-control' name='NAM_PRODUCT' type="text" onInput={toUpperCase} required/>
                 </div>
                 <div className="col-8">
                     <label className='form-label' htmlFor="DES_PRODUCT">Descripción</label>
-                    <textarea value={DES_PRODUCT} onChange={handleInputChange} className='form-control' rows='2' name='DES_PRODUCT' type="text" required/>
+                    <textarea value={DES_PRODUCT} onChange={handleInputChange} className='form-control' rows='2' name='DES_PRODUCT' type="text" onInput={toUpperCase} required/>
                 </div>
             </div>
             <div className="row mb-4">
