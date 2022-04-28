@@ -24,16 +24,17 @@ const getPurchase = (req, res) => {
 };
 
 const addPurchase = (req,res)=>{
+    const {COD_USER} = req.user
+
     const {
         SUBTOTAL,
-        TOT_DISCOUNT ,
+        TOT_DISCOUNT = 0,
         TOT_ISV,
         TOT_PURCHASE,
         TYP_TO_PURCHASE,
         COD_TYP_PAY,
         DAT_INVOICE,
-        COD_ORDER,
-        COD_USER
+        COD_ORDER = 0
     }= req.body;
 
     const sp = 'CALL SP_INS_PURCHASE_INVOICE(?,?,?,?,?,?,?,?,?)';
@@ -41,7 +42,7 @@ const addPurchase = (req,res)=>{
     mysqlConnect.query(sp,
     [
         SUBTOTAL,
-        TOT_DISCOUNT ,
+        TOT_DISCOUNT,
         TOT_ISV,
         TOT_PURCHASE,
         TYP_TO_PURCHASE,
