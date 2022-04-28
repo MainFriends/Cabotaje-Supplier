@@ -26,10 +26,12 @@ const getOrder = (req, res) => {
 };
 
 const addOrder = (req, res) => {
+
+    const {COD_USER} = req.user
+
     const{
         COD_SUPPLIER,
-        DAT_REQUIRED,
-        COD_USER
+        DAT_REQUIRED
     } = req.body
 
    const sp = 'CALL SP_INS_ORDER(?,?,?)'
@@ -48,11 +50,13 @@ const addOrder = (req, res) => {
 };
 
 const updateOrder = (req, res) => {
+    const {COD_USER} = req.user
+
     const {codOrder} = req.params;
+    
     const {
         COD_SUPPLIER,
         DAT_REQUIRED,
-        COD_USER,
         COD_STATUS
     } = req.body
 
@@ -66,7 +70,7 @@ const updateOrder = (req, res) => {
         COD_STATUS
    ], (err) => {
        if(err){
-           res.status(304).send({message: err.message});
+           res.status(304).send({message: err});
        }else{
            res.status(200).send({message: 'La orden a sido actualizada exitosamente.'})
        };
