@@ -11,7 +11,6 @@ const EditDecreaseForm = ({rowCOD, setSendRequest, setMessageError}) => {
             CONCEPT: '',
             CANT_PRODUCTS:'',
             NUM_LOT:'',
-            COD_USER:'',
             DAT_DECREASE:''
          })
 
@@ -25,7 +24,13 @@ const EditDecreaseForm = ({rowCOD, setSendRequest, setMessageError}) => {
      useEffect(() => {
         if(rowCOD){
             axios.get(`/decrease/${rowCOD}`, token())
-            .then(res => setFormEditDecreas(res.data[0]))
+            .then(res => {
+                const { DAT_DECREASE } = res.data[0]
+                setFormEditDecreas({
+                    ...res.data[0],
+                    DAT_DECREASE: moment(DAT_DECREASE).format('YYYY-MM-DD')
+                })
+            })
         }
     }, [rowCOD])
 
@@ -38,6 +43,7 @@ const EditDecreaseForm = ({rowCOD, setSendRequest, setMessageError}) => {
                 setSendRequest(true)
         })
         .catch(err => {
+            console.log(err.response)
             const {message} = err.response.data;
             setMessageError(message)
             setTimeout(()=>{
@@ -64,10 +70,6 @@ const EditDecreaseForm = ({rowCOD, setSendRequest, setMessageError}) => {
             <div className="col-md-3 mt-2">
                 <label className='form-label' htmlFor="NUM_LOT">Número de lote</label>
                 <input onChange={handleInputChange} value = {formEditDecreas.NUM_LOT} className='form-control' name='NUM_LOT' type="number" required/>
-            </div>
-            <div className="col-md-3 mt-2">
-                <label className='form-label' htmlFor="COD_USER">Codigo usuario</label>
-                <input onChange={handleInputChange} value = {formEditDecreas.COD_USER} className='form-control' name='COD_USER' type="number" required/>
             </div>
             <div className="col-md-3 mt-2">
                 <label className='form-label' htmlFor="DAT_DECREASE">Fecha merma</label>

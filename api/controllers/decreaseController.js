@@ -24,12 +24,13 @@ const getDecreaseS = (req, res) =>{
 }
 
 const addDecrease = (req, res) => {
+    const {COD_USER} = req.user
+
   const {
     COD_PRODUCT,
     CONCEPT,
     CANT_PRODUCTS,
     NUM_LOT,
-    COD_USER,
     DAT_DECREASE
     } = req.body
 
@@ -44,7 +45,8 @@ const addDecrease = (req, res) => {
     DAT_DECREASE
     ], (error, resultado) => {
         if(error){
-            res.status(400).send({message: error.message});
+            const message = error.message.split(': ')[1];
+            res.status(400).send({message});
         }else{
             res.status(201).send({message: 'La merma se ha agregado exitosamente'})
         }
@@ -53,13 +55,13 @@ const addDecrease = (req, res) => {
 
 const updateDecrease = (req, res) =>{
     const {codDecrease} = req.params;
+    const {COD_USER} = req.user;
 
     const {
         COD_PRODUCT,
         CONCEPT,
         CANT_PRODUCTS,
         NUM_LOT,
-        COD_USER,
         DAT_DECREASE
         } = req.body
     
@@ -75,7 +77,8 @@ const updateDecrease = (req, res) =>{
         DAT_DECREASE
         ], (error, resultado) => {
             if(error){
-                res.status(304).send({message: error.message});
+                const message = error.message.split(': ')[1];
+                res.status(500).send({message});
             }else{
                 res.status(200).send({message: 'El detalle inventario se ha actualizado exitosamente'})
             }
@@ -87,7 +90,7 @@ const updateDecrease = (req, res) =>{
         const sp  = 'CALL SP_DEL_DECREASE(?)';
         mysqlConnect.query(sp, [codDecrease], (error, resultado) => {
             if(error){
-                res.status(304).send({message: error.message});
+                res.status(500).send({message: error.message});
             }else{
                 res.status(200).send({message: 'La merma se ha eliminado exitosamente'})
             };

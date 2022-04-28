@@ -10,7 +10,6 @@ const AddDecreaseForm = ({setSendRequest, setMessageError}) => {
             CONCEPT: '',
             CANT_PRODUCTS:'',
             NUM_LOT:'',
-            COD_USER:'',
             DATE_DECREASE:''
          })
 
@@ -57,10 +56,6 @@ const AddDecreaseForm = ({setSendRequest, setMessageError}) => {
             <div className="col-md-3 mt-2">
                 <label className='form-label' htmlFor="NUM_LOT">Número de lote</label>
                 <input onChange={handleInputChange} className='form-control' name='NUM_LOT' type="number" required/>
-            </div>
-            <div className="col-md-3 mt-2">
-                <label className='form-label' htmlFor="COD_USER">Codigo usuario</label>
-                <input onChange={handleInputChange} className='form-control' name='COD_USER' type="number" required/>
             </div>
             <div className="col-md-3 mt-2">
                 <label className='form-label' htmlFor="DAT_DECREASE">Fecha merma</label>

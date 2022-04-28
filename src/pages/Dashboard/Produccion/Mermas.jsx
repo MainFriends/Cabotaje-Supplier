@@ -25,14 +25,14 @@ const mermas = () => {
     
     //definir las columnas
     const columns = [
-        {
-            name: 'CODIGO',
-            selector: row => row.COD_DECREASE,
-            sortable: true,
-        },
          {
             name: 'CODIGO PRODUCTO',
             selector: row => row.COD_PRODUCT,
+            sortable: true,
+        },
+        {
+            name: 'PRODUCTO',
+            selector: row => row.NAM_PRODUCT,
             sortable: true,
         },
          {
@@ -51,8 +51,8 @@ const mermas = () => {
             sortable: true,
         },
         {
-            name: 'CODIGO USUARIO',
-            selector: row => row.COD_USER,
+            name: 'USUARIO',
+            selector: row => row.USER_NAME,
             sortable: true,
         },
         {
