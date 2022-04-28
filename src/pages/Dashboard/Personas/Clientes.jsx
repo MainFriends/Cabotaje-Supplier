@@ -23,11 +23,6 @@ const Clientes = () => {
     //definir las columnas
     const columns = [
         {
-            name: 'CÓDIGO',
-            selector: row => row.COD_CLIENT,
-            sortable: true,
-        },
-        {
             name: 'IDENTIDAD',
             selector: row => row.IDENTITY,
             sortable: true,

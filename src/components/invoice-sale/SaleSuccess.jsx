@@ -6,7 +6,7 @@ const SaleSuccess = ({saleMessage, setsaleInvoice, setCurrentPage, setproductLis
     const onCheck = () => {
         if(ok){
             setsaleInvoice({
-                COD_CLIENT: '',
+                COD_CLIENT: 1,
                 NAM_CLIENT: 'CF',
                 COD_USER: '', 
                 NAM_USER: '',

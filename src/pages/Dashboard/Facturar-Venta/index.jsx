@@ -9,7 +9,7 @@ const Facturar = () => {
   const [correlativeInvoice, setCorrelativeInvoice] = useState('');
   const [productListSale, setproductListSale] = useState([]);
   const [saleInvoice, setsaleInvoice] = useState({
-    COD_CLIENT: '',
+    COD_CLIENT: 1,
     NAM_CLIENT: 'CF',
     COD_USER: '', 
     NAM_USER: '',
