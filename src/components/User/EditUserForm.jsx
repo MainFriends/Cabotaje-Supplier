@@ -26,7 +26,10 @@ const EditUserForm = ({rowCOD, setSendRequest, setMessageError}) => {
 
     useEffect(() => {
         axios.get('/roles', token())
-            .then(res => setRolesEdit(res.data))
+            .then(res => {
+                const arrayRoles = res.data.filter(rol => rol.COD_ROLE !== 2);
+                setRolesEdit(arrayRoles);
+            })
     }, [])
 
     const handleInputChange = (e) => {
@@ -49,6 +52,8 @@ const EditUserForm = ({rowCOD, setSendRequest, setMessageError}) => {
     }, [rowCOD])
 
     const handleSubmitUser = (e) => {
+        delete formEditUser['IMG_USER'];
+        delete formEditUser['USER_PASSWORD'];
         e.preventDefault();
         axios.put(`/User/${rowCOD}`,formEditUser, token())
             .then(res => {

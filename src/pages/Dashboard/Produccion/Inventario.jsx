@@ -33,7 +33,7 @@ const Inventario = () => {
             name: 'PROVEEDOR',
             selector: row => row.NAM_SUPPLIER,
             sortable: true,
-            allowOverflow: true
+            grow: 2
         },
         {
             name: 'PRODUCTO',

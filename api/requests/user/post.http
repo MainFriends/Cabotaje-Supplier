@@ -1,11 +1,12 @@
 POST http://localhost:4000/api/user
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfUk9MRSI6MSwiRklSU1RfTkFNRSI6IlBlZHJvIiwiTEFTVF9OQU1FIjoiU2FuY2hleiIsImlhdCI6MTY0NzM5MDI1M30.cn1xro2BAtDzbgoNloL6o2j9sQpY4UI41kOH3mZ-_Q8
 
 {
     "IDENTITY": "0801199902531",
     "FIRST_NAME": "Luis",
     "MIDDLE_NAME": "Eduardo",
-    "LAST_NAME": "Eduardo",
+    "LAST_NAME": "Garcia",
     "GENDER": "M",
     "NUM_PHONE_ONE": 31511888,
     "NUM_REFERENCE": 22301972,

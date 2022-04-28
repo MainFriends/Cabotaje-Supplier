@@ -15,7 +15,9 @@ const SidebarItems = () => {
 
     useEffect(() => {
         axios.get('/user-profile', token())
-            .then(res => setRole(res.data[0].COD_ROLE))
+            .then(res => {
+                setRole(res.data[0].COD_ROLE)
+            })
     }, [])
 
     useEffect(() => {
@@ -93,7 +95,13 @@ const SidebarItems = () => {
                 <div className="collapse" id="collapsePersona"  aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div className="bg-white py-2 collapse-inner rounded">
                         <h6 className="collapse-header">Tablas</h6>
-                        <NavLink className="collapse-item" to="usuarios">Usuarios</NavLink>
+                        {
+                            role === 1
+                            ?
+                            <NavLink className="collapse-item" to="usuarios">Usuarios</NavLink>
+                            :
+                            null
+                        }
                         <NavLink className="collapse-item" to="clientes">Clientes</NavLink>
                         <NavLink className="collapse-item" to="proveedores">Proveedores</NavLink>
                     </div>

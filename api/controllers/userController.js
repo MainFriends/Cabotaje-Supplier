@@ -89,13 +89,11 @@ const updateUser = (req, res) => {
         DAT_BIRTHDAY,
         NAM_CITY,
         ADDRESS,
-        IMG_USER = null,
         COD_ROLE,
-        USER_EMAIL,
-        USER_PASSWORD
+        USER_EMAIL
     } = req.body;
     
-    const sp = 'CALL SP_UPD_USER(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+    const sp = 'CALL SP_UPD_USER(?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
 
     mysqlConnect.query(sp,
         [   
@@ -111,10 +109,8 @@ const updateUser = (req, res) => {
             DAT_BIRTHDAY,
             NAM_CITY,
             ADDRESS,
-            IMG_USER,
             COD_ROLE,
-            USER_EMAIL,
-            USER_PASSWORD
+            USER_EMAIL
         ], (err) => {
             if(err){
                 const message = err.message.split(': ')[1];
