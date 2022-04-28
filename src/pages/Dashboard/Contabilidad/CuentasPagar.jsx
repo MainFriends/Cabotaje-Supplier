@@ -32,26 +32,6 @@ const CuentasPagar = () => {
             sortable: true,
         },
         {
-            name: 'PROVEEDOR',
-            selector: row => row.NAM_SUPPLIER,
-            sortable: true,
-        },
-        {
-            name: 'NOMBRE',
-            selector: row => row.NAM_CONTACT,
-            sortable: true,
-        },
-        {
-            name: 'APELLIDO',
-            selector: row => row.LAST_NAM_CONTACT,
-            sortable: true,
-        },
-        {
-            name: 'TELEFONO',
-            selector: row => row.NUM_PHONE_ONE,
-            sortable: true,
-        },
-        {
             name: 'DESCRIPCION',
             selector: row => row.DESCRIPTION,
             sortable: true,
