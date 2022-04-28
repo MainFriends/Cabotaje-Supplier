@@ -43,11 +43,7 @@ const Pages = () => {
     });
 
     const {
-        ventas,
-        compras,
-        personas,
-        produccion,
-        contabilidad
+        ventas
     } = modules;
 
     useEffect(() => {
@@ -81,7 +77,7 @@ const Pages = () => {
             <Route path="ventas" element={<Facturas />}/>
             <Route path="compras" element={<Compras />}/>
             <Route path="pedidos" element={<Pedidos />}/>
-            <Route path="usuarios" element={<Usuarios />}/>
+            <Route path="usuarios" element={userRole === 1 ? <Usuarios /> : <Navigate to='/'/>}/>
             <Route path="clientes" element={<Clientes />}/>
             <Route path="proveedores" element={<Proveedores />}/>
             <Route path="categorias-inventario" element={<Categorias />}/>

@@ -1,11 +1,11 @@
 const mysqlConnect = require('../config');
 
 const getDetail = (req, res) => {
-    const {codDetail} = req.params;
+    const {codInvoice} = req.params;
     const sp = 'CALL SP_SEL_PURCHASE_DETAIL(?)';
-    mysqlConnect.query(sp, [codDetail] ,(err, result) => {
+    mysqlConnect.query(sp, [codInvoice] ,(err, result) => {
         if(err){
-            res.status(500).send({message: "Error en el servidor."});
+            res.status(500).send({message: err});
         }else{
             res.status(200).json(result[0])
         }
@@ -23,7 +23,7 @@ const addDetail = (req,res)=>{
             COD_PRODUCT ,
             PRICE,
             CANT_PRODUCTS,
-            DISCOUNT,
+            DISCOUNT = 0,
             TOTAL
         } = factura;
 

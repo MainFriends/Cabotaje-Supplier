@@ -14,6 +14,7 @@ const getOrdersDetail  = (req, res) => {
 
 const getOrderDetail = (req, res) => {
     const {codOrderDetail} = req.params;
+    console.log(codOrderDetail)
     const sp = 'CALL SP_SEL_ORDER_DETAIL(?)';
 
     mysqlConnect.query(sp, [codOrderDetail], (err, result) => {
@@ -50,27 +51,32 @@ const addOrderDetail = (req, res) => {
 };
 
 const updateOrderDetail = (req, res) => {
-    const {codOrderDetail} = req.params;
-    const{
-        COD_PRODUCT,
-        DES_ORDER,
-        CANT_PRODUCTS
-    } = req.body;
+    const {codOrder} = req.params
 
-    const sp = 'CALL SP_UPD_ORDER_DETAIL(?,?,?,?)';
+    const data = req.body;
+    
+    const spDelete = 'CALL SP_DEL_ORDER_DETAIL(?)'
 
-    mysqlConnect.query(sp, [
-        codOrderDetail,
-        COD_PRODUCT,
-        DES_ORDER,
-        CANT_PRODUCTS
-    ], (err) => {
-        if(err){
-            res.status(304).send({message: err.message});
-        }else{
-            res.status(200).send({message: 'El detalle de la orden a sido actualizado exitosamente.'});
-        };
+    mysqlConnect.query(spDelete, [codOrder]);
+
+    const sp = 'CALL SP_UPD_ORDER_DETAIL(?,?,?, ?)';
+
+    data.forEach(producto => {
+        const{
+            COD_PRODUCT,
+            DES_ORDER,
+            CANT_PRODUCTS
+        } = producto;
+        
+        mysqlConnect.query(sp, [
+            codOrder,
+            COD_PRODUCT,
+            DES_ORDER,
+            CANT_PRODUCTS
+        ]);
     });
+
+    res.status(201).send({message: 'Transaccion completada.'});
 };
 
 const deleteOrderDetail = (req, res) => {

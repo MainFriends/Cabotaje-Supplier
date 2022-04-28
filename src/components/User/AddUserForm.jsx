@@ -28,7 +28,10 @@ const AddUserForm = ({setSendRequest, setMessageError}) => {
 
     useEffect(() => {
         axios.get('/roles', token())
-            .then(res => setRoles(res.data))
+            .then(res => {
+                const arrayRoles = res.data.filter(rol => rol.COD_ROLE !== 2);
+                setRoles(arrayRoles);
+            })
     }, [])
 
     const handleInputChange = (e) => {
