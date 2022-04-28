@@ -51,15 +51,15 @@ const EditClientForm = ({rowCOD, setSendRequest, setMessageError}) => {
             <div className="row mb-4">
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="FIRST_NAME">Nombre</label>
-                    <input onChange={handleInputChange} value={formEditClient.FIRST_NAME} className='form-control' name='FIRST_NAME' type="text" pattern="[A-Z]{1}[a-z]{2,15}" onInput={toUpperCase} required/>
+                    <input onChange={handleInputChange} value={formEditClient.FIRST_NAME} className='form-control' name='FIRST_NAME' type="text" pattern="^[a-zA-Z0-9ñÑØº-_ ]+$" onInput={toUpperCase} required/>
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="LAST_NAME">Apellido</label>
-                    <input onChange={handleInputChange} value={formEditClient.LAST_NAME} className='form-control' name='LAST_NAME' type="text" pattern="[A-Z]{1}[a-z]{2,15}" onInput={toUpperCase}required/>
+                    <input onChange={handleInputChange} value={formEditClient.LAST_NAME} className='form-control' name='LAST_NAME' type="text" pattern="^[a-zA-Z0-9ñÑØº-_ ]+$" onInput={toUpperCase}required/>
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="IDENTITY">Identidad</label>
-                    <input onChange={handleInputChange} value={formEditClient.IDENTITY} className='form-control' name='IDENTITY'  minlenght={13} maxLength={13}  type="text" pattern="[0-9]{13}"  title="IDENTIDAD debe contener 13 caracteres" required/>
+                    <input onChange={handleInputChange} value={formEditClient.IDENTITY} className='form-control' name='IDENTITY'  minlenght={13} maxLength={13}  type="text" pattern="[0-9]{13}"  title="Identidad debe contener 13 caracteres" required/>
                 </div>
                 <div className="col-md-3 mt-2">
                     <label className='form-label' htmlFor="NUM_PHONE_ONE">Teléfono 1</label>

@@ -65,15 +65,15 @@ const AddUserForm = ({setSendRequest, setMessageError}) => {
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="FIRST_NAME">Primer nombre</label>
-                    <input onChange={handleInputChange}  className='form-control'  name='FIRST_NAME' type="text" pattern="[A-Z]{1}[a-z]{2,30}"  onInput={toUpperCase} required/>
+                    <input onChange={handleInputChange}  className='form-control'  name='FIRST_NAME' type="text" pattern="^[a-zA-Z0-9ñÑØº-_ ]+$"  onInput={toUpperCase} required/>
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="MIDDLE_NAME">Segundo nombre</label>
-                    <input onChange={handleInputChange} className='form-control' name='MIDDLE_NAME' type="text" pattern="[A-Z]{1}[a-z]{1,30}"  onInput={toUpperCase} required/>
+                    <input onChange={handleInputChange} className='form-control' name='MIDDLE_NAME' type="text" pattern="^[a-zA-Z0-9ñÑØº-_ ]+$"  onInput={toUpperCase} required/>
                 </div>
                 <div className="col-md-4 mt-2">
                     <label className='form-label' htmlFor="LAST_NAME">Apellido</label>
-                    <input onChange={handleInputChange} className='form-control' name='LAST_NAME'  type="text" pattern="[A-Z]{1}[a-z]{1,30}" onInput={toUpperCase} required/>
+                    <input onChange={handleInputChange} className='form-control' name='LAST_NAME'  type="text" pattern="^[a-zA-Z0-9ñÑØº-_ ]+$" onInput={toUpperCase} required/>
                 </div>
 
                 <div className="col-md-4 mt-2">
@@ -105,7 +105,7 @@ const AddUserForm = ({setSendRequest, setMessageError}) => {
                 </div>
                 <div className="col-md-4 mt-2">
                     <label className='form-label' htmlFor="NAM_CITY">Ciudad</label>
-                    <input onChange={handleInputChange} className='form-control' name='NAM_CITY' type="text" pattern="[A-Z]{1}[a-z]{1,20}" onInput={toUpperCase} required/>
+                    <input onChange={handleInputChange} className='form-control' name='NAM_CITY' type="text" pattern="^[a-zA-Z0-9ñÑØº-_ ]+$" onInput={toUpperCase} required/>
                 </div>
                 <div className="col-md-8 mt-2">
                     <label className='form-label' htmlFor="ADDRESS">Dirección</label>

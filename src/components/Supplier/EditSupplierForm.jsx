@@ -55,11 +55,11 @@ const EditSupplierForm = ({rowCOD, setSendRequest, setMessageError}) => {
             </div>
             <div className="col-md-4">
                 <label className='form-label' htmlFor="NAM_CONTACT">Nombre del contacto</label>
-                <input onChange={handleInputChange} value={formEditSupplier.NAM_CONTACT} className='form-control' name='NAM_CONTACT' type="text"  pattern="[A-Z]{1}[a-z]{2,30}"  onInput={toUpperCase} required/>
+                <input onChange={handleInputChange} value={formEditSupplier.NAM_CONTACT} className='form-control' name='NAM_CONTACT' type="text"  pattern="^[a-zA-Z0-9ñÑØº-_ ]+$"  onInput={toUpperCase} required/>
             </div>
             <div className="col-md-4">
                 <label className='form-label' htmlFor="LAST_NAM_CONTACT">Apellido del contacto</label>
-                <input onChange={handleInputChange} value={formEditSupplier.LAST_NAM_CONTACT} className='form-control'  name='LAST_NAM_CONTACT' type="Text"  pattern="[A-Z]{1}[a-z]{2,30}"   onInput={toUpperCase} required/>
+                <input onChange={handleInputChange} value={formEditSupplier.LAST_NAM_CONTACT} className='form-control'  name='LAST_NAM_CONTACT' type="Text"  pattern="^[a-zA-Z0-9ñÑØº-_ ]+$"   onInput={toUpperCase} required/>
             </div>
             <div className="col-md-4 mt-2">
                 <label className='form-label' htmlFor="ADDRESS">Dirección</label>
@@ -80,7 +80,7 @@ const EditSupplierForm = ({rowCOD, setSendRequest, setMessageError}) => {
             
             <div className="col-md-4 mt-2">
                 <label className='form-label' htmlFor="NAM_CITY">Ciudad</label> 
-                <input onChange={handleInputChange} value={formEditSupplier.NAM_CITY} className='form-control' name='NAM_CITY' type="text" pattern="[A-Z]{1}[a-z]{2,15}" onInput={toUpperCase} required/>
+                <input onChange={handleInputChange} value={formEditSupplier.NAM_CITY} className='form-control' name='NAM_CITY' type="text" pattern="^[a-zA-Z0-9ñÑØº-_ ]+$" onInput={toUpperCase} required/>
             </div>
          
             <div className="col-md-3 mt-2">
