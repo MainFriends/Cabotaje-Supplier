@@ -1,46 +1,94 @@
 import React from 'react'
 import DataTable from 'react-data-table-component';
+import { useEffect, useState } from 'react/cjs/react.development';
 import Modal from '../Modal';
-import Inventory from './Inventory';
+import Inventory from './Inventory';9
+import moment from 'moment';
+import AlertError from '../AlertError';
 
-const ProductsList = ({user, client, setCurrentPage}) => {
+const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeInvoice, productListSale, setproductListSale}) => {
+    const [errorMessage, setErrorMessage] = useState('');
 
+    useEffect(() => {
+        setsaleInvoice({
+            ...saleInvoice,
+            SUBTOTAL: productListSale.reduce((acum, current) => acum + (current.PRICE * current.CANT_PRODUCTS), 0),
+            TOT_ISV: productListSale.reduce((acum, current) => acum + (current.ISV * current.CANT_PRODUCTS), 0),
+            TOT_SALE: productListSale.reduce((acum, current) => acum + current.TOTAL, 0)
+        })
+    }, [productListSale]);
+
+    const {
+        SUBTOTAL,
+        TOT_ISV,
+        TOT_SALE
+    } = saleInvoice;
+    
     const columns = [
         {
-            name: 'Código',
-            selector: row => row.title,
+            name: 'CÓDIGO',
+            selector: row => row.COD_PRODUCT,
+        },
+        {   
+            name: 'PRODUCTO',
+            selector: row => row.NAM_PRODUCT,
+            wrap: true
         },
         {
-            name: 'Producto',
-            selector: row => row.year,
+            name: 'DESCRIPCIÓN',
+            selector: row => row.DES_PRODUCT,
+            wrap: true
         },
         {
-            name: 'Descripción',
-            selector: row => row.year,
+            name: 'CANTIDAD',
+            selector: row => row.CANT_PRODUCTS,
         },
         {
-            name: 'Cantidad',
-            selector: row => row.year,
+            name: 'PRECIO',
+            selector: row => row.PRICE,
+            format: row => `L ${row.PRICE.toFixed(2)}`
         },
         {
-            name: 'Precio',
-            selector: row => row.year,
+            name: 'ISV',
+            selector: row => row.ISV,
+            format: row => `L ${row.ISV.toFixed(2)}`
         },
         {
-            name: 'Descuento',
-            selector: row => row.year,
+            name: 'TOTAL',
+            selector: row => row.TOTAL,
+            format: row => `L ${row.TOTAL.toFixed(2)}`
         },
         {
-            name: 'Total',
-            selector: row => row.year,
-        },
-        {
-            name: 'Eliminar',
-            selector: row => row.year,
+            name: 'ELIMINAR',
+            button: true,
+            cell: row => <>
+                <button className='btn btn-sm btn-danger' onClick={() => handleDelete(row.COD_PRODUCT)}><i className="fa-solid fa-trash"></i></button>
+            </>
         }
     ];
 
-    const data = []
+    const handleDelete = cod => {
+        const findProduct = productListSale.filter(product => product.COD_PRODUCT !== cod);
+
+        setproductListSale(findProduct);
+    }
+
+    const handleNextComponent = () => {
+        if(!productListSale.length){
+            setErrorMessage('No se ha ingresado ningún producto en la lista.');
+
+            setTimeout(() => {
+                setErrorMessage('');
+            }, 3000);
+            return;
+        }
+
+        setCurrentPage(3)
+    }
+    
+    const clearProductsList = () => {
+        setproductListSale([])
+    }
 
   return (
     <div className="card text-dark card-facturar shadow">
@@ -52,6 +100,7 @@ const ProductsList = ({user, client, setCurrentPage}) => {
                     <input 
                     type="number" 
                     className="form-control form-control-sm" 
+                    value={correlativeInvoice}
                     disabled
                     />
                 </div>
@@ -61,7 +110,7 @@ const ProductsList = ({user, client, setCurrentPage}) => {
                     type="text" 
                     className="form-control form-control-sm" 
                     disabled
-                    value={user.name}
+                    value={saleInvoice.NAM_USER}
                     />
                 </div>
                 <label className="col-sm-1 col-form-label pr-0">Cliente</label>
@@ -70,7 +119,16 @@ const ProductsList = ({user, client, setCurrentPage}) => {
                     type="text" 
                     className="form-control form-control-sm" 
                     disabled
-                    value={client.name}
+                    value={saleInvoice.NAM_CLIENT}
+                    />
+                </div>
+                <label className="col-sm-1 col-form-label pr-0">Fecha</label>
+                <div className="col-sm-2 pl-0 pr-4">
+                    <input 
+                    type="text" 
+                    className="form-control form-control-sm" 
+                    disabled
+                    value={moment().format('DD-MM-YYYY')}
                     />
                 </div>
             </div>
@@ -78,15 +136,16 @@ const ProductsList = ({user, client, setCurrentPage}) => {
         <hr className='mt-0'/>
         <div className="row">
             <div className="col-6">
-                <h6 className='ml-2'>Productos</h6>
+                <h6 className='ml-3 text-gray-700'>Lista de productos</h6>
             </div>
             <div className="col-6 text-right">
-                <div className="btn btn-success mr-3" data-toggle="modal" data-target='#sale-inventory'><i className="fa-solid fa-plus"></i></div>
+                <button autoFocus className="btn btn-success mr-2" data-toggle="modal" data-target='#sale-inventory' data-placement="bottom" title="Agregar producto"><i className="fa-solid fa-plus"></i></button>
+                <button onClick={() => clearProductsList()} className="btn btn-info mr-3" data-toggle="tooltip" data-placement="bottom" title="Limpiar lista"><i class="fa-solid fa-broom"></i></button>
             </div>
         </div>
         <DataTable
             columns={columns}
-            data={data}
+            data={productListSale}
             persistTableHead
             striped
             className='bg-light'
@@ -94,32 +153,34 @@ const ProductsList = ({user, client, setCurrentPage}) => {
         <Modal 
             idModal='sale-inventory'
             title='Inventario'
-            content={<Inventory />}
+            content={<Inventory
+                productListSale={productListSale} 
+                setproductListSale={setproductListSale}
+            />}
             modalSize='xl'
         />
         <hr />
         <div className="row">
             <div className="col-10 text-right">
                 <h6>Subtotal</h6>
-                <h6>Descuento total</h6>
                 <h6>ISV 15%</h6>
                 <h4>Total</h4>
             </div>
             <div className="col-2">
-                <h6>L. 0.00</h6>
-                <h6>L. 0.00</h6>
-                <h6>L. 0.00</h6>
-                <h4>L. 0.00</h4>
+                <h6>{`L. ${SUBTOTAL.toFixed(2)}`}</h6>
+                <h6>{`L. ${TOT_ISV.toFixed(2)}`}</h6>
+                <h4>{`L. ${TOT_SALE.toFixed(2)}`}</h4>
             </div>
         </div>
         <div className="modal-footer">
         <button onClick={() => setCurrentPage(1)} className="btn btn-dark">
           <i className="fa-solid fa-chevron-left"></i>
         </button>
-        <button onClick={() => setCurrentPage(3)} className="btn btn-dark">
+        <button onClick={() => handleNextComponent()} className="btn btn-dark">
           <i className="fa-solid fa-chevron-right"></i>
         </button>
       </div>
+        {errorMessage ? <AlertError message={errorMessage}/> : null}
     </div>
   )
 }

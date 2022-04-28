@@ -2,40 +2,81 @@ import React, {useState, useEffect} from "react";
 import axios from '../../config/axios';
 import token from '../../helpers/getToken';
 import moment from 'moment'
+import AlertError from "../AlertError";
 
-const SaleInformation = ({user, setUser, client, setClient, setCurrentPage}) => {
+const SaleInformation = ({setsaleInvoice, saleInvoice, setCurrentPage, setCorrelativeInvoice, correlativeInvoice }) => {
+
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const {RTN} = saleInvoice;
 
   useEffect(() => {
-    if(user.code){
-      axios.get(`/user/${user.code}`, token())
+    if(saleInvoice.COD_USER){
+      axios.get(`/user/${saleInvoice.COD_USER}`, token())
         .then(res => {
           const {FIRST_NAME, LAST_NAME} = res.data[0];
-          setUser({
-            ...user,
-            name: `${FIRST_NAME} ${LAST_NAME}`
+          setsaleInvoice({
+            ...saleInvoice,
+            NAM_USER: `${FIRST_NAME} ${LAST_NAME}`
           })
         })
         .catch(err => {
-          setUser({
-            ...user,
-            name: `Usuario no encontrado`
+          setsaleInvoice({
+            ...saleInvoice,
+            NAM_USER: `Usuario no encontrado`
           })
         })
     }
-  }, [user.code])
+  }, [saleInvoice.COD_USER])
 
-  const handleUser = ({target}) => {
-    setUser({
-      ...user,
-      code: target.value
-    })
-  }
-  
-  const handleClient = ({target}) => {
-    setClient({
-      ...client,
+  useEffect(() => {
+    axios.get('/correlative', token())
+      .then(res => {
+        const {CORRELATIVO} = res.data[0];
+        if(CORRELATIVO){
+          setCorrelativeInvoice(CORRELATIVO + 1)
+        }else{
+          setCorrelativeInvoice(1)
+        }
+      })
+  }, [])
+
+  useEffect(() => {
+    if(RTN.length === 14){
+      axios.get(`/find-client/${RTN}`, token())
+        .then(res => console.log(res.data[0]))
+    }
+  }, [RTN])
+
+  const handleInputChange = ({target}) => {
+    setsaleInvoice({
+      ...saleInvoice,
       [target.name]: target.value
     })
+  }
+
+  const handleClick = () => {
+    if(saleInvoice.NAM_USER === ''){
+      setErrorMessage('Ingrese su código de usuario.');
+
+      setTimeout(() => {
+        setErrorMessage('')
+      }, 3000);
+      
+      return;
+    }
+
+    if(saleInvoice.NAM_USER === `Usuario no encontrado`){
+      setErrorMessage('Ingrese un código de usuario válido.');
+
+      setTimeout(() => {
+        setErrorMessage('')
+      }, 3000);
+
+      return;
+    }
+
+    setCurrentPage(2)
   }
 
   return (
@@ -54,6 +95,7 @@ const SaleInformation = ({user, setUser, client, setClient, setCurrentPage}) => 
                 <input
                   className="form-control form-control-sm"
                   type="text"
+                  value={correlativeInvoice}
                   disabled
                 />
               </div>
@@ -68,9 +110,11 @@ const SaleInformation = ({user, setUser, client, setClient, setCurrentPage}) => 
                 <input
                   className="form-control form-control form-control-sm"
                   type="number"
-                  onChange={handleUser}
-                  value={user.code}
-                  name='code'
+                  onChange={handleInputChange}
+                  value={saleInvoice.COD_USER}
+                  autoFocus
+                  name='COD_USER'
+                  min={1}
                 />
               </div>
               <div className="col-6">
@@ -78,7 +122,7 @@ const SaleInformation = ({user, setUser, client, setClient, setCurrentPage}) => 
                   className="form-control form-control form-control-sm"
                   type="text"
                   disabled
-                  value={user.name}
+                  value={saleInvoice.NAM_USER}
                 />
               </div>
             </div>
@@ -107,11 +151,11 @@ const SaleInformation = ({user, setUser, client, setClient, setCurrentPage}) => 
           </div>
           <div className="col-4">
             <input 
-            onChange={handleClient}
+            onChange={handleInputChange}
             className="form-control form-control" 
             type="text" 
-            value={client.name}
-            name='name'
+            value={saleInvoice.NAM_CLIENT}
+            name='NAM_CLIENT'
             />
           </div>
         </div>
@@ -121,20 +165,21 @@ const SaleInformation = ({user, setUser, client, setClient, setCurrentPage}) => 
           </div>
           <div className="col-4">
             <input 
-            onChange={handleClient}
+            onChange={handleInputChange}
             className="form-control form-control" 
             type="number" 
-            value={client.RTN}
+            value={saleInvoice.RTN}
             name='RTN'
             />
           </div>
         </div>
       </div>
       <div className="modal-footer">
-        <button onClick={() => setCurrentPage(2)} className="btn btn-dark">
+        <button onClick={() => handleClick()} className="btn btn-dark">
           <i className="fa-solid fa-chevron-right"></i>
         </button>
       </div>
+      {errorMessage ? <AlertError message={errorMessage}/> : null}
     </div>
   );
 };

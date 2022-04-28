@@ -22,7 +22,7 @@ const addDetail = (req, res) => {
             COD_PRODUCT,
             PRICE,
             CANT_PRODUCTS,
-            DISCOUNT,
+            DISCOUNT = 0,
             TOTAL
         } = detail;
 
