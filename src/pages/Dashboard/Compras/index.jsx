@@ -13,6 +13,7 @@ import token from '../../../helpers/getToken';
 import AddFacturaForm from '../../../components/PurchaseInvoice/AddPurchaseInvoiceForm';
 import EditFacturaForm from '../../../components/PurchaseInvoice/EditPurchaseInvoiceForm';
 import moment from 'moment';
+import ViewDetail from '../../../components/PurchaseInvoice/ViewDetail';
 
 const Compras = () => {
     const [rows, setRows] = useState([]);
@@ -81,6 +82,7 @@ const Compras = () => {
             name: 'ACCIONES',
             button: true,
             cell: row => <>
+                <button className='btn btn-sm btn-primary mr-1' data-toggle="modal" data-target='#viewInvoiceDetail' onClick={() => setRowCOD(row.COD_INVOICE)}><i className="fa-solid fa-eye"></i></button>
                 <button className='btn btn-sm btn-warning mr-1' onClick={() => {setRowCOD(row.COD_INVOICE)}} data-toggle="modal" data-target='#editFactura'><i className="fa-solid fa-pen-to-square"></i></button>
                 <button className='btn btn-sm btn-danger' onClick={() => handleDelete(row.COD_INVOICE)}><i className="fa-solid fa-trash"></i></button>
             </>
@@ -149,11 +151,16 @@ const Compras = () => {
                     />
                     <Modal 
                         idModal='editFactura'
-                        title='Actulizar factura'
+                        title='Editar factura'
                         messageError={messageError}
                         content={<EditFacturaForm rowCOD={rowCOD} setSendRequest={setSendRequest} setMessageError={setMessageError} />}
                     />
-                    
+                    <Modal 
+                        idModal='viewInvoiceDetail'
+                        title='Detalle de factura'
+                        messageError={messageError}
+                        content={<ViewDetail rowCOD={rowCOD} />}
+                    />
                 </div>
             </div> 
     )
