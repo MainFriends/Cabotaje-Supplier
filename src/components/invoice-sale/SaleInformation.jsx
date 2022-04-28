@@ -4,7 +4,7 @@ import token from '../../helpers/getToken';
 import moment from 'moment'
 import AlertError from "../AlertError";
 
-const SaleInformation = ({setsaleInvoice, saleInvoice, setCurrentPage, setCorrelativeInvoice, correlativeInvoice }) => {
+const SaleInformation = ({setsaleInvoice, saleInvoice, setCurrentPage, setCorrelativeInvoice, correlativeInvoice, currentPage }) => {
 
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -39,7 +39,7 @@ const SaleInformation = ({setsaleInvoice, saleInvoice, setCurrentPage, setCorrel
           setCorrelativeInvoice(1)
         }
       })
-  }, [])
+  }, [currentPage])
 
   useEffect(() => {
     if(RTN.length === 14){

@@ -34,6 +34,7 @@ const Facturar = () => {
               setCurrentPage={setCurrentPage}
               setCorrelativeInvoice={setCorrelativeInvoice}
               correlativeInvoice={correlativeInvoice}
+              currentPage={currentPage}
             />
           }
           {

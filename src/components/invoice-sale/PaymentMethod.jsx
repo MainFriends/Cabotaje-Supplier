@@ -3,10 +3,15 @@ import DataTable from 'react-data-table-component';
 import axios from '../../config/axios';
 import token from '../../helpers/getToken';
 import moment from 'moment';
+import SaleSuccess from './SaleSuccess';
 
-export const PaymentMethod = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeInvoice, productListSale}) => {
+export const PaymentMethod = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeInvoice, productListSale, setproductListSale}) => {
     const [efectivoRecibido, setEfectivoRecibido] = useState(0);
     const [cambio, setCambio] = useState(0);
+    const [saleMessage, setSaleMessage] = useState({
+        message: '',
+        ok: true
+    });
 
     const {
         SUBTOTAL,
@@ -68,15 +73,23 @@ export const PaymentMethod = ({saleInvoice, setsaleInvoice, setCurrentPage, corr
     const onSubmit = () => {
         axios.post('/sale-invoice', saleInvoice, token())
             .then(res => {
-                console.log(res.data)
                 sendDetail()
+            })
+            .catch(res => {
+                setSaleMessage({
+                    message: 'Algo falló al intentar procesar la venta',
+                    ok: false
+                });
             })
     }
 
     const sendDetail = () => {
         axios.post('/sale-detail', productListSale, token())
             .then(res => {
-                console.log(res.data)
+                setSaleMessage({
+                    message: 'Venta procesada con éxito.',
+                    ok: true
+                });
             })
     }
 
@@ -124,7 +137,7 @@ export const PaymentMethod = ({saleInvoice, setsaleInvoice, setCurrentPage, corr
         </div>
         <hr className='mt-0'/>
         <div className="row">
-            <h7 className='ml-4 text-gray-700'>Detalle de venta</h7>
+            <p className='ml-4 mb-0 text-gray-700'>Detalle de venta</p>
         </div>
         <DataTable
             columns={columns}
@@ -145,7 +158,7 @@ export const PaymentMethod = ({saleInvoice, setsaleInvoice, setCurrentPage, corr
             </div>
         </div>
         <hr />
-        <h7 className='ml-2 text-gray-700'>Información de cobro</h7>
+        <p className='ml-2 mb-0 text-gray-700'>Información de cobro</p>
         <div className="row mt-2">
         <div className="col-3 ml-2">
                 <label className="form-label">Tipo de venta</label>
@@ -175,9 +188,15 @@ export const PaymentMethod = ({saleInvoice, setsaleInvoice, setCurrentPage, corr
         <button onClick={() => setCurrentPage(2)} className="btn btn-dark">
           <i className="fa-solid fa-chevron-left"></i>
         </button>
-        <button onClick={() => onSubmit()} className="btn btn-primary">
-            <i class="fa-solid fa-circle-check mr-2"></i>Finalizar venta
+        <button onClick={() => onSubmit()} className="btn btn-primary" data-toggle="modal" data-target="#saleSuccess">
+            <i className="fa-solid fa-circle-check mr-2"></i>Finalizar venta
         </button>
+        <SaleSuccess 
+            saleMessage={saleMessage}
+            setsaleInvoice={setsaleInvoice}
+            setCurrentPage={setCurrentPage}
+            setproductListSale={setproductListSale}
+        />
     </div>
   </div>
   )
