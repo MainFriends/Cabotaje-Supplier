@@ -11,7 +11,6 @@ import {paginationComponentOptions} from '../../../helpers/datatablesOptions';
 import axios from '../../../config/axios';
 import token from '../../../helpers/getToken';
 import AddFacturaForm from '../../../components/PurchaseInvoice/AddPurchaseInvoiceForm';
-import EditFacturaForm from '../../../components/PurchaseInvoice/EditPurchaseInvoiceForm';
 import moment from 'moment';
 import ViewDetail from '../../../components/PurchaseInvoice/ViewDetail';
 
@@ -83,7 +82,6 @@ const Compras = () => {
             button: true,
             cell: row => <>
                 <button className='btn btn-sm btn-primary mr-1' data-toggle="modal" data-target='#viewInvoiceDetail' onClick={() => setRowCOD(row.COD_INVOICE)}><i className="fa-solid fa-eye"></i></button>
-                <button className='btn btn-sm btn-warning mr-1' onClick={() => {setRowCOD(row.COD_INVOICE)}} data-toggle="modal" data-target='#editFactura'><i className="fa-solid fa-pen-to-square"></i></button>
                 <button className='btn btn-sm btn-danger' onClick={() => handleDelete(row.COD_INVOICE)}><i className="fa-solid fa-trash"></i></button>
             </>
         }
@@ -148,12 +146,6 @@ const Compras = () => {
                         title='Agregar factura'
                         messageError={messageError}
                         content={<AddFacturaForm setSendRequest={setSendRequest} />}
-                    />
-                    <Modal 
-                        idModal='editFactura'
-                        title='Editar factura'
-                        messageError={messageError}
-                        content={<EditFacturaForm rowCOD={rowCOD} setSendRequest={setSendRequest} setMessageError={setMessageError} />}
                     />
                     <Modal 
                         idModal='viewInvoiceDetail'

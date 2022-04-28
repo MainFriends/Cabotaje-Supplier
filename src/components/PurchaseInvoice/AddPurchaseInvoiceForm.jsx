@@ -190,7 +190,12 @@ const AddFacturaForm = ({setSendRequest}) => {
         if(formAddFactura.COD_ORDER === ''){
             delete formAddFactura['COD_ORDER'];
         }
-
+        if(DESCRIPTION === ''){
+            delete formAddFactura['DESCRIPTION'];
+        }
+        if(DATE_LIMIT === ''){
+            delete formAddFactura['DATE_LIMIT'];
+        }
         axios.post('/purchase-invoice', formAddFactura, token())
             .then(res => {
                 sendDetail();

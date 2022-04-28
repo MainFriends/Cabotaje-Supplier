@@ -35,8 +35,8 @@ const addPurchase = (req,res)=>{
         COD_TYP_PAY,
         DAT_INVOICE,
         COD_ORDER = 0,
-        DESCRIPTION,
-        DATE_LIMIT
+        DESCRIPTION =  null,
+        DATE_LIMIT = null
     }= req.body;
 
     const sp = 'CALL SP_INS_PURCHASE_INVOICE(?,?,?,?,?,?,?,?,?,?,?)';
