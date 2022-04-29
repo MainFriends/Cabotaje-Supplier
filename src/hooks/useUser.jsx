@@ -1,5 +1,5 @@
 import { useCallback, useContext} from "react";
-import Context from "../context/userContext";
+import Context from "../context/UserContext";
 
 export function useUser() {
     const {jwt, setJWT} = useContext(Context);
