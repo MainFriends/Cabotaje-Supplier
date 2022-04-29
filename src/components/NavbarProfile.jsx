@@ -10,10 +10,6 @@ const NavbarProfile = ({profilePicture, clickMenuOpen, setClickMenu}) => {
 
             <ul className="navbar-nav ml-auto">
 
-                <NavbarAlerts />
-
-                <NavbarMessages />
-
                 <div className="topbar-divider d-none d-sm-block"></div>
 
                 <NavbarUserDropdown profilePicture={profilePicture}/>
