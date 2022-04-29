@@ -65,7 +65,7 @@ const updateDecrease = (req, res) =>{
         DAT_DECREASE
         } = req.body
     
-        const sp = 'CALL SP_UPD_DECREASE(?,?,?,?,?,?)';
+        const sp = 'CALL SP_UPD_DECREASE(?,?,?,?,?,?,?)';
     
         mysqlConnect.query(sp,[
         codDecrease,

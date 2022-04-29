@@ -10,7 +10,6 @@ const EditReturnProductForm = ({rowCOD, setSendRequest, setMessageError}) => {
         CONCEPT: '',
         CANT_PRODUCT: '',
         NUM_LOT: '',
-        COD_USER: '',
         MOVEMENT: '',
         DES_RETURN: '',
         DAT_RETURN: ''
@@ -26,7 +25,13 @@ const EditReturnProductForm = ({rowCOD, setSendRequest, setMessageError}) => {
     useEffect(() => {
         if(rowCOD){
             axios.get(`/returnProduct/${rowCOD}`, token())
-            .then(res => setFormEditReturnProduc(res.data[0]))
+            .then(res => {
+                const {DAT_RETURN} = res.data[0]
+                setFormEditReturnProduc({
+                    ...res.data[0],
+                    DAT_RETURN: moment(DAT_RETURN).format('YYYY-MM-DD')
+                })
+            })
         }
     }, [rowCOD])
 
@@ -65,10 +70,6 @@ const EditReturnProductForm = ({rowCOD, setSendRequest, setMessageError}) => {
                 <div className="col-md-4 mt-2">
                     <label className='form-label' htmlFor="NUM_LOT">Número de lote</label>
                     <input onChange={handleInputChange} value = {formEditReturnProduc.NUM_LOT} className='form-control' name='NUM_LOT' type="number" required/>
-                </div>
-                <div className="col-md-4 mt-2">
-                    <label className='form-label' htmlFor="COD_USER">Código de usuario</label>
-                    <input onChange={handleInputChange} value = {formEditReturnProduc.COD_USER} className='form-control' name='COD_USER' type="number" required/>
                 </div>
                 <div className="col-md-6 mt-2">
                     <label className='form-label' htmlFor="MOVEMENT">Movimiento</label>

@@ -24,17 +24,19 @@ const getReturnProductS = (req, res) =>{
 }
 
 const addReturnProduct = (req, res) => {
+    const {COD_USER} = req.user
+
   const {
     COD_PRODUCT,
     CONCEPT,
     CANT_PRODUCT,
     NUM_LOT,
-    COD_USER,
     MOVEMENT,
-    DES_RETURN
+    DES_RETURN,
+    DAT_RETURN
     } = req.body
 
-    const sp = 'CALL SP_INS_RETURN_PRODUCT(?,?,?,?,?,?,?)';
+    const sp = 'CALL SP_INS_RETURN_PRODUCT(?,?,?,?,?,?,?,?)';
 
     mysqlConnect.query(sp,[
     COD_PRODUCT,
@@ -43,10 +45,12 @@ const addReturnProduct = (req, res) => {
     NUM_LOT,
     COD_USER,
     MOVEMENT,
-    DES_RETURN
+    DES_RETURN,
+    DAT_RETURN
     ], (error, resultado) => {
         if(error){
-            res.status(400).send({message: error.message});
+            const message = error.message.split(': ')[1];
+            res.status(400).send({message});
         }else{
             res.status(201).send({message: 'La devolucion se ha agregado exitosamente'})
         }
@@ -55,18 +59,19 @@ const addReturnProduct = (req, res) => {
 
 const updateReturnProduct = (req, res) =>{
     const {codReturnProduct} = req.params;
+    const {COD_USER} = req.user
 
     const {
         COD_PRODUCT,
         CONCEPT,
         CANT_PRODUCT,
         NUM_LOT,
-        COD_USER,
         MOVEMENT,
-        DES_RETURN
+        DES_RETURN,
+        DAT_RETURN
         } = req.body
     
-        const sp = 'CALL SP_UPD_RETURN_PRODUCT(?,?,?,?,?,?,?,?)';
+        const sp = 'CALL SP_UPD_RETURN_PRODUCT(?,?,?,?,?,?,?,?,?)';
     
         mysqlConnect.query(sp,[
         codReturnProduct,
@@ -76,10 +81,12 @@ const updateReturnProduct = (req, res) =>{
         NUM_LOT,
         COD_USER,
         MOVEMENT,
-        DES_RETURN
+        DES_RETURN,
+        DAT_RETURN
         ], (error, resultado) => {
             if(error){
-                res.status(304).send({message: error.message});
+                const message = error.message.split(': ')[1];
+                res.status(400).send({message});
             }else{
                 res.status(200).send({message: 'La devolucion se ha actualizado exitosamente'})
             }

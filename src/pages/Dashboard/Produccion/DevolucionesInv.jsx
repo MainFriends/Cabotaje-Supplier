@@ -25,13 +25,13 @@ const DevolucionesInv = () => {
     //definir las columnas
     const columns = [
         {
-            name: 'CÓDIGO',
-            selector: row => row.COD_RETURN,
+            name: 'CÓDIGO PRODUCTO',
+            selector: row => row.COD_PRODUCT,
             sortable: true,
         },
         {
-            name: 'CÓDIGO PRODUCTO',
-            selector: row => row.COD_PRODUCT,
+            name: 'PRODUCTO',
+            selector: row => row.NAM_PRODUCT,
             sortable: true,
         },
         {
@@ -45,13 +45,13 @@ const DevolucionesInv = () => {
             sortable: true,
         },
         {
-            name: 'NÚMERO DE LOTE',
-            selector: row => row.NUM_LOT,
+            name: 'DESCRIPCIÓN',
+            selector: row => row.DES_RETURN,
             sortable: true,
         },
         {
-            name: 'CÓDIGO USUARIO',
-            selector: row => row.COD_USER,
+            name: 'NÚMERO DE LOTE',
+            selector: row => row.NUM_LOT,
             sortable: true,
         },
         {
@@ -60,8 +60,8 @@ const DevolucionesInv = () => {
             sortable: true,
         },
         {
-            name: 'DESCRIPCIÓN',
-            selector: row => row.DES_RETURN,
+            name: 'USUARIO',
+            selector: row => row.USER_NAME,
             sortable: true,
         },
         {

@@ -9,7 +9,6 @@ const AddReturnProductForm = ({setSendRequest, setMessageError}) => {
         CONCEPT: '',
         CANT_PRODUCT: '',
         NUM_LOT: '',
-        COD_USER: '',
         MOVEMENT: '',
         DES_RETURN: '',
         DAT_RETURN: ''
@@ -58,10 +57,6 @@ const AddReturnProductForm = ({setSendRequest, setMessageError}) => {
                 <div className="col-md-4 mt-2">
                     <label className='form-label' htmlFor="NUM_LOT">Número de lote</label>
                     <input onChange={handleInputChange} className='form-control' name='NUM_LOT' type="number" required/>
-                </div>
-                <div className="col-md-4 mt-2">
-                    <label className='form-label' htmlFor="COD_USER">Código de usuario</label>
-                    <input onChange={handleInputChange} className='form-control' name='COD_USER' type="number" required/>
                 </div>
                 <div className="col-md-6 mt-2">
                     <label className='form-label' htmlFor="MOVEMENT">Movimiento</label>
