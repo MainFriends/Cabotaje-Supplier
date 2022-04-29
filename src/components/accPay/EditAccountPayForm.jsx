@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useEffect } from "react/cjs/react.development";
+import { useEffect } from "react";
 
 import axios from "../../config/axios";
 import token from "../../helpers/getToken";

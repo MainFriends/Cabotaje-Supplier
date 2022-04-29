@@ -101,9 +101,9 @@ app.use('/api', parametricTables)
 app.use('/api', rolesAndPermissions)
 
 //Mostrar UI
-app.use(express.static(path.join(__dirname, '../build')));
+app.use(express.static(path.join(__dirname, '../dist')));
 app.get('/*', function (req, res) {
-  res.sendFile(express.static(path.join(__dirname, '../build/index.html')));
+  res.sendFile(express.static(path.join(__dirname, '../dist/index.html')));
 });
 
 /* ASIGNAR PUERTO Y LEVANTAR SERVIDOR */

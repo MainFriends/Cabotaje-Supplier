@@ -1,8 +1,8 @@
 import React from 'react'
 import DataTable from 'react-data-table-component';
-import { useEffect, useState } from 'react/cjs/react.development';
+import { useEffect, useState } from 'react';
 import Modal from '../Modal';
-import Inventory from './Inventory';9
+import Inventory from './Inventory';
 import moment from 'moment';
 import AlertError from '../AlertError';
 
