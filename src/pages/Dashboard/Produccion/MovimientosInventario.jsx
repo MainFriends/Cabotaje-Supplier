@@ -24,14 +24,14 @@ const MovimientosInventario = () => {
     
     //definir las columnas
     const columns = [
-        {
-            name: 'CODIGO',
-            selector: row => row.COD_TRANSACTIONS,
-            sortable: true,
-        },
          {
             name: 'CODIGO PRODUCTO',
             selector: row => row.COD_PRODUCT,
+            sortable: true,
+        },
+        {
+            name: 'PRODUCTO',
+            selector: row => row.NAM_PRODUCT,
             sortable: true,
         },
          {
