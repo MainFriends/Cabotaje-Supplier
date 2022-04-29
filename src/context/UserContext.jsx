@@ -1,7 +1,8 @@
 import { createContext, useState } from "react";
 
+const Context = createContext({});
+
 export function UserContextProvider ({children}) {
-    const Context = createContext({});
     const getJWT = JSON.parse(window.localStorage.getItem('userSession'));
     const [jwt, setJWT] = useState(getJWT);
 
