@@ -45,11 +45,11 @@ const updateUserInformation = (req, res) => {
 
 const updProfilePicture = (req, res) => {
     const sp = 'CALL SP_UPD_IMG_PROFILE(?,?)';
-
+    
     const {COD_USER} = req.user;
     const DATA =  fs.readFileSync('api/uploads/' + req.file.filename);
     fs.rmSync('api/uploads/' + req.file.filename);
-    
+
     mysqlConnect.query(sp,
         [   
             COD_USER,

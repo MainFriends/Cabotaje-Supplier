@@ -2,6 +2,7 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const path = require('path');
 require('dotenv').config();
 
 /* IMPORTAR API ROUTES */
@@ -98,6 +99,12 @@ app.use('/api', userProfile)
 app.use('/api', parametricTables)
 // roles y permisos
 app.use('/api', rolesAndPermissions)
+
+//Mostrar UI
+app.use(express.static(path.join(__dirname, '../build')));
+app.get('/*', function (req, res) {
+  res.sendFile(express.static(path.join(__dirname, '../build/index.html')));
+});
 
 /* ASIGNAR PUERTO Y LEVANTAR SERVIDOR */
 const port = process.env.PORT;

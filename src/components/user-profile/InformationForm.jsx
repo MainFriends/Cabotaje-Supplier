@@ -1,7 +1,7 @@
 import UserImageProfile from "../UserImageProfile"
 import token from '../../helpers/getToken';
 import axios from '../../config/axios';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 const InformationForm = ({setSendRequest, profilePicture, userInformation, setUserInformation, setAlertMessage}) => {
@@ -45,7 +45,9 @@ const InformationForm = ({setSendRequest, profilePicture, userInformation, setUs
                     });
                 }, 3000);
             })
+    }
 
+    useEffect(() => {
         if(file){
             const formData = new FormData();
             formData.append('image', file);
@@ -53,10 +55,34 @@ const InformationForm = ({setSendRequest, profilePicture, userInformation, setUs
             axios.put('/profile-picture', formData, token())
                 .then(res => {
                     document.querySelector('#changeProfilePic').value = '';
-                    setFile('');
+                    setAlertMessage({
+                        message: 'Foto de perfil cambiada exitosamene.',
+                        ok: true
+                    })
+                    setSendRequest(true)
+
+                    setTimeout(() => {
+                        setAlertMessage({
+                            message: '',
+                            ok: ''
+                        });
+                    }, 3000);
+                })
+                .catch(res => {
+                    setAlertMessage({
+                        message: 'La imagen es demasiado grande.',
+                        ok: false
+                    })
+
+                    setTimeout(() => {
+                        setAlertMessage({
+                            message: '',
+                            ok: ''
+                        });
+                    }, 3000);
                 })
         }
-    }
+    }, [file])
 
     return (
         <>
