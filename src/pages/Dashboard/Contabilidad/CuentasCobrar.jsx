@@ -14,9 +14,7 @@ import token from '../../../helpers/getToken';
 import moment from 'moment';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
-
-const doc = new jsPDF();
-doc.text('Reporte de Cuentas por Cobrar - Cabotaje Supplier',40,10);    
+import logo from '../../../assets/js/logo';
 
 const CuentasCobrar = () => {
     const [rows, setRows] = useState([]);
@@ -27,24 +25,28 @@ const CuentasCobrar = () => {
     const [rowCOD, setRowCOD] = useState(null);
 
     const dowlandPdfReceivable = () => {
-        if(rows){
-            const row = rows.map(fila => {
-                const fecha = fila.DAT_LIMIT
-                return [
-                    fila.COD_ACC_RECEIVABLE,
-                    fila.IDENTITY,
-                    fila.FIRST_NAME,
-                    fila.LAST_NAME,
-                    fila.DESCRIPTION,
-                    fila.TOT_BALANCE,
-                    moment(fecha).format('DD-MM-YYYY')
-                ]
-            })  
-            doc.autoTable({
-                head: [['Codigo', 'Identidad', 'Nombre', 'Apellido', 'Descripcion', 'Monto', 'Fecha Limite']],
-                body: row.sort()
-            })
-        }
+        const doc = new jsPDF();
+        doc.text('Reporte de Cuentas por Cobrar - Cabotaje Supplier',40,30);    
+        const image = logo
+        doc.addImage(image, 'PNG', 10, 10,20,30,'Cabotaje');
+        
+        const row = rows.map(fila => {
+            const fecha = fila.DAT_LIMIT
+            return [
+                fila.COD_ACC_RECEIVABLE,
+                fila.IDENTITY,
+                fila.FIRST_NAME,
+                fila.LAST_NAME,
+                fila.DESCRIPTION,
+                fila.TOT_BALANCE,
+                moment(fecha).format('DD-MM-YYYY')
+            ]
+        })  
+        doc.autoTable({
+            head: [['Codigo', 'Identidad', 'Nombre', 'Apellido', 'Descripcion', 'Monto', 'Fecha Limite']],
+            body: row.sort(),
+            startY: 45
+        })
 
         doc.save('Cuentas por cobrar - Cabotaje Supplier.pdf')
     }

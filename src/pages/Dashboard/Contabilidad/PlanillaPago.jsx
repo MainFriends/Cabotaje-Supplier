@@ -13,12 +13,8 @@ import axios from '../../../config/axios'
 import token from '../../../helpers/getToken';
 import moment from 'moment';
 import jsPDF from 'jspdf'
-import 'jspdf-autotable'
-
-const doc = new jsPDF();
-doc.text('Reporte de Planilla de Pago - Cabotaje Supplier',45,10);   
-
-
+import 'jspdf-autotable';
+import logo from '../../../assets/js/logo';
 
 const PlanillaPago = () => {
     const [rows, setRows] = useState([]);
@@ -29,28 +25,35 @@ const PlanillaPago = () => {
     const [rowCOD, setRowCOD] = useState(null);
 
     const dowlandPdfPayment = () => {
-        if(rows){
-            const row = rows.map(fila => {
-                const fecha = fila.DAT_PAYMENT
-                return [
-                    fila.COD_PAY_FORM,
-                    fila.FIRST_NAME,
-                    fila.LAST_NAME,
-                    fila.HOURS_WORKED,
-                    fila.AMO_GROSS,
-                    fila.BONUS,
-                    fila.TOT_DEDUCTIONS,
-                    fila.NET_SALARY,
-                    moment(fecha).format('DD-MM-YYYY')
-                ]
-            })  
-            doc.autoTable({
-                head: [['#', 'Nombre', 'Apellido', 'H. Trabajadas', 'Salario Base', 'Bonificaiones', 'Deduciones', 'S. Neto', 'Fecha de pago']],
-                body: row.sort()
-            })
-        }
+        const doc = new jsPDF();
+        doc.text('Reporte de Planilla de Pago - Cabotaje Supplier',45,30);   
+        const image = logo
+        doc.addImage(image, 'PNG', 10, 10,20,30,'Cabotaje');
+        
+        const row = rows.map(fila => {
+            const fecha = fila.DAT_PAYMENT
+            return [
+                fila.COD_PAY_FORM,
+                fila.FIRST_NAME,
+                fila.LAST_NAME,
+                fila.HOURS_WORKED,
+                fila.AMO_GROSS,
+                fila.BONUS,
+                fila.TOT_DEDUCTIONS,
+                fila.NET_SALARY,
+                moment(fecha).format('DD-MM-YYYY')
+            ]
+        })  
+        doc.autoTable({
+            head: [['#', 'Nombre', 'Apellido', 'H. Trabajadas', 'Salario Base', 'Bonificaiones', 'Deduciones', 'S. Neto', 'Fecha de pago']],
+            body: row.sort(),
+            startY: 45,
+            styles: {
+                fontSize: 8
+            }
+        })
 
-        doc.save('Planilla de Pago - Cabotaje Supplier.pdf')
+        doc.save('Planilla de Pago - Cabotaje Supplier.pdf');
     }
     
     //definir las columnas

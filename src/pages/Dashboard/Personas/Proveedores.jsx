@@ -11,9 +11,7 @@ import axios from '../../../config/axios';
 import token from '../../../helpers/getToken';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
-
-const doc = new jsPDF();
-doc.text('Reporte de Proveedores - Cabotaje Supplier',50,10);    
+import logo from '../../../assets/js/logo';   
 
 const Proveedor= () => {
     const [rows, setRows] = useState([]);
@@ -24,23 +22,27 @@ const Proveedor= () => {
     const [rowCOD, setRowCOD] = useState(null);
 
     const dowlandPdfSupplier = () => {
-        if(rows){
-            const row = rows.map(fila => [
-                fila.NAM_SUPPLIER,
-                fila.NAM_CONTACT,
-                fila.LAST_NAM_CONTACT,
-                fila.ADDRESS,
-                fila.NUM_PHONE_ONE,
-                fila.NUM_PHONE_TWO,
-                fila.EMAIL,
-                fila.NAM_CITY,
-                fila.ZIP_CODE
-            ])  
-            doc.autoTable({
-                head: [['Proveedor', 'Nombre del contacto', 'Apellido del contacto', 'Direccion', 'Tel 1', 'Tel 2', 'Email', 'Ciudad', 'Codigo postal']],
-                body: row.sort()
-            })
-        }
+        const doc = new jsPDF();
+        doc.text('Reporte de Proveedores - Cabotaje Supplier',50,30);
+        const image = logo
+        doc.addImage(image, 'PNG', 10, 10,20,30,'Cabotaje'); 
+        
+        const row = rows.map(fila => [
+            fila.NAM_SUPPLIER,
+            fila.NAM_CONTACT,
+            fila.LAST_NAM_CONTACT,
+            fila.ADDRESS,
+            fila.NUM_PHONE_ONE,
+            fila.NUM_PHONE_TWO,
+            fila.EMAIL,
+            fila.NAM_CITY,
+            fila.ZIP_CODE
+        ])  
+        doc.autoTable({
+            head: [['Proveedor', 'Nombre del contacto', 'Apellido del contacto', 'Direccion', 'Tel 1', 'Tel 2', 'Email', 'Ciudad', 'Codigo postal']],
+            body: row.sort(),
+            startY: 45,
+        })
 
         doc.save('Proveedores - Cabotaje Supplier.pdf')
     }

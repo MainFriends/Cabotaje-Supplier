@@ -15,10 +15,7 @@ import moment from 'moment';
 import token from '../../../../src/helpers/getToken';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
-
-const doc = new jsPDF();
-doc.text('Reporte de Movimientos - Cabotaje Supplier',50,10);   
-
+import logo from '../../../assets/js/logo'; 
 
 const MovimientosInventario = () => {
     const [rows, setRows] = useState([]);
@@ -29,23 +26,27 @@ const MovimientosInventario = () => {
     const [rowCOD, setRowCOD] = useState(null)
 
     const dowlandPdf = () => {
-        if(rows){
-            const row = rows.map(fila => {
-                const fecha = fila.DAT_TRANSACTION
-               return [
-                    fila.COD_PRODUCT,
-                    fila.NAM_PRODUCT,
-                    fila.TYP_TRANSACTION,
-                    fila.CANT,
-                    fila.NUM_LOT,
-                    moment(fecha).format('DD-MM-YYYY')
-                ]
-            })  
-            doc.autoTable({
-                head: [['#', 'Producto', 'Tip. de transaccion', 'Cant. productos', 'N. Lote', 'Fecha de merma']],
-                body: row.sort()
-            })
-        }
+        const doc = new jsPDF();
+        doc.text('Reporte de Movimientos - Cabotaje Supplier',50,30); 
+        const image = logo
+        doc.addImage(image, 'PNG', 10, 10,20,30,'Cabotaje'); 
+
+        const row = rows.map(fila => {
+            const fecha = fila.DAT_TRANSACTION
+            return [
+                fila.COD_PRODUCT,
+                fila.NAM_PRODUCT,
+                fila.TYP_TRANSACTION,
+                fila.CANT,
+                fila.NUM_LOT,
+                moment(fecha).format('DD-MM-YYYY')
+            ]
+        })  
+        doc.autoTable({
+            head: [['#', 'Producto', 'Tip. de transaccion', 'Cant. productos', 'N. Lote', 'Fecha de merma']],
+            body: row.sort(),
+            startY: 45
+        })
 
         doc.save('Movimientos de inventario - Cabotaje Supplier.pdf')
     }

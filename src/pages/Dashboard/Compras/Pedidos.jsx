@@ -16,9 +16,7 @@ import moment from 'moment'
 import ViewDetail from '../../../components/Orders/ViewDetail';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
-
-const doc = new jsPDF();
-doc.text('Reporte de Pedidos - Cabotaje Supplier',55,10);    
+import logo from '../../../assets/js/logo';
 
 const Pedidos = () => {
     const [rows, setRows] = useState([]);
@@ -29,24 +27,28 @@ const Pedidos = () => {
     const [rowCOD, setRowCOD] = useState(null);
 
     const dowlandPdfOrder = () => {
-        if(rows){
-            const row = rows.map(fila => {
-                const fecha = fila.DAT_ORDER
-                const fechaRequired = fila.DAT_REQUIRED
-                return  [
-                    fila.COD_ORDER,
-                    fila.NAM_SUPPLIER,
-                    moment(fecha).format('DD-MM-YYYY'),
-                    moment(fechaRequired).format('DD-MM-YYYY'),
-                    fila.NAM_STATUS,
-                    fila.USER_NAME
-                ]
-            })  
-            doc.autoTable({
-                head: [['# De pedido', 'Proveedor', 'Fecha de pedido', 'Fecha requerida', 'Estado', 'Empleado']],
-                body: row.sort()
-            })
-        }
+        const doc = new jsPDF();
+        doc.text('Reporte de Pedidos - Cabotaje Supplier',55,30);    
+        const image = logo
+        doc.addImage(image, 'PNG', 10, 10,20,30,'Cabotaje');
+        
+        const row = rows.map(fila => {
+            const fecha = fila.DAT_ORDER
+            const fechaRequired = fila.DAT_REQUIRED
+            return  [
+                fila.COD_ORDER,
+                fila.NAM_SUPPLIER,
+                moment(fecha).format('DD-MM-YYYY'),
+                moment(fechaRequired).format('DD-MM-YYYY'),
+                fila.NAM_STATUS,
+                fila.USER_NAME
+            ]
+        })  
+        doc.autoTable({
+            head: [['# De pedido', 'Proveedor', 'Fecha de pedido', 'Fecha requerida', 'Estado', 'Empleado']],
+            body: row.sort(),
+            startY: 45,
+        })
 
         doc.save('Pedidos - Cabotaje Supplier.pdf')
     }

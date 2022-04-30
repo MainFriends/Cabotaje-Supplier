@@ -15,9 +15,7 @@ import moment from 'moment';
 import ViewDetail from '../../../components/PurchaseInvoice/ViewDetail';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
-
-const doc = new jsPDF();
-doc.text('Reporte de Compras - Cabotaje Supplier',55,10);    
+import logo from '../../../assets/js/logo';
 
 const Compras = () => {
     const [rows, setRows] = useState([]);
@@ -28,26 +26,30 @@ const Compras = () => {
     const [rowCOD, setRowCOD] = useState(null);
 
     const dowlandPdfShoping = () => {
-        if(rows){
-            const row = rows.map(fila => {
-                const fecha = fila.DAT_INVOICE
-                return [
-                    fila.COD_INVOICE,
-                    fila.TYP_TO_PURCHASE,
-                    fila.NAM_TYPE_PAY,
-                    fila.SUBTOTAL,
-                    fila.TOT_ISV,
-                    fila.TOT_PURCHASE,
-                    moment(fecha).format('DD-MM-YYYY'),
-                    fila.COD_ORDER,
-                    fila.USER_NAME,
-                ]
-            })  
-            doc.autoTable({
-                head: [['# De factura', 'Tipo de transaccion', 'Forma de pago', 'Sub total', 'ISV total', 'Total compra', 'Fecha', '# de pedido', 'Empleado']],
-                body: row.sort()
-            })
-        }
+        const doc = new jsPDF();
+        doc.text('Reporte de Compras - Cabotaje Supplier',55,30);    
+        const image = logo
+        doc.addImage(image, 'PNG', 10, 10,20,30,'Cabotaje');
+        
+        const row = rows.map(fila => {
+            const fecha = fila.DAT_INVOICE
+            return [
+                fila.COD_INVOICE,
+                fila.TYP_TO_PURCHASE,
+                fila.NAM_TYPE_PAY,
+                fila.SUBTOTAL,
+                fila.TOT_ISV,
+                fila.TOT_PURCHASE,
+                moment(fecha).format('DD-MM-YYYY'),
+                fila.COD_ORDER,
+                fila.USER_NAME,
+            ]
+        })  
+        doc.autoTable({
+            head: [['# De factura', 'Tipo de transaccion', 'Forma de pago', 'Sub total', 'ISV total', 'Total compra', 'Fecha', '# de pedido', 'Empleado']],
+            body: row.sort(),
+            startY: 45,
+        })
 
         doc.save('Compras - Cabotaje Supplier.pdf')
     }

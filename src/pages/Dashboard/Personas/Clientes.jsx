@@ -12,10 +12,8 @@ import {paginationComponentOptions} from '../../../helpers/datatablesOptions';
 import axios from '../../../config/axios';
 import token from '../../../helpers/getToken';
 import jsPDF from 'jspdf'
-import 'jspdf-autotable'
-
-const doc = new jsPDF()
-doc.text('Reporte de Clientes - Cabotaje Supplier',60,10);    
+import 'jspdf-autotable';
+import logo from '../../../assets/js/logo';
 
 const Clientes = () => {
     const [rows, setRows] = useState([]);
@@ -26,26 +24,29 @@ const Clientes = () => {
     const [rowCOD, setRowCOD] = useState(null);
     
     const dowlandPDFClient = () => {
+        const doc = new jsPDF();
+        doc.text('Reporte de Clientes - Cabotaje Supplier',55,30);
+        const image = logo
+        doc.addImage(image, 'PNG', 10, 10,20,30,'Cabotaje')
         
-        if(rows){
-            const row = rows.map(fila => {
-                const identidad = fila.IDENTITY
-                const rtn = fila.RTN
-               return [
-                    `0${identidad}`,
-                    fila.FIRST_NAME,
-                    fila.LAST_NAME,
-                    fila.NUM_PHONE_ONE,
-                    fila.NUM_PHONE_TWO === 0 ? "Sin número" : fila.NUM_PHONE_TWO,
-                    fila.ADDRESS,
-                    `0${rtn}`,
-                ]
-            })  
-            doc.autoTable({
-                head: [['Identidad', 'Nombre', 'Apellido', 'Numero 1', 'Numero 2', 'Direccion', 'RTN']],
-                body: row.sort()
-            })
-        }
+        const row = rows.map(fila => {
+            const identidad = fila.IDENTITY
+            const rtn = fila.RTN
+            return [
+                `0${identidad}`,
+                fila.FIRST_NAME,
+                fila.LAST_NAME,
+                fila.NUM_PHONE_ONE,
+                fila.NUM_PHONE_TWO === 0 ? "Sin número" : fila.NUM_PHONE_TWO,
+                fila.ADDRESS,
+                `0${rtn}`,
+            ]
+        })  
+        doc.autoTable({
+            head: [['Identidad', 'Nombre', 'Apellido', 'Numero 1', 'Numero 2', 'Direccion', 'RTN']],
+            body: row.sort(),
+            startY: 45
+        })
 
         doc.save('Clientes - Cabotaje Supplier.pdf');
     }

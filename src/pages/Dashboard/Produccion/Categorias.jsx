@@ -14,10 +14,8 @@ import axios from '../../../config/axios'
 
 import token from '../../../../src/helpers/getToken';
 import jsPDF from 'jspdf'
-import 'jspdf-autotable'
-
-const doc = new jsPDF();
-doc.text('Reporte de Categorias - Cabotaje Supplier',55,10);   
+import 'jspdf-autotable';
+import logo from '../../../assets/js/logo';
 
 const Categoria = () => {
     const [rows, setRows] = useState([]);
@@ -28,17 +26,21 @@ const Categoria = () => {
     const [rowCOD, setRowCOD] = useState(null)
 
     const dowlandPdfCategory = () => {
-        if(rows){
-            const row = rows.map(fila => [
-                fila.COD_CATEGORY,
-                fila.NAM_CATEGORY,
-                fila.DESCRIPTION
-            ])  
-            doc.autoTable({
-                head: [['#', 'Categoria', 'Descripcion']],
-                body: row.sort()
-            })
-        }
+        const doc = new jsPDF();
+        doc.text('Reporte de Categorias - Cabotaje Supplier',55,30);   
+        const image = logo
+        doc.addImage(image, 'PNG', 10, 10,20,30,'Cabotaje');
+
+        const row = rows.map(fila => [
+            fila.COD_CATEGORY,
+            fila.NAM_CATEGORY,
+            fila.DESCRIPTION
+        ])  
+        doc.autoTable({
+            head: [['#', 'Categoria', 'Descripcion']],
+            body: row.sort(),
+            startY: 45,
+        })
 
         doc.save('Categorias de Inventario - Cabotaje Supplier.pdf')
     }
