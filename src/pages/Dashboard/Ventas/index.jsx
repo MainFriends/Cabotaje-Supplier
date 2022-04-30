@@ -10,12 +10,48 @@ import Modal from '../../../components/Modal';
 import { getInvoices } from '../../../services/sale-invoice';
 import {paginationComponentOptions} from '../../../helpers/datatablesOptions';
 import SaleDetail from '../../../components/sale-detail/SaleDetail';
+import jsPDF from 'jspdf'
+import 'jspdf-autotable';
+import logo from '../../../assets/js/logo';
 
 const Facturas = () => {
     const [rows, setRows] = useState([]);
     const [filterText, setFilterText] = useState('');
     const [pending, setPending] = useState(true);
     const [rowCOD, setRowCOD] = useState(null);
+
+    const dowlandPdfSales = () => {
+        const doc = new jsPDF();
+        doc.text('Reporte de Ventas - Cabotaje Supplier',55,30); 
+        const image = logo
+        doc.addImage(image, 'PNG', 10, 10,20,30,'Cabotaje');
+
+        const row = rows.map(fila => {
+            const fecha = fila.DAT_INVOICE
+            return [
+                fila.COD_INVOICE,
+                fila.CLIENT,
+                fila.SUBTOTAL,
+                fila.TOT_DISCOUNT,
+                fila.TOT_ISV,
+                fila.TOT_SALE,
+                fila.TYP_TO_SALE,
+                fila.NAM_TYPE_PAY,
+                fila.USER_NAME,
+                moment(fecha).format('DD-MM-YYYY'),
+            ]
+        })  
+        doc.autoTable({
+            head: [['#', 'Cliente', 'Sub total', 'Total des.', 'Total ISV', 'Total ventas', 'Tipo de transac.', 'F. de pago', 'Usuario', 'Fecha']],
+            body: row.sort(),
+            startY: 45,
+            styles: {
+                fontSize: 8
+            }
+        })
+
+        doc.save('Ventas - Cabotaje Supplier.pdf')
+    }
     
     //definir las columnas
     const columns = [
@@ -121,6 +157,7 @@ const Facturas = () => {
                         highlightOnHover
                         striped
                         persistTableHead 
+                        actions={<button onClick={() => dowlandPdfSales()} className='btn btn-danger btn-sm'><i class="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}
                     />
 
                     <Modal 

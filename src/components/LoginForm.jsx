@@ -34,7 +34,7 @@ const LoginForm = ({setFormLogin, handleLoginSubmit, errorMessage}) => {
                                             <div className="text-muted font-weight-light mt-3 small">¿Olvidaste tu contraseña? Informale a tu gerente o encargado.</div>
                                         </form>
                                     </div>
-                                    {errorMessage ? <AlertError message={errorMessage}/> : null};
+                                    {errorMessage ? <AlertError message={errorMessage}/> : null}
                                 </div>
                             </div>
                         </div>

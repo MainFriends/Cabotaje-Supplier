@@ -9,12 +9,39 @@ import Modal from '../../../components/Modal';
 import {paginationComponentOptions} from '../../../helpers/datatablesOptions';
 import axios from '../../../config/axios';
 import token from '../../../helpers/getToken';
+import jsPDF from 'jspdf'
+import 'jspdf-autotable';
+import logo from '../../../assets/js/logo';
 
 const Rebajas = () => {
     const [rows, setRows] = useState([]);
     const [filterText, setFilterText] = useState('');
     const [loading, setLoading] = useState(true);
     const [messageError, setMessageError] = useState('');
+
+    const dowlandPdfRebates = () => {
+        const doc = new jsPDF();
+        doc.text('Reporte de Rebajas - Cabotaje Supplier',55,30);
+        const image = logo
+        doc.addImage(image, 'PNG', 10, 10,20,30,'Cabotaje');
+
+        const row = rows.map(fila => [
+            fila.COD_DISCOUNT,
+            fila.COD_INVOICE,
+            fila.CLIENT_NAME,
+            fila.DESCRIPTION,
+            fila.AMOUNT,
+            fila.NAM_TYPE_PAY,
+            fila.USER_NAME
+        ])  
+        doc.autoTable({
+            head: [['#', 'Factura', 'Cliente', 'Descrip.', 'Monto', 'Tipo de pago', 'Usuario']],
+            body: row.sort(),
+            startY: 45
+        })
+
+        doc.save('Rebajas - Cabotaje Supplier.pdf')
+    }
     
     //definir las columnas
     const columns = [
@@ -97,7 +124,9 @@ const Rebajas = () => {
                         subHeaderComponent={subHeaderComponentMemo}
                         highlightOnHover
                         striped
-                        persistTableHead 
+                        persistTableHead
+                        actions={<button onClick={() => dowlandPdfRebates()} className='btn btn-danger btn-sm'><i class="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}
+
                     />
 
                     <Modal 

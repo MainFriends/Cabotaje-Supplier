@@ -9,6 +9,9 @@ import EditSupplierForm from '../../../components/Supplier/EditSupplierForm';
 import {paginationComponentOptions} from '../../../helpers/datatablesOptions';
 import axios from '../../../config/axios';
 import token from '../../../helpers/getToken';
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
+import logo from '../../../assets/js/logo';   
 
 const Proveedor= () => {
     const [rows, setRows] = useState([]);
@@ -17,6 +20,32 @@ const Proveedor= () => {
     const [messageError, setMessageError] = useState('');
     const [sendRequest, setSendRequest] = useState(false);
     const [rowCOD, setRowCOD] = useState(null);
+
+    const dowlandPdfSupplier = () => {
+        const doc = new jsPDF();
+        doc.text('Reporte de Proveedores - Cabotaje Supplier',50,30);
+        const image = logo
+        doc.addImage(image, 'PNG', 10, 10,20,30,'Cabotaje'); 
+        
+        const row = rows.map(fila => [
+            fila.NAM_SUPPLIER,
+            fila.NAM_CONTACT,
+            fila.LAST_NAM_CONTACT,
+            fila.ADDRESS,
+            fila.NUM_PHONE_ONE,
+            fila.NUM_PHONE_TWO,
+            fila.EMAIL,
+            fila.NAM_CITY,
+            fila.ZIP_CODE
+        ])  
+        doc.autoTable({
+            head: [['Proveedor', 'Nombre del contacto', 'Apellido del contacto', 'Direccion', 'Tel 1', 'Tel 2', 'Email', 'Ciudad', 'Codigo postal']],
+            body: row.sort(),
+            startY: 45,
+        })
+
+        doc.save('Proveedores - Cabotaje Supplier.pdf')
+    }
     
     //definir las columnas
     const columns = [
@@ -130,7 +159,8 @@ const Proveedor= () => {
                         subHeaderComponent={subHeaderComponentMemo}
                         highlightOnHover
                         striped
-                        persistTableHead 
+                        persistTableHead
+                        actions={<button onClick={() => dowlandPdfSupplier()} className='btn btn-danger btn-sm'><i class="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}
                     />
 
                     <Modal 

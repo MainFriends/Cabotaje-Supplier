@@ -12,6 +12,9 @@ import {paginationComponentOptions} from '../../../helpers/datatablesOptions';
 import axios from '../../../config/axios';
 import token from '../../../helpers/getToken';
 import moment from 'moment';
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
+import logo from '../../../assets/js/logo';
 
 const Usuarios = () => {
     const [rows, setRows] = useState([]);
@@ -20,6 +23,43 @@ const Usuarios = () => {
     const [messageError, setMessageError] = useState('');
     const [sendRequest, setSendRequest] = useState(false);
     const [rowCOD, setRowCOD] = useState(null);
+
+    const dowlandPDFUser = () => {
+        const doc = new jsPDF();
+        doc.text('Reporte de Usuarios - Cabotaje Supplier',55,30);
+        const image = logo
+        doc.addImage(image, 'PNG', 10, 10,20,30,'Cabotaje');
+        
+        const row = rows.map(fila => {
+            const fecha = fila.DAT_BIRTHDAY;
+            const identidad = fila.IDENTITY
+            return [
+                fila.COD_USER,
+                `0${identidad}`,
+                fila.FIRST_NAME,
+                fila.LAST_NAME,
+                fila.USER_EMAIL,
+                fila.NAM_ROLE,
+                fila.GENDER,
+                fila.NUM_PHONE_ONE,
+                fila.NUM_PHONE_TWO === 0 ? "Sin número" : fila.NUM_PHONE_TWO,
+                fila.NUM_REFERENCE,
+                moment(fecha).format('DD-MM-YYYY'),
+                fila.NAM_CITY,
+                fila.ADDRESS
+            ]
+        })  
+        doc.autoTable({
+            head: [['#', 'ID', 'Nombre', 'Apellido', 'Email', 'Rol', 'Genero', 'Tel. 1', 'Tel. 2', 'Tel. Ref', 'Fecha de nacimiento', 'Ciudad','Direccion']],
+            body: row.sort(),
+            startY: 45,
+            styles: {
+                fontSize: 5
+            }
+        })
+
+        doc.save('Usuarios - Cabotaje Supplier.pdf')
+    }
 
 
     
@@ -164,7 +204,9 @@ const Usuarios = () => {
                         subHeaderComponent={subHeaderComponentMemo}
                         highlightOnHover
                         striped
-                        persistTableHead 
+                        persistTableHead
+                        actions={<button onClick={() => dowlandPDFUser()} className='btn btn-danger btn-sm'><i class="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}
+
                     />
 
                     <Modal 

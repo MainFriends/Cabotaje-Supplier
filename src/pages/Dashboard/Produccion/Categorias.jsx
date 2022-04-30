@@ -13,6 +13,9 @@ import axios from '../../../config/axios'
 
 
 import token from '../../../../src/helpers/getToken';
+import jsPDF from 'jspdf'
+import 'jspdf-autotable';
+import logo from '../../../assets/js/logo';
 
 const Categoria = () => {
     const [rows, setRows] = useState([]);
@@ -21,6 +24,26 @@ const Categoria = () => {
     const [messageError, setMessageError] = useState('');
     const [sendRequest, setSendRequest] = useState('false');
     const [rowCOD, setRowCOD] = useState(null)
+
+    const dowlandPdfCategory = () => {
+        const doc = new jsPDF();
+        doc.text('Reporte de Categorias - Cabotaje Supplier',55,30);   
+        const image = logo
+        doc.addImage(image, 'PNG', 10, 10,20,30,'Cabotaje');
+
+        const row = rows.map(fila => [
+            fila.COD_CATEGORY,
+            fila.NAM_CATEGORY,
+            fila.DESCRIPTION
+        ])  
+        doc.autoTable({
+            head: [['#', 'Categoria', 'Descripcion']],
+            body: row.sort(),
+            startY: 45,
+        })
+
+        doc.save('Categorias de Inventario - Cabotaje Supplier.pdf')
+    }
     
     //definir las columnas
     const columns = [
@@ -101,7 +124,9 @@ const Categoria = () => {
                         subHeaderComponent={subHeaderComponentMemo}
                         highlightOnHover
                         striped
-                        persistTableHead 
+                        persistTableHead
+                        actions={<button onClick={() => dowlandPdfCategory()} className='btn btn-danger btn-sm'><i class="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}
+
                     />
 
                     <Modal 
