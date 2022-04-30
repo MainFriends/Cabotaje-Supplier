@@ -75,19 +75,19 @@ const EditUserForm = ({rowCOD, setSendRequest, setMessageError}) => {
             <div className="row mb-4">
             <div className="col-md-4">
                     <label className='form-label' htmlFor="IDENTITY">Identidad</label>
-                    <input onChange={handleInputChange} value={formEditUser.IDENTITY} className='form-control' name='IDENTITY' minlenght={13} maxLength={13}  type="tel" pattern="[0-9]{1,13}" required/>
+                    <input onChange={handleInputChange} value={formEditUser.IDENTITY} className='form-control' name='IDENTITY' minlenght={13} maxLength={13}  type="text" pattern="[0-9]{13}"  title="Identidad debe contener 13 caracteres"required/>
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="FIRST_NAME">Primer nombre</label>
-                    <input onChange={handleInputChange} value={formEditUser.FIRST_NAME} className='form-control' name='FIRST_NAME' type="text" pattern="^[a-zA-Z0-9ñÑØº-_ ]+$" title="La primera letra debe ser MAYUSCULA" onInput={toUpperCase} required/>
+                    <input onChange={handleInputChange} value={formEditUser.FIRST_NAME} className='form-control' name='FIRST_NAME' type="text" pattern="^[a-zA-ZñÑ]+$"  title="No debe contener caracteres numericos" onInput={toUpperCase} required/>
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="MIDDLE_NAME">Segundo nombre</label>
-                    <input onChange={handleInputChange} value={formEditUser.MIDDLE_NAME} className='form-control' name='MIDDLE_NAME' type="text" pattern="^[a-zA-Z0-9ñÑØº-_ ]+$" title="La primera letra debe ser MAYUSCULA" onInput={toUpperCase} required/>
+                    <input onChange={handleInputChange} value={formEditUser.MIDDLE_NAME} className='form-control' name='MIDDLE_NAME' type="text" pattern="^[a-zA-ZñÑ]+$"  title="No debe contener caracteres numericos" onInput={toUpperCase} required/>
                 </div>
                 <div className="col-md-4 mt-2">
                     <label className='form-label' htmlFor="LAST_NAME">Apellido</label>
-                    <input onChange={handleInputChange} value={formEditUser.LAST_NAME} className='form-control' name='LAST_NAME' type="text" pattern="^[a-zA-Z0-9ñÑØº-_ ]+$" title="La primera letra debe ser MAYUSCULA" onInput={toUpperCase} required/>
+                    <input onChange={handleInputChange} value={formEditUser.LAST_NAME} className='form-control' name='LAST_NAME' type="text" pattern="^[a-zA-ZñÑ_ ]+$" title="No debe contener caracteres numericos" onInput={toUpperCase} required/>
                 </div>
             
                 <div className="col-md-4 mt-2">
@@ -118,11 +118,11 @@ const EditUserForm = ({rowCOD, setSendRequest, setMessageError}) => {
             
                 <div className="col-md-4 mt-2">
                     <label className='form-label' htmlFor="NAM_CITY">Ciudad</label>
-                    <input onChange={handleInputChange.DAT_BIRTHDAY} value={formEditUser.NAM_CITY} className='form-control' name='NAM_CITY'   type="text" onInput={toUpperCase} pattern="^[a-zA-Z0-9ñÑØº-_ ]+$" required/>
+                    <input onChange={handleInputChange.DAT_BIRTHDAY} value={formEditUser.NAM_CITY} className='form-control' name='NAM_CITY'   type="text"pattern="^[a-zA-ZñÑ_ ]+$" onInput={toUpperCase} required/>
                 </div>
                 <div className="col-md-8 mt-2">
                     <label className='form-label' htmlFor="ADDRESS">Dirección</label>
-                    <textarea onChange={handleInputChange} value={formEditUser.ADDRESS} className='form-control' name='ADDRESS'  rows='3' cols='4' type="text" required/>
+                    <textarea onChange={handleInputChange} value={formEditUser.ADDRESS} className='form-control' name='ADDRESS'  rows='3' cols='4' type="text" pattern="^[a-zA-Z0-9ñÑØº-_ ]+$" onInput={toUpperCase}required/>
                 </div>
                 <br></br>
                 <br></br>
@@ -143,11 +143,12 @@ const EditUserForm = ({rowCOD, setSendRequest, setMessageError}) => {
                 </div>
             
             </div>
-            
-            
+           
             <div className="modal-footer">
                 <button type="button" id='idCloseEditForm' className="btn btn-primary" data-dismiss="modal">Cerrar</button>
                 <button type='submit' className="btn btn-success">Guardar</button>
+              
+            
             </div>
         </form>
     )

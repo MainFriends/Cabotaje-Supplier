@@ -50,7 +50,7 @@ const EditCategoryForm = ({rowCOD, setSendRequest, setMessageError}) => {
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="DESCRIPTION">Concepto</label>
-                    <input onChange={handleInputChange} value = {formEditCategor.DESCRIPTION} className='form-control' name='DESCRIPTION' type="text" onInput={toUpperCase} required/>
+                    <input onChange={handleInputChange} value = {formEditCategor.DESCRIPTION} className='form-control' name='DESCRIPTION' type="text" pattern="^[a-zA-Z0-9ñÑØº-_ ]+$" onInput={toUpperCase}  required/>
                 </div>
             </div>
             <div className="modal-footer">

@@ -40,11 +40,11 @@ const AddCategoryForm = ({setSendRequest, setMessageError}) => {
             <div className="row mb-4">
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="NAM_CATEGORY">Nombre categoría</label>
-                    <input onChange={handleInputChange} className='form-control' name='NAM_CATEGORY' type="text" onInput={toUpperCase} required/>
+                    <input onChange={handleInputChange} className='form-control' name='NAM_CATEGORY' type="text" pattern="^[a-zA-ZñÑ]+$"  title="No debe contener caracteres numericos" onInput={toUpperCase}required/>
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="DESCRIPTION">Descripción</label>
-                    <input onChange={handleInputChange} className='form-control' name='DESCRIPTION' type="text" onInput={toUpperCase} required/>
+                    <input onChange={handleInputChange} className='form-control' name='DESCRIPTION' type="text" pattern="^[a-zA-Z0-9ñÑØº-_ ]+$" onInput={toUpperCase}  required/>
                 </div>
             </div>
             
