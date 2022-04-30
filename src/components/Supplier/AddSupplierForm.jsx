@@ -63,11 +63,11 @@ const AddSupplierForm = ({setSendRequest, setMessageError}) => {
                 </div>           
                 <div className="col-md-4 mt-2">
                     <label className='form-label' htmlFor="NUM_PHONE_ONE">Teléfono 1</label>
-                    <input onChange={handleInputChange} className='form-control' name='NUM_PHONE_ONE' type="tel"  pattern="[0-9]{8}" minLength={8} maxLength={8} title="El numero telfonico debe contener 8 caracteres" required/>
+                    <input onChange={handleInputChange} className='form-control' name='NUM_PHONE_ONE' type="tel"  pattern="[0-9]{8}" minLength={8} maxLength={8} title="El número telefónico debe contener 8 caracteres númericos" required/>
                 </div>
                 <div className="col-md-4 mt-2">
                     <label className='form-label' htmlFor="NUM_PHONE_TWO">Teléfono 2</label>
-                    <input onChange={handleInputChange} className='form-control' name='NUM_PHONE_TWO' type="tel"  pattern="[0-9]{1,8}" title="OPCIONAL"  min={0} maxLength={8} required/>
+                    <input onChange={handleInputChange} className='form-control' name='NUM_PHONE_TWO' type="tel"  pattern="[0-9]{1,8}" title="El número telefónico debe contener 8 caracteres númericos"  min={0} maxLength={8} required/>
                 </div>  
                 <div className="col-md-4 mt-2">
                     <label className='form-label' htmlFor="EMAIL">Correo electrónico</label>
