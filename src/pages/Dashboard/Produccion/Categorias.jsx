@@ -16,7 +16,8 @@ import token from '../../../../src/helpers/getToken';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 
-const doc = new jsPDF()
+const doc = new jsPDF();
+doc.text('Reporte de Categorias - Cabotaje Supplier',55,10);   
 
 const Categoria = () => {
     const [rows, setRows] = useState([]);
@@ -39,7 +40,7 @@ const Categoria = () => {
             })
         }
 
-        doc.save('categoria.pdf')
+        doc.save('Categorias de Inventario - Cabotaje Supplier.pdf')
     }
     
     //definir las columnas

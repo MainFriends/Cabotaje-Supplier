@@ -16,7 +16,8 @@ import ViewDetail from '../../../components/PurchaseInvoice/ViewDetail';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 
-const doc = new jsPDF()
+const doc = new jsPDF();
+doc.text('Reporte de Compras - Cabotaje Supplier',55,10);    
 
 const Compras = () => {
     const [rows, setRows] = useState([]);
@@ -48,7 +49,7 @@ const Compras = () => {
             })
         }
 
-        doc.save('compras.pdf')
+        doc.save('Compras - Cabotaje Supplier.pdf')
     }
     
     //definir las columnas

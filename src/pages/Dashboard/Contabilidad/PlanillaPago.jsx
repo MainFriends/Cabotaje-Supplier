@@ -15,7 +15,8 @@ import moment from 'moment';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 
-const doc = new jsPDF()
+const doc = new jsPDF();
+doc.text('Reporte de Planilla de Pago - Cabotaje Supplier',45,10);   
 
 
 
@@ -49,7 +50,7 @@ const PlanillaPago = () => {
             })
         }
 
-        doc.save('planillaDePago.pdf')
+        doc.save('Planilla de Pago - Cabotaje Supplier.pdf')
     }
     
     //definir las columnas

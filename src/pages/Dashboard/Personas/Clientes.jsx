@@ -15,13 +15,7 @@ import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 
 const doc = new jsPDF()
-doc.text('Reportes de venta - Cabotaje Supplier', 10, 10);
-
-
-
-
-
-
+doc.text('Reporte de Clientes - Cabotaje Supplier',60,10);    
 
 const Clientes = () => {
     const [rows, setRows] = useState([]);
@@ -51,10 +45,9 @@ const Clientes = () => {
                 head: [['Identidad', 'Nombre', 'Apellido', 'Numero 1', 'Numero 2', 'Direccion', 'RTN']],
                 body: row.sort()
             })
-            doc.setFontSize(7);
         }
 
-        doc.save('clientes.pdf')
+        doc.save('Clientes - Cabotaje Supplier.pdf');
     }
     
     //definir las columnas

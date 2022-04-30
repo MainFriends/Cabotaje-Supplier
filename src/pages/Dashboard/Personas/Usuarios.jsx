@@ -16,7 +16,9 @@ import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 
 
-const doc = new jsPDF()
+const doc = new jsPDF();
+doc.text('Reporte de Usuarios - Cabotaje Supplier',55,10);
+
 
 const Usuarios = () => {
     const [rows, setRows] = useState([]);
@@ -53,7 +55,7 @@ const Usuarios = () => {
             })
         }
 
-        doc.save('usuarios.pdf')
+        doc.save('Usuarios - Cabotaje Supplier.pdf')
     }
 
 

@@ -16,7 +16,9 @@ import EditProductForm from '../../../components/inventory/EditProductForm';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 
-const doc = new jsPDF()
+const doc = new jsPDF();
+doc.text('Reporte de Inventario - Cabotaje Supplier',55,10);   
+
 
 const Inventario = () => {
     const [rows, setRows] = useState([]);
@@ -48,7 +50,7 @@ const Inventario = () => {
             })
         }
 
-        doc.save('inventario.pdf')
+        doc.save('Inventario - Cabotaje Supplier.pdf')
     }
     
     //definir las columnas

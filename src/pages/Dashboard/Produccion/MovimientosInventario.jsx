@@ -16,7 +16,8 @@ import token from '../../../../src/helpers/getToken';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 
-const doc = new jsPDF()
+const doc = new jsPDF();
+doc.text('Reporte de Movimientos - Cabotaje Supplier',50,10);   
 
 
 const MovimientosInventario = () => {
@@ -46,7 +47,7 @@ const MovimientosInventario = () => {
             })
         }
 
-        doc.save('compras.pdf')
+        doc.save('Movimientos de inventario - Cabotaje Supplier.pdf')
     }
     
     //definir las columnas
@@ -131,6 +132,7 @@ const MovimientosInventario = () => {
                         highlightOnHover
                         striped
                         persistTableHead 
+                        actions={<button onClick={() => dowlandPdf()} className='btn btn-danger btn-sm'><i class="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}
                     />
                 </div>
             </div> 

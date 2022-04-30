@@ -14,7 +14,8 @@ import moment from 'moment';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 
-const doc = new jsPDF()
+const doc = new jsPDF();
+doc.text('Reporte de Mermas - Cabotaje Supplier',50,10);  
 
 
 import token from '../../../../src/helpers/getToken';
@@ -47,7 +48,7 @@ const mermas = () => {
             })
         }
 
-        doc.save('mermas.pdf')
+        doc.save('Mermas de inventario - Cabotaje Supplier.pdf')
     }
     
     //definir las columnas

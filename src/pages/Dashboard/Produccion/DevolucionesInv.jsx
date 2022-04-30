@@ -16,7 +16,8 @@ import moment from 'moment';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 
-const doc = new jsPDF()
+const doc = new jsPDF();
+doc.text('Reporte de Devoluciones - Cabotaje Supplier',50,10);   
 
 const DevolucionesInv = () => {
     const [rows, setRows] = useState([]);
@@ -48,7 +49,7 @@ const DevolucionesInv = () => {
             })
         }
 
-        doc.save('devoluciones.pdf')
+        doc.save('Devoluciones - Cabotaje Supplier.pdf');
     }
     
     //definir las columnas

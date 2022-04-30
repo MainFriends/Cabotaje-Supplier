@@ -17,7 +17,8 @@ import ViewDetail from '../../../components/Orders/ViewDetail';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 
-const doc = new jsPDF()
+const doc = new jsPDF();
+doc.text('Reporte de Pedidos - Cabotaje Supplier',55,10);    
 
 const Pedidos = () => {
     const [rows, setRows] = useState([]);
@@ -47,7 +48,7 @@ const Pedidos = () => {
             })
         }
 
-        doc.save('pedidos.pdf')
+        doc.save('Pedidos - Cabotaje Supplier.pdf')
     }
     
     //definir las columnas

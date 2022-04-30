@@ -49,7 +49,7 @@ const EditCategoryForm = ({rowCOD, setSendRequest, setMessageError}) => {
                     <input onChange={handleInputChange} value = {formEditCategor.NAM_CATEGORY} className='form-control' name='NAM_CATEGORY' type="text" onInput={toUpperCase} required/>
                 </div>
                 <div className="col-md-4">
-                    <label className='form-label' htmlFor="DESCRIPTION">Concepto</label>
+                    <label className='form-label' htmlFor="DESCRIPTION">Descripción</label>
                     <input onChange={handleInputChange} value = {formEditCategor.DESCRIPTION} className='form-control' name='DESCRIPTION' type="text" onInput={toUpperCase} required/>
                 </div>
             </div>
