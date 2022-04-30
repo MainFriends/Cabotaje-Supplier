@@ -12,6 +12,10 @@ import {paginationComponentOptions} from '../../../helpers/datatablesOptions';
 import axios from '../../../config/axios';
 import token from '../../../helpers/getToken';
 import moment from 'moment';
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
+
+const doc = new jsPDF()
 
 
 const Devoluciones = () => {
@@ -21,6 +25,30 @@ const Devoluciones = () => {
     const [messageError, setMessageError] = useState('');
     const [sendRequest, setSendRequest] = useState(false);
     const [rowCOD, setRowCOD] = useState(null);
+
+    const dowlandPdfReturns = () => {
+        if(rows){
+            const row = rows.map(fila => {
+                const fecha = fila.DAT_RETURN
+                return [
+                    fila.COD_RETURN,
+                    fila.NAM_PRODUCT,
+                    fila.DESCRIPTION,
+                    fila.CANT,
+                    fila.NAM_TYPE_PRODUCT,
+                    fila.AMOUNT,
+                    fila.USER_NAME,
+                    moment(fecha).format('DD-MM-YYYY'),
+                ]
+            })  
+            doc.autoTable({
+                head: [['Codigo', 'Producto', 'Descripcion', 'Cantidad', 'Tipo', 'Monto', 'Usuario', 'Fecha']],
+                body: row.sort()
+            })
+        }
+
+        doc.save('devoluciones.pdf')
+    }
     
     //definir las columnas
     const columns = [
@@ -129,6 +157,7 @@ const Devoluciones = () => {
                         highlightOnHover
                         striped
                         persistTableHead 
+                        actions={<button onClick={() => dowlandPdfReturns()} className='btn btn-danger btn-sm'><i class="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}
                     />
 
                     <Modal 

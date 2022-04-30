@@ -13,6 +13,10 @@ import DetailForm from '../../../components/inventory/DetailForm';
 import ViewDetail from '../../../components/inventory/ViewDetail';
 import ProductForm from '../../../components/inventory/ProductForm';
 import EditProductForm from '../../../components/inventory/EditProductForm';
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
+
+const doc = new jsPDF()
 
 const Inventario = () => {
     const [rows, setRows] = useState([]);
@@ -21,6 +25,31 @@ const Inventario = () => {
     const [messageError, setMessageError] = useState('');
     const [sendRequest, setSendRequest] = useState(false);
     const [rowCOD, setRowCOD] = useState(null);
+
+    const dowlandPdfInventory = () => {
+        if(rows){
+            const row = rows.map(fila => [
+                fila.COD_PRODUCT,
+                fila.NAM_SUPPLIER,
+                fila.NAM_PRODUCT,
+                fila.DES_PRODUCT,
+                fila.CANT_TOTAL,
+                fila.ISV,
+                fila.NORMAL_UNIT_PRICE,
+                fila.PURCHASE_PRICE,
+                fila.WHOLESALE_CANT,
+                fila.WHOLESALE_PRICE,
+                fila.NAM_CATEGORY,
+                fila.NAM_TYPE_PRODUCT
+            ])  
+            doc.autoTable({
+                head: [['Codigo', 'Proveedor', 'Producto', 'Descripcion', 'Cantidad', 'ISV', 'Precio', 'Costo', 'Cantidad', 'Precio al por mayor', 'Categoria', 'Tipo de producto']],
+                body: row.sort()
+            })
+        }
+
+        doc.save('inventario.pdf')
+    }
     
     //definir las columnas
     const columns = [
@@ -150,7 +179,8 @@ const Inventario = () => {
                         subHeaderComponent={subHeaderComponentMemo}
                         highlightOnHover
                         striped
-                        persistTableHead 
+                        persistTableHead
+                        actions={<button onClick={() => dowlandPdfInventory()} className='btn btn-danger btn-sm'><i class="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}     
                     />
 
                     <Modal 

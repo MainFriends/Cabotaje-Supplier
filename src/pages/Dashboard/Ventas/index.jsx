@@ -21,18 +21,31 @@ const Facturas = () => {
     const [pending, setPending] = useState(true);
     const [rowCOD, setRowCOD] = useState(null);
 
-    useEffect(() => {
+    const dowlandPdfSales = () => {
         if(rows){
-            const row = rows.map(fila => [
-                fila.COD_INVOICE,
-                fila.CLIENT
-            ])  
+            const row = rows.map(fila => {
+                const fecha = fila.DAT_INVOICE
+               return [
+                    fila.COD_INVOICE,
+                    fila.CLIENT,
+                    fila.SUBTOTAL,
+                    fila.TOT_DISCOUNT,
+                    fila.TOT_ISV,
+                    fila.TOT_SALE,
+                    fila.TYP_TO_SALE,
+                    fila.NAM_TYPE_PAY,
+                    fila.USER_NAME,
+                    moment(fecha).format('DD-MM-YYYY'),
+                ]
+            })  
             doc.autoTable({
-                head: [['FACTURA', 'CLIENTE']],
+                head: [['#', 'Cliente', 'Sub total', 'Total des.', 'Total ISV', 'Total ventas', 'Tipo de transac.', 'F. de pago', 'Usuario', 'Fecha']],
                 body: row.sort()
             })
         }
-    }, [rows])
+
+        doc.save('ventas.pdf')
+    }
     
     //definir las columnas
     const columns = [
@@ -138,7 +151,7 @@ const Facturas = () => {
                         highlightOnHover
                         striped
                         persistTableHead 
-                        actions={<button onClick={() => doc.save('ventas.pdf')} className='btn btn-danger btn-sm'><i class="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}
+                        actions={<button onClick={() => dowlandPdfSales()} className='btn btn-danger btn-sm'><i class="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}
                     />
 
                     <Modal 

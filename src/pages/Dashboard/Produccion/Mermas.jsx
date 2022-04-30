@@ -11,6 +11,10 @@ import EditDecreaseForm from '../../../components/decrease/EditDecreaseForm';
 import {paginationComponentOptions} from '../../../helpers/datatablesOptions';
 import axios from '../../../config/axios'
 import moment from 'moment';
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
+
+const doc = new jsPDF()
 
 
 import token from '../../../../src/helpers/getToken';
@@ -22,6 +26,29 @@ const mermas = () => {
     const [messageError, setMessageError] = useState('');
     const [sendRequest, setSendRequest] = useState('false');
     const [rowCOD, setRowCOD] = useState(null)
+
+    const dowlandPdfLosses = () => {
+        if(rows){
+            const row = rows.map(fila => {
+                const fecha = fila.DAT_DECREASE
+                return [
+                    fila.COD_PRODUCT,
+                    fila.NAM_PRODUCT,
+                    fila.CONCEPT,
+                    fila.CANT_PRODUCTS,
+                    fila.NUM_LOT,
+                    fila.USER_NAME,
+                    moment(fecha).format('DD-MM-YYYY')
+                ]
+            })  
+            doc.autoTable({
+                head: [['Codigo', 'Producto', 'Concepto', 'Cantidad de productos', 'Numero de lote', 'Usuario', 'Fecha de merma']],
+                body: row.sort()
+            })
+        }
+
+        doc.save('mermas.pdf')
+    }
     
     //definir las columnas
     const columns = [
@@ -123,7 +150,8 @@ const mermas = () => {
                         subHeaderComponent={subHeaderComponentMemo}
                         highlightOnHover
                         striped
-                        persistTableHead 
+                        persistTableHead
+                        actions={<button onClick={() => dowlandPdfLosses()} className='btn btn-danger btn-sm'><i class="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}
                     />
 
                     <Modal 

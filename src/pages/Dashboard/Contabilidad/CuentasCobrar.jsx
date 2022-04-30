@@ -12,6 +12,10 @@ import {paginationComponentOptions} from '../../../helpers/datatablesOptions';
 import axios from '../../../config/axios';
 import token from '../../../helpers/getToken';
 import moment from 'moment';
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
+
+const doc = new jsPDF()
 
 const CuentasCobrar = () => {
     const [rows, setRows] = useState([]);
@@ -20,6 +24,29 @@ const CuentasCobrar = () => {
     const [messageError, setMessageError] = useState('');
     const [sendRequest, setSendRequest] = useState(false);
     const [rowCOD, setRowCOD] = useState(null);
+
+    const dowlandPdfReceivable = () => {
+        if(rows){
+            const row = rows.map(fila => {
+                const fecha = fila.DAT_LIMIT
+                return [
+                    fila.COD_ACC_RECEIVABLE,
+                    fila.IDENTITY,
+                    fila.FIRST_NAME,
+                    fila.LAST_NAME,
+                    fila.DESCRIPTION,
+                    fila.TOT_BALANCE,
+                    moment(fecha).format('DD-MM-YYYY')
+                ]
+            })  
+            doc.autoTable({
+                head: [['Codigo', 'Identidad', 'Nombre', 'Apellido', 'Descripcion', 'Monto', 'Fecha Limite']],
+                body: row.sort()
+            })
+        }
+
+        doc.save('cuentasxcobrar.pdf')
+    }
     
     //definir las columnas
     const columns = [
@@ -110,7 +137,8 @@ const CuentasCobrar = () => {
                         subHeaderComponent={subHeaderComponentMemo}
                         highlightOnHover
                         striped
-                        persistTableHead 
+                        persistTableHead
+                        actions={<button onClick={() => dowlandPdfReceivable()} className='btn btn-danger btn-sm'><i class="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}
                     />
                     <Modal 
                         idModal='idCobrar'

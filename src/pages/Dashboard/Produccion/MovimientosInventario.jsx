@@ -13,6 +13,11 @@ import moment from 'moment';
 
 
 import token from '../../../../src/helpers/getToken';
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
+
+const doc = new jsPDF()
+
 
 const MovimientosInventario = () => {
     const [rows, setRows] = useState([]);
@@ -21,6 +26,28 @@ const MovimientosInventario = () => {
     const [messageError, setMessageError] = useState('');
     const [sendRequest, setSendRequest] = useState('false');
     const [rowCOD, setRowCOD] = useState(null)
+
+    const dowlandPdf = () => {
+        if(rows){
+            const row = rows.map(fila => {
+                const fecha = fila.DAT_TRANSACTION
+               return [
+                    fila.COD_PRODUCT,
+                    fila.NAM_PRODUCT,
+                    fila.TYP_TRANSACTION,
+                    fila.CANT,
+                    fila.NUM_LOT,
+                    moment(fecha).format('DD-MM-YYYY')
+                ]
+            })  
+            doc.autoTable({
+                head: [['#', 'Producto', 'Tip. de transaccion', 'Cant. productos', 'N. Lote', 'Fecha de merma']],
+                body: row.sort()
+            })
+        }
+
+        doc.save('compras.pdf')
+    }
     
     //definir las columnas
     const columns = [

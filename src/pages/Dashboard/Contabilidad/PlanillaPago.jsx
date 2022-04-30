@@ -12,6 +12,10 @@ import {paginationComponentOptions} from '../../../helpers/datatablesOptions';
 import axios from '../../../config/axios'
 import token from '../../../helpers/getToken';
 import moment from 'moment';
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
+
+const doc = new jsPDF()
 
 
 
@@ -22,6 +26,31 @@ const PlanillaPago = () => {
     const [messageError, setMessageError] = useState('');
     const [sendRequest, setSendRequest] = useState(false);
     const [rowCOD, setRowCOD] = useState(null);
+
+    const dowlandPdfPayment = () => {
+        if(rows){
+            const row = rows.map(fila => {
+                const fecha = fila.DAT_PAYMENT
+                return [
+                    fila.COD_PAY_FORM,
+                    fila.FIRST_NAME,
+                    fila.LAST_NAME,
+                    fila.HOURS_WORKED,
+                    fila.AMO_GROSS,
+                    fila.BONUS,
+                    fila.TOT_DEDUCTIONS,
+                    fila.NET_SALARY,
+                    moment(fecha).format('DD-MM-YYYY')
+                ]
+            })  
+            doc.autoTable({
+                head: [['#', 'Nombre', 'Apellido', 'H. Trabajadas', 'Salario Base', 'Bonificaiones', 'Deduciones', 'S. Neto', 'Fecha de pago']],
+                body: row.sort()
+            })
+        }
+
+        doc.save('planillaDePago.pdf')
+    }
     
     //definir las columnas
     const columns = [
@@ -137,6 +166,7 @@ const PlanillaPago = () => {
                         highlightOnHover
                         striped
                         persistTableHead 
+                        actions={<button onClick={() => dowlandPdfPayment()} className='btn btn-danger btn-sm'><i class="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}
                     />
 
                     <Modal 
