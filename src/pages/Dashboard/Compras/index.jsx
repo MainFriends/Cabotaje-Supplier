@@ -13,9 +13,10 @@ import token from '../../../helpers/getToken';
 import AddFacturaForm from '../../../components/PurchaseInvoice/AddPurchaseInvoiceForm';
 import moment from 'moment';
 import ViewDetail from '../../../components/PurchaseInvoice/ViewDetail';
-import jsPDF from 'jspdf'
-import 'jspdf-autotable'
 import logo from '../../../assets/js/logo';
+import jsPDF from 'jspdf'
+import { applyPlugin } from 'jspdf-autotable'
+applyPlugin(jsPDF)
 
 const Compras = () => {
     const [rows, setRows] = useState([]);
