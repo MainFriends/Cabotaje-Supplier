@@ -28,7 +28,7 @@ const EditOrder = ({rowCOD,setSendRequest,setMessageError}) => {
         DES_ORDER
     } = formEditOrderDetail
 
-
+    
     const [productsEdit, setProductsEdit] = useState([]);
 
     const columns = [
@@ -52,7 +52,7 @@ const EditOrder = ({rowCOD,setSendRequest,setMessageError}) => {
             name: 'ACCIONES',
             button: true,
             cell: row => <>
-                <button className='btn btn-sm btn-danger'onClick={() => handleDelete(row.COD_PRODUCT)}><i className="fa-solid fa-trash"></i></button>
+                <button type='button' className='btn btn-sm btn-danger' onClick={() => handleDelete(row.COD_PRODUCT)}><i className="fa-solid fa-trash"></i></button>
             </>
         }
     ];
@@ -119,17 +119,26 @@ const EditOrder = ({rowCOD,setSendRequest,setMessageError}) => {
                     setMessageError("")
                 }, 3000);
             return
-        }
+        }   
 
         const isItemEdit = productsEdit.some(item => item.COD_PRODUCT === COD_PRODUCT);
 
         if(isItemEdit){
-                setMessageError('El producto ya esta')
+                setMessageError('El producto ya se encuentra agregado a la lista')
 
                 setTimeout(() => {
                     setMessageError("")
                 }, 3000);
             return
+        }
+
+        if(CANT_PRODUCTS === ''){
+            setMessageError('Ingrese una cantidad.');
+
+            setTimeout(() => {
+                setMessageError('')
+            }, 3000);
+            return;
         }
 
         const item = {
@@ -166,7 +175,7 @@ const EditOrder = ({rowCOD,setSendRequest,setMessageError}) => {
     }
 
     const handleDelete = (cod) => {
-        const elemento = productsEdit.filter(product => product.COD_PRODUCT !== cod)
+        const elemento = productsEdit.filter(product => product.COD_PRODUCT !== cod);
         setProductsEdit([...elemento])
     }
             return (

@@ -70,7 +70,7 @@ const AddOrder = ({setSendRequest,setMessageError}) => {
             name: 'ACCIONES',
             button: true,
             cell: row => <>
-                <button className='btn btn-sm btn-danger'onClick={() => handleDelete(row.COD_PRODUCT)}><i className="fa-solid fa-trash"></i></button>
+                <button type='button' className='btn btn-sm btn-danger'onClick={() => handleDelete(row.COD_PRODUCT)}><i className="fa-solid fa-trash"></i></button>
             </>
         }
     ];
@@ -138,6 +138,16 @@ const AddOrder = ({setSendRequest,setMessageError}) => {
             return
         }
 
+        if(CANT_PRODUCTS === ''){
+            setMessageError('Ingrese una cantidad.');
+
+            setTimeout(() => {
+                setMessageError('')
+            }, 3000);
+
+            return;
+        }
+
         const item = {
             COD_PRODUCT,
             NAM_PRODUCT,
@@ -183,7 +193,7 @@ const AddOrder = ({setSendRequest,setMessageError}) => {
                         <div className="col-md-4">
                             <label className='form-label' htmlFor="COD_SUPPLIER">Proveedor</label>
                             <select onChange={handleInputChange} defaultValue={'default'} className="form-control" name="COD_SUPPLIER" type="text" required>
-                                <option valu='default'>-Seleccionar-</option>
+                                <option value=''>-Seleccionar-</option>
                                 {suppliers.map(supplier => {
                                     return <option key={supplier.COD_SUPPLIER} value={supplier.COD_SUPPLIER}>{supplier.NAM_SUPPLIER}</option>
                                 })}

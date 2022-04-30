@@ -150,6 +150,15 @@ const AddFacturaForm = ({setSendRequest}) => {
             return;
         }
 
+        if(userCantProduct === ''){
+            setErrorMessage('Ingrese una cantidad.');
+
+            setTimeout(() => {
+                setErrorMessage('')
+            }, 3000);
+            return;
+        }
+
         const item = {
             COD_PRODUCT,
             NAM_PRODUCT,
