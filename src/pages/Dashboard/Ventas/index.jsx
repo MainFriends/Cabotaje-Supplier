@@ -10,12 +10,29 @@ import Modal from '../../../components/Modal';
 import { getInvoices } from '../../../services/sale-invoice';
 import {paginationComponentOptions} from '../../../helpers/datatablesOptions';
 import SaleDetail from '../../../components/sale-detail/SaleDetail';
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
+
+const doc = new jsPDF()
 
 const Facturas = () => {
     const [rows, setRows] = useState([]);
     const [filterText, setFilterText] = useState('');
     const [pending, setPending] = useState(true);
     const [rowCOD, setRowCOD] = useState(null);
+
+    useEffect(() => {
+        if(rows){
+            const row = rows.map(fila => [
+                fila.COD_INVOICE,
+                fila.CLIENT
+            ])  
+            doc.autoTable({
+                head: [['FACTURA', 'CLIENTE']],
+                body: row.sort()
+            })
+        }
+    }, [rows])
     
     //definir las columnas
     const columns = [
@@ -121,6 +138,7 @@ const Facturas = () => {
                         highlightOnHover
                         striped
                         persistTableHead 
+                        actions={<button onClick={() => doc.save('ventas.pdf')} className='btn btn-danger btn-sm'><i class="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}
                     />
 
                     <Modal 
