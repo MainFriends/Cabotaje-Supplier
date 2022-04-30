@@ -43,11 +43,11 @@ const AddDecreaseForm = ({setSendRequest, setMessageError}) => {
         <div className="row mb-4">
             <div className="col-md-6">
                 <label className='form-label' htmlFor="COD_PRODUCT">Código producto</label>
-                <input onChange={handleInputChange} className='form-control' name='COD_PRODUCT' type="number" required/>
+                <input onChange={handleInputChange} className='form-control' name='COD_PRODUCT' type="number" pattern="[0-9]" tittle="Solo agregar caracteres numericos" required/>
             </div>
             <div className="col-md-6">
                 <label className='form-label' htmlFor="CONCEPT">Concepto</label>
-                <textarea onChange={handleInputChange} className='form-control' name='CONCEPT' type="text" onInput={toUpperCase} required/>
+                <textarea onChange={handleInputChange} className='form-control' name='CONCEPT' type="text" pattern="^[a-zA-Z0-9ñÑØº-_ ]+$" onInput={toUpperCase} required/>
             </div>
             <div className="col-md-3 mt-2">
                 <label className='form-label' htmlFor="CANT_PRODUCTS">Cantidad Productos</label>

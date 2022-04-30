@@ -47,11 +47,11 @@ const AddClientForm = ({setSendRequest, setMessageError}) => {
             <div className="row mb-4">
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="FIRST_NAME">Nombre</label>
-                    <input onChange={handleInputChange} className='form-control' name='FIRST_NAME' type="text " pattern="^[a-zA-Z0-9ñÑØº-_ ]+$" onInput={toUpperCase}  required/>
+                    <input onChange={handleInputChange} className='form-control' name='FIRST_NAME' type="text "  pattern="^[a-zA-ZñÑ]+$"  title="No debe contener caracteres numericos" onInput={toUpperCase}  required/>
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="LAST_NAME">Apellido</label>
-                    <input onChange={handleInputChange} className='form-control' name='LAST_NAME' type="text" pattern="^[a-zA-Z0-9ñÑØº-_ ]+$"  onInput={toUpperCase} required/>
+                    <input onChange={handleInputChange} className='form-control' name='LAST_NAME' type="text"  pattern="^[a-zA-ZñÑ_ ]+$" title="No debe contener caracteres numericos" onInput={toUpperCase} required/>
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="IDENTITY">Identidad</label>
@@ -59,15 +59,15 @@ const AddClientForm = ({setSendRequest, setMessageError}) => {
                 </div>
                 <div className="col-md-3 mt-2">
                     <label className='form-label' htmlFor="NUM_PHONE_ONE">Teléfono 1</label>
-                    <input onChange={handleInputChange} className='form-control' name='NUM_PHONE_ONE' type="tel" pattern="[0-9]{8}" minLength={8}  maxLength={8} title="El número telefónico debe contener 8 carácteres" required/>
+                    <input onChange={handleInputChange} className='form-control' name='NUM_PHONE_ONE' type="tel" pattern="[0-9]{8}" minLength={8}  maxLength={8} title="El número telefónico debe contener 8 caracteres númericos" required/>
                 </div>
                 <div className="col-md-3 mt-2">
                     <label className='form-label' htmlFor="NUM_PHONE_TWO">Teléfono 2</label>
-                    <input onChange={handleInputChange} className='form-control' name='NUM_PHONE_TWO' type="tel" pattern="[0-9]{1,8}" min={0} maxLength={8} title="Opcional" required/>
+                    <input onChange={handleInputChange} className='form-control' name='NUM_PHONE_TWO' type="tel" pattern="[0-9]{1,8}" min={0} maxLength={8} title="El número telefónico debe contener 8 caracteres númericos" required/>
                 </div>
                 <div className="col-md-6 mt-2">
                     <label className='form-label' htmlFor="ADDRESS">Dirección</label>
-                    <textarea onChange={handleInputChange} className='form-control' name='ADDRESS'  rows='3' cols='4' type="text" onInput={toUpperCase} required/>
+                    <textarea onChange={handleInputChange} className='form-control' name='ADDRESS'  rows='3' cols='4' type="text" pattern="^[a-zA-Z0-9ñÑØº-_ ]+$" onInput={toUpperCase} required/>
                 </div>
                 <div className="col-md-6">
                     <label className='form-label' htmlFor="RTN">RTN</label>

@@ -79,11 +79,11 @@ const ProductForm = ({setSendRequest, setMessageError}) => {
             <div className="row mb-4">
                 <div className="col-4">
                     <label className='form-label' htmlFor="NAM_PRODUCT">Nombre del producto</label>
-                    <input onChange={handleInputChange} className='form-control' name='NAM_PRODUCT' type="text" onInput={toUpperCase} required/>
+                    <input onChange={handleInputChange} className='form-control' name='NAM_PRODUCT' type="text" pattern="^[a-zA-ZñÑ]+$" title="Solamente se pueden ingresar letras" onInput={toUpperCase}required/>
                 </div>
                 <div className="col-8">
                     <label className='form-label' htmlFor="DES_PRODUCT">Descripción</label>
-                    <textarea onChange={handleInputChange} className='form-control' rows='2' name='DES_PRODUCT' type="text" onInput={toUpperCase} required/>
+                    <textarea onChange={handleInputChange} className='form-control' rows='2' name='DES_PRODUCT' type="text" pattern="^[a-zA-Z0-9ñÑØº-_ ]+$" onInput={toUpperCase}required/>
                 </div>
             </div>
             <div className="row mb-4">

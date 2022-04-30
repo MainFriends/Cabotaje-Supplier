@@ -51,15 +51,15 @@ const EditSupplierForm = ({rowCOD, setSendRequest, setMessageError}) => {
         <div className="row mb-4">
             <div className="col-md-4">
                 <label className='form-label' htmlFor="NAM_SUPPLIER">Nombre del Proveedor</label>
-                <input onChange={handleInputChange} value={formEditSupplier.NAM_SUPPLIER} className='form-control' name='NAM_SUPPLIER' type="text"  onInput={toUpperCase} required/>
+                <input onChange={handleInputChange} value={formEditSupplier.NAM_SUPPLIER} className='form-control' name='NAM_SUPPLIER' type="text"  pattern="^[a-zA-ZñÑ_ ]+$" title="No debe contener caracteres numericos" onInput={toUpperCase} required/>
             </div>
             <div className="col-md-4">
                 <label className='form-label' htmlFor="NAM_CONTACT">Nombre del contacto</label>
-                <input onChange={handleInputChange} value={formEditSupplier.NAM_CONTACT} className='form-control' name='NAM_CONTACT' type="text"  pattern="^[a-zA-Z0-9ñÑØº-_ ]+$"  onInput={toUpperCase} required/>
+                <input onChange={handleInputChange} value={formEditSupplier.NAM_CONTACT} className='form-control' name='NAM_CONTACT' type="text"  pattern="^[a-zA-ZñÑ]+$"  title="No debe contener caracteres numericos" onInput={toUpperCase} required/>
             </div>
             <div className="col-md-4">
                 <label className='form-label' htmlFor="LAST_NAM_CONTACT">Apellido del contacto</label>
-                <input onChange={handleInputChange} value={formEditSupplier.LAST_NAM_CONTACT} className='form-control'  name='LAST_NAM_CONTACT' type="Text"  pattern="^[a-zA-Z0-9ñÑØº-_ ]+$"   onInput={toUpperCase} required/>
+                <input onChange={handleInputChange} value={formEditSupplier.LAST_NAM_CONTACT} className='form-control'  name='LAST_NAM_CONTACT' type="Text"  pattern="^[a-zA-ZñÑ_ ]+$" title="No debe contener caracteres numericos" onInput={toUpperCase} required/>
             </div>
             <div className="col-md-4 mt-2">
                 <label className='form-label' htmlFor="ADDRESS">Dirección</label>
@@ -67,11 +67,11 @@ const EditSupplierForm = ({rowCOD, setSendRequest, setMessageError}) => {
             </div>
             <div className="col-md-4 mt-2">
                 <label className='form-label' htmlFor="NUM_PHONE_ONE">Teléfono 1</label>
-                <input onChange={handleInputChange} value={formEditSupplier.NUM_PHONE_ONE} className='form-control' name='NUM_PHONE_ONE' type="tel" pattern="[0-9]{8}" minLength={8} maxLength={8} title="El numero telfono debe contener 8 caracteres" required/>
+                <input onChange={handleInputChange} value={formEditSupplier.NUM_PHONE_ONE} className='form-control' name='NUM_PHONE_ONE' type="tel" pattern="[0-9]{8}" minLength={8} maxLength={8} title="El número telefónico debe contener 8 caracteres númericos" required/>
             </div>
             <div className="col-md-4 mt-2">
                 <label className='form-label' htmlFor="NUM_PHONE_TWO">Teléfono 2</label>
-                <input onChange={handleInputChange} value={formEditSupplier.NUM_PHONE_TWO} className='form-control' name='NUM_PHONE_TWO'  type="tel"  pattern="[0-9]{1,8}" title="OPCIONAL"  min={0} maxLength={8} required/>
+                <input onChange={handleInputChange} value={formEditSupplier.NUM_PHONE_TWO} className='form-control' name='NUM_PHONE_TWO'  type="tel"  pattern="[0-9]{1,8}" title="El número telefónico debe contener 8 caracteres númericos"  min={0} maxLength={8} required/>
             </div>
             <div className="col-md-4 mt-2">
                 <label className='form-label' htmlFor="EMAIL">Correo Electronico</label>
@@ -85,7 +85,7 @@ const EditSupplierForm = ({rowCOD, setSendRequest, setMessageError}) => {
          
             <div className="col-md-3 mt-2">
                 <label className='form-label' htmlFor="ZIP_CODE">Código postal</label>
-                <input onChange={handleInputChange} value={formEditSupplier.ZIP_CODE} className='form-control' name='ZIP_CODE' type="text" pattern="[0-9]{5,7}" minLength={5} maxLength={7} required/>
+                <input onChange={handleInputChange} value={formEditSupplier.ZIP_CODE} className='form-control' name='ZIP_CODE' type="text" pattern="[0-9]{5,7}" minLength={5} maxLength={5} required/>
             </div>
 
         </div>
