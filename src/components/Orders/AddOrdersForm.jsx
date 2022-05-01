@@ -59,7 +59,7 @@ const AddOrder = ({setSendRequest,setMessageError}) => {
             selector: row => row.NAM_PRODUCT,
         },
         {
-            name: 'DESCRIPCION',
+            name: 'DESCRIPCIÓN',
             selector: row => row.DES_ORDER,
         },
         {
@@ -85,7 +85,7 @@ const AddOrder = ({setSendRequest,setMessageError}) => {
                     setProduct({
                         ...product,
                         COD_PRODUCT: '',
-                        NAM_PRODUCT: 'Producto no encontrado',
+                        NAM_PRODUCT: 'Producto no encontrado.',
                     })
                 }
             })
@@ -117,7 +117,7 @@ const AddOrder = ({setSendRequest,setMessageError}) => {
         const {DES_ORDER, CANT_PRODUCTS} = formAddOrderDetail
 
         if(formAddOrderDetail.COD_PRODUCT === ''){
-            setMessageError('Inserte un producto');
+            setMessageError('Inserte un producto.');
 
             setTimeout(() => {
                 setMessageError("")
@@ -161,6 +161,16 @@ const AddOrder = ({setSendRequest,setMessageError}) => {
 
     const handleSubmitOrder = (e) => {
         e.preventDefault();
+
+        if(!productsAdd.length){
+            setMessageError('Debe agregar al menos un producto a la lista.');
+
+            setTimeout(() => {
+                setMessageError('')
+            }, 3000);
+            return;
+        }
+
         axios.post('/order', FormAddOrder, token())
             .then(res => {
                 document.querySelector('#idCloseForm').click();
@@ -191,7 +201,7 @@ const AddOrder = ({setSendRequest,setMessageError}) => {
                 <form onSubmit={handleSubmitOrder} action='#'>
                     <div className="row mb-4">
                         <div className="col-md-4">
-                            <label className='form-label' htmlFor="COD_SUPPLIER">Proveedor</label>
+                            <label className='form-label' htmlFor="COD_SUPPLIER">Proveedor<span className="text-danger"> *</span></label>
                             <select onChange={handleInputChange} defaultValue={'default'} className="form-control" name="COD_SUPPLIER" type="text" required>
                                 <option value=''>-Seleccionar-</option>
                                 {suppliers.map(supplier => {
@@ -200,19 +210,19 @@ const AddOrder = ({setSendRequest,setMessageError}) => {
                             </select>
                         </div>
                         <div className="col-md-4">
-                            <label className='form-label' htmlFor="COD_PRODUCT">Codigo del producto</label>
+                            <label className='form-label' htmlFor="COD_PRODUCT">Código del producto<span className="text-danger"> *</span></label>
                             <input onChange={handleInputChangeDetail} value={COD_PRODUCT} className='form-control' name='COD_PRODUCT' type="number"min="1"/>
                         </div>
                         <div className="col-md-4">
-                            <label className='form-label' htmlFor="NAME_PRODUCT">Nombre del Producto</label>
+                            <label className='form-label' htmlFor="NAME_PRODUCT">Nombre del producto</label>
                             <input value={product.NAM_PRODUCT} className='form-control' name='NAME_PRODUCT' disabled />
                         </div>
                         <div className="col-md-4 mt-2">
-                            <label className='form-label' htmlFor="CANT_PRODUCTS">Cantidad</label>
+                            <label className='form-label' htmlFor="CANT_PRODUCTS">Cantidad<span className="text-danger"> *</span></label>
                             <input onChange={handleInputChangeDetail} value={CANT_PRODUCTS} className='form-control' name='CANT_PRODUCTS' type="number"min="1"/>
                         </div>
                         <div className="col-md-4 mt-2">
-                            <label className='form-label' htmlFor="DAT_REQUIRED">Fecha requerida</label>
+                            <label className='form-label' htmlFor="DAT_REQUIRED">Fecha requerida<span className="text-danger"> *</span></label>
                             <input onChange={handleInputChange} value={DAT_REQUIRED} className='form-control' name='DAT_REQUIRED' type="date" required/>
                         </div>
                         <div className="col-md-4 mt-2">
@@ -221,7 +231,7 @@ const AddOrder = ({setSendRequest,setMessageError}) => {
                             </div>
                         </div>
                         <div className="col-md-6 mt-2">
-                            <label className='form-label' htmlFor="DES_ORDER">Descripcion</label>
+                            <label className='form-label' htmlFor="DES_ORDER">Descripción</label>
                             <textarea onChange={handleInputChangeDetail} value={DES_ORDER} rows={3} className='form-control' name='DES_ORDER' type="text"/>
                         </div>
 

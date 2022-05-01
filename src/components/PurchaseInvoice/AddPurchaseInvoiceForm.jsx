@@ -196,6 +196,16 @@ const AddFacturaForm = ({setSendRequest}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        if(!productList.length){
+            setErrorMessage('Debe agregar al menos un producto a la lista.');
+
+            setTimeout(() => {
+                setErrorMessage('')
+            }, 3000);
+            return;
+        }
+
         if(formAddFactura.COD_ORDER === ''){
             delete formAddFactura['COD_ORDER'];
         }
@@ -241,24 +251,25 @@ const AddFacturaForm = ({setSendRequest}) => {
     return (
         <form onSubmit={handleSubmit} action='#'>
             <div className="row mb-4">
-                <div className="col-md-3">
-                    <label className='form-label' htmlFor="COD_ORDER">Codigo del pedido</label>
+                <div className="col-md-4">
+                    <label className='form-label' htmlFor="COD_ORDER">Código del pedido</label>
                     <input onChange={handleInputChange} className='form-control' name='COD_ORDER' type="number" />
-                </div>
-                <div className="col-md-3">
-                    <label className='form-label' htmlFor="COD_PRODUCT">Codigo del producto</label>
-                    <input value={userCodProduct} onChange={handleInputProduct} className='form-control' name='userCodProduct' type="number" />
+                    <small className="text-muted text-sm">Opcional</small>
                 </div>
                 <div className="col-md-4">
-                    <label className='form-label' htmlFor="NAM_PRODUCT">Nombre del producto</label>
+                    <label className='form-label' htmlFor="COD_PRODUCT">Código del producto<span className="text-danger"> *</span></label>
+                    <input value={userCodProduct} onChange={handleInputProduct} className='form-control' name='userCodProduct' type="number" required/>
+                </div>
+                <div className="col-md-4">
+                    <label className='form-label' htmlFor="NAM_PRODUCT">Nombre del producto </label>
                     <input value={product.NAM_PRODUCT} className='form-control' name='NAM_PRODUCT' type="text" disabled/>
                 </div>
                 <div className="col-md-4 mt-2">
-                    <label className='form-label' htmlFor="CANT_PRODUCTS">Cantidad de productos</label>
+                    <label className='form-label' htmlFor="CANT_PRODUCTS">Cantidad de productos<span className="text-danger"> *</span></label>
                     <input value={userCantProduct} onChange={handleInputProduct} className='form-control' name='userCantProduct' type="number"min="1" />
                 </div>
                 <div className="col-md-4 mt-2">
-                    <label className="form-label" htmlFor="TYP_TO_PURCHASE">Tipo de compra</label>
+                    <label className="form-label" htmlFor="TYP_TO_PURCHASE">Tipo de compra<span className="text-danger"> *</span></label>
                     <select value={TYP_TO_PURCHASE} onChange={handleInputChange} className="form-control" name="TYP_TO_PURCHASE" type="text" required>
                         <option value={''}>-Seleccionar-</option>
                         <option value="Contado">Contado</option>
@@ -266,7 +277,7 @@ const AddFacturaForm = ({setSendRequest}) => {
                     </select>
                 </div>
                 <div className="col-md-4 mt-2">
-                    <label className="form-label" htmlFor="COD_TYP_PAY">Forma de pago</label>
+                    <label className="form-label" htmlFor="COD_TYP_PAY">Forma de pago<span className="text-danger"> *</span></label>
                     <select value={COD_TYP_PAY} onChange={handleInputChange} className="form-control" name="COD_TYP_PAY" type="text" required>
                             <option value={''}>-Seleccionar-</option>
                             <option value={1}>Efectivo</option>
@@ -275,7 +286,7 @@ const AddFacturaForm = ({setSendRequest}) => {
                     </select>
                 </div>
                 <div className="col-md-3 mt-2">
-                    <label className='form-label' htmlFor="DAT_INVOICE">Fecha</label>
+                    <label className='form-label' htmlFor="DAT_INVOICE">Fecha<span className="text-danger"> *</span></label>
                     <input value={DAT_INVOICE} onChange={handleInputChange} className='form-control' name='DAT_INVOICE' type="date" required/>
                 </div>
                 <div className="col-md-1">

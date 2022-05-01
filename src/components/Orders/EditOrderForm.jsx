@@ -186,19 +186,19 @@ const EditOrder = ({rowCOD,setSendRequest,setMessageError}) => {
                             <input value={`${formEditOrder.NAM_SUPPLIER}`} className='form-control' name='COD_SUPPLIER' type="text" disabled />
                         </div>
                         <div className="col-md-4">
-                            <label className='form-label' htmlFor="COD_PRODUCT">Codigo del producto</label>
+                            <label className='form-label' htmlFor="COD_PRODUCT">Código del producto<span className="text-danger"> *</span></label>
                             <input onChange={handleInputChangeDetail} value={formEditOrderDetail.COD_PRODUCT} value={COD_PRODUCT} className='form-control' name='COD_PRODUCT' type="number"min="1"/>
                         </div>
                         <div className="col-md-4">
-                            <label className='form-label' htmlFor="NAME_PRODUCT">Nombre del Producto</label>
+                            <label className='form-label' htmlFor="NAME_PRODUCT">Nombre del producto</label>
                             <input value={product.NAM_PRODUCT} className='form-control' name='NAME_PRODUCT' disabled />
                         </div>
                         <div className="col-md-4 mt-2">
-                            <label className='form-label' htmlFor="CANT_PRODUCTS">Cantidad</label>
+                            <label className='form-label' htmlFor="CANT_PRODUCTS">Cantidad<span className="text-danger"> *</span></label>
                             <input onChange={handleInputChangeDetail} value={formEditOrderDetail.CANT_PRODUCTS}  className='form-control' name='CANT_PRODUCTS' type="number"min="1"/>
                         </div>
                         <div className="col-md-4 mt-2">
-                            <label className='form-label' htmlFor="DAT_REQUIRED">Fecha requerida</label>
+                            <label className='form-label' htmlFor="DAT_REQUIRED">Fecha requerida<span className="text-danger"> *</span></label>
                             <input onChange={handleInputChange} value={moment(formEditOrder.DAT_REQUIRED).format('YYYY-MM-DD')} className='form-control' name='DAT_REQUIRED' type="date" />
                         </div>
                         <div className="col-md-4">
@@ -207,7 +207,7 @@ const EditOrder = ({rowCOD,setSendRequest,setMessageError}) => {
                             </div>
                         </div>
                         <div className="col-md-4 mt-2">
-                            <label className="form-label" htmlFor="COD_STATUS">Estado del pedido</label>
+                            <label className="form-label" htmlFor="COD_STATUS">Estado del pedido<span className="text-danger"> *</span></label>
                             <select onChange={handleInputChange} value={formEditOrder.COD_STATUS} className="form-control" name="COD_STATUS" type="text" required>
                                     <option value={''}>-Seleccionar-</option>
                                     <option value={5}>En proceso</option>
