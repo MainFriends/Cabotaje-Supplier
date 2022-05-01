@@ -11,7 +11,6 @@ import {paginationComponentOptions} from '../../../helpers/datatablesOptions';
 import axios from '../../../config/axios';
 import token from '../../../helpers/getToken';
 import AddOrder from '../../../components/Orders/AddOrdersForm';
-import EditOrder from '../../../components/Orders/EditOrderForm';
 import moment from 'moment'
 import ViewDetail from '../../../components/Orders/ViewDetail';
 import jsPDF from 'jspdf'
@@ -91,8 +90,8 @@ const Pedidos = () => {
             name: 'ACCIONES',
             button: true,
             cell: row => <>
+                <button className={'btn btn-sm ' + (row.NAM_STATUS === 'Recibido' ? 'btn-warning ' : 'btn-success ') + 'mr-1'}onClick={() => {handleStatus(row.NAM_STATUS,row.COD_ORDER)}} title={'Marcar como ' + (row.NAM_STATUS === 'Recibido' ? 'En proceso' : 'Recibido')} >{row.NAM_STATUS === 'Recibido' ? <i class="fa-solid fa-truck"></i> : <i className="fa-solid fa-check-to-slot"></i>}</button>
                 <button className='btn btn-sm btn-primary mr-1' data-toggle="modal" data-target='#viewOrderDetail' onClick={() => setRowCOD(row.COD_ORDER)}><i className="fa-solid fa-eye"></i></button>
-                <button className='btn btn-sm btn-warning mr-1'onClick={() => {setRowCOD(row.COD_ORDER)}}  data-toggle="modal" data-target='#editOrder'><i className="fa-solid fa-pen-to-square"></i></button>
                 <button className='btn btn-sm btn-danger'onClick={() => handleDelete(row.COD_ORDER)}><i className="fa-solid fa-trash"></i></button>
             </>
         }
@@ -122,6 +121,19 @@ const Pedidos = () => {
     const handleDelete = (cod) => {
         axios.delete(`/order/${cod}`, token())
             .then(res => setSendRequest(true))
+    }
+
+    const handleStatus = (status,cod) => {
+        let COD_STATUS;
+        if(status === 'Recibido'){
+            COD_STATUS = 5;
+        }else{
+            COD_STATUS = 6;
+        }
+        axios.put(`order/${cod}`, {COD_STATUS}, token())
+            .then(res => {
+                setSendRequest(true);
+            })
     }
 
     return (
@@ -158,12 +170,6 @@ const Pedidos = () => {
                         title='Añadir Pedido'
                         messageError={messageError}
                         content={<AddOrder rowCOD={rowCOD} setSendRequest={setSendRequest} setMessageError={setMessageError} />}
-                    />
-                    <Modal 
-                        idModal='editOrder'
-                        title='Actualizar Pedido'
-                        messageError={messageError}
-                        content={<EditOrder rowCOD={rowCOD} setSendRequest={setSendRequest} setMessageError={setMessageError} />}
                     />
                     <Modal 
                         idModal='viewOrderDetail'

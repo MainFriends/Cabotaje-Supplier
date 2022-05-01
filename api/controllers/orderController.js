@@ -50,23 +50,16 @@ const addOrder = (req, res) => {
 };
 
 const updateOrder = (req, res) => {
-    const {COD_USER} = req.user
-
     const {codOrder} = req.params;
     
     const {
-        COD_SUPPLIER,
-        DAT_REQUIRED,
         COD_STATUS
     } = req.body
 
-   const sp = 'CALL SP_UPD_ORDER(?,?,?,?,?)';
+   const sp = 'CALL SP_UPD_ORDER(?,?)';
 
    mysqlConnect.query(sp, [
         codOrder,
-        COD_SUPPLIER,
-        DAT_REQUIRED,
-        COD_USER,
         COD_STATUS
    ], (err) => {
        if(err){

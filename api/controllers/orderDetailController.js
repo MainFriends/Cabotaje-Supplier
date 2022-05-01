@@ -14,7 +14,6 @@ const getOrdersDetail  = (req, res) => {
 
 const getOrderDetail = (req, res) => {
     const {codOrderDetail} = req.params;
-    console.log(codOrderDetail)
     const sp = 'CALL SP_SEL_ORDER_DETAIL(?)';
 
     mysqlConnect.query(sp, [codOrderDetail], (err, result) => {
