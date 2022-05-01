@@ -5,6 +5,8 @@ import ProductsList from '../../../components/invoice-sale/ProductsList';
 import SaleInformation from '../../../components/invoice-sale/SaleInformation'
 
 const Facturar = () => {
+  document.title = "Cabotaje Supplier - Facturar"
+
   const [currentPage, setCurrentPage] = useState(1);
   const [correlativeInvoice, setCorrelativeInvoice] = useState('');
   const [productListSale, setproductListSale] = useState([]);
@@ -19,7 +21,7 @@ const Facturar = () => {
     TOT_SALE: 0,
     TYP_TO_SALE: 'Contado',
     COD_TYP_PAY: 1,
-    RTN: 0
+    RTN: ''
   })
 
   return (

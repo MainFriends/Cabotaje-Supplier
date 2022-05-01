@@ -177,13 +177,13 @@ const Compras = () => {
 
                     <Modal 
                         idModal='addFactura'
-                        title='Agregar factura'
+                        title='Agregar compra'
                         messageError={messageError}
                         content={<AddFacturaForm setSendRequest={setSendRequest} />}
                     />
                     <Modal 
                         idModal='viewInvoiceDetail'
-                        title='Detalle de factura'
+                        title='Detalle de compra'
                         messageError={messageError}
                         content={<ViewDetail rowCOD={rowCOD} />}
                     />

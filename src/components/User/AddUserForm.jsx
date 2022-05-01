@@ -66,7 +66,7 @@ const AddUserForm = ({setSendRequest, setMessageError}) => {
             <div className="row mb-4">
             <div className="col-md-4">
                     <label className='form-label' htmlFor="IDENTITY">Identidad<span className="text-danger"> *</span></label>
-                    <input onChange={handleInputChange} className='form-control' name='IDENTITY' minlenght={13} maxLength={13}  type="text" pattern="[0-9]{13}"  title="Identidad debe contener 13 carácteres númericos, sin guiones ni espacios." required/>
+                    <input onChange={handleInputChange} className='form-control' name='IDENTITY' minlenght={13} maxLength={13}  type="text" pattern="^[0][0-9]{12}"  title="Identidad debe comenzar con cero, contener 13 carácteres númericos, sin guiones ni espacios." required/>
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="FIRST_NAME">Primer nombre<span className="text-danger"> *</span></label>
@@ -74,11 +74,11 @@ const AddUserForm = ({setSendRequest, setMessageError}) => {
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="MIDDLE_NAME">Segundo nombre<span className="text-danger"> *</span></label>
-                    <input onChange={handleInputChange} className='form-control' name='MIDDLE_NAME' type="text" pattern="^[a-zA-ZñÑáéíóú ]+$" title="Segundo nombre no debe contener carácteres especiales y/o númericos.." onInput={toUpperCase} required/>
+                    <input onChange={handleInputChange} className='form-control' name='MIDDLE_NAME' type="text" pattern="^[a-zA-ZñÑáéíóú ]+$" title="Segundo nombre no debe contener carácteres especiales y/o númericos." onInput={toUpperCase} required/>
                 </div>
                 <div className="col-md-4 mt-2">
                     <label className='form-label' htmlFor="LAST_NAME">Apellido<span className="text-danger"> *</span></label>
-                    <input onChange={handleInputChange} className='form-control' name='LAST_NAME'  type="text" pattern="^[a-zA-ZñÑáéíóú ]+$" title="Apellido no debe contener carácteres especiales y/o númericos.." onInput={toUpperCase} required/>
+                    <input onChange={handleInputChange} className='form-control' name='LAST_NAME'  type="text" pattern="^[a-zA-ZñÑáéíóú ]+$" title="Apellido no debe contener carácteres especiales y/o númericos." onInput={toUpperCase} required/>
                 </div>
 
                 <div className="col-md-4 mt-2">

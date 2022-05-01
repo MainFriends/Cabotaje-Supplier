@@ -27,16 +27,15 @@ const getSupplier=(req,res) => {
 
 const addSupplier= (req,res) =>{
     const {
-                                NAM_SUPPLIER,
-								NAM_CONTACT,
-								LAST_NAM_CONTACT,
-								ADDRESS,
-								NUM_PHONE_ONE,
-								NUM_PHONE_TWO = null,
-								EMAIL,
-								NAM_CITY,
-								ZIP_CODE
-
+        NAM_SUPPLIER,
+        NAM_CONTACT,
+        LAST_NAM_CONTACT,
+        ADDRESS,
+        NUM_PHONE_ONE,
+        NUM_PHONE_TWO = 0,
+        EMAIL,
+        NAM_CITY,
+        ZIP_CODE
     } = req.body
     
     const sp= 'CALL SP_INS_SUPPLIER(?,?,?,?,?,?,?,?,?)';
@@ -67,16 +66,15 @@ const addSupplier= (req,res) =>{
 const updateSupplier= (req,res) =>{
     const {codSupplier} = req.params;
      const {
-                                NAM_SUPPLIER,
-								NAM_CONTACT,
-								LAST_NAM_CONTACT,
-								ADDRESS,
-								NUM_PHONE_ONE,
-								NUM_PHONE_TWO = null,
-								EMAIL,
-								NAM_CITY,
-								ZIP_CODE
-
+        NAM_SUPPLIER,
+        NAM_CONTACT,
+        LAST_NAM_CONTACT,
+        ADDRESS,
+        NUM_PHONE_ONE,
+        NUM_PHONE_TWO = 0,
+        EMAIL,
+        NAM_CITY,
+        ZIP_CODE
     } = req.body
 
     const sp= 'CALL SP_UPD_SUPPLIER (?,?,?,?,?,?,?,?,?,?)';

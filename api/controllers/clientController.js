@@ -33,7 +33,7 @@ const addClient=  (req,res) =>{
         LAST_NAME,
         ADDRESS ,
         NUM_PHONE_ONE,
-        NUM_PHONE_TWO = NULL,
+        NUM_PHONE_TWO = 0,
         RTN 
     } = req.body
 const sp= 'CALL SP_INS_CLIENT(?,?,?,?,?,?,?)';
@@ -68,7 +68,7 @@ const updateClient= (req,res) =>{
         LAST_NAME,
         ADDRESS ,
         NUM_PHONE_ONE,
-        NUM_PHONE_TWO= NULL,
+        NUM_PHONE_TWO = 0,
         RTN
 
     } = req.body
@@ -89,7 +89,7 @@ const updateClient= (req,res) =>{
 
         if(err){
             const message = err.message.split(': ')[1];
-            res.status(400). send({message:'El cliente no se pudo modificar, verifique su Informacion e intentelos de nuevo'});
+            res.status(400). send({message});
         }else{
             res.status(201).send({message:'El cliente  ha sido actualizado correctamente'});
         }

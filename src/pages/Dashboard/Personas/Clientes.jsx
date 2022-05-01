@@ -167,7 +167,7 @@ const Clientes = () => {
 
                     <Modal 
                         idModal='editClient'
-                        title='Actualizar cliente'
+                        title='Editar cliente'
                         messageError={messageError}
                         content={<EditClientForm rowCOD={rowCOD} setSendRequest={setSendRequest} setMessageError={setMessageError}/>}
                     />  

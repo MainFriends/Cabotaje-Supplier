@@ -54,6 +54,14 @@ const SaleInformation = ({setsaleInvoice, saleInvoice, setCurrentPage, setCorrel
         })
       return
     }
+
+    if(RTN.length === 0){
+      setsaleInvoice({
+        ...saleInvoice,
+        COD_CLIENT: 1,
+        NAM_CLIENT: 'CF'
+      })
+    }
   }, [RTN])
 
   const handleInputChange = ({target}) => {
@@ -83,6 +91,16 @@ const SaleInformation = ({setsaleInvoice, saleInvoice, setCurrentPage, setCorrel
 
     if(saleInvoice.NAM_USER === `Usuario no encontrado`){
       setErrorMessage('Ingrese un código de usuario válido.');
+
+      setTimeout(() => {
+        setErrorMessage('')
+      }, 3000);
+
+      return;
+    }
+
+    if(RTN.length > 1 && RTN.length < 14){
+      setErrorMessage('Ingrese un RTN Válido.');
 
       setTimeout(() => {
         setErrorMessage('')
@@ -171,6 +189,7 @@ const SaleInformation = ({setsaleInvoice, saleInvoice, setCurrentPage, setCorrel
             type="text" 
             value={saleInvoice.NAM_CLIENT}
             name='NAM_CLIENT'
+            disabled
             />
           </div>
         </div>
@@ -182,10 +201,14 @@ const SaleInformation = ({setsaleInvoice, saleInvoice, setCurrentPage, setCorrel
             <input 
             onChange={handleInputChange}
             className="form-control form-control" 
-            type="number" 
+            type="text" 
             value={saleInvoice.RTN}
             name='RTN'
+            pattern="^[0][0-9]{13}" 
+            minLength={14}
+            maxLength={14}
             />
+            <small className="form-text text-muted">En caso de tener registrado al cliente, ingrese su RTN para vincularlo a la venta.</small>
           </div>
         </div>
       </div>
