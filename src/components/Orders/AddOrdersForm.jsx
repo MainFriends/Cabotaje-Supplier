@@ -85,7 +85,7 @@ const AddOrder = ({setSendRequest,setMessageError}) => {
                     setProduct({
                         ...product,
                         COD_PRODUCT: '',
-                        NAM_PRODUCT: 'Producto no encontrado.',
+                        NAM_PRODUCT: 'Producto no encontrado',
                     })
                 }
             })
@@ -118,6 +118,16 @@ const AddOrder = ({setSendRequest,setMessageError}) => {
 
         if(formAddOrderDetail.COD_PRODUCT === ''){
             setMessageError('Inserte un producto.');
+
+            setTimeout(() => {
+                setMessageError("")
+            }, 3000);
+
+            return
+        }
+
+        if(NAM_PRODUCT === 'Producto no encontrado'){
+            setMessageError('Inserte un producto válido.');
 
             setTimeout(() => {
                 setMessageError("")
