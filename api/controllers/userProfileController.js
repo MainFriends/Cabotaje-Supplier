@@ -48,7 +48,6 @@ const updProfilePicture = (req, res) => {
     
     const {COD_USER} = req.user;
     const DATA =  fs.readFileSync('api/uploads/' + req.file.filename);
-    fs.rmSync('api/uploads/' + req.file.filename);
 
     mysqlConnect.query(sp,
         [   
