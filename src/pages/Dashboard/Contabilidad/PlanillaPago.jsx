@@ -12,6 +12,7 @@ import {paginationComponentOptions} from '../../../helpers/datatablesOptions';
 import axios from '../../../config/axios'
 import token from '../../../helpers/getToken';
 import moment from 'moment';
+
 import jsPDF from 'jspdf'
 import 'jspdf-autotable';
 import logo from '../../../assets/js/logo';
