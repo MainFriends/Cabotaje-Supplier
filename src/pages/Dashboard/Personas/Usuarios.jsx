@@ -32,10 +32,9 @@ const Usuarios = () => {
         
         const row = rows.map(fila => {
             const fecha = fila.DAT_BIRTHDAY;
-            const identidad = fila.IDENTITY
             return [
                 fila.COD_USER,
-                `0${identidad}`,
+                fila.IDENTITY,
                 fila.FIRST_NAME,
                 fila.LAST_NAME,
                 fila.USER_EMAIL,
@@ -75,8 +74,7 @@ const Usuarios = () => {
             name: 'IDENTIDAD',
             selector: row => row.IDENTITY,
             sortable: true,
-            grow: 2,
-            format: row => `0${row.IDENTITY}`
+            grow: 2
         },
         {
             name: 'NOMBRE',

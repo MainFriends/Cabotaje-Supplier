@@ -66,7 +66,7 @@ const AddUserForm = ({setSendRequest, setMessageError}) => {
             <div className="row mb-4">
             <div className="col-md-4">
                     <label className='form-label' htmlFor="IDENTITY">Identidad<span className="text-danger"> *</span></label>
-                    <input onChange={handleInputChange} className='form-control' name='IDENTITY' minlenght={13} maxLength={13}  type="text" pattern="^[0][0-9]{12}"  title="Identidad debe comenzar con cero, contener 13 carácteres númericos, sin guiones ni espacios." required/>
+                    <input onChange={handleInputChange} className='form-control' name='IDENTITY' minlenght={13} maxLength={13}  type="text" pattern="^[0-1][0-9]{12}"  title="Identidad debe comenzar con cero o uno, contener 13 carácteres númericos, sin guiones ni espacios." required/>
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="FIRST_NAME">Primer nombre<span className="text-danger"> *</span></label>

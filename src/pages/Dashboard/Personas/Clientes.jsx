@@ -30,16 +30,14 @@ const Clientes = () => {
         doc.addImage(image, 'PNG', 10, 10,20,30,'Cabotaje')
         
         const row = rows.map(fila => {
-            const identidad = fila.IDENTITY
-            const rtn = fila.RTN
             return [
-                `0${identidad}`,
+                fila.IDENTITY,
                 fila.FIRST_NAME,
                 fila.LAST_NAME,
                 fila.NUM_PHONE_ONE,
                 fila.NUM_PHONE_TWO === 0 ? "Sin número" : fila.NUM_PHONE_TWO,
                 fila.ADDRESS,
-                `0${rtn}`,
+                fila.RTN,
             ]
         })  
         doc.autoTable({
@@ -57,7 +55,6 @@ const Clientes = () => {
             name: 'IDENTIDAD',
             selector: row => row.IDENTITY,
             sortable: true,
-            format: row => `0${row.IDENTITY}`,
             grow: 2
         },
         {
@@ -90,7 +87,6 @@ const Clientes = () => {
             name: 'RTN',
             selector: row => row.RTN,
             sortable: true,
-            format: row => `0${row.RTN}`,
             grow: 2
         },
         {

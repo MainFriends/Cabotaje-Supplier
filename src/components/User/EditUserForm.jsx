@@ -43,10 +43,10 @@ const EditUserForm = ({rowCOD, setSendRequest, setMessageError}) => {
         if(rowCOD){
             axios.get(`/User/${rowCOD}`, token())
             .then(res => {
+                console.log(res.data[0].IDENTITY.charAt(0))
                 setFormEditUser({
                     ...res.data[0],
-                    DAT_BIRTHDAY: moment(res.data[0].DAT_BIRTHDAY).format('YYYY-MM-DD'),
-                    IDENTITY: `0${res.data[0].IDENTITY}`   
+                    DAT_BIRTHDAY: moment(res.data[0].DAT_BIRTHDAY).format('YYYY-MM-DD')  
                 })
             })
         }
@@ -79,7 +79,7 @@ const EditUserForm = ({rowCOD, setSendRequest, setMessageError}) => {
             <div className="row mb-4">
             <div className="col-md-4">
                     <label className='form-label' htmlFor="IDENTITY">Identidad<span className="text-danger"> *</span></label>
-                    <input onChange={handleInputChange} value={formEditUser.IDENTITY} className='form-control' name='IDENTITY' minlenght={13} maxLength={13}  type="text" pattern="^[0][0-9]{12}"  title="Identidad debe comenzar con cero, contener 13 carácteres númericos, sin guiones ni espacios." required/>
+                    <input onChange={handleInputChange} value={formEditUser.IDENTITY} className='form-control' name='IDENTITY' minlenght={13} maxLength={13}  type="text" pattern="^[0-1][0-9]{12}"  title="Identidad debe comenzar con cero o uno, contener 13 carácteres númericos, sin guiones ni espacios." required/>
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="FIRST_NAME">Primer nombre<span className="text-danger"> *</span></label>
