@@ -99,7 +99,7 @@ const SaleInformation = ({setsaleInvoice, saleInvoice, setCurrentPage, setCorrel
       return;
     }
 
-    if(RTN.length > 1 && RTN.length < 14){
+    if(RTN.length >= 1 && RTN.length < 14){
       setErrorMessage('Ingrese un RTN Válido.');
 
       setTimeout(() => {
