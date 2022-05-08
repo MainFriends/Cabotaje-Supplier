@@ -5,7 +5,7 @@ import token from '../../helpers/getToken';
 const AddPermissions = ({rowCOD, setSendRequestPermissions, setMessageError}) => {
     const [formDataPermissions, setFormDataPermissions] = useState({
         COD_MODULE: '',
-        QUE: 0,
+        QUE: 1,
         INS: 0,
         UPD: 0,
         DEL: 0
@@ -66,10 +66,6 @@ const AddPermissions = ({rowCOD, setSendRequestPermissions, setMessageError}) =>
                 </select>
             </div>
             <div className="col-4 ml-3">
-                <div className="form-group form-check">
-                    <input onChange={handleInputChange} value={1} type="checkbox" className="form-check-input" name='QUE' id="QUE"/>
-                    <label className="form-check-label" htmlFor="QUE"><i className="fa-solid fa-eye"></i> Visualizar</label>
-                </div>
                 <div className="form-group form-check">
                     <input onChange={handleInputChange} value={1} type="checkbox" className="form-check-input" name='INS' id="INS"/>
                     <label className="form-check-label" htmlFor="INS"><i className="fa-solid fa-square-plus"></i> Agregar</label>
