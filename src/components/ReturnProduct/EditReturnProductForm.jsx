@@ -74,7 +74,7 @@ const EditReturnProductForm = ({rowCOD, setSendRequest, setMessageError}) => {
                 <div className="col-md-6 mt-2">
                     <label className='form-label' htmlFor="MOVEMENT">Movimiento</label>
                     <select onChange={handleInputChange} value = {formEditReturnProduc.MOVEMENT} className='form-control' name='MOVEMENT'  rows='3' cols='4' type="text" required>
-                     <option selected>-seleccionar-</option>
+                     <option value=''>-Seleccionar-</option>
                      <option value="1">Entrada</option>
                      <option value="2">Salida</option>
                      </select>         

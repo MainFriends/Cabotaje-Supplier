@@ -186,7 +186,7 @@ const Inventario = () => {
                         highlightOnHover
                         striped
                         persistTableHead
-                        actions={<button onClick={() => dowlandPdfInventory()} className='btn btn-danger btn-sm'><i class="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}     
+                        actions={<button onClick={() => dowlandPdfInventory()} className='btn btn-danger btn-sm'><i className="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}     
                     />
 
                     <Modal 

@@ -45,7 +45,7 @@ const AddFeesReceivable = ({rowCOD, setMessageError, setSendRequest}) => {
                 <div className='col-md-4'>
                     <label className='form-label' htmlFor='COD_TYP_PAY'>Forma de Pago</label>
                     <select onChange={handleInputChange} value={formAddFeesReceivable.COD_TYP_PAY} className='form-control' name='COD_TYP_PAY' required>
-                        <option selected>-Seleccionar-</option>
+                        <option value=''>-Seleccionar-</option>
                             <option value="1">Efectivo</option>
                             <option value="2">Tarjeta</option>
                             <option value="3">Transferencia</option>

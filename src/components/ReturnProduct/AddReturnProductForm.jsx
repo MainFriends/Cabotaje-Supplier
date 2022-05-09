@@ -60,8 +60,8 @@ const AddReturnProductForm = ({setSendRequest, setMessageError}) => {
                 </div>
                 <div className="col-md-6 mt-2">
                     <label className='form-label' htmlFor="MOVEMENT">Movimiento</label>
-                    <select onChange={handleInputChange} className='form-control' name='MOVEMENT'  rows='3' cols='4' type="text" required>
-                     <option selected>-seleccionar-</option>
+                    <select onChange={handleInputChange} defaultValue={''} className='form-control' name='MOVEMENT'  rows='3' cols='4' type="text" required>
+                     <option value=''>-Seleccionar-</option>
                      <option value="1">Entrada</option>
                      <option value="2">Salida</option>
                      </select>         

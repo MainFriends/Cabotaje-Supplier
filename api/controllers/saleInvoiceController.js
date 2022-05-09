@@ -108,7 +108,7 @@ const getClient = (req, res) => {
 
     const sp = `CALL SP_SEL_FINDCLIENT(?)`;
 
-    mysqlConnect.query(sp, [parseInt(rtn)], (err, result) => {
+    mysqlConnect.query(sp, [rtn], (err, result) => {
         if(err){
             res.status(500).send({message: "Error en el servidor."});
         }else{
