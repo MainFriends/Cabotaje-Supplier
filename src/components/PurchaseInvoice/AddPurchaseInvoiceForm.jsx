@@ -300,7 +300,7 @@ const AddFacturaForm = ({setSendRequest}) => {
                     <>
                         <div className="col-md-4 mt-2">
                             <label className='form-label' htmlFor="DESCRIPTION">Descripción</label>
-                            <textarea onChange={handleInputChange} value={DESCRIPTION} onChange={handleInputChange} rows={3} className='form-control' name='DESCRIPTION' type="text" placeholder="Descripción de la cuenta por pagar" required/>
+                            <textarea onChange={handleInputChange} value={DESCRIPTION} rows={3} className='form-control' name='DESCRIPTION' type="text" placeholder="Descripción de la cuenta por pagar" required/>
                         </div>
                         <div className="col-md-3 mt-2">
                             <label className='form-label' htmlFor="DATE_LIMIT">Fecha limite CP</label>
