@@ -155,7 +155,7 @@ const SidebarItems = () => {
                             pathname === '/dashboard/usuarios' ? "active" : "")}>
                         <a className="nav-link collapsed dinamic" href="#" data-toggle="collapse" data-target="#collapseRoles"
                             aria-expanded="true" aria-controls="collapseTwo">
-                            <i class="mr-2 fa-solid fa-shield"></i>
+                            <i className="mr-2 fa-solid fa-shield"></i>
                             <span>Seguridad</span>
                         </a>
                         <div className="collapse" id="collapseRoles" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -163,6 +163,7 @@ const SidebarItems = () => {
                                 <h6 className="collapse-header">Tablas</h6>
                                 <NavLink className="collapse-item" to="usuarios">Usuarios</NavLink>
                                 <NavLink className="collapse-item" to="roles-permisos">Roles y permisos</NavLink>
+                                <NavLink className="collapse-item" to="bitacora">Bitacora de usuarios</NavLink>
                             </div>
                         </div>
                     </li>
