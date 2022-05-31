@@ -86,7 +86,7 @@ const SidebarItems = () => {
                 </div>
             </li>
 
-            <li className={ "nav-item " + (pathname === '/dashboard/usuarios' || pathname === '/dashboard/clientes' || pathname === '/dashboard/proveedores' ? "active" : "")}>
+            <li className={ "nav-item " + (pathname === '/dashboard/clientes' || pathname === '/dashboard/proveedores' ? "active" : "")}>
                 <a className="nav-link collapsed dinamic" href="#" data-toggle="collapse" data-target="#collapsePersona"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i className="mr-2 fas fa-users"></i>
@@ -95,13 +95,6 @@ const SidebarItems = () => {
                 <div className="collapse" id="collapsePersona"  aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div className="bg-white py-2 collapse-inner rounded">
                         <h6 className="collapse-header">Tablas</h6>
-                        {
-                            role === 1
-                            ?
-                            <NavLink className="collapse-item" to="usuarios">Usuarios</NavLink>
-                            :
-                            null
-                        }
                         <NavLink className="collapse-item" to="clientes">Clientes</NavLink>
                         <NavLink className="collapse-item" to="proveedores">Proveedores</NavLink>
                     </div>
@@ -154,23 +147,33 @@ const SidebarItems = () => {
                 </div>
             </li>
 
+            {
+                role === 1
+                ?
+                    <li className={ "nav-item " + 
+                            (pathname === '/dashboard/roles-permisos' ||
+                            pathname === '/dashboard/usuarios' ? "active" : "")}>
+                        <a className="nav-link collapsed dinamic" href="#" data-toggle="collapse" data-target="#collapseRoles"
+                            aria-expanded="true" aria-controls="collapseTwo">
+                            <i class="mr-2 fa-solid fa-shield"></i>
+                            <span>Seguridad</span>
+                        </a>
+                        <div className="collapse" id="collapseRoles" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                            <div className="bg-white py-2 collapse-inner rounded">
+                                <h6 className="collapse-header">Tablas</h6>
+                                <NavLink className="collapse-item" to="usuarios">Usuarios</NavLink>
+                                <NavLink className="collapse-item" to="roles-permisos">Roles y permisos</NavLink>
+                            </div>
+                        </div>
+                    </li>
+                : null
+            }
+
             <hr className="sidebar-divider"></hr>
 
             <div className="sidebar-heading">
                 Utilidades
-            </div>
-
-            {
-                role === 1
-                ?
-                <li className={ "nav-item " + (pathname === '/dashboard/roles-permisos' ? "active" : "")}>
-                    <NavLink className='nav-link' to="roles-permisos">
-                    <i className="mr-2 fa-solid fa-user-lock"></i>
-                    <span>Roles y permisos</span></NavLink>
-                </li>
-                :
-                null
-            }   
+            </div>  
 
             <li className={ "nav-item " + (pathname === '/dashboard/graficas' ? "active" : "")}>
                 <NavLink className='nav-link' to="graficas">

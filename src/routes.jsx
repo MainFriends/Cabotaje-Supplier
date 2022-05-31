@@ -26,7 +26,7 @@ import PlanillaPago from "./pages/Dashboard/Contabilidad/PlanillaPago";
 import Graficas from "./pages/Dashboard/Graficas";
 import Profile from './pages/User-Profile';
 import Categorias from "./pages/Dashboard/Produccion/Categorias";
-import Roles from "./pages/Dashboard/Roles";
+import Roles from "./pages/Dashboard/Seguridad/roles-permisos";
 import Page401 from "./pages/Error-Pages/Page401";
 import Page404 from "./pages/Error-Pages/Page404";
 
