@@ -26,6 +26,8 @@ const getUser = (req, res) => {
 };
 
 const addUser = async (req, res) => {
+    const {COD_USER} = req.user
+
     const {
         IDENTITY,
         FIRST_NAME,
@@ -46,7 +48,7 @@ const addUser = async (req, res) => {
 
     const USER_PASSWORD_HASH = await bcrypt.hash(USER_PASSWORD, 10);
 
-    const sp = 'CALL SP_INS_USER(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+    const sp = 'CALL SP_INS_USER(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
 
     mysqlConnect.query(sp,
     [
@@ -64,7 +66,8 @@ const addUser = async (req, res) => {
         IMG_USER,
         COD_ROLE,
         USER_EMAIL,
-        USER_PASSWORD_HASH
+        USER_PASSWORD_HASH,
+        COD_USER
     ], (err) => {
         if(err){
             const message = err.message.split(': ')[1];
@@ -76,6 +79,7 @@ const addUser = async (req, res) => {
 };
 
 const updateUser = (req, res) => {
+    const {COD_USER} = req.user
     const {codUser} = req.params;
     const {
         IDENTITY,
@@ -93,7 +97,7 @@ const updateUser = (req, res) => {
         USER_EMAIL
     } = req.body;
     
-    const sp = 'CALL SP_UPD_USER(?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+    const sp = 'CALL SP_UPD_USER(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
 
     mysqlConnect.query(sp,
         [   
@@ -110,7 +114,8 @@ const updateUser = (req, res) => {
             NAM_CITY,
             ADDRESS,
             COD_ROLE,
-            USER_EMAIL
+            USER_EMAIL,
+            COD_USER
         ], (err) => {
             if(err){
                 const message = err.message.split(': ')[1];
@@ -122,14 +127,15 @@ const updateUser = (req, res) => {
 }
 
 const deleteUser = (req, res) => {
+    const {COD_USER} = req.user
     const {codUser} = req.params;
-    const sp = `CALL SP_DEL_USER(?)`;
-    mysqlConnect.query(sp, [codUser], (err) => {
+    const sp = `CALL SP_DEL_USER(?,?)`;
+    mysqlConnect.query(sp, [codUser, COD_USER], (err) => {
         if(err){
             res.status(304).send({message: err.message});
         }else{
             res.status(200).send({message: 'El usuario ha sido eliminado exitosamente.'});
-        }
+    }
     })
 };
 

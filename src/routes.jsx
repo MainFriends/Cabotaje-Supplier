@@ -26,9 +26,10 @@ import PlanillaPago from "./pages/Dashboard/Contabilidad/PlanillaPago";
 import Graficas from "./pages/Dashboard/Graficas";
 import Profile from './pages/User-Profile';
 import Categorias from "./pages/Dashboard/Produccion/Categorias";
-import Roles from "./pages/Dashboard/Roles";
+import Roles from "./pages/Dashboard/Seguridad/roles-permisos";
 import Page401 from "./pages/Error-Pages/Page401";
 import Page404 from "./pages/Error-Pages/Page404";
+import Bitacora from "./pages/Dashboard/Seguridad/Bitacora";
 
 const Pages = () => {
 
@@ -92,6 +93,7 @@ const Pages = () => {
             <Route path="planilla-pago" element={<PlanillaPago />}/>
             <Route path="graficas" element={<Graficas />}/>
             <Route path="roles-permisos" element={userRole === 1 ? <Roles /> : <Page401 />}/>
+            <Route path="bitacora" element={<Bitacora />}/>
         </Route>
         <Route path="/*" element={isLogged ? (<Page404 />) : (<Navigate to='/'/>)}></Route>
     </Routes>
