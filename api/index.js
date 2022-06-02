@@ -45,6 +45,7 @@ const userProfile = require('./routes/userProfile')
 //tablas parametricas
 const parametricTables = require('./routes/parametricTables')
 //roles y permisos
+const bitacora = require('./routes/bitacora')
 const rolesAndPermissions = require('./routes/rolesAndPermissions');
 
 /* CREAR SERVIDOR */
@@ -99,6 +100,7 @@ app.use('/api', userProfile)
 app.use('/api', parametricTables)
 // roles y permisos
 app.use('/api', rolesAndPermissions)
+app.use('/api', bitacora)
 
 //Mostrar UI
 app.use(express.static(path.join(__dirname, '../dist')));
