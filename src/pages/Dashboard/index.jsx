@@ -79,7 +79,9 @@ const Dashboard = () => {
   const {logout} = useUser();
 
   useEffect(() => {
-    runApp();
+    setTimeout(() => {
+      runApp();
+    }, 2000);
   },[]);
 
   //comprobamos que haya un token valido cada vez que se navega.
