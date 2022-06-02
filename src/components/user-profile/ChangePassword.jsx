@@ -19,6 +19,9 @@ const ChangePassword = ({setAlertMessage}) => {
         })
     }
 
+    const [isPasswordValid, setIsPasswordValid] = useState(false);
+    const [isPasswordEquals, setIsPasswordEquals] = useState(false);
+
     const cleanForm = (e) => {
         setPassForm({
             LAST_USER_PASSWORD: '',
@@ -31,13 +34,15 @@ const ChangePassword = ({setAlertMessage}) => {
     useEffect(() => {
         //validar input nueva contraseña
         const inputNewPass = document.querySelector('#NEW_USER_PASSWORD');
-        const regex = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,16}$/
+        const regex = /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/
         if(regex.test(NEW_USER_PASSWORD)){
             inputNewPass.classList.remove('is-invalid');
             inputNewPass.classList.add('is-valid');
+            setIsPasswordValid(true);
         }else{
             inputNewPass.classList.remove('is-valid');
             USER_PASSWORD !== '' && inputNewPass.classList.add('is-invalid');
+            setIsPasswordValid(false);
         }
 
         //validar input repetir contraseña
@@ -45,9 +50,11 @@ const ChangePassword = ({setAlertMessage}) => {
         if(NEW_USER_PASSWORD === USER_PASSWORD && USER_PASSWORD !== ''){
             inputPass.classList.remove('is-invalid');
             inputPass.classList.add('is-valid');
+            setIsPasswordEquals(true)
         }else{
             inputPass.classList.remove('is-valid');
             USER_PASSWORD !== '' && inputPass.classList.add('is-invalid');
+            setIsPasswordEquals(false)
         }
     }, [passForm])
 
@@ -105,7 +112,8 @@ const ChangePassword = ({setAlertMessage}) => {
                     <div className="form-group">
                         <label>Contraseña nueva</label>
                         <input id='NEW_USER_PASSWORD' onChange={handleInputChange} className="form-control text-dark" type="password" name="NEW_USER_PASSWORD"/>
-                        <small id="emailHelp" className="form-text text-muted">La contraseña debe tener entre 6 y 16 caracteres, al menos un número, al menos una minúscula y al menos una mayúscula.</small>
+                        <small id="emailHelp" className="form-text text-muted">La contraseña debe tener al entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula, 
+                        al menos una mayúscula y al menos un caracter no alfanumérico.</small>
                     </div>
                     <div className="form-group">
                         <label>Repetir contraseña nueva</label>
@@ -114,7 +122,7 @@ const ChangePassword = ({setAlertMessage}) => {
                 </div>
             </div>
             <div className="modal-footer">
-                <button type="submit" className={'btn btn-success ' + (NEW_USER_PASSWORD !== USER_PASSWORD || USER_PASSWORD === '' ? 'disabled' : '')}>Cambiar contraseña</button>
+                <button type="submit" className={'btn btn-success ' + (isPasswordValid === true && isPasswordEquals === true && passForm.LAST_USER_PASSWORD !== '' ? '' : 'disabled')}>Cambiar contraseña</button>
             </div>
         </form>
     </>
