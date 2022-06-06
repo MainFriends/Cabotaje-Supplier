@@ -26,7 +26,7 @@ const getUser = (req, res) => {
 };
 
 const addUser = async (req, res) => {
-    const {COD_USER} = req.user
+    const COD_USER = 0
 
     const {
         IDENTITY,
@@ -41,6 +41,7 @@ const addUser = async (req, res) => {
         NAM_CITY,
         ADDRESS,
         IMG_USER = null,
+        COD_STATUS,
         COD_ROLE,
         USER_EMAIL,
         USER_PASSWORD
@@ -48,7 +49,7 @@ const addUser = async (req, res) => {
 
     const USER_PASSWORD_HASH = await bcrypt.hash(USER_PASSWORD, 10);
 
-    const sp = 'CALL SP_INS_USER(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+    const sp = 'CALL SP_INS_USER(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
 
     mysqlConnect.query(sp,
     [
@@ -65,13 +66,14 @@ const addUser = async (req, res) => {
         ADDRESS,
         IMG_USER,
         COD_ROLE,
+        COD_STATUS,
         USER_EMAIL,
         USER_PASSWORD_HASH,
         COD_USER
     ], (err) => {
         if(err){
             const message = err.message.split(': ')[1];
-            res.status(400).send({message});
+            res.status(400).send(err);
         }else{
             res.status(201).send({message: 'El usuario ha sido creado correctamente.'});
         }
@@ -93,11 +95,12 @@ const updateUser = (req, res) => {
         DAT_BIRTHDAY,
         NAM_CITY,
         ADDRESS,
+        COD_STATUS,
         COD_ROLE,
         USER_EMAIL
     } = req.body;
     
-    const sp = 'CALL SP_UPD_USER(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+    const sp = 'CALL SP_UPD_USER(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
 
     mysqlConnect.query(sp,
         [   
@@ -113,6 +116,7 @@ const updateUser = (req, res) => {
             DAT_BIRTHDAY,
             NAM_CITY,
             ADDRESS,
+            COD_STATUS,
             COD_ROLE,
             USER_EMAIL,
             COD_USER

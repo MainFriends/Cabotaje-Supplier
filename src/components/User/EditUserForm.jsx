@@ -20,6 +20,7 @@ const EditUserForm = ({rowCOD, setSendRequest, setMessageError}) => {
         DAT_BIRTHDAY: '',
         NAM_CITY: '',
         ADDRESS: '',
+        COD_STATUS:'',
         COD_ROLE:'',
         USER_EMAIL:'',
     })
@@ -142,6 +143,14 @@ const EditUserForm = ({rowCOD, setSendRequest, setMessageError}) => {
                         })}
                         </select>
                         </div>
+                        <div className="col-md-4 mt-2">
+                    <label className="form-label" htmlFor="COD_STATUS">Estado<span className="text-danger"> *</span></label>
+                    <select onChange={handleInputChange} value={formEditUser.COD_STATUS} className="form-control" name="COD_STATUS" type="text" required>
+                        <option value=''>-Seleccionar-</option> 
+                        <option value="1">Activo</option>
+                        <option value="2">Inactivo</option>
+                    </select>   
+                </div>
                 <div className="col-md-5 mt-2">
                     <label className='form-label' htmlFor="USER_EMAIL">Correo electrónico<span className="text-danger"> *</span></label>
                     <input onChange={handleInputChange} value={formEditUser.USER_EMAIL} className='form-control' name='USER_EMAIL'  type="email" required/>
