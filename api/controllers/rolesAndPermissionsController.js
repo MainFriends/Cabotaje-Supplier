@@ -13,12 +13,13 @@ const getRoles = (req, res) => {
 };
 
 const addRole = (req, res) => {
-    const sp = 'CALL SP_INS_ROLE(?,?,?,?,?,?,?)';
+    const sp = 'CALL SP_INS_ROLE(?,?,?,?,?,?,?,?)';
 
     const {
         NAM_ROLE,
         DES_ROLE,
         COD_MODULE,
+        COD_TABLE,
         QUE,
         INS,
         UPD,
@@ -29,6 +30,7 @@ const addRole = (req, res) => {
         NAM_ROLE,
         DES_ROLE,
         COD_MODULE,
+        COD_TABLE,
         QUE,
         INS,
         UPD,
@@ -129,6 +131,32 @@ const delPermissions = (req, res) => {
     })
 };
 
+const getModules = (req, res) => {
+
+    const sp = 'CALL SP_SEL_MODULES()';
+
+    mysqlConnect.query(sp, (err, result) => {
+        if(err){
+            res.status(500).send({message: err});
+        }else{
+            res.status(200).json(result[0]);
+        }
+    })
+};
+
+const getTables = (req, res) => {
+    const {codModule} = req.params
+    const sp = 'CALL SP_SEL_TABLES(?)';
+
+    mysqlConnect.query(sp, [codModule], (err, result) => {
+        if(err){
+            res.status(500).send({message: err});
+        }else{
+            res.status(200).json(result[0]);
+        }
+    })
+};
+
 module.exports = {
     getRoles,
     addRole,
@@ -136,5 +164,7 @@ module.exports = {
     getPermissions,
     getUserPermissions,
     addPermissions,
-    delPermissions
+    delPermissions,
+    getModules,
+    getTables
 }

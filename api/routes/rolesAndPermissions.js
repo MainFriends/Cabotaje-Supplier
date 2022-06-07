@@ -10,5 +10,7 @@ router.get('/permissions/:codRole', userExtractor, rolesAndPermissionsController
 router.get('/user-permissions', userExtractor, rolesAndPermissionsController.getUserPermissions);
 router.post('/permissions/:codRole', userExtractor, rolesAndPermissionsController.addPermissions);
 router.delete('/permissions/:codPermission', userExtractor, rolesAndPermissionsController.delPermissions);
+router.get('/modules', userExtractor, rolesAndPermissionsController.getModules);
+router.get('/tables/:codModule', userExtractor, rolesAndPermissionsController.getTables);
 
 module.exports = router;
