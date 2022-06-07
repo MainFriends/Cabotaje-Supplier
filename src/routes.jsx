@@ -52,11 +52,11 @@ const Pages = () => {
             axios.get('/user-permissions', token())
                 .then(res => {
                     setModules({
-                        ventas: res.data.some(row => row.COD_MODULE === 1),
-                        compras: res.data.some(row => row.COD_MODULE === 2),
-                        personas: res.data.some(row => row.COD_MODULE === 3),
-                        produccion: res.data.some(row => row.COD_MODULE === 4),
-                        contabilidad: res.data.some(row => row.COD_MODULE === 5)
+                        ventas: res.data.some(row => row.COD_MODULE === 3),
+                        compras: res.data.some(row => row.COD_MODULE === 4),
+                        personas: res.data.some(row => row.COD_MODULE === 5),
+                        produccion: res.data.some(row => row.COD_MODULE === 6),
+                        contabilidad: res.data.some(row => row.COD_MODULE === 7)
                     })
                 })
         }

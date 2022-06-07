@@ -2,7 +2,7 @@ const mysqlConnect = require('../config');
 
 const verifyRoleProduction = async (req, res, next) => {
     const {COD_ROLE} = req.user;
-    const COD_MODULE = 4;
+    const COD_MODULE = 6;
     const sp = 'CALL SP_VERIFY_ROLE(?,?)';
     const message = "No tienes autorización para realizar cambios.";
 
