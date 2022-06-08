@@ -53,6 +53,8 @@ const Compras = () => {
     const [messageError, setMessageError] = useState('');
     const [sendRequest, setSendRequest] = useState(false);
     const [rowCOD, setRowCOD] = useState(null);
+    const [permissions, setPermissions] = useState({});
+
     
     //definir las columnas
     const columns = [
@@ -113,7 +115,7 @@ const Compras = () => {
             button: true,
             cell: row => <>
                 <button className='btn btn-sm btn-primary mr-1' data-toggle="modal" data-target='#viewInvoiceDetail' onClick={() => setRowCOD(row.COD_INVOICE)}><i className="fa-solid fa-eye"></i></button>
-                <button className='btn btn-sm btn-danger' onClick={() => handleDelete(row.COD_INVOICE)}><i className="fa-solid fa-trash"></i></button>
+                <button className={'btn btn-sm btn-danger ' + (!permissions.DEL ? 'disabled' : null)} onClick={() => handleDelete(row.COD_INVOICE)}><i className="fa-solid fa-trash"></i></button>
             </>
         }
     ];
@@ -144,6 +146,14 @@ const Compras = () => {
             .then(res => setSendRequest(true))
     }
 
+    useEffect(() => {
+        axios.get(`/user-permissions`,token())
+        .then(res => {
+            const result = res.data.find(row => row.COD_MODULE === 4 && row.COD_TABLE === 4)
+            setPermissions(result)
+        })
+    },[])
+
     return (
             loading
             ?
@@ -156,7 +166,7 @@ const Compras = () => {
                 <div className="card-body">
                     <div className="row mt-2 ml-1">
                         <div className="col">
-                            <button className='btn btn-sm btn-primary' data-toggle="modal" data-target='#addFactura'><i className="fas fa-plus mr-2"></i>Agregar</button>
+                            <button className={'btn btn-sm btn-primary ' + (!permissions.INS ? 'disabled' : null)} data-toggle="modal" data-target='#addFactura'><i className="fas fa-plus mr-2"></i>Agregar</button>
                         </div>
                     </div>
                     <DataTable

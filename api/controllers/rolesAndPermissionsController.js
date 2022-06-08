@@ -101,8 +101,6 @@ const addPermissions = (req, res) => {
         DEL
     } = req.body
 
-    console.log(req.body)
-
     mysqlConnect.query(sp, [
         codRole,
         COD_MODULE,
