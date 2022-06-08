@@ -90,19 +90,23 @@ const getUserPermissions = (req, res) => {
 const addPermissions = (req, res) => {
     const {codRole} = req.params;
 
-    const sp = 'CALL SP_INS_PERMISSIONS(?,?,?,?,?,?)';
+    const sp = 'CALL SP_INS_PERMISSIONS(?,?,?,?,?,?,?)';
 
     const {
         COD_MODULE,
+        COD_TABLE,
         QUE,
         INS,
         UPD,
         DEL
     } = req.body
 
+    console.log(req.body)
+
     mysqlConnect.query(sp, [
         codRole,
         COD_MODULE,
+        COD_TABLE,
         QUE,
         INS,
         UPD,

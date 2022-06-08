@@ -11,7 +11,13 @@ const ViewPermissions = ({rowCOD, sendRequestPermissions, setSendRequestPermissi
     const columns = [
         {
             name: 'MÓDULO',
-            selector: row => row.NAM_MODULE,
+            selector: row => row.COD_MODULE,
+            sortable: true,
+            format: row => (<h1 className="badge badge-dark text-module">{row.NAM_MODULE.toUpperCase()}</h1>)
+        },
+        {
+            name: 'ITEM',
+            selector: row => row.NAM_TABLE,
             sortable: true,
         },
         {
@@ -52,6 +58,7 @@ const ViewPermissions = ({rowCOD, sendRequestPermissions, setSendRequestPermissi
             axios.get(`/permissions/${rowCOD}`, token())
             .then(res => {
                 setRowsData(res.data);
+                console.log(res.data)
                 setSendRequestPermissions(false)
             })
         }

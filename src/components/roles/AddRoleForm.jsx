@@ -73,23 +73,21 @@ const AddRoleForm = ({setSendRequest, setMessageError}) => {
     }, [])
 
     useEffect(() => {
-        axios.get(`/tables/${formData.COD_MODULE}`, token())
-        .then(res => {
-            setTables(res.data)
-            console.log(res.data)
-        })
-        .catch(err => {
-            const {message} = err.response.data;
-            setMessageError(message)
-
-            setTimeout(() => {
-                setMessageError('')
-            }, 3000);
-        })
-    }, [formData.COD_MODULE])
-
-    console.log(tables)
+        if(formData.COD_MODULE){
+            axios.get(`/tables/${formData.COD_MODULE}`, token())
+            .then(res => {
+                setTables(res.data)
+            })
+            .catch(err => {
+                const {message} = err.response.data;
+                setMessageError(message)
     
+                setTimeout(() => {
+                    setMessageError('')
+                }, 3000);
+            })
+        }
+    }, [formData.COD_MODULE])
 
   return (
     <form onSubmit={handleSubmit} action='#'>
@@ -111,7 +109,7 @@ const AddRoleForm = ({setSendRequest, setMessageError}) => {
                     <option value='' disabled>Seleccionar...</option>
                     {
                         modules.map(modulo => {
-                            return <option value={modulo.COD_MODULE}>{modulo.NAM_MODULE}</option>
+                            return <option key={modulo.COD_MODULE} value={modulo.COD_MODULE}>{modulo.NAM_MODULE}</option>
                         })
                     }
                 </select>
@@ -124,7 +122,7 @@ const AddRoleForm = ({setSendRequest, setMessageError}) => {
                         <option value='' disabled>Seleccionar...</option>
                         {
                             tables.map(table => {
-                                return <option value={table.COD_TABLE}>{table.NAM_TABLE}</option>
+                                return <option key={table.COD_TABLE} value={table.COD_TABLE}>{table.NAM_TABLE}</option>
                             })
                         }
                     </select>
@@ -138,7 +136,7 @@ const AddRoleForm = ({setSendRequest, setMessageError}) => {
                 <div className="col-4">
                     <div className="form-group form-check">
                         <input onChange={handleInputChange} value={1} type="checkbox" className="form-check-input" name='QUE' id="QUE"/>
-                        <label className="form-check-label" htmlFor="QUE"><i class="fa-solid fa-eye"></i> Visualizar</label>
+                        <label className="form-check-label" htmlFor="QUE"><i className="fa-solid fa-eye"></i> Visualizar</label>
                     </div>
                     {
                         formData.COD_MODULE !== "1" && formData.COD_MODULE !== "9"
