@@ -39,7 +39,7 @@ const AddPermissions = ({rowCOD, setSendRequestPermissions, setMessageError}) =>
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        axios.post(`/permissions/${rowCOD}`, formDataPermissions, token())
+        axios.post(`/permissions/${rowCOD.COD_ROLE}`, formDataPermissions, token())
             .then(res => {
                 e.target.reset();
                 document.querySelector('#closeModalPermissions').click();

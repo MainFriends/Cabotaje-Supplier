@@ -44,7 +44,7 @@ const Roles = () => {
             name: 'ACCIONES',
             button: true,
             cell: row => <>
-                <button onClick={() => setRowCOD(row.COD_ROLE)} className='btn btn-sm btn-primary mr-1' data-toggle="modal" data-target='#viewModules'><i className="fa-solid fa-eye"></i></button>
+                <button onClick={() => setRowCOD({COD_ROLE: row.COD_ROLE, NAM_ROLE: row.NAM_ROLE})} className='btn btn-sm btn-primary mr-1' data-toggle="modal" data-target='#viewModules'><i className="fa-solid fa-eye"></i></button>
                 <button onClick={() => handleDelete(row.COD_ROLE)} className={'btn btn-sm btn-danger ' + ((row.COD_ROLE === 1 || row.COD_ROLE === 2) && 'disabled')}><i className="fa-solid fa-trash"></i></button>
             </>
         }
@@ -111,7 +111,7 @@ const Roles = () => {
 
                     <Modal 
                         idModal='viewModules'
-                        title='Permisos'
+                        title={`Permisos de ${rowCOD?.NAM_ROLE}`}
                         content={<ViewPermissions 
                             rowCOD={rowCOD} 
                             sendRequestPermissions={sendRequestPermissions}

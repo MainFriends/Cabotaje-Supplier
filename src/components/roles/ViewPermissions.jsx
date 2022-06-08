@@ -54,15 +54,15 @@ const ViewPermissions = ({rowCOD, sendRequestPermissions, setSendRequestPermissi
     ];
 
     useEffect(() => {
-        if(rowCOD){
-            axios.get(`/permissions/${rowCOD}`, token())
+        if(rowCOD?.COD_ROLE){
+            axios.get(`/permissions/${rowCOD.COD_ROLE}`, token())
             .then(res => {
                 setRowsData(res.data);
                 console.log(res.data)
                 setSendRequestPermissions(false)
             })
         }
-    }, [rowCOD, sendRequestPermissions])
+    }, [rowCOD?.COD_ROLE, sendRequestPermissions])
 
     const handleDelete = (cod) => {
         axios.delete(`/permissions/${cod}`, token())
@@ -76,7 +76,7 @@ const ViewPermissions = ({rowCOD, sendRequestPermissions, setSendRequestPermissi
       <div className="row">
           <div className="col-12 text-right">
               {
-                rowCOD > 2
+                rowCOD?.COD_ROLE > 2
                 ?
                 <button data-dismiss="modal" className='btn btn-sm btn-success' data-toggle="modal" data-target='#addPermissions'><i className="fa-solid fa-plus"></i> Agregar permisos</button>
                 :
