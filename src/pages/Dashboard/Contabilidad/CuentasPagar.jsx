@@ -25,6 +25,7 @@ const CuentasPagar = () => {
     const [messageError, setMessageError] = useState('');
     const [sendRequest, setSendRequest] = useState(false);
     const [rowCOD, setRowCOD] = useState(null);
+    const [permissions, setPermissions] = useState({});
 
     const dowlandPdfPay = () => {
         const doc = new jsPDF();
@@ -80,8 +81,8 @@ const CuentasPagar = () => {
             button: true,
             cell: row => <>
                 <button className='btn btn-sm btn-primary m-1' onClick={() => setRowCOD(row.COD_ACC_PAY)} data-toggle="modal" data-target='#idCobrar'><i className="fa-solid fa-eye"></i></button>
-                <button className='btn btn-sm btn-warning mr-1' onClick={() => {setRowCOD(row.COD_ACC_PAY)}} data-toggle="modal" data-target='#editAccountPay'><i className="fa-solid fa-pen-to-square"></i></button>
-                <button className='btn btn-sm btn-danger' onClick={() => handleDelete(row.COD_ACC_PAY)}><i className="fa-solid fa-trash"></i></button>
+                <button className={'btn btn-sm btn-warning mr-1 ' + (!permissions.UPD ? 'disabled' : null)} onClick={() => {setRowCOD(row.COD_ACC_PAY)}} data-toggle="modal" data-target='#editAccountPay'><i className="fa-solid fa-pen-to-square"></i></button>
+                <button className={'btn btn-sm btn-danger ' + (!permissions.DEL ? 'disabled' : null)} onClick={() => handleDelete(row.COD_ACC_PAY)}><i className="fa-solid fa-trash"></i></button>
             </>
         }
     ];
@@ -112,6 +113,14 @@ const CuentasPagar = () => {
            .then(res => setSendRequest(true))
     }
 
+    useEffect(() => {
+        axios.get(`/user-permissions`,token())
+        .then(res => {
+            const result = res.data.find(row => row.COD_MODULE === 7 && row.COD_TABLE === 14)
+            setPermissions(result)
+        })
+    },[])
+
     return (
             loading
             ?
@@ -124,7 +133,7 @@ const CuentasPagar = () => {
                 <div className="card-body">
                     <div className="row mt-2 ml-1">
                         <div className="col">
-                            <button className='btn btn-sm btn-primary' data-toggle="modal" data-target='#addAccountPay'><i className="fas fa-plus mr-2"></i>Agregar</button>
+                            <button className={'btn btn-sm btn-primary ' + (!permissions.INS ? 'disabled' : null)} data-toggle="modal" data-target='#addAccountPay'><i className="fas fa-plus mr-2"></i>Agregar</button>
                         </div>
                     </div>
                     <DataTable

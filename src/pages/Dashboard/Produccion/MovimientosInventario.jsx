@@ -21,9 +21,7 @@ const MovimientosInventario = () => {
     const [rows, setRows] = useState([]);
     const [filterText, setFilterText] = useState('');
     const [loading, setLoading] = useState(true);
-    const [messageError, setMessageError] = useState('');
     const [sendRequest, setSendRequest] = useState('false');
-    const [rowCOD, setRowCOD] = useState(null)
 
     const dowlandPdf = () => {
         const doc = new jsPDF();
@@ -107,7 +105,6 @@ const MovimientosInventario = () => {
             })
 
     },[sendRequest]);
-
 
     return (
             loading

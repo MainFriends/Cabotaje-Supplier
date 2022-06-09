@@ -24,6 +24,7 @@ const Inventario = () => {
     const [messageError, setMessageError] = useState('');
     const [sendRequest, setSendRequest] = useState(false);
     const [rowCOD, setRowCOD] = useState(null);
+    const [permissions, setPermissions] = useState({});
 
     const dowlandPdfInventory = () => {
         const doc = new jsPDF();
@@ -129,8 +130,8 @@ const Inventario = () => {
             button: true,
             cell: row => <>
                 <button className='btn btn-sm btn-primary mr-1' data-toggle="modal" data-target='#viewDetailProduct' onClick={() => setRowCOD(row.COD_PRODUCT)}><i className="fa-solid fa-eye"></i></button>
-                <button onClick={() => setRowCOD(row.COD_PRODUCT)} className='btn btn-sm btn-warning mr-1' data-toggle="modal" data-target='#editProduct'><i className="fa-solid fa-pen-to-square"></i></button>
-                <button onClick={() => handleDelete(row.COD_PRODUCT)} className='btn btn-sm btn-danger'><i className="fa-solid fa-trash"></i></button>
+                <button onClick={() => setRowCOD(row.COD_PRODUCT)} className={'btn btn-sm btn-warning mr-1 ' + (!permissions.UPD ? 'disabled' : null)} data-toggle="modal" data-target='#editProduct'><i className="fa-solid fa-pen-to-square"></i></button>
+                <button onClick={() => handleDelete(row.COD_PRODUCT)} className={'btn btn-sm btn-danger ' + (!permissions.DEL ? 'disabled' : null)}><i className="fa-solid fa-trash"></i></button>
             </>
         }
     ];
@@ -160,6 +161,14 @@ const Inventario = () => {
             .then(res => setSendRequest(true))
     }
 
+    useEffect(() => {
+        axios.get(`/user-permissions`,token())
+        .then(res => {
+            const result = res.data.find(row => row.COD_MODULE === 6 && row.COD_TABLE === 8)
+            setPermissions(result)
+        })
+    },[])
+
     return (
             loading
             ?
@@ -172,7 +181,7 @@ const Inventario = () => {
                 <div className="card-body">
                     <div className="row mt-2 ml-1">
                         <div className="col">
-                            <button className='btn btn-sm btn-primary' data-toggle="modal" data-target='#addDetailProduct'><i className="fas fa-plus mr-2"></i>Agregar a inventario</button>
+                            <button className={'btn btn-sm btn-primary ' + (!permissions.INS ? 'disabled' : null)} data-toggle="modal" data-target='#addDetailProduct'><i className="fas fa-plus mr-2"></i>Agregar a inventario</button>
                         </div>
                     </div>
                     <DataTable

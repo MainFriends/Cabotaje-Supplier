@@ -44,6 +44,7 @@ const Pages = () => {
     });
 
     const {
+        facturar,
         ventas
     } = modules;
 
@@ -52,6 +53,7 @@ const Pages = () => {
             axios.get('/user-permissions', token())
                 .then(res => {
                     setModules({
+                        facturar: res.data.some(row => row.COD_MODULE === 2),
                         ventas: res.data.some(row => row.COD_MODULE === 3),
                         compras: res.data.some(row => row.COD_MODULE === 4),
                         personas: res.data.some(row => row.COD_MODULE === 5),
@@ -73,12 +75,12 @@ const Pages = () => {
     <Routes>
         <Route path="/" element={isLogged ? (<Navigate to='/dashboard'/>) : (<Login />)}/>
         <Route path="/profile" element={isLogged ? (<Profile />) : (<Navigate to='/'/>)}/>
-        <Route path="/facturar" element={isLogged ? (ventas ? <Facturar /> : <Page401 />) : (<Navigate to='/'/>)}/>
+        <Route path="/facturar" element={isLogged ? (facturar ? <Facturar /> : <Page401 />) : (<Navigate to='/'/>)}/>
         <Route path="/dashboard" element={isLogged ? (<Dashboard />) : (<Navigate to='/'/>)}>
             <Route path="ventas" element={<Facturas />}/>
             <Route path="compras" element={<Compras />}/>
             <Route path="pedidos" element={<Pedidos />}/>
-            <Route path="usuarios" element={userRole === 1 ? <Usuarios /> : <Navigate to='/'/>}/>
+            <Route path="usuarios" element={<Usuarios />}/>
             <Route path="clientes" element={<Clientes />}/>
             <Route path="proveedores" element={<Proveedores />}/>
             <Route path="categorias-inventario" element={<Categorias />}/>
@@ -92,7 +94,7 @@ const Pages = () => {
             <Route path="rebajas" element={<Rebajas />}/>
             <Route path="planilla-pago" element={<PlanillaPago />}/>
             <Route path="graficas" element={<Graficas />}/>
-            <Route path="roles-permisos" element={userRole === 1 ? <Roles /> : <Page401 />}/>
+            <Route path="roles-permisos" element={<Roles />}/>
             <Route path="bitacora" element={<Bitacora />}/>
         </Route>
         <Route path="/*" element={isLogged ? (<Page404 />) : (<Navigate to='/'/>)}></Route>

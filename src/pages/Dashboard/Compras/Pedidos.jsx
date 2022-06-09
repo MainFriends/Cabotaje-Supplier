@@ -24,6 +24,7 @@ const Pedidos = () => {
     const [messageError, setMessageError] = useState('');
     const [sendRequest, setSendRequest] = useState(false);
     const [rowCOD, setRowCOD] = useState(null);
+    const [permissions, setPermissions] = useState({});
 
     const dowlandPdfOrder = () => {
         const doc = new jsPDF();
@@ -90,9 +91,9 @@ const Pedidos = () => {
             name: 'ACCIONES',
             button: true,
             cell: row => <>
-                <button className={'btn btn-sm ' + (row.NAM_STATUS === 'Recibido' ? 'btn-warning ' : 'btn-success ') + 'mr-1'}onClick={() => {handleStatus(row.NAM_STATUS,row.COD_ORDER)}} title={'Marcar como ' + (row.NAM_STATUS === 'Recibido' ? 'En proceso' : 'Recibido')} >{row.NAM_STATUS === 'Recibido' ? <i className="fa-solid fa-truck"></i> : <i className="fa-solid fa-check-to-slot"></i>}</button>
+                <button className={'btn btn-sm ' + (row.NAM_STATUS === 'Recibido' ? 'btn-warning ' : 'btn-success ') + 'mr-1' + (!permissions.UPD ? ' disabled' : null)} onClick={() => {handleStatus(row.NAM_STATUS,row.COD_ORDER)}} title={'Marcar como ' + (row.NAM_STATUS === 'Recibido' ? 'En proceso' : 'Recibido')} >{row.NAM_STATUS === 'Recibido' ? <i className="fa-solid fa-truck"></i> : <i className="fa-solid fa-check-to-slot"></i>}</button>
                 <button className='btn btn-sm btn-primary mr-1' data-toggle="modal" data-target='#viewOrderDetail' onClick={() => setRowCOD(row.COD_ORDER)}><i className="fa-solid fa-eye"></i></button>
-                <button className='btn btn-sm btn-danger'onClick={() => handleDelete(row.COD_ORDER)}><i className="fa-solid fa-trash"></i></button>
+                <button className={'btn btn-sm btn-danger ' + (!permissions.DEL ? 'disabled' : null)}onClick={() => handleDelete(row.COD_ORDER)}><i className="fa-solid fa-trash"></i></button>
             </>
         }
     ];
@@ -136,6 +137,14 @@ const Pedidos = () => {
             })
     }
 
+    useEffect(() => {
+        axios.get(`/user-permissions`,token())
+        .then(res => {
+            const result = res.data.find(row => row.COD_MODULE === 4 && row.COD_TABLE === 5)
+            setPermissions(result)
+        })
+    },[])
+
     return (
             loading
             ?
@@ -148,7 +157,7 @@ const Pedidos = () => {
                 <div className="card-body">
                     <div className="row mt-2 ml-1">
                         <div className="col">
-                            <button className='btn btn-sm btn-primary' data-toggle="modal" data-target='#addOrder'><i className="fas fa-plus mr-2"></i>Agregar</button>
+                            <button className={'btn btn-sm btn-primary ' + (!permissions.INS ? 'disabled' : null)} data-toggle="modal" data-target='#addOrder'><i className="fas fa-plus mr-2"></i>Agregar</button>
                         </div>
                     </div>
                     <DataTable

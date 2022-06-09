@@ -7,6 +7,7 @@ import token from '../../helpers/getToken';
 
 const ViewPermissions = ({rowCOD, sendRequestPermissions, setSendRequestPermissions}) => {
     const [rowsData, setRowsData] = useState([]);
+    const [permissions, setPermissions] = useState({});
 
     const columns = [
         {
@@ -48,7 +49,7 @@ const ViewPermissions = ({rowCOD, sendRequestPermissions, setSendRequestPermissi
             name: 'ACCIONES',
             button: true,
             cell: row => <>
-                <button onClick={() => handleDelete(row.COD_PERMISSION)} className={'btn btn-sm btn-danger ' + (row.COD_ROLE === 1 && 'disabled')}><i className="fa-solid fa-trash"></i></button>
+                <button onClick={() => handleDelete(row.COD_PERMISSION)} className={'btn btn-sm btn-danger ' + (row.COD_ROLE === 1 && 'disabled') + (!permissions.DEL ? ' disabled' : null)}><i className="fa-solid fa-trash"></i></button>
             </>
         }
     ];
@@ -71,6 +72,14 @@ const ViewPermissions = ({rowCOD, sendRequestPermissions, setSendRequestPermissi
             })
     }
 
+    useEffect(() => {
+        axios.get(`/user-permissions`,token())
+        .then(res => {
+            const result = res.data.find(row => row.COD_MODULE === 8 && row.COD_TABLE === 19)
+            setPermissions(result)
+        })
+    },[])
+
   return (
       <>
       <div className="row">
@@ -78,7 +87,7 @@ const ViewPermissions = ({rowCOD, sendRequestPermissions, setSendRequestPermissi
               {
                 rowCOD?.COD_ROLE > 2
                 ?
-                <button data-dismiss="modal" className='btn btn-sm btn-success' data-toggle="modal" data-target='#addPermissions'><i className="fa-solid fa-plus"></i> Agregar permisos</button>
+                <button data-dismiss="modal" className={'btn btn-sm btn-success ' + (!permissions.INS ? 'disabled' : null)} data-toggle="modal" data-target='#addPermissions'><i className="fa-solid fa-plus"></i> Agregar permisos</button>
                 :
                 null
               }

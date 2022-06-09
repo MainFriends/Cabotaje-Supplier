@@ -9,6 +9,7 @@ import moment from 'moment';
 
 const CuotasCobrar = ({rowCOD, sendRequest, setSendRequest}) => {
     const [rowsCuotas, setRowsCuotas] = useState([]);
+    const [permissions, setPermissions] = useState({});
 
     const columns = [
         {
@@ -34,7 +35,7 @@ const CuotasCobrar = ({rowCOD, sendRequest, setSendRequest}) => {
             button: true,
             cell: row => (
                 <>
-                    <button className='btn btn-sm btn-danger' onClick={() => handleDelete(row.COD_FEES)}><i className="fa-solid fa-trash"></i></button>
+                    <button className={'btn btn-sm btn-danger ' + (!permissions.DEL ? 'disabled' : null)} onClick={() => handleDelete(row.COD_FEES)}><i className="fa-solid fa-trash"></i></button>
                 </>
             )
         },
@@ -57,11 +58,19 @@ const CuotasCobrar = ({rowCOD, sendRequest, setSendRequest}) => {
         document.querySelector('#idCloseSelCuotas').click();
     }
 
+    useEffect(() => {
+        axios.get(`/user-permissions`,token())
+        .then(res => {
+            const result = res.data.find(row => row.COD_MODULE === 7 && row.COD_TABLE === 14)
+            setPermissions(result)
+        })
+    },[])
+
   return (
     <>  
     <div className="row">
             <div className="col-12 text-right">
-                <button onClick={() => closeModal()} className='btn btn-sm btn-success' data-toggle="modal" data-target='#addCuotaPay'>+</button>
+                <button onClick={() => closeModal()} className={'btn btn-sm btn-success ' + (!permissions.UPD ? 'disabled' : null)} data-toggle="modal" data-target='#addCuotaPay'>+</button>
             </div>
     </div>
         <DataTable

@@ -23,6 +23,7 @@ const Devoluciones = () => {
     const [messageError, setMessageError] = useState('');
     const [sendRequest, setSendRequest] = useState(false);
     const [rowCOD, setRowCOD] = useState(null);
+    const [permissions, setPermissions] = useState({});
 
     const dowlandPdfReturns = () => {
         const doc = new jsPDF();
@@ -101,8 +102,8 @@ const Devoluciones = () => {
             name: 'ACCIONES',
             button: true,
             cell: row => <>
-                <button className='btn btn-sm btn-warning mr-1' onClick={() => {setRowCOD(row.COD_RETURN)}} data-toggle="modal" data-target='#editSalesReturn'><i className="fa-solid fa-pen-to-square"></i></button>
-                <button className='btn btn-sm btn-danger' onClick={() => handleDelete(row.COD_RETURN)}><i className="fa-solid fa-trash"></i></button>
+                <button className={'btn btn-sm btn-warning mr-1 ' + (!permissions.UPD ? 'disabled' : null)} onClick={() => {setRowCOD(row.COD_RETURN)}} data-toggle="modal" data-target='#editSalesReturn'><i className="fa-solid fa-pen-to-square"></i></button>
+                <button className={'btn btn-sm btn-danger ' + (!permissions.DEL ? 'disabled' : null)} onClick={() => handleDelete(row.COD_RETURN)}><i className="fa-solid fa-trash"></i></button>
             </>
         }
     ];
@@ -133,6 +134,14 @@ const Devoluciones = () => {
            .then(res => setSendRequest(true));
     }
 
+    useEffect(() => {
+        axios.get(`/user-permissions`,token())
+        .then(res => {
+            const result = res.data.find(row => row.COD_MODULE === 7 && row.COD_TABLE === 15)
+            setPermissions(result)
+        })
+    },[])
+
     return (
             loading
             ?
@@ -145,7 +154,7 @@ const Devoluciones = () => {
                 <div className="card-body">
                     <div className="row mt-2 ml-1">
                         <div className="col">
-                            <button className='btn btn-sm btn-primary' data-toggle="modal" data-target='#addSalesReturn'><i className="fas fa-plus mr-2"></i>Agregar</button>
+                            <button className={'btn btn-sm btn-primary ' + (!permissions.INS ? 'disabled' : null)} data-toggle="modal" data-target='#addSalesReturn'><i className="fas fa-plus mr-2"></i>Agregar</button>
                         </div>
                     </div>
                     <DataTable

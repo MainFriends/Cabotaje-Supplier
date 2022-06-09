@@ -6,6 +6,9 @@ const verifyRoleAccounting = (req, res, next) => {
     const sp = 'CALL SP_VERIFY_ROLE(?,?)';
     const message = "No tienes autorización para realizar cambios.";
 
+    next()
+    return;
+
     mysqlConnect.query(sp, [COD_ROLE, COD_MODULE], (err, result) => {
         if(err){
             res.status(500).send({message: 'Ha ocurrido un error en el servidor.'});

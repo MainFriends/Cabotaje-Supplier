@@ -21,6 +21,8 @@ const Roles = () => {
     const [sendRequest, setSendRequest] = useState(false);
     const [sendRequestPermissions, setSendRequestPermissions] = useState(false);
     const [rowCOD, setRowCOD] = useState(null);
+    const [permissions, setPermissions] = useState({});
+
     
     //definir las columnas
     const columns = [
@@ -33,6 +35,7 @@ const Roles = () => {
             name: 'ROL',
             selector: row => row.NAM_ROLE,
             sortable: true,
+            format: row => row.NAM_ROLE.toUpperCase()
         },
         {
             name: 'DESCRIPCIÓN',
@@ -44,8 +47,8 @@ const Roles = () => {
             name: 'ACCIONES',
             button: true,
             cell: row => <>
-                <button onClick={() => setRowCOD({COD_ROLE: row.COD_ROLE, NAM_ROLE: row.NAM_ROLE})} className='btn btn-sm btn-primary mr-1' data-toggle="modal" data-target='#viewModules'><i className="fa-solid fa-eye"></i></button>
-                <button onClick={() => handleDelete(row.COD_ROLE)} className={'btn btn-sm btn-danger ' + ((row.COD_ROLE === 1 || row.COD_ROLE === 2) && 'disabled')}><i className="fa-solid fa-trash"></i></button>
+                <button onClick={() => setRowCOD({COD_ROLE: row.COD_ROLE, NAM_ROLE: row.NAM_ROLE})} className={'btn btn-sm btn-primary mr-1 '} data-toggle="modal" data-target='#viewModules'><i className="fa-solid fa-eye"></i></button>
+                <button onClick={() => handleDelete(row.COD_ROLE)} className={'btn btn-sm btn-danger ' + ((row.COD_ROLE === 1 || row.COD_ROLE === 2) && 'disabled') + (!permissions.DEL ? ' disabled' : null)}><i className="fa-solid fa-trash"></i></button>
             </>
         }
     ];
@@ -74,6 +77,14 @@ const Roles = () => {
             .then(res => setSendRequest(true))
     }
 
+    useEffect(() => {
+        axios.get(`/user-permissions`,token())
+        .then(res => {
+            const result = res.data.find(row => row.COD_MODULE === 8 && row.COD_TABLE === 19)
+            setPermissions(result)
+        })
+    },[])
+
     return (
             loading
             ?
@@ -86,7 +97,7 @@ const Roles = () => {
                 <div className="card-body">
                     <div className="row mt-2 ml-1">
                         <div className="col">
-                            <button className='btn btn-sm btn-primary' data-toggle="modal" data-target='#addRole'><i className="fas fa-plus mr-2"></i>Agregar</button>
+                            <button className={'btn btn-sm btn-primary ' + (!permissions.INS ? 'disabled' : null)} data-toggle="modal" data-target='#addRole'><i className="fas fa-plus mr-2"></i>Agregar</button>
                         </div>
                     </div>
                     <DataTable
