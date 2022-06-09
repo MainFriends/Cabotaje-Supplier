@@ -80,6 +80,10 @@ const AddPermissions = ({rowCOD, setSendRequestPermissions, setMessageError}) =>
 
     useEffect(() => {
         if(formDataPermissions.COD_MODULE){
+            setFormDataPermissions({
+                ...formDataPermissions,
+                COD_TABLE: ''
+            })
             axios.get(`/tables/${formDataPermissions.COD_MODULE}`, token())
             .then(res => {
                 setTables(res.data)
@@ -94,7 +98,6 @@ const AddPermissions = ({rowCOD, setSendRequestPermissions, setMessageError}) =>
             })
         }
     }, [formDataPermissions.COD_MODULE])
-
 
   return (
     <form onSubmit={handleSubmit} action='#'>
@@ -114,7 +117,7 @@ const AddPermissions = ({rowCOD, setSendRequestPermissions, setMessageError}) =>
                 ?
                 <div className="col-4">
                     <select onChange={handleInputChange} defaultValue='' className="custom-select" name='COD_TABLE' required>
-                        <option value='' disabled>Seleccionar...</option>
+                        <option value=''>Seleccionar...</option>
                         {
                             tables.map(table => {
                                 return <option key={table.COD_TABLE} value={table.COD_TABLE}>{table.NAM_TABLE}</option>
@@ -134,7 +137,12 @@ const AddPermissions = ({rowCOD, setSendRequestPermissions, setMessageError}) =>
                         <label className="form-check-label" htmlFor="QUE"><i className="fa-solid fa-eye"></i> Visualizar</label>
                     </div>
                     {
-                        formDataPermissions.COD_MODULE !== "1" && formDataPermissions.COD_MODULE !== "9"
+                        formDataPermissions.COD_TABLE != 10 &&
+                        formDataPermissions.COD_TABLE != 20 &&
+                        formDataPermissions.COD_TABLE != 1 &&
+                        formDataPermissions.COD_TABLE != 3 &&
+                        formDataPermissions.COD_TABLE != 21 &&
+                        formDataPermissions.COD_TABLE != 16
                         ?
                         <>
                             <div className="form-group form-check">

@@ -74,6 +74,10 @@ const AddRoleForm = ({setSendRequest, setMessageError}) => {
 
     useEffect(() => {
         if(formData.COD_MODULE){
+            setFormData({
+                ...formData,
+                COD_TABLE: ''
+            })
             axios.get(`/tables/${formData.COD_MODULE}`, token())
             .then(res => {
                 setTables(res.data)
@@ -103,7 +107,7 @@ const AddRoleForm = ({setSendRequest, setMessageError}) => {
             </div>
         </div>
         <h6 className='text-muted mb-4'>Otorgar permisos</h6>
-        <div className="row">
+        <div className="row mb-3">
             <div className="col-4">
                 <select onChange={handleInputChange} defaultValue='' className="custom-select" name='COD_MODULE' required>
                     <option value='' disabled>Seleccionar...</option>
@@ -119,7 +123,7 @@ const AddRoleForm = ({setSendRequest, setMessageError}) => {
                 ?
                 <div className="col-4">
                     <select onChange={handleInputChange} defaultValue='' className="custom-select" name='COD_TABLE' required>
-                        <option value='' disabled>Seleccionar...</option>
+                        <option value=''>Seleccionar...</option>
                         {
                             tables.map(table => {
                                 return <option key={table.COD_TABLE} value={table.COD_TABLE}>{table.NAM_TABLE}</option>
@@ -139,7 +143,12 @@ const AddRoleForm = ({setSendRequest, setMessageError}) => {
                         <label className="form-check-label" htmlFor="QUE"><i className="fa-solid fa-eye"></i> Visualizar</label>
                     </div>
                     {
-                        formData.COD_MODULE !== "1" && formData.COD_MODULE !== "9"
+                        formData.COD_TABLE != 10 &&
+                        formData.COD_TABLE != 20 &&
+                        formData.COD_TABLE != 1 &&
+                        formData.COD_TABLE != 3 &&
+                        formData.COD_TABLE != 21 &&
+                        formData.COD_TABLE != 16
                         ?
                         <>
                             <div className="form-group form-check">
