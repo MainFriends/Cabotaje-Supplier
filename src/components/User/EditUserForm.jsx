@@ -48,10 +48,10 @@ const EditUserForm = ({rowCOD, setSendRequest, setMessageError}) => {
         if(rowCOD){
             axios.get(`/User/${rowCOD}`, token())
             .then(res => {
-                console.log(res.data[0].IDENTITY.charAt(0))
                 setFormEditUser({
                     ...res.data[0],
-                    DAT_BIRTHDAY: moment(res.data[0].DAT_BIRTHDAY).format('YYYY-MM-DD')  
+                    DAT_BIRTHDAY: moment(res.data[0].DAT_BIRTHDAY).format('YYYY-MM-DD'),
+                    USER_PASSWORD: '' 
                 })
             })
         }
@@ -353,7 +353,7 @@ const EditUserForm = ({rowCOD, setSendRequest, setMessageError}) => {
                 isNewPasswordGenerate 
                 ?
                     <div className="col-md-4 mt-2">
-                        <label className="form-label" htmlFor="PASSWORD">
+                        <label className="form-label" htmlFor="USER_PASSWORD">
                         Contraseña temporal<span className="text-danger"> *</span>
                         </label>
                         <input
