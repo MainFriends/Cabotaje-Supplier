@@ -150,10 +150,23 @@ const deleteUser = (req, res) => {
     })
 };
 
+const getDate = (req, res) => {
+    const {COD_USER} = req.user
+    const sp = 'CALL SP_PASS_EXPIRE(?)';
+    mysqlConnect.query(sp, [COD_USER], (err, result) => {
+        if(err){
+            res.status(500).send({message: "Error en el servidor."});
+        }else{
+            res.status(200).json(result[0]);
+        }
+    });
+};
+
 module.exports = {
     getUsers,
     getUser,
     addUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    getDate
 };

@@ -9,5 +9,6 @@ router.get('/user/:codUser', [userExtractor, verifyRolePersons], userController.
 router.post('/user', [userExtractor, verifyRolePersons], userController.addUser);
 router.put('/user/:codUser', [userExtractor, verifyRolePersons], userController.updateUser);
 router.delete('/user/:codUser', [userExtractor, verifyRolePersons], userController.deleteUser);
+router.get('/pass-dat-exp', [userExtractor, verifyRolePersons], userController.getDate);
 
 module.exports = router;

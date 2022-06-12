@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { useUser } from "../../hooks/useUser";
+import moment from 'moment';
 
 import Sidebar from "../../components/Sidebar";
 import Navbar from "../../components/Navbar";
@@ -19,6 +20,7 @@ import LineChart from "../../components/ChartJS/LineChart";
 import CardOrder from "../../components/ChartJS/CardOrder";
 import CardSalesDay from "../../components/ChartJS/SalesDayCard";
 import PieChartClient from "../../components/ChartJS/PieChartCliente";
+import AlertWarning from "../../components/AlertWarning";
 
 const ContentDashboard = () => {
 
@@ -77,6 +79,7 @@ const Dashboard = () => {
   const {pathname} = useLocation();
   const [clickMenuOpen, setClickMenu] = useState(true);
   const {logout} = useUser();
+  const [isPasswordExpired, setIsPasswordExpired] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
@@ -93,6 +96,19 @@ const Dashboard = () => {
             logout(sessionExpiredMessage);
         }
       })
+
+    axios.get('/pass-dat-exp', token())
+    .then(res => {
+      const {DAT_EXP} = res.data[0]
+      const USER_PASS_EXP = moment(DAT_EXP).format('YYYY-MM-DD h:mm:ss a');
+      const DAT_NOW = moment().format('YYYY-MM-DD h:mm:ss a');
+
+      if(moment(USER_PASS_EXP).diff(DAT_NOW, 'hours') < 120){
+        setIsPasswordExpired(true)
+      }else{
+        setIsPasswordExpired(false)
+      }
+    });
   },[pathname])
 
   return (
@@ -106,6 +122,13 @@ const Dashboard = () => {
 
           {/* <!-- Begin Page Content --> */}
           <div className="container-fluid">
+            {
+              isPasswordExpired
+              ?
+              <AlertWarning message={'Su contraseña de inicio de sesión expirará pronto. Favor cambiarla lo antes posible.'}/>
+              :
+              null
+            }
             {pathname === '/dashboard' ? <ContentDashboard /> : <Outlet />}
           </div>
           {/* <!-- /.container-fluid --> */}

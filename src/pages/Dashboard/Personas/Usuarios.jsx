@@ -149,6 +149,22 @@ const Usuarios = () => {
             sortable: true,
         },
         {
+            name: 'FECHA DE CREACIÓN',
+            selector: row => row.DAT_CREATE,
+            sortable: true,
+            wrap: true,
+            format: row => moment(row.DAT_EXP).format('YYYY-MM-DD hh:mm:ss a'),
+            grow: 2,
+        },
+        {
+            name: 'FECHA DE EXP',
+            selector: row => row.DAT_EXP,
+            sortable: true,
+            wrap: true,
+            format: row => moment(row.DAT_EXP).format('YYYY-MM-DD hh:mm:ss a'),
+            grow: 2,
+        },
+        {
             name: 'ACCIONES',
             button: true,
             cell: row => <>
@@ -170,7 +186,7 @@ const Usuarios = () => {
 
     useEffect(() => {
         //PETICION GET
-        axios.get('/User', token())
+        axios.get('/user', token())
             .then(res => {
                 const {data} = res;
                 setRows(data);

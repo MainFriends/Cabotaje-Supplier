@@ -25,11 +25,14 @@ const login = (req, res) => {
 
                 if(COD_STATUS === 2){
                     res.status(400).send({message: 'Sus credenciales de sesión estan desactivadas, favor contactar con el administrador.'});
+                    return;
                 }
                 
                 if(DAT_NOW >= DAT_EXP_FORMAT){
                     res.status(400).send({message: 'Sus credenciales de sesión han expirado, favor contactar con el administrador.'});
+                    return;
                 }
+
 
                 //generar token
                 const payload = {
