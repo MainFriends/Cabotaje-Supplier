@@ -153,7 +153,7 @@ const Usuarios = () => {
             selector: row => row.DAT_CREATE,
             sortable: true,
             wrap: true,
-            format: row => moment(row.DAT_EXP).format('YYYY-MM-DD hh:mm:ss a'),
+            format: row => moment(row.DAT_CREATE).format('YYYY-MM-DD hh:mm:ss a'),
             grow: 2,
         },
         {
