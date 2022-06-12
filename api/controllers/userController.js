@@ -73,14 +73,15 @@ const addUser = async (req, res) => {
     ], (err) => {
         if(err){
             const message = err.message.split(': ')[1];
-            res.status(400).send(err);
+            res.status(400).send(message);
         }else{
             res.status(201).send({message: 'El usuario ha sido creado correctamente.'});
         }
     });
 };
 
-const updateUser = (req, res) => {
+const updateUser = async (req, res) => {
+    let USER_PASSWORD_HASH = 0;
     const {COD_USER} = req.user
     const {codUser} = req.params;
     const {
@@ -97,10 +98,15 @@ const updateUser = (req, res) => {
         ADDRESS,
         COD_STATUS,
         COD_ROLE,
-        USER_EMAIL
+        USER_EMAIL,
+        USER_PASSWORD = null
     } = req.body;
+
+    if(USER_PASSWORD){
+        USER_PASSWORD_HASH = await bcrypt.hash(USER_PASSWORD, 10);
+    }
     
-    const sp = 'CALL SP_UPD_USER(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+    const sp = 'CALL SP_UPD_USER(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
 
     mysqlConnect.query(sp,
         [   
@@ -119,7 +125,8 @@ const updateUser = (req, res) => {
             COD_STATUS,
             COD_ROLE,
             USER_EMAIL,
-            COD_USER
+            COD_USER,
+            USER_PASSWORD_HASH
         ], (err) => {
             if(err){
                 const message = err.message.split(': ')[1];

@@ -68,7 +68,7 @@ const AddUserForm = ({ setSendRequest, setMessageError }) => {
         //validar input contraseña
         const {USER_PASSWORD} = formAddUser
         const inputPass = document.querySelector('#USER_PASSWORD');
-        const regex = /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/
+        const regex = /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,255}$/
         if(regex.test(USER_PASSWORD)){
             inputPass.classList.remove('is-invalid');
             inputPass.classList.add('is-valid');
@@ -130,7 +130,7 @@ const AddUserForm = ({ setSendRequest, setMessageError }) => {
             required
           />
         </div>
-        <div className="col-md-4">
+        <div className="col-md-4 mt-2">
           <label className="form-label" htmlFor="LAST_NAME">
             Apellido<span className="text-danger"> *</span>
           </label>
@@ -146,7 +146,7 @@ const AddUserForm = ({ setSendRequest, setMessageError }) => {
           />
         </div>
 
-        <div className="col-md-4 ">
+        <div className="col-md-4 mt-2">
           <label className="form-label" htmlFor="GENDER">
             Género<span className="text-danger"> *</span>
           </label>
@@ -164,7 +164,7 @@ const AddUserForm = ({ setSendRequest, setMessageError }) => {
           </select>
         </div>
 
-        <div className="col-md-4">
+        <div className="col-md-4 mt-2">
           <label className="form-label" htmlFor="NUM_PHONE_ONE">
             Teléfono 1<span className="text-danger"> *</span>
           </label>
@@ -181,7 +181,7 @@ const AddUserForm = ({ setSendRequest, setMessageError }) => {
           />
         </div>
 
-        <div className="col-md-4">
+        <div className="col-md-4 mt-2">
           <label className="form-label" htmlFor="NUM_PHONE_TWO">
             Teléfono 2
           </label>
@@ -197,7 +197,7 @@ const AddUserForm = ({ setSendRequest, setMessageError }) => {
           />
           <small className="form-text text-muted">Opcional</small>
         </div>
-        <div className="col-md-4 ">
+        <div className="col-md-4 mt-2">
           <label className="form-label" htmlFor="NUM_REFERENCE">
             Teléfono de referencia<span className="text-danger"> *</span>
           </label>
@@ -213,7 +213,7 @@ const AddUserForm = ({ setSendRequest, setMessageError }) => {
             required
           />
         </div>
-        <div className="col-md-4 ">
+        <div className="col-md-4 mt-2">
           <label className="form-label" htmlFor="DAT_BIRTHDAY">
             Fecha de nacimiento<span className="text-danger"> *</span>
           </label>
@@ -282,7 +282,37 @@ const AddUserForm = ({ setSendRequest, setMessageError }) => {
             })}
           </select>
         </div>
-       < div className="col-md-3 mt-2">
+        <div className="col-md-4 mt-2">
+          <label className="form-label" htmlFor="EMAIL">
+            Correo eletrónico<span className="text-danger"> *</span>
+          </label>
+          <input
+            onChange={handleInputChange}
+            className="form-control"
+            name="USER_EMAIL"
+            type="email"
+            required
+          />
+        </div>
+        <div className="col-md-4 mt-2">
+          <label className="form-label" htmlFor="PASSWORD">
+            Contraseña temporal<span className="text-danger"> *</span>
+          </label>
+          <span>
+              
+          </span>
+          <input
+            id="USER_PASSWORD"
+            onChange={handleInputChange}
+            className="form-control form-control-user"
+            name="USER_PASSWORD"
+            type="password"
+            title="La contraseña debe tener más de 8 caracteres, al menos un dígito, al menos una minúscula, 
+            al menos una mayúscula y al menos un caracter no alfanumérico."
+            required
+          />
+        </div>
+        < div className="col-md-3 mt-2">
           <label className="form-label" htmlFor="COD_STATUS">
             Estado<span className="text-danger"> *</span>
           </label>
@@ -298,38 +328,6 @@ const AddUserForm = ({ setSendRequest, setMessageError }) => {
             <option value="1">Activo</option>
             <option value="2">Inactivo</option>
           </select>
-        </div>
-
-  
-        <div className="col-md-6 mt-2">
-          <label className="form-label" htmlFor="EMAIL">
-            Correo eletrónico<span className="text-danger"> *</span>
-          </label>
-          <input
-            onChange={handleInputChange}
-            className="form-control"
-            name="USER_EMAIL"
-            type="email"
-            required
-          />
-        </div>
-        <div className="col-md-5 mt-2">
-          <label className="form-label" htmlFor="PASSWORD">
-            Contraseña temporal<span className="text-danger"> *</span>
-          </label>
-          <span>
-              
-          </span>
-          <input
-            id="USER_PASSWORD"
-            onChange={handleInputChange}
-            className="form-control form-control-user"
-            name="USER_PASSWORD"
-            type="password"
-            title="La contraseña debe tener al entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula, 
-            al menos una mayúscula y al menos un caracter no alfanumérico."
-            required
-          />
         </div>
       </div>
       <div className="modal-footer mt-3">
