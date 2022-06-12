@@ -46,11 +46,12 @@ const Usuarios = () => {
                 fila.NUM_REFERENCE,
                 moment(fecha).format('DD-MM-YYYY'),
                 fila.NAM_CITY,
-                fila.ADDRESS
+                fila.ADDRESS,
+                fila.NAM_STATUS
             ]
         })  
         doc.autoTable({
-            head: [['#', 'ID', 'Nombre', 'Apellido', 'Email', 'Rol', 'Genero', 'Tel. 1', 'Tel. 2', 'Tel. Ref', 'Fecha de nacimiento', 'Ciudad','Direccion']],
+            head: [['#', 'ID', 'Nombre', 'Apellido', 'Email', 'Rol', 'Genero', 'Tel. 1', 'Tel. 2', 'Tel. Ref', 'Fecha de nacimiento', 'Ciudad','Direccion','Estado']],
             body: row.sort(),
             startY: 45,
             styles: {
@@ -140,6 +141,11 @@ const Usuarios = () => {
         {
             name: 'DIRECCIÓN',
             selector: row => row.ADDRESS,
+            sortable: true,
+        },
+        {
+            name: 'ESTADO',
+            selector: row => row.NAM_STATUS,
             sortable: true,
         },
         {

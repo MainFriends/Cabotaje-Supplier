@@ -518,17 +518,19 @@ CREATE PROCEDURE SP_INS_USER(
        _ADDRESS TEXT,
        _IMG_USER MEDIUMBLOB,
        _COD_ROLE BIGINT,
+       _COD_STATUS BIGINT ,
        _USER_EMAIL VARCHAR(255),
        _USER_PASSWORD VARCHAR(255),
     	_COD_USER BIGINT
-)BEGIN
+)
+BEGIN
 -- INSERT
 	SET @EMAIL = (SELECT COUNT(COD_USER) FROM LOGIN WHERE USER_EMAIL = _USER_EMAIL);
 	SET @COD_IDEN = (SELECT COUNT(COD_USER) FROM USER WHERE IDENTITY = _IDENTITY);
  
   IF @EMAIL = 0 AND @COD_IDEN= 0 THEN
-  	INSERT INTO USER(IDENTITY, FIRST_NAME,MIDDLE_NAME,LAST_NAME, GENDER, NUM_PHONE_ONE, NUM_PHONE_TWO, NUM_REFERENCE, DAT_BIRTHDAY, NAM_CITY, ADDRESS, IMG_USER)
-  	VALUES (_IDENTITY, _FIRST_NAME, _MIDDLE_NAME, _LAST_NAME,_GENDER, _NUM_PHONE_ONE, _NUM_PHONE_TWO, _NUM_REFERENCE, _DAT_BIRTHDAY, _NAM_CITY, _ADDRESS, _IMG_USER);
+  	INSERT INTO USER(IDENTITY, FIRST_NAME,MIDDLE_NAME,LAST_NAME, GENDER, NUM_PHONE_ONE, NUM_PHONE_TWO, NUM_REFERENCE, DAT_BIRTHDAY, NAM_CITY, ADDRESS, IMG_USER, COD_STATUS)
+  	VALUES (_IDENTITY, _FIRST_NAME, _MIDDLE_NAME, _LAST_NAME,_GENDER, _NUM_PHONE_ONE, _NUM_PHONE_TWO, _NUM_REFERENCE, _DAT_BIRTHDAY, _NAM_CITY, _ADDRESS, _IMG_USER, _COD_STATUS);
 
   	SET @COD_USER= (SELECT MAX(COD_USER) FROM USER);
         
@@ -567,10 +569,12 @@ CREATE PROCEDURE SP_UPD_USER(
 								_DAT_BIRTHDAY DATE,
 								_NAM_CITY VARCHAR(255),
 								_ADDRESS TEXT,
+                                _COD_STATUS BIGINT,
 								_COD_ROLE BIGINT,
                                 _USER_EMAIL VARCHAR(255),
                                 _USER_ACTIVITY BIGINT
-)BEGIN
+)
+BEGIN
 START TRANSACTION;
    
 	UPDATE USER 
@@ -585,7 +589,8 @@ START TRANSACTION;
 		NUM_REFERENCE= _NUM_REFERENCE ,
 		DAT_BIRTHDAY=_DAT_BIRTHDAY ,
 		NAM_CITY=_NAM_CITY ,
-		ADDRESS= _ADDRESS
+		ADDRESS= _ADDRESS,
+        COD_STATUS=_COD_STATUS
 	WHERE COD_USER=_COD_USER;
     
     UPDATE LOGIN
@@ -614,12 +619,14 @@ END;
 -- OBTENER TODOS LOS USUARIOS Y USUARIO POR ID
 DELIMITER //
 CREATE PROCEDURE SP_SEL_USER(
-							IN _COD_USER BIGINT
-)BEGIN
+														IN _COD_USER BIGINT
+)
+BEGIN
 	IF _COD_USER = 0  THEN
-  select * from User inner join login on user.cod_user= login.cod_user inner join role on login.cod_role = role.cod_role;                     
+      select * from status inner join user  on status.cod_status= user.cod_status inner join login on user.cod_user= login.cod_user  inner join role on login.cod_role = role.cod_role ;                     
+
 	ELSE
-  select * from User inner join login on user.cod_user= login.cod_user inner join role on login.cod_role = role.cod_role where _cod_user= user.cod_user;  
+  select * from status inner join user  on status.cod_status= user.cod_status inner join login on user.cod_user= login.cod_user inner join role on login.cod_role = role.cod_role where _cod_user= user.cod_user;  
                   
 
     END IF;
@@ -997,7 +1004,7 @@ SIGNAL SQLSTATE '45000'
 	END IF;
     
 	SET @CANT_PRODUCT = (SELECT CANT_PRODUCTS FROM INVENTORY_DETAIL WHERE COD_PRODUCT = _COD_PRODUCT AND NUM_LOT = _NUM_LOT);
-    IF _CANT_PRODUCTS > @CANT_PRODUCT  THEN 
+    IF _CANT_PRODUCT > @CANT_PRODUCT  THEN 
 		SIGNAL SQLSTATE '45000'
 		SET MESSAGE_TEXT = 'No hay cantidad suficiente de productos en inventario';	
 	END IF;
@@ -1054,7 +1061,7 @@ SIGNAL SQLSTATE '45000'
 	END IF;
     
 	SET @CANT_PRODUCT = (SELECT CANT_PRODUCTS FROM INVENTORY_DETAIL WHERE COD_PRODUCT = _COD_PRODUCT AND NUM_LOT = _NUM_LOT);
-    IF _CANT_PRODUCTS > @CANT_PRODUCT  THEN 
+    IF _CANT_PRODUCT > @CANT_PRODUCT  THEN 
 		SIGNAL SQLSTATE '45000'
 		SET MESSAGE_TEXT = 'No hay cantidad suficiente de productos en inventario';	
 	END IF;

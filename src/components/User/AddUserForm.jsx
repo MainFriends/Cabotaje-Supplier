@@ -18,6 +18,7 @@ const AddUserForm = ({ setSendRequest, setMessageError }) => {
     DAT_BIRTHDAY: "",
     NAM_CITY: "",
     ADDRESS: "",
+    COD_STATUS: "",
     COD_ROLES: "",
     USER_EMAIL: "",
     USER_PASSWORD: "",
@@ -83,7 +84,7 @@ const AddUserForm = ({ setSendRequest, setMessageError }) => {
     <form id="addFormUser" onSubmit={handleSubmitUser} action="#">
       <h6 className="text-muted">Información general de empleado</h6>
       <div className="row mb-4">
-        <div className="col-md-3">
+        <div className="col-md-4">
           <label className="form-label" htmlFor="IDENTITY">
             Identidad<span className="text-danger"> *</span>
           </label>
@@ -99,7 +100,7 @@ const AddUserForm = ({ setSendRequest, setMessageError }) => {
             required
           />
         </div>
-        <div className="col-md-3">
+        <div className="col-md-4">
           <label className="form-label" htmlFor="FIRST_NAME">
             Primer nombre<span className="text-danger"> *</span>
           </label>
@@ -114,7 +115,7 @@ const AddUserForm = ({ setSendRequest, setMessageError }) => {
             required
           />
         </div>
-        <div className="col-md-3">
+        <div className="col-md-4">
           <label className="form-label" htmlFor="MIDDLE_NAME">
             Segundo nombre<span className="text-danger"> *</span>
           </label>
@@ -129,7 +130,7 @@ const AddUserForm = ({ setSendRequest, setMessageError }) => {
             required
           />
         </div>
-        <div className="col-md-3">
+        <div className="col-md-4">
           <label className="form-label" htmlFor="LAST_NAME">
             Apellido<span className="text-danger"> *</span>
           </label>
@@ -145,7 +146,7 @@ const AddUserForm = ({ setSendRequest, setMessageError }) => {
           />
         </div>
 
-        <div className="col-md-3 mt-2">
+        <div className="col-md-4 ">
           <label className="form-label" htmlFor="GENDER">
             Género<span className="text-danger"> *</span>
           </label>
@@ -163,7 +164,7 @@ const AddUserForm = ({ setSendRequest, setMessageError }) => {
           </select>
         </div>
 
-        <div className="col-md-3 mt-2">
+        <div className="col-md-4">
           <label className="form-label" htmlFor="NUM_PHONE_ONE">
             Teléfono 1<span className="text-danger"> *</span>
           </label>
@@ -180,7 +181,7 @@ const AddUserForm = ({ setSendRequest, setMessageError }) => {
           />
         </div>
 
-        <div className="col-md-3 mt-2">
+        <div className="col-md-4">
           <label className="form-label" htmlFor="NUM_PHONE_TWO">
             Teléfono 2
           </label>
@@ -196,7 +197,7 @@ const AddUserForm = ({ setSendRequest, setMessageError }) => {
           />
           <small className="form-text text-muted">Opcional</small>
         </div>
-        <div className="col-md-4 mt-2">
+        <div className="col-md-4 ">
           <label className="form-label" htmlFor="NUM_REFERENCE">
             Teléfono de referencia<span className="text-danger"> *</span>
           </label>
@@ -212,7 +213,7 @@ const AddUserForm = ({ setSendRequest, setMessageError }) => {
             required
           />
         </div>
-        <div className="col-md-4 mt-2">
+        <div className="col-md-4 ">
           <label className="form-label" htmlFor="DAT_BIRTHDAY">
             Fecha de nacimiento<span className="text-danger"> *</span>
           </label>
@@ -281,8 +282,26 @@ const AddUserForm = ({ setSendRequest, setMessageError }) => {
             })}
           </select>
         </div>
+       < div className="col-md-3 mt-2">
+          <label className="form-label" htmlFor="COD_STATUS">
+            Estado<span className="text-danger"> *</span>
+          </label>
+          <select
+            onChange={handleInputChange}
+            defaultValue={""}
+            className="form-control"
+            name="COD_STATUS"
+            type="text"
+            required
+          >
+            <option value="">-Seleccionar-</option>
+            <option value="1">Activo</option>
+            <option value="2">Inactivo</option>
+          </select>
+        </div>
 
-        <div className="col-md-4 mt-2">
+  
+        <div className="col-md-6 mt-2">
           <label className="form-label" htmlFor="EMAIL">
             Correo eletrónico<span className="text-danger"> *</span>
           </label>
