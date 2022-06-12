@@ -26,7 +26,7 @@ const getUser = (req, res) => {
 };
 
 const addUser = async (req, res) => {
-    const COD_USER = 0
+    const {COD_USER} = req.user
 
     const {
         IDENTITY,

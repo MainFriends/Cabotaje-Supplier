@@ -3,9 +3,9 @@ Content-Type: application/json
 
 {
     "IDENTITY": "0801199902531",
-    "FIRST_NAME": "Mendel",
-    "MIDDLE_NAME": "Brez",
-    "LAST_NAME": "Aguilar",
+    "FIRST_NAME": "Luis",
+    "MIDDLE_NAME": "Eduardo",
+    "LAST_NAME": "Garcia",
     "GENDER": "M",
     "NUM_PHONE_ONE": 31511888,
     "NUM_REFERENCE": 22301972,
@@ -13,6 +13,6 @@ Content-Type: application/json
     "NAM_CITY": "Tegucigalpa",
     "ADDRESS": "Res. Plaza",
     "COD_ROLE": 1,
-    "USER_EMAIL": "mendel@unah.hn",
-    "USER_PASSWORD": "Cooper123"
+    "USER_EMAIL": "luis@hotmail.com",
+    "USER_PASSWORD": "Hook23"
 }
