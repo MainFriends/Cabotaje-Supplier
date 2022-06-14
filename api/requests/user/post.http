@@ -12,6 +12,7 @@ Content-Type: application/json
     "DAT_BIRTHDAY": "1999-07-05",
     "NAM_CITY": "Tegucigalpa",
     "ADDRESS": "Res. Plaza",
+    "COD_STATUS": 1,
     "COD_ROLE": 1,
     "USER_EMAIL": "luis@hotmail.com",
     "USER_PASSWORD": "Hook23"
