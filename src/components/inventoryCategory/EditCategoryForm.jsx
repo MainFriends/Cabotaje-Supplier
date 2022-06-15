@@ -45,11 +45,11 @@ const EditCategoryForm = ({rowCOD, setSendRequest, setMessageError}) => {
         <form id='editFormCategory' onSubmit={handleSubmitCategor} action='#'>
             <div className="row mb-4">
             <div className="col-md-4">
-                    <label className='form-label' htmlFor="NAM_CATEGORY">Código producto</label>
+                    <label className='form-label' htmlFor="NAM_CATEGORY">Nombre de categoria<span className="text-danger"> *</span></label>
                     <input onChange={handleInputChange} value = {formEditCategor.NAM_CATEGORY} className='form-control' name='NAM_CATEGORY' type="text" onInput={toUpperCase} required/>
                 </div>
                 <div className="col-md-4">
-                    <label className='form-label' htmlFor="DESCRIPTION">Descripción</label>
+                    <label className='form-label' htmlFor="DESCRIPTION">Descripción <span className="text-danger"> *</span></label>
                     <input onChange={handleInputChange} value = {formEditCategor.DESCRIPTION} className='form-control' name='DESCRIPTION' type="text" onInput={toUpperCase} required/>
                 </div>
             </div>
