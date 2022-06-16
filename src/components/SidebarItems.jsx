@@ -286,7 +286,8 @@ const SidebarItems = () => {
                 ?
                     <li className={ "nav-item " + 
                             (pathname === '/dashboard/roles-permisos' ||
-                            pathname === '/dashboard/usuarios' ? "active" : "")}>
+                            pathname === '/dashboard/usuarios' ||
+                            pathname === '/dashboard/backup-restauracion' ? "active" : "")}>
                         <a className="nav-link collapsed dinamic" href="#" data-toggle="collapse" data-target="#collapseRoles"
                             aria-expanded="true" aria-controls="collapseTwo">
                             <i className="mr-2 fa-solid fa-shield"></i>
@@ -296,7 +297,7 @@ const SidebarItems = () => {
                             <div className="bg-white py-2 collapse-inner rounded">
                                 <h6 className="collapse-header">Tablas</h6>
                                 {
-                                    viewSeguridad().usuarios ? <NavLink className="collapse-item" to="usuarios">Usuarios</NavLink> : null
+                                    viewSeguridad().usuarios ? <NavLink className="collapse-item" to="usuarios">Usuarios del sistema</NavLink> : null
                                 }
                                 {
                                     viewSeguridad().rolesPermisos ? <NavLink className="collapse-item" to="roles-permisos">Roles y permisos</NavLink> : null
@@ -304,6 +305,7 @@ const SidebarItems = () => {
                                 {
                                     viewSeguridad().bitacora ? <NavLink className="collapse-item" to="bitacora">Bitacora de usuarios</NavLink> : null
                                 }
+                                <NavLink className="collapse-item" to="backup-restauracion">Backup y restauración</NavLink>
                             </div>
                         </div>
                     </li>
