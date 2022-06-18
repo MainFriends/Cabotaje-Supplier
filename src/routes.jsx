@@ -58,7 +58,9 @@ const Pages = () => {
                         compras: res.data.some(row => row.COD_MODULE === 4),
                         personas: res.data.some(row => row.COD_MODULE === 5),
                         produccion: res.data.some(row => row.COD_MODULE === 6),
-                        contabilidad: res.data.some(row => row.COD_MODULE === 7)
+                        contabilidad: res.data.some(row => row.COD_MODULE === 7),
+                        seguridad: res.data.some(row => row.COD_MODULE === 8),
+                        graficas: res.data.some(row => row.COD_MODULE === 9)
                     })
                 })
         }

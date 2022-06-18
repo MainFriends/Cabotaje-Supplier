@@ -374,11 +374,11 @@ const EditUserForm = ({rowCOD, setSendRequest, setMessageError}) => {
                 isNewPasswordGenerate
                 ?
                 <div className="col-md-3 mt-4 pt-3">
-                    <button className="btn btn-dark" type="button" onClick={() => setIsNewPasswordGenerate(false)}>Cancelar</button>
+                    <button className="btn btn-primary" type="button" onClick={() => setIsNewPasswordGenerate(false)}>Cancelar</button>
                 </div>
                 :
                 <div className="col-md-12 mt-4 text-right">
-                <button className="btn btn-dark btn-sm" type="button" onClick={() => setIsNewPasswordGenerate(true)}>Generar contraseña nueva</button>
+                <button className="btn btn-danger btn-sm" type="button" onClick={() => setIsNewPasswordGenerate(true)}>Generar contraseña nueva</button>
                 </div>
             }
             

@@ -20,15 +20,18 @@ const login = (req, res) => {
             const isPasswordCorrect = await bcrypt.compare(PASSWORD, USER_PASSWORD);
             
             if(isPasswordCorrect){
-                const DAT_EXP_FORMAT = moment(DAT_EXP).format('YYYY-MM-DD h:mm:ss a');
-                const DAT_NOW = moment().format('YYYY-MM-DD h:mm:ss a');
+                const DAT_EXP_FORMAT = moment(DAT_EXP).format('YYYY-MM-DD H:mm:ss');
+                const DAT_NOW = moment().format('YYYY-MM-DD H:mm:ss');
+
+                const duration = moment.duration(moment(DAT_EXP_FORMAT).diff(DAT_NOW));
+                const hours = duration.asHours();
 
                 if(COD_STATUS === 2){
                     res.status(400).send({message: 'Sus credenciales de sesión estan desactivadas, favor contactar con el administrador.'});
                     return;
                 }
                 
-                if(DAT_NOW >= DAT_EXP_FORMAT){
+                if(hours < 0){
                     res.status(400).send({message: 'Sus credenciales de sesión han expirado, favor contactar con el administrador.'});
                     return;
                 }

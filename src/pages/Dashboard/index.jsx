@@ -100,10 +100,13 @@ const Dashboard = () => {
     axios.get('/pass-dat-exp', token())
     .then(res => {
       const {DAT_EXP} = res.data[0]
-      const USER_PASS_EXP = moment(DAT_EXP).format('YYYY-MM-DD h:mm:ss a');
-      const DAT_NOW = moment().format('YYYY-MM-DD h:mm:ss a');
+      const USER_PASS_EXP = moment(DAT_EXP).format('YYYY-MM-DD H:mm:ss');
+      const DAT_NOW = moment().format('YYYY-MM-DD H:mm:ss');
 
-      if(moment(USER_PASS_EXP).diff(DAT_NOW, 'hours') < 120){
+      const duration = moment.duration(moment(USER_PASS_EXP).diff(DAT_NOW));
+      const hours = duration.asHours();
+
+      if(hours < 120){
         setIsPasswordExpired(true)
       }else{
         setIsPasswordExpired(false)
