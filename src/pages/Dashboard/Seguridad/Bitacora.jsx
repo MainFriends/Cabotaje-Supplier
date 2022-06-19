@@ -48,23 +48,57 @@ const Bitacora = () => {
     //definir las columnas
     const columns = [
         {
-            id: 'user',
-            name: 'USUARIO',
-            selector: row => row.USUARIO,
-            sortable: true,
-        },
-         {
             id: 'action',
             name: 'ACCIÓN REALIZADA',
             selector: row => row.ACTION,
             sortable: true,
+            format: row => (row.ACTION === 'Agregar' ? <h1 className="badge badge-primary text-module p-2">{row.ACTION}</h1> : 
+                            (row.ACTION === 'Eliminar' ? <h1 className="badge badge-danger text-module p-2">{row.ACTION}</h1> :
+                            <h1 className="badge badge-warning text-module p-2">{row.ACTION}</h1>))
         },
         {
-            id: 'description',
-            name: 'DESCRIPCIÓN',
-            selector: row => row.DESCRIPTION,
+            id: 'user',
+            name: 'USUARIO',
+            selector: row => row.USER,
+            sortable: true,
+        },
+        {
+            id: 'object',
+            name: 'OBJETO',
+            selector: row => row.OBJECT,
             sortable: true,
             wrap: true
+        },
+        {
+            id: 'field',
+            name: 'CAMPO',
+            selector: row => row.FIELD,
+            sortable: true,
+            wrap: true,
+            format: row => (!row.FIELD ? (<i className="fa-solid fa-ban"></i>) : row.FIELD)
+        },
+        {
+            id: 'record',
+            name: 'REGISTRO',
+            selector: row => row.RECORD,
+            sortable: true,
+            wrap: true
+        },
+        {
+            id: 'before',
+            name: 'ANTES DEL CAMBIO',
+            selector: row => row.BEFORE_THE_CHANGE,
+            sortable: true,
+            wrap: true,
+            format: row => (!row.BEFORE_THE_CHANGE ? (<i className="fa-solid fa-ban"></i>) : row.BEFORE_THE_CHANGE)
+        },
+        {
+            id: 'after',
+            name: 'DESPUÉS DEL CAMBIO',
+            selector: row => row.AFTER_THE_CHANGE,
+            sortable: true,
+            wrap: true,
+            format: row => (!row.AFTER_THE_CHANGE ? (<i className="fa-solid fa-ban"></i>) : row.AFTER_THE_CHANGE)
         },
         {
             id: 'date',
