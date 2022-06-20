@@ -54,8 +54,8 @@ const AddSalesReturn = ({setSendRequest, setMessageError}) => {
     return(
         <form id='addFormSalesReturn' onSubmit={handleSubmitSalesReturn} action='#'>
             <div className="row mb-4">
-                <div className="col-md-3">
-                    <label className='form-label' htmlFor="COD_PRODUCT">Código del Producto</label>
+                <div className="col-md-4">
+                    <label className='form-label' htmlFor="COD_PRODUCT">Código del Producto <span className="text-danger">*</span></label>
                     <input className='form-control' onBlur={() => getProductInput()} onChange={handleInputChange} name='COD_PRODUCT' type="number" required/>
                 </div>
                 <div className="col-md-5">
@@ -63,19 +63,19 @@ const AddSalesReturn = ({setSendRequest, setMessageError}) => {
                     <input className='form-control' value={productName} name='PRODUCT' type="text" required disabled/>
                 </div>
                 <div className="col-md-5 mt-2">
-                    <label className='form-label' htmlFor="DESCRIPTION">Descripción</label>
+                    <label className='form-label' htmlFor="DESCRIPTION">Descripción <span className="text-danger"> *</span> </label>
                     <textarea className='form-control' onChange={handleInputChange} name='DESCRIPTION' type="text" required/>
                 </div>
                 <div className="col-md-3 mt-2">
-                    <label className='form-label' htmlFor="CANT">Cantidad</label>
+                    <label className='form-label' htmlFor="CANT">Cantidad <span className="text-danger"> *</span> </label>
                     <input className='form-control' onChange={handleInputChange} name='CANT' type="number" required/>
                 </div>
                 <div className="col-md-4 mt-2">
-                    <label className='form-label' htmlFor="AMOUNT">Monto</label>
+                    <label className='form-label' htmlFor="AMOUNT">Monto <span className="text-danger"> *</span> </label>
                     <input className='form-control' onChange={handleInputChange} name='AMOUNT' type="number" required/>
                 </div>
                 <div className="col-md-4 mt-2">
-                    <label className='form-label' htmlFor="DAT_RETURN">Fecha</label>
+                    <label className='form-label' htmlFor="DAT_RETURN">Fecha <span className="text-danger"> *</span> </label>
                     <input className='form-control' onChange={handleInputChange} name='DAT_RETURN' type="date" required/>
                 </div>
             </div>

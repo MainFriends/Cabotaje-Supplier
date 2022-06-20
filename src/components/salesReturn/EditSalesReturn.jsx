@@ -44,23 +44,23 @@ const EditSalesReturn = ({setSendRequest, rowCOD}) => {
         <form id='addFormSalesReturn' onSubmit={handleSubmitSalesReturn} action='#'>
             <div className="row mb-4">
                 <div className="col-md-5">
-                    <label className='form-label' htmlFor="PRODUCT">Producto</label>
+                    <label className='form-label' htmlFor="PRODUCT">Producto <span className="text-danger"> *</span> </label>
                     <input className='form-control' value={`${formEditSalesReturn.NAM_PRODUCT}`} name='PRODUCT' type="text" required disabled/>
                 </div>
                 <div className="col-md-5 mt-2">
-                    <label className='form-label' htmlFor="DESCRIPTION">Descripción</label>
+                    <label className='form-label' htmlFor="DESCRIPTION">Descripción <span className="text-danger"> *</span> </label>
                     <textarea className='form-control' value={formEditSalesReturn.DESCRIPTION} onChange={handleInputChange} name='DESCRIPTION' type="text" required/>
                 </div>
                 <div className="col-md-3 mt-2">
-                    <label className='form-label' htmlFor="CANT">Cantidad</label>
+                    <label className='form-label' htmlFor="CANT">Cantidad <span className="text-danger"> *</span> </label>
                     <input className='form-control' value={formEditSalesReturn.CANT} onChange={handleInputChange} name='CANT' type="number" required/>
                 </div>
                 <div className="col-md-4 mt-2">
-                    <label className='form-label' htmlFor="AMOUNT">Monto</label>
+                    <label className='form-label' htmlFor="AMOUNT">Monto <span className="text-danger"> *</span> </label>
                     <input className='form-control' value={formEditSalesReturn.AMOUNT} onChange={handleInputChange} name='AMOUNT' type="number" required/>
                 </div>
                 <div className="col-md-4 mt-2">
-                    <label className='form-label' htmlFor="DAT_RETURN">Fecha</label>
+                    <label className='form-label' htmlFor="DAT_RETURN">Fecha <span className="text-danger"> *</span> </label>
                     <input className='form-control' value={moment(formEditSalesReturn.DAT_RETURN).format('YYYY-MM-DD')} onChange={handleInputChange} name='DAT_RETURN' type="date" required/>
                 </div>
             </div>

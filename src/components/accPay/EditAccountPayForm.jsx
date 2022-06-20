@@ -55,7 +55,7 @@ const EditAccountPayForm = ({rowCOD, setSendRequest}) => {
                     <textarea onChange={handleInputChange} value={formEditAccountPay.DESCRIPTION} className='form-control' name='DESCRIPTION' type="text" required/>
                 </div>
                 <div className="col-md-3 mt-3">
-                    <label className='form-label' htmlFor="DATE_LIMIT">Fecha Límite</label>
+                    <label className='form-label' htmlFor="DATE_LIMIT">Fecha Límite <span className="text-danger"> *</span> </label>
                     <input onChange={handleInputChange} value={moment(formEditAccountPay.DATE_LIMIT).format('YYYY-MM-DD')} className='form-control' name='DATE_LIMIT' type="date" required/>
                 </div>
             </div>
