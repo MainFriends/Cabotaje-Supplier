@@ -43,23 +43,23 @@ const AddReturnProductForm = ({setSendRequest, setMessageError}) => {
         <form id='addFormReturnProduct' onSubmit={handleSubmitReturnProduc} action='#'>
             <div className="row mb-4">
                 <div className="col-md-6">
-                    <label className='form-label' htmlFor="COD_PRODUCT">Código producto</label>
+                    <label className='form-label' htmlFor="COD_PRODUCT">Código producto <span className="text-danger"> *</span></label>
                     <input onChange={handleInputChange} className='form-control' name='COD_PRODUCT' type="text" required/>
                 </div>
                 <div className="col-md-6">
-                    <label className='form-label' htmlFor="CONCEPT">Concepto</label>
+                    <label className='form-label' htmlFor="CONCEPT">Concepto <span className="text-danger"> *</span></label>
                     <textarea onChange={handleInputChange} className='form-control' name='CONCEPT' type="text" required/>
                 </div>
                 <div className="col-md-4 mt-2">
-                    <label className='form-label' htmlFor="CANT_PRODUCT">Cantidad productos</label>
+                    <label className='form-label' htmlFor="CANT_PRODUCT">Cantidad productos <span className="text-danger"> *</span></label>
                     <input onChange={handleInputChange} className='form-control' name='CANT_PRODUCT' type="number" required/>
                 </div>
                 <div className="col-md-4 mt-2">
-                    <label className='form-label' htmlFor="NUM_LOT">Número de lote</label>
+                    <label className='form-label' htmlFor="NUM_LOT">Número de lote  <span className="text-danger"> *</span></label>
                     <input onChange={handleInputChange} className='form-control' name='NUM_LOT' type="number" required/>
                 </div>
                 <div className="col-md-6 mt-2">
-                    <label className='form-label' htmlFor="MOVEMENT">Movimiento</label>
+                    <label className='form-label' htmlFor="MOVEMENT">Movimiento  <span className="text-danger"> *</span></label>
                     <select onChange={handleInputChange} defaultValue={''} className='form-control' name='MOVEMENT'  rows='3' cols='4' type="text" required>
                      <option value=''>-Seleccionar-</option>
                      <option value="1">Entrada</option>
@@ -67,11 +67,11 @@ const AddReturnProductForm = ({setSendRequest, setMessageError}) => {
                      </select>         
                 </div>
                 <div className="col-md-6 mt-2">
-                    <label className='form-label' htmlFor="DES_RETURN">Descripción</label>
+                    <label className='form-label' htmlFor="DES_RETURN">Descripción  <span className="text-danger"> *</span></label>
                     <textarea onChange={handleInputChange} className='form-control' name='DES_RETURN' type="text" required/>
                 </div>
                 <div className="col-md-6">
-                    <label className='form-label' htmlFor="DAT_RETURN">Fecha devolución</label>
+                    <label className='form-label' htmlFor="DAT_RETURN">Fecha devolución  <span className="text-danger"> *</span></label>
                     <input onChange={handleInputChange} className='form-control' name='DAT_RETURN' type="date" required/>
                 </div>
             </div>

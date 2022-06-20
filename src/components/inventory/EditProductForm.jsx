@@ -105,17 +105,17 @@ const EditProductForm = ({sendRequest, rowCOD, setSendRequest, setMessageError})
         <form onSubmit={handleSubmit} action='#'>
             <div className="row mb-4">
                 <div className="col-4">
-                    <label className='form-label' htmlFor="NAM_PRODUCT">Nombre del producto</label>
+                    <label className='form-label' htmlFor="NAM_PRODUCT">Nombre del producto <span className="text-danger"> *</span></label>
                     <input value={NAM_PRODUCT} onChange={handleInputChange} className='form-control' name='NAM_PRODUCT' type="text" onInput={toUpperCase} required/>
                 </div>
                 <div className="col-8">
-                    <label className='form-label' htmlFor="DES_PRODUCT">Descripción</label>
+                    <label className='form-label' htmlFor="DES_PRODUCT">Descripción <span className="text-danger"> *</span></label>
                     <textarea value={DES_PRODUCT} onChange={handleInputChange} className='form-control' rows='2' name='DES_PRODUCT' type="text" onInput={toUpperCase} required/>
                 </div>
             </div>
             <div className="row mb-4">
                 <div className="col-4">
-                    <label className='form-label'>Proveedor</label>
+                    <label className='form-label'>Proveedor <span className="text-danger"> *</span></label>
                     <select onChange={handleInputChange} value={COD_SUPPLIER} name="COD_SUPPLIER" className="custom-select" required>
                         <option value={'default'}>Seleccionar</option>
                         {suppliersEdit.map(supplier => {
@@ -124,21 +124,21 @@ const EditProductForm = ({sendRequest, rowCOD, setSendRequest, setMessageError})
                     </select>
                 </div>
                 <div className="col-3">
-                    <label className='form-label' htmlFor="NORMAL_UNIT_PRICE">Precio de venta</label>
+                    <label className='form-label' htmlFor="NORMAL_UNIT_PRICE">Precio de venta <span className="text-danger"> *</span></label>
                     <input value={NORMAL_UNIT_PRICE} onChange={handleInputChange} className='form-control' min={0} name='NORMAL_UNIT_PRICE' type="number" required/>
                 </div>
                 <div className="col-3">
-                    <label className='form-label' htmlFor="PURCHASE_PRICE">Precio de compra</label>
+                    <label className='form-label' htmlFor="PURCHASE_PRICE">Precio de compra <span className="text-danger"> *</span></label>
                     <input value={PURCHASE_PRICE} onChange={handleInputChange} className='form-control' min={0} name='PURCHASE_PRICE' type="number" required/>
                 </div>
                 <div className="col-2">
-                    <label className='form-label' htmlFor="ISV">ISV</label>
+                    <label className='form-label' htmlFor="ISV">ISV <span className="text-danger"> *</span></label>
                     <input value={ISV} onChange={handleInputChange} className='form-control' step="0.01" min={0} max={1} name='ISV' type="number" required/>
                 </div>
             </div>
             <div className="row mb-4">
                 <div className="col-4">
-                    <label className='form-label'>Categoria</label>
+                    <label className='form-label'>Categoria <span className="text-danger"> *</span></label>
                     <select onChange={handleInputChange} value={COD_CATEGORY} name="COD_CATEGORY" className="custom-select" required>
                         <option value={'default'}>Seleccionar</option>
                         {categoriesEdit.map(category => {
@@ -147,7 +147,7 @@ const EditProductForm = ({sendRequest, rowCOD, setSendRequest, setMessageError})
                     </select>
                 </div>
                 <div className="col-5">
-                    <label htmlFor="COD_TYP_PRODUCT">Tipo de producto</label><br />
+                    <label htmlFor="COD_TYP_PRODUCT">Tipo de producto <span className="text-danger"> *</span></label><br />
                     <label htmlFor="unidadEdit">
                         <input onChange={handleInputChange} className="mr-2" id='unidadEdit' type="radio" value={1} name='COD_TYP_PRODUCT' required/>Unidad
                     </label>
@@ -160,12 +160,12 @@ const EditProductForm = ({sendRequest, rowCOD, setSendRequest, setMessageError})
                 ?
                 <div className="row mb-4">
                     <div className="col-4">
-                        <label className='form-label' htmlFor="WHOLESALE_CANT">Cantidad</label>
+                        <label className='form-label' htmlFor="WHOLESALE_CANT">Cantidad <span className="text-danger"> *</span></label>
                         <input value={WHOLESALE_CANT} onChange={handleInputChange} className='form-control' min={0} name='WHOLESALE_CANT' type="number" required/>
                         <small className="form-text text-muted">Establezca a partir de qué cantidad se determinará una venta al por mayor de este producto.</small>
                     </div>
                     <div className="col-4">
-                        <label className='form-label' htmlFor="WHOLESALE_PRICE">Precio unitario</label>
+                        <label className='form-label' htmlFor="WHOLESALE_PRICE">Precio unitario <span className="text-danger"> *</span></label>
                         <input value={WHOLESALE_PRICE} onChange={handleInputChange} className='form-control' min={0} name='WHOLESALE_PRICE' type="number" required/>
                         <small className="form-text text-muted">Establezca el precio unitario que se determinará en la venta al por mayor.</small>
                     </div>

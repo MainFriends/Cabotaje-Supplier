@@ -90,11 +90,11 @@ const DetailForm = ({setSendRequest, setMessageError}) => {
         <form onSubmit={handleSubmit} action='#'>
             <div className="row mb-4">
                 <div className="col-2">
-                    <label className='form-label' htmlFor="COD_PRODUCT">Código</label>
+                    <label className='form-label' htmlFor="COD_PRODUCT">Código <span className="text-danger"> *</span></label>
                     <input onChange={handleInputChange} name='COD_PRODUCT' className='form-control' type="number" min='1' required/>
                 </div>
                 <div className="col-6">
-                    <label className='form-label'>Producto</label>
+                    <label className='form-label'>Producto <span className="text-danger"> *</span></label>
                     <input id='nameProduct' value={nameProduct} className='form-control' type="text" onInput={toUpperCase} disabled/>
                 </div>
                 <div className="col-4 text-right">
@@ -104,15 +104,15 @@ const DetailForm = ({setSendRequest, setMessageError}) => {
             </div>
             <div className="row mb-4">
                 <div className="col-2">
-                    <label className='form-label' htmlFor="CANT_PRODUCTS">Cantidad</label>
+                    <label className='form-label' htmlFor="CANT_PRODUCTS">Cantidad <span className="text-danger"> *</span></label>
                     <input onChange={handleInputChange} className='form-control' name='CANT_PRODUCTS' type="number" min='1' required/>
                 </div>
                 <div className="col-3">
-                    <label className='form-label' htmlFor="NUM_LOT">Número de Lote</label>
+                    <label className='form-label' htmlFor="NUM_LOT">Número de Lote <span className="text-danger"> *</span></label>
                     <input onChange={handleInputChange} className='form-control' name='NUM_LOT' type="number" min='1' required/>
                 </div>
                 <div className="col-4">
-                    <label className='form-label'>Estado</label>
+                    <label className='form-label'>Estado <span className="text-danger"> *</span></label>
                     <select onChange={handleInputChange} defaultValue={'default'} name="COD_STATUS" className="custom-select" required>
                         <option value={'default'}>Seleccionar</option>
                         <option value="3">Revisado</option>
@@ -126,11 +126,11 @@ const DetailForm = ({setSendRequest, setMessageError}) => {
             </div>
             <div className="row mb-4">
                 <div className="col-4">
-                    <label className='form-label' htmlFor="DAT_PURCHASE">Fecha de compra</label>
+                    <label className='form-label' htmlFor="DAT_PURCHASE">Fecha de compra <span className="text-danger"> *</span></label>
                     <input onChange={handleInputChange} className='form-control' name='DAT_PURCHASE' type="date" required/>
                 </div>
                 <div className="col-4">
-                    <label className='form-label' htmlFor="DAT_EXP">Fecha de expiración</label>
+                    <label className='form-label' htmlFor="DAT_EXP">Fecha de expiración <span className="text-danger"> *</span></label>
                     <input onChange={handleInputChange} className='form-control' name='DAT_EXP' type="date" required/>
                 </div>
             </div>
