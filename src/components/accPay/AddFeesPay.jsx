@@ -40,11 +40,11 @@ const AddFeesPay = ({rowCOD, setMessageError, setSendRequest}) => {
         <form id='AddFormCuota' onSubmit={handleSubmitFeesPay} action='#'>
             <div className="row mb-4">
                 <div className="col-md-4">
-                    <label className='form-label' htmlFor="AMOUNT">Monto</label>
+                    <label className='form-label' htmlFor="AMOUNT">Monto <span className="text-danger"> *</span> </label>
                     <input onChange={handleInputChange} className='form-control' name='AMOUNT' type="number" required/>
                 </div>
                 <div className='col-md-4'>
-                    <label className='form-label' htmlFor='COD_TYP_PAY'>Forma de Pago</label>
+                    <label className='form-label' htmlFor='COD_TYP_PAY'>Forma de Pago <span className="text-danger"> *</span> </label>
                     <select onChange={handleInputChange} value={formAddFeesPay.COD_TYP_PAY} className='form-control' name='COD_TYP_PAY' required>
                         <option value=''>-Seleccionar-</option>
                             <option value="1">Efectivo</option>
@@ -53,7 +53,7 @@ const AddFeesPay = ({rowCOD, setMessageError, setSendRequest}) => {
                     </select>
                 </div>
                 <div className="col-md-4">
-                    <label className='form-label' htmlFor="DATE_PAY">Fecha</label>
+                    <label className='form-label' htmlFor="DATE_PAY">Fecha <span className="text-danger"> *</span> </label>
                     <input onChange={handleInputChange} className='form-control' name='DATE_PAY' type="date" required/>
                 </div>
             </div>
