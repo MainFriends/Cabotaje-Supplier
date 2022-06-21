@@ -75,11 +75,11 @@ const EditPayForm = ({rowCOD, setSendRequest, setMessageError}) => {
                 <input className='form-control' value={`${formEditPayForm?.FIRST_NAME} ${formEditPayForm?.LAST_NAME}`} name='EMPLOYEE' type="text" required disabled/>
             </div>
             <div className="col-md-3">
-                <label className='form-label mt-2' htmlFor="HOURS_WORKED">Dias Trabajados</label>
+                <label className='form-label mt-2' htmlFor="HOURS_WORKED">Dias Trabajados <span className="text-danger"> *</span> </label>
                 <input  onChange={handleInputChange} value={formEditPayForm?.HOURS_WORKED} className='form-control' name='HOURS_WORKED' type="number" required/>
             </div>
             <div className="col-md-3">
-                <label className='form-label mt-2' htmlFor="AMO_GROSS">Salario Base</label>
+                <label className='form-label mt-2' htmlFor="AMO_GROSS">Salario Base <span className="text-danger"> *</span> </label>
                 <input onChange={handleInputChange} value={formEditPayForm?.AMO_GROSS} className='form-control' name='AMO_GROSS' type="number" required/>
             </div>
             <div className="col-md-3">
@@ -87,15 +87,15 @@ const EditPayForm = ({rowCOD, setSendRequest, setMessageError}) => {
                 <input onChange={handleInputChange} value={formEditPayForm?.BONUS} className='form-control' name='BONUS' type="number" required/>
             </div>
             <div className="col-md-3">
-                <label className='form-label mt-2' htmlFor="TOT_DEDUCTIONS">Deducciones</label>
+                <label className='form-label mt-2' htmlFor="TOT_DEDUCTIONS">Deducciones <span className="text-danger"> *</span> </label>
                 <input onChange={handleInputChange} value={formEditPayForm?.TOT_DEDUCTIONS} className='form-control' name='TOT_DEDUCTIONS' type="number" required/>
             </div>
             <div className="col-md-3">
-                <label className='form-label mt-2' htmlFor="NET_SALARY">Salario Neto</label>
+                <label className='form-label mt-2' htmlFor="NET_SALARY">Salario Neto <span className="text-danger"> *</span> </label>
                 <input className='form-control' value={netSalary} name='NET_SALARY' type="number" required disabled/>
             </div>
             <div className="col-md-4">
-                <label className='form-label mt-2' htmlFor="DAT_PAYMENT">Fecha de Pago</label>
+                <label className='form-label mt-2' htmlFor="DAT_PAYMENT">Fecha de Pago <span className="text-danger"> *</span> </label>
                 <input onChange={handleInputChange} value={moment(formEditPayForm?.DAT_PAYMENT).format('YYYY-MM-DD')} className='form-control' name='DAT_PAYMENT' type="date" required/>
             </div>
         </div>

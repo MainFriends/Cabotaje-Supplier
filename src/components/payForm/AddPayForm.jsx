@@ -90,7 +90,7 @@ const AddPayForm = ({setSendRequest, setMessageError}) => {
         <form id='addPayForm' onSubmit={handleSubmitPayForm} action='#'>
         <div className="row mb-4">
             <div className="col-md-3">
-                <label className='form-label' htmlFor="COD_USER">Código de empleado</label>
+                <label className='form-label' htmlFor="COD_USER">Código de empleado <span className="text-danger"> *</span> </label>
                 <input onBlur={() => getUserInput()} onChange={handleInputChange} className='form-control' name='COD_USER' type="number" required/>
             </div>
             <div className="col-md-7">
@@ -98,11 +98,11 @@ const AddPayForm = ({setSendRequest, setMessageError}) => {
                 <input className='form-control' value={employeeName} name='EMPLOYEE' type="text" required disabled/>
             </div>
             <div className="col-md-3">
-                <label className='form-label mt-2' htmlFor="HOURS_WORKED">Dias Trabajados</label>
+                <label className='form-label mt-2' htmlFor="HOURS_WORKED">Dias Trabajados <span className="text-danger"> *</span></label>
                 <input onChange={handleInputChange} value={formAddPayForm?.HOURS_WORKED} className='form-control' name='HOURS_WORKED' type="number" required/>
             </div>
             <div className="col-md-3">
-                <label className='form-label mt-2' htmlFor="AMO_GROSS">Salario Base</label>
+                <label className='form-label mt-2' htmlFor="AMO_GROSS">Salario Base <span className="text-danger"> *</span> </label>
                 <input onChange={handleInputChange} value={formAddPayForm?.AMO_GROSS} className='form-control' name='AMO_GROSS' type="number" required/>
             </div>
             <div className="col-md-3">
@@ -110,7 +110,7 @@ const AddPayForm = ({setSendRequest, setMessageError}) => {
                 <input onChange={handleInputChange} value={formAddPayForm?.BONUS} className='form-control' name='BONUS' type="number" required/>
             </div>
             <div className="col-md-3">
-                <label className='form-label mt-2' htmlFor="TOT_DEDUCTIONS">Deducciones</label>
+                <label className='form-label mt-2' htmlFor="TOT_DEDUCTIONS">Deducciones <span className="text-danger"> *</span> </label>
                 <input onChange={handleInputChange} value={formAddPayForm?.TOT_DEDUCTIONS} className='form-control' name='TOT_DEDUCTIONS' type="number" required/>
             </div>
             <div className="col-md-3">
@@ -118,7 +118,7 @@ const AddPayForm = ({setSendRequest, setMessageError}) => {
                 <input className='form-control' value={netSalary} name='NET_SALARY' type="number" required disabled/>
             </div>
             <div className="col-md-4">
-                <label className='form-label mt-2' htmlFor="DAT_PAYMENT">Fecha de Pago</label>
+                <label className='form-label mt-2' htmlFor="DAT_PAYMENT">Fecha de Pago <span className="text-danger"> *</span> </label>
                 <input onChange={handleInputChange} className='form-control' name='DAT_PAYMENT' type="date" required/>
             </div>
         </div>

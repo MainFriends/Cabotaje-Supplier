@@ -38,19 +38,19 @@ const AddAccountPayForm = ({setSendRequest, setMessageError}) => {
         <form id='AddAccountPayForm' onSubmit={handleSubmitAccountPayForm} action='#'>
             <div className="row mb-4">
                 <div className="col-md-4 mt-3">
-                    <label className='form-label' htmlFor="COD_INVOICE">Código de la Factura</label>
+                    <label className='form-label' htmlFor="COD_INVOICE">Código de la Factura <span className="text-danger"> *</span></label>
                     <input onChange={handleInputChange} className='form-control' name='COD_INVOICE' type="number" required/>
                 </div>
                 <div className="col-md-8 mt-3">
-                    <label className='form-label' htmlFor="DESCRIPTION">Descripción</label>
+                    <label className='form-label' htmlFor="DESCRIPTION">Descripción <span className="text-danger"> *</span></label>
                     <textarea onChange={handleInputChange} className='form-control' name='DESCRIPTION' type="text" required/>
                 </div>
                 <div className="col-md-3 mt-3">
-                    <label className='form-label' htmlFor="TOT_BALANCE">Monto</label>
+                    <label className='form-label' htmlFor="TOT_BALANCE">Monto <span className="text-danger"> *</span></label>
                     <input onChange={handleInputChange} className='form-control' name='TOT_BALANCE' type="number" required/>
                 </div>
                 <div className="col-md-3 mt-3">
-                    <label className='form-label' htmlFor="DATE_LIMIT">Fecha Límite</label>
+                    <label className='form-label' htmlFor="DATE_LIMIT">Fecha Límite <span className="text-danger"> *</span> </label>
                     <input onChange={handleInputChange} className='form-control' name='DATE_LIMIT' type="date" required/>
                 </div>
             </div>

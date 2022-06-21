@@ -30,7 +30,7 @@ const addInventoryDetail = (req, res) => {
     DAT_EXP,
     CANT_PRODUCTS,
     NUM_LOT,
-    COD_ORDER = null,
+    COD_ORDER = 0,
     COD_STATUS
     } = req.body
 
