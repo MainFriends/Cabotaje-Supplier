@@ -42,11 +42,11 @@ const AddAccountPayForm = ({setSendRequest, setMessageError}) => {
                     <input onChange={handleInputChange} className='form-control' name='COD_INVOICE' type="number" required/>
                 </div>
                 <div className="col-md-8 mt-3">
-                    <label className='form-label' htmlFor="DESCRIPTION">Descripción</label>
+                    <label className='form-label' htmlFor="DESCRIPTION">Descripción <span className="text-danger"> *</span></label>
                     <textarea onChange={handleInputChange} className='form-control' name='DESCRIPTION' type="text" required/>
                 </div>
                 <div className="col-md-3 mt-3">
-                    <label className='form-label' htmlFor="TOT_BALANCE">Monto <span className="text-danger"> *</span> </label>
+                    <label className='form-label' htmlFor="TOT_BALANCE">Monto <span className="text-danger"> *</span></label>
                     <input onChange={handleInputChange} className='form-control' name='TOT_BALANCE' type="number" required/>
                 </div>
                 <div className="col-md-3 mt-3">
