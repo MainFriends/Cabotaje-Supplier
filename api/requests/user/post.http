@@ -2,18 +2,18 @@ POST http://localhost:4000/api/user
 Content-Type: application/json 
 
 {
-    "IDENTITY": "0801199902531",
-    "FIRST_NAME": "Luis",
-    "MIDDLE_NAME": "Eduardo",
-    "LAST_NAME": "Garcia",
+    "IDENTITY": "0801879902531",
+    "FIRST_NAME": "Rodrigo",
+    "MIDDLE_NAME": "Alejandro",
+    "LAST_NAME": "Valle",
     "GENDER": "M",
-    "NUM_PHONE_ONE": 31511888,
-    "NUM_REFERENCE": 22301972,
+    "NUM_PHONE_ONE": 31211888,
+    "NUM_REFERENCE": 22101972,
     "DAT_BIRTHDAY": "1999-07-05",
     "NAM_CITY": "Tegucigalpa",
     "ADDRESS": "Res. Plaza",
     "COD_STATUS": 1,
     "COD_ROLE": 1,
-    "USER_EMAIL": "luis@hotmail.com",
+    "USER_EMAIL": "rodri@hotmail.com",
     "USER_PASSWORD": "Hook23"
 }
