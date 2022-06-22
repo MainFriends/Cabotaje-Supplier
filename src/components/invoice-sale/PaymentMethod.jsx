@@ -89,6 +89,14 @@ export const PaymentMethod = ({saleInvoice, setsaleInvoice, setCurrentPage, corr
         setCambio(saleInvoice.TOT_SALE - efectivoRecibido)
     }, [efectivoRecibido])
 
+    
+    useEffect(() => {
+        if(efectivoRecibido<saleInvoice.TOT_SALE){
+            setCambio(0)
+          }
+      }, [efectivoRecibido])
+
+
     const onSubmit = () => {
         axios.post('/sale-invoice', saleInvoice, token())
             .then(res => {

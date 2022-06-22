@@ -52,9 +52,14 @@ const SaleInformation = ({setsaleInvoice, saleInvoice, setCurrentPage, setCorrel
             NAM_CLIENT: `${FIRST_NAME} ${LAST_NAME}`
           })
         })
-      return
+        .catch(err => {
+          setsaleInvoice({
+            ...saleInvoice,
+            NAM_CLIENT: `Cliente no encontrado`
+          })
+        })
     }
-
+    
     if(RTN.length === 0){
       setsaleInvoice({
         ...saleInvoice,
@@ -63,6 +68,7 @@ const SaleInformation = ({setsaleInvoice, saleInvoice, setCurrentPage, setCorrel
       })
     }
   }, [RTN])
+
 
   const handleInputChange = ({target}) => {
     setsaleInvoice({
@@ -82,15 +88,18 @@ const SaleInformation = ({setsaleInvoice, saleInvoice, setCurrentPage, setCorrel
       return;
     }
 
-    if(saleInvoice.NAM_CLIENT === ''){
-      setsaleInvoice({
-        ...saleInvoice,
-        NAM_CLIENT: 'CF'
-      })
-    }
-
     if(saleInvoice.NAM_USER === `Usuario no encontrado`){
       setErrorMessage('Ingrese un código de usuario válido.');
+
+      setTimeout(() => {
+        setErrorMessage('')
+      }, 3000);
+
+      return;
+    }
+
+    if(saleInvoice.NAM_CLIENT === `Cliente no encontrado`){
+      setErrorMessage('Ingrese un RTN válido.');
 
       setTimeout(() => {
         setErrorMessage('')
@@ -201,7 +210,7 @@ const SaleInformation = ({setsaleInvoice, saleInvoice, setCurrentPage, setCorrel
             <input 
             onChange={handleInputChange}
             className="form-control form-control" 
-            type="text" 
+            type="number" 
             value={saleInvoice.RTN}
             name='RTN'
             pattern="^[0][0-9]{13}" 
