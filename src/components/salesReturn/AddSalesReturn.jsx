@@ -56,7 +56,7 @@ const AddSalesReturn = ({setSendRequest, setMessageError}) => {
             <div className="row mb-4">
                 <div className="col-md-3">
                     <label className='form-label' htmlFor="COD_PRODUCT">Código del Producto</label>
-                    <input className='form-control' onBlur={() => getProductInput()} onChange={handleInputChange} name='COD_PRODUCT' type="number" required/>
+                    <input onChange={() => getProductInput()} onInput={handleInputChange} className='form-control'  name='COD_PRODUCT' type="number" required/>
                 </div>
                 <div className="col-md-5">
                     <label className='form-label' htmlFor="PRODUCT">Producto</label>

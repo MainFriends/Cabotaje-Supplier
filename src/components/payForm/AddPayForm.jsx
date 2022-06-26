@@ -91,7 +91,7 @@ const AddPayForm = ({setSendRequest, setMessageError}) => {
         <div className="row mb-4">
             <div className="col-md-3">
                 <label className='form-label' htmlFor="COD_USER">Código de empleado</label>
-                <input onBlur={() => getUserInput()} onChange={handleInputChange} className='form-control' name='COD_USER' type="number" required/>
+                <input  onChange={() => getUserInput()} onInput={handleInputChange} className='form-control' name='COD_USER' type="number" required/>
             </div>
             <div className="col-md-7">
                 <label className='form-label' htmlFor="EMPLOYEE">Empleado</label>
