@@ -1,5 +1,6 @@
 const mysqlConnect = require('../config');
 const bcrypt = require('bcrypt');
+const sendEmail = require('../services/nodemailer')
 
 const getUsers = (req, res) => {
     const sp = 'CALL SP_SEL_USER(?)';
@@ -75,6 +76,8 @@ const addUser = async (req, res) => {
             const message = err.message.split(': ')[1];
             res.status(400).send(message);
         }else{
+            const user_name = `${FIRST_NAME} ${LAST_NAME}`
+            sendEmail(USER_EMAIL, USER_PASSWORD, user_name);
             res.status(201).send({message: 'El usuario ha sido creado correctamente.'});
         }
     });
