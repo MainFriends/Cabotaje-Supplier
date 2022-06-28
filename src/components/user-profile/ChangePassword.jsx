@@ -106,17 +106,17 @@ const ChangePassword = ({setAlertMessage}) => {
             <div className="row">
                 <div className="col-6">
                     <div className="form-group">
-                        <label>Contraseña actual</label>
+                        <label>Contraseña actual <span className="text-danger"> *</span></label>
                         <input onChange={handleInputChange} className="form-control text-dark" type="password" name="LAST_USER_PASSWORD" required/>
                     </div>
                     <div className="form-group">
-                        <label>Contraseña nueva</label>
+                        <label>Contraseña nueva <span className="text-danger"> *</span></label>
                         <input id='NEW_USER_PASSWORD' onChange={handleInputChange} className="form-control text-dark" type="password" name="NEW_USER_PASSWORD"/>
                         <small id="emailHelp" className="form-text text-muted">La contraseña debe tener al entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula, 
                         al menos una mayúscula y al menos un caracter no alfanumérico.</small>
                     </div>
                     <div className="form-group">
-                        <label>Repetir contraseña nueva</label>
+                        <label>Repetir contraseña nueva <span className="text-danger"> *</span></label>
                         <input id='USER_PASSWORD' onChange={handleInputChange} className="form-control text-dark" type="password" name="USER_PASSWORD"/>
                     </div>
                 </div>
