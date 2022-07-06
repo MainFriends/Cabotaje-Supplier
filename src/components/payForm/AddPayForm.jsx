@@ -39,17 +39,17 @@ const AddPayForm = ({setSendRequest, setMessageError}) => {
         })
     }
 
-    //get del usuario cada vez que cambia de foco el input COD_USER
-    const getUserInput = () => {
+    useEffect(() => {
         axios.get(`/user/${formAddPayForm.COD_USER}`, token())
-            .then(res => {
-                const {FIRST_NAME, LAST_NAME} = res.data[0];
-                setEmployeeName(`${FIRST_NAME} ${LAST_NAME}`)
-            })
-            .catch(err => {
-                setEmployeeName(`Empleado no encontrado`)
-            })
-    }
+        .then(res => {
+            const {FIRST_NAME, LAST_NAME} = res.data[0];
+            setEmployeeName(`${FIRST_NAME} ${LAST_NAME}`)
+        })
+        .catch(err => {
+            setEmployeeName(`Empleado no encontrado`)
+        })
+    }, [formAddPayForm.COD_USER])
+
 
     const resetState = () => {
         setFormAddPayForm({
@@ -91,7 +91,7 @@ const AddPayForm = ({setSendRequest, setMessageError}) => {
         <div className="row mb-4">
             <div className="col-md-3">
                 <label className='form-label' htmlFor="COD_USER">Código de empleado</label>
-                <input  onChange={() => getUserInput()} onInput={handleInputChange} className='form-control' name='COD_USER' type="number" required/>
+                <input onChange={handleInputChange} className='form-control' name='COD_USER' type="number" required/>
             </div>
             <div className="col-md-7">
                 <label className='form-label' htmlFor="EMPLOYEE">Empleado</label>
