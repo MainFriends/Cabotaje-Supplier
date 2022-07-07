@@ -221,7 +221,7 @@ const AddOrder = ({setSendRequest,setMessageError}) => {
                         </div>
                         <div className="col-md-4">
                             <label className='form-label' htmlFor="COD_PRODUCT">Código del producto<span className="text-danger"> *</span></label>
-                            <input onChange={handleInputChangeDetail} value={COD_PRODUCT} className='form-control' name='COD_PRODUCT' type="number"min="1"/>
+                            <input onChange={handleInputChangeDetail} value={COD_PRODUCT} className='form-control' name='COD_PRODUCT' type="number"  min="1" pattern="[0-9]+" />
                         </div>
                         <div className="col-md-4">
                             <label className='form-label' htmlFor="NAME_PRODUCT">Nombre del producto</label>
@@ -229,7 +229,7 @@ const AddOrder = ({setSendRequest,setMessageError}) => {
                         </div>
                         <div className="col-md-4 mt-2">
                             <label className='form-label' htmlFor="CANT_PRODUCTS">Cantidad<span className="text-danger"> *</span></label>
-                            <input onChange={handleInputChangeDetail} value={CANT_PRODUCTS} className='form-control' name='CANT_PRODUCTS' type="number"min="1"/>
+                            <input  onChange={handleInputChangeDetail} value={CANT_PRODUCTS} className='form-control' name='CANT_PRODUCTS' type="number"  min="1" pattern="[0-9]+" />
                         </div>
                         <div className="col-md-4 mt-2">
                             <label className='form-label' htmlFor="DAT_REQUIRED">Fecha requerida<span className="text-danger"> *</span></label>

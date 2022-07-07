@@ -17,6 +17,14 @@ const AddAccountPayForm = ({setSendRequest, setMessageError}) => {
         });
     }
 
+    var numero = document.getElementById('numero');
+
+function comprueba(valor){
+  if(valor.value < 0){
+    valor.value = 1;
+  }
+}
+
     const handleSubmitAccountPayForm = (e) => {
         e.preventDefault();
         axios.post('/accounts-pay', formAddAccountPay, token())
@@ -47,7 +55,7 @@ const AddAccountPayForm = ({setSendRequest, setMessageError}) => {
                 </div>
                 <div className="col-md-3 mt-3">
                     <label className='form-label' htmlFor="TOT_BALANCE">Monto <span className="text-danger"> *</span></label>
-                    <input onChange={handleInputChange} className='form-control' name='TOT_BALANCE' type="number" required/>
+                    <input min="1" pattern="[0-9]+" onChange={handleInputChange} className='form-control' name='TOT_BALANCE' type="number" required/>
                 </div>
                 <div className="col-md-3 mt-3">
                     <label className='form-label' htmlFor="DATE_LIMIT">Fecha Límite <span className="text-danger"> *</span> </label>

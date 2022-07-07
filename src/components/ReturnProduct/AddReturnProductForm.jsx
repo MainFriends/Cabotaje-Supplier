@@ -44,7 +44,7 @@ const AddReturnProductForm = ({setSendRequest, setMessageError}) => {
             <div className="row mb-4">
                 <div className="col-md-6">
                     <label className='form-label' htmlFor="COD_PRODUCT">Código producto <span className="text-danger"> *</span></label>
-                    <input onChange={handleInputChange} className='form-control' name='COD_PRODUCT' type="text" required/>
+                    <input min = "1" pattern="[0-9]+" onChange={handleInputChange} className='form-control' name='COD_PRODUCT' type="text" required/>
                 </div>
                 <div className="col-md-6">
                     <label className='form-label' htmlFor="CONCEPT">Concepto <span className="text-danger"> *</span></label>
@@ -52,11 +52,11 @@ const AddReturnProductForm = ({setSendRequest, setMessageError}) => {
                 </div>
                 <div className="col-md-4 mt-2">
                     <label className='form-label' htmlFor="CANT_PRODUCT">Cantidad productos <span className="text-danger"> *</span></label>
-                    <input onChange={handleInputChange} className='form-control' name='CANT_PRODUCT' type="number" required/>
+                    <input min = "1" pattern="[0-9]+" onChange={handleInputChange} className='form-control' name='CANT_PRODUCT' type="number" required/>
                 </div>
                 <div className="col-md-4 mt-2">
                     <label className='form-label' htmlFor="NUM_LOT">Número de lote  <span className="text-danger"> *</span></label>
-                    <input onChange={handleInputChange} className='form-control' name='NUM_LOT' type="number" required/>
+                    <input onChange={handleInputChange} className='form-control' name='NUM_LOT' type="text" required/>
                 </div>
                 <div className="col-md-6 mt-2">
                     <label className='form-label' htmlFor="MOVEMENT">Movimiento  <span className="text-danger"> *</span></label>

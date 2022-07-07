@@ -258,7 +258,7 @@ const AddFacturaForm = ({setSendRequest}) => {
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="COD_PRODUCT">Código del producto<span className="text-danger"> *</span></label>
-                    <input value={userCodProduct} onChange={handleInputProduct} className='form-control' name='userCodProduct' type="number"/>
+                    <input min = "1" pattern="[0-9]+" value={userCodProduct} onChange={handleInputProduct} className='form-control' name='userCodProduct' type="number"/>
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="NAM_PRODUCT">Nombre del producto </label>
@@ -266,7 +266,7 @@ const AddFacturaForm = ({setSendRequest}) => {
                 </div>
                 <div className="col-md-4 mt-2">
                     <label className='form-label' htmlFor="CANT_PRODUCTS">Cantidad de productos<span className="text-danger"> *</span></label>
-                    <input value={userCantProduct} onChange={handleInputProduct} className='form-control' name='userCantProduct' type="number"min="1" />
+                    <input min = "1" pattern="[0-9]+" value={userCantProduct} onChange={handleInputProduct} className='form-control' name='userCantProduct' type="number" />
                 </div>
                 <div className="col-md-4 mt-2">
                     <label className="form-label" htmlFor="TYP_TO_PURCHASE">Tipo de compra<span className="text-danger"> *</span></label>

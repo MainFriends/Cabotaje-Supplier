@@ -72,39 +72,39 @@ const EditInventoryForm = ({rowCOD, setSendRequest, setMessageError}) => {
             </div>
             <div className="col-md-3 mt-2">
                 <label className='form-label' htmlFor="ISV">ISV</label>
-                <input onChange={handleInputChange} value = {formEditInvent.ISV} className='form-control' name='ISV' type="text" required/>
+                <input min = "0" pattern="[0-9]+" onChange={handleInputChange} value = {formEditInvent.ISV} className='form-control' name='ISV' type="text" required/>
             </div>
             <div className="col-md-3 mt-2">
                 <label className='form-label' htmlFor="PRICE_UNIT_PURCHASE">Precio compra</label>
-                <input onChange={handleInputChange} value = {formEditInvent.PRICE_UNIT_PURCHASE} className='form-control' name='PRICE_UNIT_PURCHASE' type="text" required/>
+                <input min = "0" pattern="[0-9]+" onChange={handleInputChange} value = {formEditInvent.PRICE_UNIT_PURCHASE} className='form-control' name='PRICE_UNIT_PURCHASE' type="text" required/>
             </div>
             <div className="col-md-3 mt-2">
                 <label className='form-label' htmlFor="NORMAL_UNIT_PRICE_1">Precio unidad 1</label>
-                <input onChange={handleInputChange} value = {formEditInvent.NORMAL_UNIT_PRICE_1} className='form-control' name='NORMAL_UNIT_PRICE_1' type="text" required/>
+                <input min = "0" pattern="[0-9]+" onChange={handleInputChange} value = {formEditInvent.NORMAL_UNIT_PRICE_1} className='form-control' name='NORMAL_UNIT_PRICE_1' type="text" required/>
             </div>
             <div className="col-md-3 mt-2">
                 <label className='form-label' htmlFor="NORMAL_UNIT_PRICE_2">Precio unidad 2</label>
-                <input onChange={handleInputChange} value = {formEditInvent.NORMAL_UNIT_PRICE_2}  className='form-control' name='NORMAL_UNIT_PRICE_2' type="text" required/>
+                <input min = "0" pattern="[0-9]+" onChange={handleInputChange} value = {formEditInvent.NORMAL_UNIT_PRICE_2}  className='form-control' name='NORMAL_UNIT_PRICE_2' type="text" required/>
             </div>
             <div className="col-md-3 mt-2">
                 <label className='form-label' htmlFor="NORMAL_UNIT_PRICE_3">Precio unidad 3</label>
-                <input onChange={handleInputChange} value = {formEditInvent.NORMAL_UNIT_PRICE_3} className='form-control' name='NORMAL_UNIT_PRICE_3' type="text" required/>
+                <input min = "0" pattern="[0-9]+" onChange={handleInputChange} value = {formEditInvent.NORMAL_UNIT_PRICE_3} className='form-control' name='NORMAL_UNIT_PRICE_3' type="text" required/>
             </div>
             <div className="col-md-3 mt-2">
                 <label className='form-label' htmlFor="WHOLESALE_PRICE_1">Precio venta 1</label>
-                <input onChange={handleInputChange} value = {formEditInvent.WHOLESALE_PRICE_1} className='form-control' name='WHOLESALE_PRICE_1' type="text" required/>
+                <input min = "0" pattern="[0-9]+" onChange={handleInputChange} value = {formEditInvent.WHOLESALE_PRICE_1} className='form-control' name='WHOLESALE_PRICE_1' type="text" required/>
             </div>
             <div className="col-md-3 mt-2">
                 <label className='form-label' htmlFor="WHOLESALE_PRICE_2">Precio venta 2</label>
-                <input onChange={handleInputChange} value = {formEditInvent.WHOLESALE_PRICE_2} className='form-control' name='WHOLESALE_PRICE_2' type="text" required/>
+                <input min = "0" pattern="[0-9]+" onChange={handleInputChange} value = {formEditInvent.WHOLESALE_PRICE_2} className='form-control' name='WHOLESALE_PRICE_2' type="text" required/>
             </div>
             <div className="col-md-3 mt-2">
                 <label className='form-label' htmlFor="WHOLESALE_CANT_1">Cantidad venta 1</label>
-                <input onChange={handleInputChange} value = {formEditInvent.WHOLESALE_CANT_1} className='form-control' name='WHOLESALE_CANT_1' type="text" required/>
+                <input min = "1" pattern="[0-9]+" onChange={handleInputChange} value = {formEditInvent.WHOLESALE_CANT_1} className='form-control' name='WHOLESALE_CANT_1' type="text" required/>
             </div>
             <div className="col-md-3 mt-2">
                 <label className='form-label' htmlFor="WHOLESALE_CANT_2">Cantidad venta 2</label>
-                <input onChange={handleInputChange} value = {formEditInvent.WHOLESALE_CANT_2} className='form-control' name='WHOLESALE_CANT_2' type="text" required/>
+                <input min = "1" pattern="[0-9]+" onChange={handleInputChange} value = {formEditInvent.WHOLESALE_CANT_2} className='form-control' name='WHOLESALE_CANT_2' type="text" required/>
             </div>
         </div>
         

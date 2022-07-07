@@ -125,15 +125,15 @@ const EditProductForm = ({sendRequest, rowCOD, setSendRequest, setMessageError})
                 </div>
                 <div className="col-3">
                     <label className='form-label' htmlFor="NORMAL_UNIT_PRICE">Precio de venta <span className="text-danger"> *</span></label>
-                    <input value={NORMAL_UNIT_PRICE} onChange={handleInputChange} className='form-control' min={0} name='NORMAL_UNIT_PRICE' type="number" required/>
+                    <input min = "0" pattern="[0-9]+" value={NORMAL_UNIT_PRICE} onChange={handleInputChange} className='form-control'  name='NORMAL_UNIT_PRICE' type="number" required/>
                 </div>
                 <div className="col-3">
                     <label className='form-label' htmlFor="PURCHASE_PRICE">Precio de compra <span className="text-danger"> *</span></label>
-                    <input value={PURCHASE_PRICE} onChange={handleInputChange} className='form-control' min={0} name='PURCHASE_PRICE' type="number" required/>
+                    <input min = "0" pattern="[0-9]+" value={PURCHASE_PRICE} onChange={handleInputChange} className='form-control'  name='PURCHASE_PRICE' type="number" required/>
                 </div>
                 <div className="col-2">
                     <label className='form-label' htmlFor="ISV">ISV <span className="text-danger"> *</span></label>
-                    <input value={ISV} onChange={handleInputChange} className='form-control' step="0.01" min={0} max={1} name='ISV' type="number" required/>
+                    <input min = "0" pattern="[0-9]+" value={ISV} onChange={handleInputChange} className='form-control' step="0.01"  max={1} name='ISV' type="number" required/>
                 </div>
             </div>
             <div className="row mb-4">
@@ -161,12 +161,12 @@ const EditProductForm = ({sendRequest, rowCOD, setSendRequest, setMessageError})
                 <div className="row mb-4">
                     <div className="col-4">
                         <label className='form-label' htmlFor="WHOLESALE_CANT">Cantidad <span className="text-danger"> *</span></label>
-                        <input value={WHOLESALE_CANT} onChange={handleInputChange} className='form-control' min={0} name='WHOLESALE_CANT' type="number" required/>
+                        <input min = "1" pattern="[0-9]+" value={WHOLESALE_CANT} onChange={handleInputChange} className='form-control'  name='WHOLESALE_CANT' type="number" required/>
                         <small className="form-text text-muted">Establezca a partir de qué cantidad se determinará una venta al por mayor de este producto.</small>
                     </div>
                     <div className="col-4">
                         <label className='form-label' htmlFor="WHOLESALE_PRICE">Precio unitario <span className="text-danger"> *</span></label>
-                        <input value={WHOLESALE_PRICE} onChange={handleInputChange} className='form-control' min={0} name='WHOLESALE_PRICE' type="number" required/>
+                        <input min = "0" pattern="[0-9]+" value={WHOLESALE_PRICE} onChange={handleInputChange} className='form-control'  name='WHOLESALE_PRICE' type="number" required/>
                         <small className="form-text text-muted">Establezca el precio unitario que se determinará en la venta al por mayor.</small>
                     </div>
                     <div className="col-4 text-right mt-4 py-2">

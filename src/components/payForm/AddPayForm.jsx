@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "../../config/axios";
 import token from "../../helpers/getToken";
+import AlertError from "../AlertError";
 
 const AddPayForm = ({setSendRequest, setMessageError}) => {
+    
+    const [errorMessage, setErrorMessage] = useState('');
     const [formAddPayForm, setFormAddPayForm] = useState({
         COD_USER: '',
         HOURS_WORKED: 0,
@@ -51,6 +54,7 @@ const AddPayForm = ({setSendRequest, setMessageError}) => {
             })
     }
 
+
     const resetState = () => {
         setFormAddPayForm({
             COD_USER: '',
@@ -69,6 +73,15 @@ const AddPayForm = ({setSendRequest, setMessageError}) => {
 
     const handleSubmitPayForm = (e) => {
         e.preventDefault();
+
+        if(formAddPayForm.TOT_DEDUCTIONS > netSalary && netSalary <= 0){
+            setErrorMessage('Las deducciones no pueden ser mayores o iguales al salario');
+            setTimeout(() => {
+            setErrorMessage('')
+         }, 3000);
+         return
+        }
+
         axios.post('/pay-form', formAddPayForm, token())
            .then(res => {
                document.querySelector('#closeAddPayForm').click();
@@ -85,7 +98,6 @@ const AddPayForm = ({setSendRequest, setMessageError}) => {
            })
     }
 
-
     return(
         <form id='addPayForm' onSubmit={handleSubmitPayForm} action='#'>
         <div className="row mb-4">
@@ -99,23 +111,23 @@ const AddPayForm = ({setSendRequest, setMessageError}) => {
             </div>
             <div className="col-md-3">
                 <label className='form-label mt-2' htmlFor="HOURS_WORKED">Dias Trabajados <span className="text-danger"> *</span></label>
-                <input onChange={handleInputChange} value={formAddPayForm?.HOURS_WORKED} className='form-control' name='HOURS_WORKED' type="number" required/>
+                <input min="1" pattern="[0-9]+" onChange={handleInputChange} value={formAddPayForm?.HOURS_WORKED} className='form-control' name='HOURS_WORKED' type="number" required/>
             </div>
             <div className="col-md-3">
                 <label className='form-label mt-2' htmlFor="AMO_GROSS">Salario Base <span className="text-danger"> *</span> </label>
-                <input onChange={handleInputChange} value={formAddPayForm?.AMO_GROSS} className='form-control' name='AMO_GROSS' type="number" required/>
+                <input min="1" pattern="[0-9]+" onChange={handleInputChange} value={formAddPayForm?.AMO_GROSS} className='form-control' name='AMO_GROSS' type="number" required/>
             </div>
             <div className="col-md-3">
                 <label className='form-label mt-2' htmlFor="BONUS">Bonificaciones</label>
-                <input onChange={handleInputChange} value={formAddPayForm?.BONUS} className='form-control' name='BONUS' type="number" required/>
+                <input min="1" pattern="[0-9]+" onChange={handleInputChange} value={formAddPayForm?.BONUS} className='form-control' name='BONUS' type="number" required/>
             </div>
             <div className="col-md-3">
                 <label className='form-label mt-2' htmlFor="TOT_DEDUCTIONS">Deducciones <span className="text-danger"> *</span> </label>
-                <input onChange={handleInputChange} value={formAddPayForm?.TOT_DEDUCTIONS} className='form-control' name='TOT_DEDUCTIONS' type="number" required/>
+                <input min="1" pattern="[0-9]+" onChange={handleInputChange} value={formAddPayForm?.TOT_DEDUCTIONS} className='form-control' name='TOT_DEDUCTIONS' type="number" required/>
             </div>
             <div className="col-md-3">
                 <label className='form-label mt-2' htmlFor="NET_SALARY">Salario Neto</label>
-                <input className='form-control' value={netSalary} name='NET_SALARY' type="number" required disabled/>
+                <input min="1" pattern="[0-9]+" onChange={handleInputChange} className='form-control' value={netSalary} name='NET_SALARY' type="number" required disabled/>
             </div>
             <div className="col-md-4">
                 <label className='form-label mt-2' htmlFor="DAT_PAYMENT">Fecha de Pago <span className="text-danger"> *</span> </label>
@@ -124,7 +136,8 @@ const AddPayForm = ({setSendRequest, setMessageError}) => {
         </div>
         <div className="modal-footer">
             <button type="button" id='closeAddPayForm' className="btn btn-primary" data-dismiss="modal">Cerrar</button>
-            <button type='submit' className="btn btn-success">Guardar</button>
+            <button type='submit'  className="btn btn-success">Guardar</button>
+            {errorMessage ? <AlertError message={errorMessage} /> : null} 
         </div>
     </form>
     )

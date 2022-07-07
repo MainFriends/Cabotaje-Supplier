@@ -56,7 +56,7 @@ const AddSalesReturn = ({setSendRequest, setMessageError}) => {
             <div className="row mb-4">
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="COD_PRODUCT">Código del Producto <span className="text-danger">*</span></label>
-                    <input className='form-control' onBlur={() => getProductInput()} onChange={handleInputChange} name='COD_PRODUCT' type="number" required/>
+                    <input min = "1" pattern="[0-9]+" className='form-control' onBlur={() => getProductInput()} onChange={handleInputChange} name='COD_PRODUCT' type="number" required/>
                 </div>
                 <div className="col-md-5">
                     <label className='form-label' htmlFor="PRODUCT">Producto</label>
@@ -68,11 +68,11 @@ const AddSalesReturn = ({setSendRequest, setMessageError}) => {
                 </div>
                 <div className="col-md-3 mt-2">
                     <label className='form-label' htmlFor="CANT">Cantidad <span className="text-danger"> *</span> </label>
-                    <input className='form-control' onChange={handleInputChange} name='CANT' type="number" required/>
+                    <input min = "1" pattern="[0-9]+" className='form-control' onChange={handleInputChange} name='CANT' type="number" required/>
                 </div>
                 <div className="col-md-4 mt-2">
                     <label className='form-label' htmlFor="AMOUNT">Monto <span className="text-danger"> *</span> </label>
-                    <input className='form-control' onChange={handleInputChange} name='AMOUNT' type="number" required/>
+                    <input min = "1" pattern="[0-9]+" className='form-control' onChange={handleInputChange} name='AMOUNT' type="number" required/>
                 </div>
                 <div className="col-md-4 mt-2">
                     <label className='form-label' htmlFor="DAT_RETURN">Fecha <span className="text-danger"> *</span> </label>
