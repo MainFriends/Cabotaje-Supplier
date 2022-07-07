@@ -36,7 +36,7 @@ const Welcome = () => {
       </div>
 
       <div className = 'row'>
-      <h3 className = 'py-4 px-3 font-weight-bold text-dark'>Informacin</h3>
+      <h3 className = 'py-4 px-3 font-weight-bold text-dark'>Información</h3>
       </div>
       <div className='row'>
         <div className='col-4'>
