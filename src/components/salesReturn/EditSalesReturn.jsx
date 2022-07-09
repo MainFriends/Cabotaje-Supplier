@@ -49,7 +49,7 @@ const EditSalesReturn = ({setSendRequest, rowCOD}) => {
                 </div>
                 <div className="col-md-5 mt-2">
                     <label className='form-label' htmlFor="DESCRIPTION">Descripción</label>
-                    <textarea className='form-control' value={formEditSalesReturn.DESCRIPTION} onChange={handleInputChange} name='DESCRIPTION' type="text" required/>
+                    <textarea className='form-control' value={formEditSalesReturn.DESCRIPTION} onChange={handleInputChange} name='DESCRIPTION' type="text"  maxLength={50}  wrap="hard"  required/>
                 </div>
                 <div className="col-md-3 mt-2">
                     <label className='form-label' htmlFor="CANT">Cantidad</label>

@@ -242,7 +242,7 @@ const AddOrder = ({setSendRequest,setMessageError}) => {
                         </div>
                         <div className="col-md-6 mt-2">
                             <label className='form-label' htmlFor="DES_ORDER">Descripción</label>
-                            <textarea onChange={handleInputChangeDetail} value={DES_ORDER} rows={3} className='form-control' name='DES_ORDER' type="text"/>
+                            <textarea onChange={handleInputChangeDetail} value={DES_ORDER} rows={3} className='form-control' maxLength={50}  wrap="hard" name='DES_ORDER' type="text"/>
                         </div>
 
                         <DataTable

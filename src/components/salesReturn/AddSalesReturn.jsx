@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "../../config/axios";
 import token from "../../helpers/getToken";
 
@@ -17,6 +17,19 @@ const AddSalesReturn = ({setSendRequest, setMessageError}) => {
             [e.target.name] : e.target.value
         })
     }
+ // Estados que manejaran el nombre del producto y del usuario 
+ const [productName, setProductName] = useState('');
+
+ useEffect(() => {
+     axios.get(`/inventory/${formAddSalesReturn.COD_PRODUCT}`, token())
+        .then(res => {
+            const {NAM_PRODUCT} = res.data[0];
+            setProductName(`${NAM_PRODUCT}`)
+        })
+        .catch(err => {
+            setProductName('Producto no encontrado.')
+        })
+ },[formAddSalesReturn.COD_PRODUCT]); 
 
     const handleSubmitSalesReturn = (e) => {
         e.preventDefault();
@@ -37,26 +50,14 @@ const AddSalesReturn = ({setSendRequest, setMessageError}) => {
     }
 
 
-    // Estados que manejaran el nombre del producto y del usuario 
-    const [productName, setProductName] = useState('');
-
-    const getProductInput = () => {
-        axios.get(`/inventory/${formAddSalesReturn.COD_PRODUCT}`, token())
-           .then(res => {
-               const {NAM_PRODUCT} = res.data[0];
-               setProductName(`${NAM_PRODUCT}`)
-           })
-           .catch(err => {
-               setProductName('Producto no encontrado.')
-           })
-    }
+   
 
     return(
         <form id='addFormSalesReturn' onSubmit={handleSubmitSalesReturn} action='#'>
             <div className="row mb-4">
                 <div className="col-md-3">
                     <label className='form-label' htmlFor="COD_PRODUCT">Código del Producto</label>
-                    <input className='form-control' onBlur={() => getProductInput()} onChange={handleInputChange} name='COD_PRODUCT' type="number" required/>
+                    <input onChange={handleInputChange}  className='form-control'  name='COD_PRODUCT' type="number" required/>
                 </div>
                 <div className="col-md-5">
                     <label className='form-label' htmlFor="PRODUCT">Producto</label>
@@ -64,7 +65,7 @@ const AddSalesReturn = ({setSendRequest, setMessageError}) => {
                 </div>
                 <div className="col-md-5 mt-2">
                     <label className='form-label' htmlFor="DESCRIPTION">Descripción</label>
-                    <textarea className='form-control' onChange={handleInputChange} name='DESCRIPTION' type="text" required/>
+                    <textarea className='form-control' onChange={handleInputChange} name='DESCRIPTION' type="text"  maxLength={50}  wrap="hard"  required/>
                 </div>
                 <div className="col-md-3 mt-2">
                     <label className='form-label' htmlFor="CANT">Cantidad</label>

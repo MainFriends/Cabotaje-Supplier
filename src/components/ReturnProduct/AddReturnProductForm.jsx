@@ -48,7 +48,7 @@ const AddReturnProductForm = ({setSendRequest, setMessageError}) => {
                 </div>
                 <div className="col-md-6">
                     <label className='form-label' htmlFor="CONCEPT">Concepto</label>
-                    <textarea onChange={handleInputChange} className='form-control' name='CONCEPT' type="text" required/>
+                    <textarea onChange={handleInputChange} className='form-control' name='CONCEPT' type="text" maxLength={50}  wrap="hard"  required/>
                 </div>
                 <div className="col-md-4 mt-2">
                     <label className='form-label' htmlFor="CANT_PRODUCT">Cantidad productos</label>
@@ -68,7 +68,7 @@ const AddReturnProductForm = ({setSendRequest, setMessageError}) => {
                 </div>
                 <div className="col-md-6 mt-2">
                     <label className='form-label' htmlFor="DES_RETURN">Descripción</label>
-                    <textarea onChange={handleInputChange} className='form-control' name='DES_RETURN' type="text" required/>
+                    <textarea onChange={handleInputChange} className='form-control' name='DES_RETURN' type="text"  maxLength={50}  wrap="hard" required/>
                 </div>
                 <div className="col-md-6">
                     <label className='form-label' htmlFor="DAT_RETURN">Fecha devolución</label>

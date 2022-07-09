@@ -44,7 +44,7 @@ const AddCategoryForm = ({setSendRequest, setMessageError}) => {
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="DESCRIPTION">Descripción</label>
-                    <input onChange={handleInputChange} className='form-control' name='DESCRIPTION' type="text" pattern="^[a-zA-Z0-9ñÑØº-_ ]+$" onInput={toUpperCase}  required/>
+                    <input onChange={handleInputChange} className='form-control' name='DESCRIPTION' type="text" pattern="^[a-zA-Z0-9ñÑØº-_ ]+$" onInput={toUpperCase} maxLength={20}  wrap="hard"  required/>
                 </div>
             </div>
             

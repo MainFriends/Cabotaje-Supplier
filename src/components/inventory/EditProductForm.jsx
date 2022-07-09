@@ -110,7 +110,7 @@ const EditProductForm = ({sendRequest, rowCOD, setSendRequest, setMessageError})
                 </div>
                 <div className="col-8">
                     <label className='form-label' htmlFor="DES_PRODUCT">Descripción</label>
-                    <textarea value={DES_PRODUCT} onChange={handleInputChange} className='form-control' rows='2' name='DES_PRODUCT' type="text" onInput={toUpperCase} required/>
+                    <textarea value={DES_PRODUCT} onChange={handleInputChange} className='form-control' rows='2' name='DES_PRODUCT' type="text" onInput={toUpperCase} maxLength={20}  wrap="hard" required/>
                 </div>
             </div>
             <div className="row mb-4">

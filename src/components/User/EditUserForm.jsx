@@ -139,6 +139,8 @@ const EditUserForm = ({rowCOD, setSendRequest, setMessageError}) => {
                 pattern="^[a-zA-ZñÑáéíóú ]+$"
                 title="Primer nombre no debe contener carácteres especiales y/o númericos."
                 onInput={toUpperCase}
+                minLength={2}
+                maxLength={15}
                 required
             />
           </div>
@@ -155,6 +157,8 @@ const EditUserForm = ({rowCOD, setSendRequest, setMessageError}) => {
                 pattern="^[a-zA-ZñÑáéíóú ]+$"
                 title="Segundo nombre no debe contener carácteres especiales y/o númericos."
                 onInput={toUpperCase}
+                minLength={2}
+                maxLength={15}
                 required
             />
           </div>
@@ -171,6 +175,8 @@ const EditUserForm = ({rowCOD, setSendRequest, setMessageError}) => {
                 pattern="^[a-zA-ZñÑáéíóú ]+$"
                 title="Apellido no debe contener carácteres especiales y/o númericos."
                 onInput={toUpperCase}
+                minLength={2}
+                maxLength={15}
                 required
             />
           </div>
@@ -289,6 +295,7 @@ const EditUserForm = ({rowCOD, setSendRequest, setMessageError}) => {
                 type="text"
                 pattern="^[a-zA-Z0-9ñÑØº-_ ]+$"
                 onInput={toUpperCase}
+                maxLength={50}  wrap="hard" 
                 required
             />
           </div>

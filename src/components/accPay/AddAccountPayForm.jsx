@@ -43,7 +43,7 @@ const AddAccountPayForm = ({setSendRequest, setMessageError}) => {
                 </div>
                 <div className="col-md-8 mt-3">
                     <label className='form-label' htmlFor="DESCRIPTION">Descripción</label>
-                    <textarea onChange={handleInputChange} className='form-control' name='DESCRIPTION' type="text" required/>
+                    <textarea onChange={handleInputChange} className='form-control' name='DESCRIPTION' maxLength={50}  wrap="hard" type="text" required/>
                 </div>
                 <div className="col-md-3 mt-3">
                     <label className='form-label' htmlFor="TOT_BALANCE">Monto</label>
