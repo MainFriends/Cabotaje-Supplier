@@ -9,6 +9,7 @@ import horario from '../../assets/img/horario.png';
 import servicio from '../../assets/img/domicilio.png';
 
 import Card from '../../components/ChartJS/Card'
+import { Link } from 'react-router-dom'
 
 
 
@@ -33,29 +34,24 @@ const Welcome = () => {
             <img src = {logo1} ></img>
           </div>
         </div>
+        <h4 className = 'py-3 px-3 font-weight-bold text-dark'>Atajos</h4>
       </div>
 
-      <div className = 'row'>
-      <h3 className = 'py-4 px-3 font-weight-bold text-dark'>Información</h3>
-      </div>
+      
+
+      
       <div className='row'>
         <div className='col-4'>
-          <Card
-          titulo='Contactanos'
-          image= {contactanos}
-           />
+        <a href = "http://localhost:3000/profile#"  className='btn btn-danger btn-sm float-left my-3'><i className="fa-solid fa-solid fa-user mr-2"></i>Configurar perfil</a>
+
         </div>
         <div className='col-4'>
-          <Card
-          titulo='Horario'
-          image= {horario}
-           />
+        <a href = "http://localhost:3000/dashboard/inventario"  className='btn btn-danger btn-sm float-left my-3'><i className="fa-solid fas fa-dolly-flatbed mr-2"></i>Inventario</a>
+
         </div>
         <div className='col-4'>
-          <Card
-          titulo='Servicio a domicilio'
-          image= {servicio}
-           />
+        <Link to = "/facturar"  className='btn btn-danger btn-sm float-left my-3'><i className="fa-solid fas fa-file-invoice mr-2"></i>Facturar</Link>
+
         </div>
       </div>
 
