@@ -14,6 +14,39 @@ import token from '../../../helpers/getToken';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable';
 import logo from '../../../assets/js/logo';
+import moment from 'moment';
+
+const dowlandPDFClient = (filteredItems) => {
+    const doc = new jsPDF();
+    doc.text('Reporte de Clientes - Cabotaje Supplier',55,30);
+    const image = logo
+    doc.addImage(image, 'PNG', 10, 10,20,30,'Cabotaje')
+
+    const nombre = JSON.parse(localStorage.getItem("userSession"));
+    const nombreReporte = `${nombre.FIRST_NAME} ${nombre.LAST_NAME}`
+    doc.setFontSize(10)
+    doc.text(`${moment(new Date()).format('DD-MM-YYYY, h:mm:ss a')}` ,165, 13)
+    doc.text(`Impreso por: ${nombreReporte}`, 165, 7)
+    
+    const row = filteredItems.map(fila => {
+        return [
+            fila.IDENTITY,
+            fila.FIRST_NAME,
+            fila.LAST_NAME,
+            fila.NUM_PHONE_ONE,
+            fila.NUM_PHONE_TWO === 0 ? "Sin número" : fila.NUM_PHONE_TWO,
+            fila.ADDRESS,
+            fila.RTN,
+        ]
+    })  
+    doc.autoTable({
+        head: [['Identidad', 'Nombre', 'Apellido', 'Numero 1', 'Numero 2', 'Direccion', 'RTN']],
+        body: row.sort(),
+        startY: 45
+    })
+
+    doc.save('Clientes - Cabotaje Supplier.pdf');
+}
 
 const Clientes = () => {
     const [rows, setRows] = useState([]);
@@ -23,32 +56,6 @@ const Clientes = () => {
     const [sendRequest, setSendRequest] = useState(false);
     const [rowCOD, setRowCOD] = useState(null);
     const [permissions, setPermissions] = useState({});
-    
-    const dowlandPDFClient = () => {
-        const doc = new jsPDF();
-        doc.text('Reporte de Clientes - Cabotaje Supplier',55,30);
-        const image = logo
-        doc.addImage(image, 'PNG', 10, 10,20,30,'Cabotaje')
-        
-        const row = rows.map(fila => {
-            return [
-                fila.IDENTITY,
-                fila.FIRST_NAME,
-                fila.LAST_NAME,
-                fila.NUM_PHONE_ONE,
-                fila.NUM_PHONE_TWO === 0 ? "Sin número" : fila.NUM_PHONE_TWO,
-                fila.ADDRESS,
-                fila.RTN,
-            ]
-        })  
-        doc.autoTable({
-            head: [['Identidad', 'Nombre', 'Apellido', 'Numero 1', 'Numero 2', 'Direccion', 'RTN']],
-            body: row.sort(),
-            startY: 45
-        })
-
-        doc.save('Clientes - Cabotaje Supplier.pdf');
-    }
     
     //definir las columnas
     const columns = [
@@ -160,7 +167,7 @@ const Clientes = () => {
                         highlightOnHover
                         striped
                         persistTableHead
-                        actions={<button onClick={() => dowlandPDFClient()} className='btn btn-danger btn-sm'><i className="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}
+                        actions={<button onClick={() => dowlandPDFClient(filteredItems)} className='btn btn-danger btn-sm'><i className="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}
                     />
 
                     <Modal 

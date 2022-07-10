@@ -16,6 +16,45 @@ import EditProductForm from '../../../components/inventory/EditProductForm';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable';
 import logo from '../../../assets/js/logo';
+import moment from 'moment';
+
+const dowlandPdfInventory = (filteredItems) => {
+    const doc = new jsPDF();
+    doc.text('Reporte de Inventario - Cabotaje Supplier',55,30);   
+    const image = logo
+    doc.addImage(image, 'PNG', 10, 10,20,30,'Cabotaje');
+
+    const nombre = JSON.parse(localStorage.getItem("userSession"));
+    const nombreReporte = `${nombre.FIRST_NAME} ${nombre.LAST_NAME}`
+    doc.setFontSize(10)
+    doc.text(`${moment(new Date()).format('DD-MM-YYYY, h:mm:ss a')}` ,165, 13)
+    doc.text(`Impreso por: ${nombreReporte}`, 165, 7)
+
+    const row = filteredItems.map(fila => [
+        fila.COD_PRODUCT,
+        fila.NAM_SUPPLIER,
+        fila.NAM_PRODUCT,
+        fila.DES_PRODUCT,
+        fila.CANT_TOTAL,
+        fila.ISV,
+        fila.NORMAL_UNIT_PRICE,
+        fila.PURCHASE_PRICE,
+        fila.WHOLESALE_CANT,
+        fila.WHOLESALE_PRICE,
+        fila.NAM_CATEGORY,
+        fila.NAM_TYPE_PRODUCT
+    ])  
+    doc.autoTable({
+        head: [['Codigo', 'Proveedor', 'Producto', 'Descripcion', 'Cantidad', 'ISV', 'Precio', 'Costo', 'Cantidad', 'Precio al por mayor', 'Categoria', 'Tipo de producto']],
+        body: row.sort(),
+        startY: 45,
+        styles: {
+            fontSize: 5
+        }
+    })
+
+    doc.save('Inventario - Cabotaje Supplier.pdf')
+}
 
 const Inventario = () => {
     const [rows, setRows] = useState([]);
@@ -25,38 +64,6 @@ const Inventario = () => {
     const [sendRequest, setSendRequest] = useState(false);
     const [rowCOD, setRowCOD] = useState(null);
     const [permissions, setPermissions] = useState({});
-
-    const dowlandPdfInventory = () => {
-        const doc = new jsPDF();
-        doc.text('Reporte de Inventario - Cabotaje Supplier',55,30);   
-        const image = logo
-        doc.addImage(image, 'PNG', 10, 10,20,30,'Cabotaje');
-
-        const row = rows.map(fila => [
-            fila.COD_PRODUCT,
-            fila.NAM_SUPPLIER,
-            fila.NAM_PRODUCT,
-            fila.DES_PRODUCT,
-            fila.CANT_TOTAL,
-            fila.ISV,
-            fila.NORMAL_UNIT_PRICE,
-            fila.PURCHASE_PRICE,
-            fila.WHOLESALE_CANT,
-            fila.WHOLESALE_PRICE,
-            fila.NAM_CATEGORY,
-            fila.NAM_TYPE_PRODUCT
-        ])  
-        doc.autoTable({
-            head: [['Codigo', 'Proveedor', 'Producto', 'Descripcion', 'Cantidad', 'ISV', 'Precio', 'Costo', 'Cantidad', 'Precio al por mayor', 'Categoria', 'Tipo de producto']],
-            body: row.sort(),
-            startY: 45,
-            styles: {
-                fontSize: 5
-            }
-        })
-
-        doc.save('Inventario - Cabotaje Supplier.pdf')
-    }
     
     //definir las columnas
     const columns = [
@@ -195,7 +202,7 @@ const Inventario = () => {
                         highlightOnHover
                         striped
                         persistTableHead
-                        actions={<button onClick={() => dowlandPdfInventory()} className='btn btn-danger btn-sm'><i className="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}     
+                        actions={<button onClick={() => dowlandPdfInventory(filteredItems)} className='btn btn-danger btn-sm'><i className="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}     
                     />
 
                     <Modal 

@@ -21,6 +21,12 @@ const dowlandPdf = (filteredItems) => {
     const image = logo
     doc.addImage(image, 'PNG', 10, 10,20,30,'Cabotaje'); 
 
+    const nombre = JSON.parse(localStorage.getItem("userSession"));
+    const nombreReporte = `${nombre.FIRST_NAME} ${nombre.LAST_NAME}`
+    doc.setFontSize(10)
+    doc.text(`${moment(new Date()).format('DD-MM-YYYY, h:mm:ss a')}` ,165, 13)
+    doc.text(`Impreso por: ${nombreReporte}`, 165, 7)
+
     const row = filteredItems.map(fila => {
         const fecha = fila.DATE
         return [

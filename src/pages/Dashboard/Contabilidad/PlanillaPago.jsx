@@ -17,6 +17,44 @@ import jsPDF from 'jspdf'
 import 'jspdf-autotable';
 import logo from '../../../assets/js/logo';
 
+const dowlandPdfPayment = (filteredItems) => {
+    const doc = new jsPDF();
+    doc.text('Reporte de Planilla de Pago - Cabotaje Supplier',45,30);   
+    const image = logo
+    doc.addImage(image, 'PNG', 10, 10,20,30,'Cabotaje');
+
+    const nombre = JSON.parse(localStorage.getItem("userSession"));
+    const nombreReporte = `${nombre.FIRST_NAME} ${nombre.LAST_NAME}`
+    doc.setFontSize(10)
+    doc.text(`${moment(new Date()).format('DD-MM-YYYY, h:mm:ss a')}` ,165, 13)
+    doc.text(`Impreso por: ${nombreReporte}`, 165, 7)
+    
+    const row = filteredItems.map(fila => {
+        const fecha = fila.DAT_PAYMENT
+        return [
+            fila.COD_PAY_FORM,
+            fila.FIRST_NAME,
+            fila.LAST_NAME,
+            fila.HOURS_WORKED,
+            fila.AMO_GROSS,
+            fila.BONUS,
+            fila.TOT_DEDUCTIONS,
+            fila.NET_SALARY,
+            moment(fecha).format('DD-MM-YYYY')
+        ]
+    })  
+    doc.autoTable({
+        head: [['#', 'Nombre', 'Apellido', 'H. Trabajadas', 'Salario Base', 'Bonificaiones', 'Deduciones', 'S. Neto', 'Fecha de pago']],
+        body: row.sort(),
+        startY: 45,
+        styles: {
+            fontSize: 8
+        }
+    })
+
+    doc.save('Planilla de Pago - Cabotaje Supplier.pdf');
+}
+
 const PlanillaPago = () => {
     const [rows, setRows] = useState([]);
     const [filterText, setFilterText] = useState('');
@@ -25,38 +63,6 @@ const PlanillaPago = () => {
     const [sendRequest, setSendRequest] = useState(false);
     const [rowCOD, setRowCOD] = useState(null);
     const [permissions, setPermissions] = useState({});
-
-    const dowlandPdfPayment = () => {
-        const doc = new jsPDF();
-        doc.text('Reporte de Planilla de Pago - Cabotaje Supplier',45,30);   
-        const image = logo
-        doc.addImage(image, 'PNG', 10, 10,20,30,'Cabotaje');
-        
-        const row = rows.map(fila => {
-            const fecha = fila.DAT_PAYMENT
-            return [
-                fila.COD_PAY_FORM,
-                fila.FIRST_NAME,
-                fila.LAST_NAME,
-                fila.HOURS_WORKED,
-                fila.AMO_GROSS,
-                fila.BONUS,
-                fila.TOT_DEDUCTIONS,
-                fila.NET_SALARY,
-                moment(fecha).format('DD-MM-YYYY')
-            ]
-        })  
-        doc.autoTable({
-            head: [['#', 'Nombre', 'Apellido', 'H. Trabajadas', 'Salario Base', 'Bonificaiones', 'Deduciones', 'S. Neto', 'Fecha de pago']],
-            body: row.sort(),
-            startY: 45,
-            styles: {
-                fontSize: 8
-            }
-        })
-
-        doc.save('Planilla de Pago - Cabotaje Supplier.pdf');
-    }
     
     //definir las columnas
     const columns = [
@@ -180,7 +186,7 @@ const PlanillaPago = () => {
                         highlightOnHover
                         striped
                         persistTableHead 
-                        actions={<button onClick={() => dowlandPdfPayment()} className='btn btn-danger btn-sm'><i className="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}
+                        actions={<button onClick={() => dowlandPdfPayment(filteredItems)} className='btn btn-danger btn-sm'><i className="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}
                     />
 
                     <Modal 
