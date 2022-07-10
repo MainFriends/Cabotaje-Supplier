@@ -60,8 +60,8 @@ const EditReturnProductForm = ({rowCOD, setSendRequest, setMessageError}) => {
                     <input onChange={handleInputChange} value = {formEditReturnProduc.COD_PRODUCT} className='form-control' name='COD_PRODUCT' type="text" required/>
                 </div>
                 <div className="col-md-6">
-                    <label className='form-label' htmlFor="CONCEPT">Concepto <span className="text-danger"> *</span></label>
-                    <textarea onChange={handleInputChange} value = {formEditReturnProduc.CONCEPT} className='form-control' name='CONCEPT' type="text" required/>
+                    <label className='form-label' htmlFor="CONCEPT">Concepto</label>
+                    <textarea onChange={handleInputChange} value = {formEditReturnProduc.CONCEPT} className='form-control' name='CONCEPT' type="text"  maxLength={50}  wrap="hard"  required/>
                 </div>
                 <div className="col-md-4 mt-2">
                     <label className='form-label' htmlFor="CANT_PRODUCT">Cantidad productos <span className="text-danger"> *</span></label>
@@ -80,8 +80,8 @@ const EditReturnProductForm = ({rowCOD, setSendRequest, setMessageError}) => {
                      </select>         
                 </div>
                 <div className="col-md-6 mt-2">
-                    <label className='form-label' htmlFor="DES_RETURN">Descripción <span className="text-danger"> *</span></label>
-                    <textarea onChange={handleInputChange} value = {formEditReturnProduc.DES_RETURN} className='form-control' name='DES_RETURN' type="text" required/>
+                    <label className='form-label' htmlFor="DES_RETURN">Descripción</label>
+                    <textarea onChange={handleInputChange} value = {formEditReturnProduc.DES_RETURN} className='form-control' name='DES_RETURN' type="text"  maxLength={50}  wrap="hard"  required/>
                 </div>
                 <div className="col-md-6 mt-2">
                     <label className='form-label' htmlFor="DAT_RETURN">Fecha devolución <span className="text-danger"> *</span></label>

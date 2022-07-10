@@ -52,19 +52,19 @@ const AddSupplierForm = ({setSendRequest, setMessageError}) => {
             <div className="row mb-4">
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="NAM_SUPPLIER ">Nombre del Proveedor<span className="text-danger"> *</span></label>
-                    <input onChange={handleInputChange} className='form-control' name='NAM_SUPPLIER' type="text" pattern="^[a-zA-ZñÑáéíóú ]+$" title="No debe contener carácteres especiales y/o númericos." onInput={toUpperCase} required/>
+                    <input onChange={handleInputChange} className='form-control' name='NAM_SUPPLIER' type="text" pattern="^[a-zA-ZñÑáéíóú ]+$" minLength={1} maxLength={20} title="No debe contener carácteres especiales y/o númericos." onInput={toUpperCase} required/>
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="NAM_CONTACT ">Nombre de contacto<span className="text-danger"> *</span></label>
-                    <input onChange={handleInputChange} className='form-control' name='NAM_CONTACT' type="text" pattern="^[a-zA-ZñÑáéíóú ]+$"  title="No debe contener carácteres especiales y/o númericos." onInput={toUpperCase}required/>
+                    <input onChange={handleInputChange} className='form-control' name='NAM_CONTACT' type="text" pattern="^[a-zA-ZñÑáéíóú ]+$" minLength={2} maxLength={15} title="No debe contener carácteres especiales y/o númericos." onInput={toUpperCase}required/>
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="LAST_NAM_CONTACT">Apellido de contacto<span className="text-danger"> *</span></label>
-                    <input onChange={handleInputChange} className='form-control' name='LAST_NAM_CONTACT' type="text" pattern="^[a-zA-ZñÑáéíóú ]+$" title="No debe contener carácteres especiales y/o númericos." onInput={toUpperCase} required/>
+                    <input onChange={handleInputChange} className='form-control' name='LAST_NAM_CONTACT' type="text" pattern="^[a-zA-ZñÑáéíóú ]+$"minLength={1}  maxLength={15} title="No debe contener carácteres especiales y/o númericos." onInput={toUpperCase} required/>
                 </div>
                 <div className="col-md-4 mt-2">
                     <label className='form-label' htmlFor="ADDRESS">Dirección<span className="text-danger"> *</span></label>
-                    <textarea onChange={handleInputChange} className='form-control' name='ADDRESS'  rows='3' cols='4' type="text" pattern="^[a-zA-Z0-9ñÑØº-_ ]+$" onInput={toUpperCase} required/>
+                    <textarea onChange={handleInputChange} className='form-control' name='ADDRESS'  rows='3' cols='4' type="text" pattern="^[a-zA-Z0-9ñÑØº-_ ]+$" onInput={toUpperCase}  maxLength={50}  wrap="hard"  required/>
                 </div>           
                 <div className="col-md-4 mt-2">
                     <label className='form-label' htmlFor="NUM_PHONE_ONE">Teléfono 1<span className="text-danger"> *</span></label>

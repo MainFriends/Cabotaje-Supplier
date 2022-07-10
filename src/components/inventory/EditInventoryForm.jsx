@@ -60,7 +60,7 @@ const EditInventoryForm = ({rowCOD, setSendRequest, setMessageError}) => {
             </div>
             <div className="col-md-6">
                 <label className='form-label' htmlFor="DES_PRODUCT">Descripción</label>
-                <textarea onChange={handleInputChange} value = {formEditInvent.DES_PRODUCT} className='form-control' name='DES_PRODUCT' type="text" required/>
+                <textarea onChange={handleInputChange} value = {formEditInvent.DES_PRODUCT} className='form-control' name='DES_PRODUCT' type="text" maxLength={50}  wrap="hard" required/>
             </div>
             <div className="col-md-3 mt-2">
                 <label className='form-label' htmlFor="COD_TYP_PRODUCT">Tipo Producto</label>

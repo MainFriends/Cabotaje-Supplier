@@ -82,8 +82,8 @@ const ProductForm = ({setSendRequest, setMessageError}) => {
                     <input onChange={handleInputChange} className='form-control' name='NAM_PRODUCT' type="text" pattern="^[a-zA-ZñÑ_ ]+$" title="Solamente se pueden ingresar letras" onInput={toUpperCase}required/>
                 </div>
                 <div className="col-8">
-                    <label className='form-label' htmlFor="DES_PRODUCT">Descripción <span className="text-danger"> *</span></label>
-                    <textarea onChange={handleInputChange} className='form-control' rows='2' name='DES_PRODUCT' type="text" pattern="^[a-zA-Z0-9ñÑØº-_ ]+$" onInput={toUpperCase}required/>
+                    <label className='form-label' htmlFor="DES_PRODUCT">Descripción</label>
+                    <textarea onChange={handleInputChange} className='form-control' rows='2' name='DES_PRODUCT' type="text" pattern="^[a-zA-Z0-9ñÑØº-_ ]+$" onInput={toUpperCase} maxLength={50}  wrap="hard" required/>
                 </div>
             </div>
             <div className="row mb-4">

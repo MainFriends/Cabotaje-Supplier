@@ -60,11 +60,11 @@ const EditClientForm = ({rowCOD, setSendRequest, setMessageError}) => {
             <div className="row mb-4">
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="FIRST_NAME">Nombre<span className="text-danger"> *</span></label>
-                    <input onChange={handleInputChange} value={formEditClient.FIRST_NAME} className='form-control' name='FIRST_NAME' type="text" pattern="^[a-zA-ZñÑáéíóú ]+$"  title="Primer nombre no debe contener carácteres especiales y/o númericos." onInput={toUpperCase} required/>
+                    <input onChange={handleInputChange} value={formEditClient.FIRST_NAME} className='form-control' name='FIRST_NAME' type="text"minLength={1} maxLength={15}  pattern="^[a-zA-ZñÑáéíóú ]+$"  title="Primer nombre no debe contener carácteres especiales y/o númericos." onInput={toUpperCase} required/>
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="LAST_NAME">Apellido<span className="text-danger"> *</span></label>
-                    <input onChange={handleInputChange} value={formEditClient.LAST_NAME} className='form-control' name='LAST_NAME' type="text"  pattern="^[a-zA-ZñÑáéíóú ]+$" title="Primer nombre no debe contener carácteres especiales y/o númericos." onInput={toUpperCase}required/>
+                    <input onChange={handleInputChange} value={formEditClient.LAST_NAME} className='form-control' name='LAST_NAME' type="text" minLength={1} maxLength={15}   pattern="^[a-zA-ZñÑáéíóú ]+$" title="Primer nombre no debe contener carácteres especiales y/o númericos." onInput={toUpperCase}required/>
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="IDENTITY">Identidad<span className="text-danger"> *</span></label>
@@ -81,7 +81,7 @@ const EditClientForm = ({rowCOD, setSendRequest, setMessageError}) => {
                 </div>
                 <div className="col-md-6 mt-2">
                     <label className='form-label' htmlFor="ADDRESS">Dirección<span className="text-danger"> *</span></label>
-                    <textarea onChange={handleInputChange} value={formEditClient.ADDRESS} className='form-control' name='ADDRESS'  rows='3' cols='4' type="text" pattern="^[a-zA-Z0-9ñÑØº-_ ]+$" onInput={toUpperCase} required/>
+                    <textarea onChange={handleInputChange} value={formEditClient.ADDRESS} className='form-control' name='ADDRESS'  rows='5' cols='10' type="text" pattern="^[a-zA-Z0-9ñÑØº-_ ]+$" onInput={toUpperCase} maxLength={50}  wrap="hard" required/>
                 </div>
                 <div className="col-md-6">
                     <label className='form-label' htmlFor="RTN">RTN<span className="text-danger"> *</span></label>

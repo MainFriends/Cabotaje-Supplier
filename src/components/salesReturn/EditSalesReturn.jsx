@@ -48,8 +48,8 @@ const EditSalesReturn = ({setSendRequest, rowCOD}) => {
                     <input className='form-control' value={`${formEditSalesReturn.NAM_PRODUCT}`} name='PRODUCT' type="text" required disabled/>
                 </div>
                 <div className="col-md-5 mt-2">
-                    <label className='form-label' htmlFor="DESCRIPTION">Descripción <span className="text-danger"> *</span> </label>
-                    <textarea className='form-control' value={formEditSalesReturn.DESCRIPTION} onChange={handleInputChange} name='DESCRIPTION' type="text" required/>
+                    <label className='form-label' htmlFor="DESCRIPTION">Descripción</label>
+                    <textarea className='form-control' value={formEditSalesReturn.DESCRIPTION} onChange={handleInputChange} name='DESCRIPTION' type="text"  maxLength={50}  wrap="hard"  required/>
                 </div>
                 <div className="col-md-3 mt-2">
                     <label className='form-label' htmlFor="CANT">Cantidad <span className="text-danger"> *</span> </label>

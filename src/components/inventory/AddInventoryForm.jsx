@@ -54,7 +54,7 @@ const AddInventoryForm = ({setSendRequest, setMessageError}) => {
             </div>
             <div className="col-md-6">
                 <label className='form-label' htmlFor="DES_PRODUCT">Descripción</label>
-                <textarea onChange={handleInputChange} className='form-control' name='DES_PRODUCT' type="text" required/>
+                <textarea onChange={handleInputChange} className='form-control' name='DES_PRODUCT' maxLength={50}  wrap="hard" type="text" required/>
             </div>
             <div className="col-md-3 mt-2">
                 <label className='form-label' htmlFor="COD_TYP_PRODUCT">Tipo Producto</label>
