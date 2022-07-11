@@ -16,49 +16,6 @@ import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 import logo from '../../../assets/js/logo';
 
-const dowlandPDFUser = (filteredItems) => {
-    const doc = new jsPDF();
-    doc.text('Reporte de Usuarios - Cabotaje Supplier',55,30);
-    const image = logo
-    doc.addImage(image, 'PNG', 10, 10,20,30,'Cabotaje');
-
-    const nombre = JSON.parse(localStorage.getItem("userSession"));
-    const nombreReporte = `${nombre.FIRST_NAME} ${nombre.LAST_NAME}`
-    doc.setFontSize(10)
-    doc.text(`${moment(new Date()).format('DD-MM-YYYY, h:mm:ss a')}` ,165, 13)
-    doc.text(`Impreso por: ${nombreReporte}`, 165, 7)
-    
-    const row = filteredItems.map(fila => {
-        const fecha = fila.DAT_BIRTHDAY;
-        return [
-            fila.COD_USER,
-            fila.IDENTITY,
-            fila.FIRST_NAME,
-            fila.LAST_NAME,
-            fila.USER_EMAIL,
-            fila.NAM_ROLE,
-            fila.GENDER,
-            fila.NUM_PHONE_ONE,
-            fila.NUM_PHONE_TWO === 0 ? "Sin número" : fila.NUM_PHONE_TWO,
-            fila.NUM_REFERENCE,
-            moment(fecha).format('DD-MM-YYYY'),
-            fila.NAM_CITY,
-            fila.ADDRESS,
-            fila.NAM_STATUS
-        ]
-    })  
-    doc.autoTable({
-        head: [['#', 'ID', 'Nombre', 'Apellido', 'Email', 'Rol', 'Genero', 'Tel. 1', 'Tel. 2', 'Tel. Ref', 'Fecha de nacimiento', 'Ciudad','Direccion','Estado']],
-        body: row.sort(),
-        startY: 45,
-        styles: {
-            fontSize: 5
-        }
-    })
-
-    doc.save('Usuarios - Cabotaje Supplier.pdf')
-}
-
 const Usuarios = () => {
     const [rows, setRows] = useState([]);
     const [filterText, setFilterText] = useState('');
@@ -68,6 +25,46 @@ const Usuarios = () => {
     const [rowCOD, setRowCOD] = useState(null);
     const [permissions, setPermissions] = useState({});
 
+    const dowlandPDFUser = () => {
+        const doc = new jsPDF();
+        doc.text('Reporte de Usuarios - Cabotaje Supplier',55,30);
+        const image = logo
+        doc.addImage(image, 'PNG', 10, 10,20,30,'Cabotaje');
+        
+        const row = rows.map(fila => {
+            const fecha = fila.DAT_BIRTHDAY;
+            return [
+                fila.COD_USER,
+                fila.IDENTITY,
+                fila.FIRST_NAME,
+                fila.LAST_NAME,
+                fila.USER_EMAIL,
+                fila.NAM_ROLE,
+                fila.GENDER,
+                fila.NUM_PHONE_ONE,
+                fila.NUM_PHONE_TWO === 0 ? "Sin número" : fila.NUM_PHONE_TWO,
+                fila.NUM_REFERENCE,
+                moment(fecha).format('DD-MM-YYYY'),
+                fila.NAM_CITY,
+                fila.ADDRESS,
+                fila.NAM_STATUS
+            ]
+        })  
+        doc.autoTable({
+            head: [['#', 'ID', 'Nombre', 'Apellido', 'Email', 'Rol', 'Genero', 'Tel. 1', 'Tel. 2', 'Tel. Ref', 'Fecha de nacimiento', 'Ciudad','Direccion','Estado']],
+            body: row.sort(),
+            startY: 45,
+            styles: {
+                fontSize: 5
+            }
+        })
+
+        doc.save('Usuarios - Cabotaje Supplier.pdf')
+    }
+
+
+    
+    
     //definir las columnas
     const columns = [
         {
@@ -237,7 +234,7 @@ const Usuarios = () => {
                         highlightOnHover
                         striped
                         persistTableHead
-                        actions={<button onClick={() => dowlandPDFUser(filteredItems)} className='btn btn-danger btn-sm'><i className="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}
+                        actions={<button onClick={() => dowlandPDFUser()} className='btn btn-danger btn-sm'><i className="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}
 
                     />
 

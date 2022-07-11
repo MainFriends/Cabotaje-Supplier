@@ -17,43 +17,37 @@ import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 import logo from '../../../assets/js/logo'; 
 
-const dowlandPdf = (filteredItems) => {
-    const doc = new jsPDF();
-    doc.text('Reporte de Movimientos - Cabotaje Supplier',50,30); 
-    const image = logo
-    doc.addImage(image, 'PNG', 10, 10,20,30,'Cabotaje'); 
-
-    const nombre = JSON.parse(localStorage.getItem("userSession"));
-    const nombreReporte = `${nombre.FIRST_NAME} ${nombre.LAST_NAME}`
-    doc.setFontSize(10)
-    doc.text(`${moment(new Date()).format('DD-MM-YYYY, h:mm:ss a')}` ,165, 13)
-    doc.text(`Impreso por: ${nombreReporte}`, 165, 7)
-
-    const row = filteredItems.map(fila => {
-        const fecha = fila.DAT_TRANSACTION
-        return [
-            fila.COD_PRODUCT,
-            fila.NAM_PRODUCT,
-            fila.TYP_TRANSACTION,
-            fila.CANT,
-            fila.NUM_LOT,
-            moment(fecha).format('DD-MM-YYYY')
-        ]
-    })  
-    doc.autoTable({
-        head: [['#', 'Producto', 'Tip. de transaccion', 'Cant. productos', 'N. Lote', 'Fecha de merma']],
-        body: row.sort(),
-        startY: 45
-    })
-
-    doc.save('Movimientos de inventario - Cabotaje Supplier.pdf')
-}
-
 const MovimientosInventario = () => {
     const [rows, setRows] = useState([]);
     const [filterText, setFilterText] = useState('');
     const [loading, setLoading] = useState(true);
     const [sendRequest, setSendRequest] = useState('false');
+
+    const dowlandPdf = () => {
+        const doc = new jsPDF();
+        doc.text('Reporte de Movimientos - Cabotaje Supplier',50,30); 
+        const image = logo
+        doc.addImage(image, 'PNG', 10, 10,20,30,'Cabotaje'); 
+
+        const row = rows.map(fila => {
+            const fecha = fila.DAT_TRANSACTION
+            return [
+                fila.COD_PRODUCT,
+                fila.NAM_PRODUCT,
+                fila.TYP_TRANSACTION,
+                fila.CANT,
+                fila.NUM_LOT,
+                moment(fecha).format('DD-MM-YYYY')
+            ]
+        })  
+        doc.autoTable({
+            head: [['#', 'Producto', 'Tip. de transaccion', 'Cant. productos', 'N. Lote', 'Fecha de merma']],
+            body: row.sort(),
+            startY: 45
+        })
+
+        doc.save('Movimientos de inventario - Cabotaje Supplier.pdf')
+    }
     
     //definir las columnas
     const columns = [
@@ -136,7 +130,7 @@ const MovimientosInventario = () => {
                         highlightOnHover
                         striped
                         persistTableHead 
-                        actions={<button onClick={() => dowlandPdf(filteredItems)} className='btn btn-danger btn-sm'><i className="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}
+                        actions={<button onClick={() => dowlandPdf()} className='btn btn-danger btn-sm'><i className="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}
                     />
                 </div>
             </div> 

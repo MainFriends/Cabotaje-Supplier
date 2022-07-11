@@ -18,36 +18,6 @@ import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 import logo from '../../../assets/js/logo';  
 
-const dowlandPdfPay = (filteredItems) => {
-    const doc = new jsPDF();
-    doc.text('Reporte de Cuentas por Pagar - Cabotaje Supplier',40,30);  
-    const image = logo
-    doc.addImage(image, 'PNG', 10, 10,20,30,'Cabotaje');
-
-    const nombre = JSON.parse(localStorage.getItem("userSession"));
-    const nombreReporte = `${nombre.FIRST_NAME} ${nombre.LAST_NAME}`
-    doc.setFontSize(10)
-    doc.text(`${moment(new Date()).format('DD-MM-YYYY, h:mm:ss a')}` ,165, 13)
-    doc.text(`Impreso por: ${nombreReporte}`, 165, 7)
-
-    const row = filteredItems.map(fila => {
-        const fecha = fila.DATE_LIMIT
-        return [
-            fila.COD_ACC_PAY,
-            fila.DESCRIPTION,
-            fila.TOT_BALANCE,
-            moment(fecha).format('DD-MM-YYYY')
-        ]
-    })  
-    doc.autoTable({
-        head: [['Codigo', 'Descripcion', 'Monto', 'Fecha Limite']],
-        body: row.sort(),
-        startY: 45
-    })
-
-    doc.save('Cuentas por pagar - Cabotaje Supplier.pdf')
-}
-
 const CuentasPagar = () => {
     const [rows, setRows] = useState([]);
     const [filterText, setFilterText] = useState('');
@@ -56,6 +26,30 @@ const CuentasPagar = () => {
     const [sendRequest, setSendRequest] = useState(false);
     const [rowCOD, setRowCOD] = useState(null);
     const [permissions, setPermissions] = useState({});
+
+    const dowlandPdfPay = () => {
+        const doc = new jsPDF();
+        doc.text('Reporte de Cuentas por Pagar - Cabotaje Supplier',40,30);  
+        const image = logo
+        doc.addImage(image, 'PNG', 10, 10,20,30,'Cabotaje');
+
+        const row = rows.map(fila => {
+            const fecha = fila.DATE_LIMIT
+            return [
+                fila.COD_ACC_PAY,
+                fila.DESCRIPTION,
+                fila.TOT_BALANCE,
+                moment(fecha).format('DD-MM-YYYY')
+            ]
+        })  
+        doc.autoTable({
+            head: [['Codigo', 'Descripcion', 'Monto', 'Fecha Limite']],
+            body: row.sort(),
+            startY: 45
+        })
+
+        doc.save('Cuentas por pagar - Cabotaje Supplier.pdf')
+    }
     
     //definir las columnas
     const columns = [
@@ -153,7 +147,7 @@ const CuentasPagar = () => {
                         highlightOnHover
                         striped
                         persistTableHead 
-                        actions={<button onClick={() => dowlandPdfPay(filteredItems)} className='btn btn-danger btn-sm'><i className="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}
+                        actions={<button onClick={() => dowlandPdfPay()} className='btn btn-danger btn-sm'><i className="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}
                     />
 
                     <Modal 

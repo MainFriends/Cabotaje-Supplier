@@ -17,6 +17,14 @@ const AddAccountPayForm = ({setSendRequest, setMessageError}) => {
         });
     }
 
+    var numero = document.getElementById('numero');
+
+function comprueba(valor){
+  if(valor.value < 0){
+    valor.value = 1;
+  }
+}
+
     const handleSubmitAccountPayForm = (e) => {
         e.preventDefault();
         axios.post('/accounts-pay', formAddAccountPay, token())
@@ -42,12 +50,12 @@ const AddAccountPayForm = ({setSendRequest, setMessageError}) => {
                     <input onChange={handleInputChange} className='form-control' name='COD_INVOICE' type="number" required/>
                 </div>
                 <div className="col-md-8 mt-3">
-                    <label className='form-label' htmlFor="DESCRIPTION">Descripción</label>
-                    <textarea onChange={handleInputChange} className='form-control' name='DESCRIPTION' maxLength={50}  wrap="hard" type="text" required/>
+                    <label className='form-label' htmlFor="DESCRIPTION">Descripción <span className="text-danger"> *</span></label>
+                    <textarea onChange={handleInputChange} className='form-control' name='DESCRIPTION' type="text" required/>
                 </div>
                 <div className="col-md-3 mt-3">
                     <label className='form-label' htmlFor="TOT_BALANCE">Monto <span className="text-danger"> *</span></label>
-                    <input onChange={handleInputChange} className='form-control' name='TOT_BALANCE' type="number" required/>
+                    <input min="1" pattern="[0-9]+" onChange={handleInputChange} className='form-control' name='TOT_BALANCE' type="number" required/>
                 </div>
                 <div className="col-md-3 mt-3">
                     <label className='form-label' htmlFor="DATE_LIMIT">Fecha Límite <span className="text-danger"> *</span> </label>

@@ -40,7 +40,7 @@ const AddFeesReceivable = ({rowCOD, setMessageError, setSendRequest}) => {
             <div className="row mb-4">
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="AMOUNT">Monto <span className="text-danger"> *</span> </label>
-                    <input onChange={handleInputChange} className='form-control' name='AMOUNT' type="number" required/>
+                    <input min="1" pattern="[0-9]+" onChange={handleInputChange} className='form-control' name='AMOUNT' type="number" required/>
                 </div>
                 <div className='col-md-4'>
                     <label className='form-label' htmlFor='COD_TYP_PAY'>Forma de Pago <span className="text-danger"> *</span> </label>

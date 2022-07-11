@@ -57,7 +57,7 @@ const EditDecreaseForm = ({rowCOD, setSendRequest, setMessageError}) => {
         <div className="row mb-4">
         <div className="col-md-6">
                 <label className='form-label' htmlFor="COD_PRODUCT">Código producto <span className="text-danger"> *</span></label>
-                <input onChange={handleInputChange} value = {formEditDecreas.COD_PRODUCT} className='form-control' name='COD_PRODUCT' type="number" required/>
+                <input min = "1" pattern="[0-9]+" onChange={handleInputChange} value = {formEditDecreas.COD_PRODUCT} className='form-control' name='COD_PRODUCT' type="number" required/>
             </div>
             <div className="col-md-6">
                 <label className='form-label' htmlFor="CONCEPT">Concepto <span className="text-danger"> *</span></label>
@@ -65,11 +65,11 @@ const EditDecreaseForm = ({rowCOD, setSendRequest, setMessageError}) => {
             </div>
             <div className="col-md-3 mt-2">
                 <label className='form-label' htmlFor="CANT_PRODUCTS">Cantidad Productos <span className="text-danger"> *</span></label>
-                <input onChange={handleInputChange} value = {formEditDecreas.CANT_PRODUCTS} className='form-control' name='CANT_PRODUCTS' type="number" required/>
+                <input min = "1" pattern="[0-9]+" onChange={handleInputChange} value = {formEditDecreas.CANT_PRODUCTS} className='form-control' name='CANT_PRODUCTS' type="number" required/>
             </div>
             <div className="col-md-3 mt-2">
                 <label className='form-label' htmlFor="NUM_LOT">Número de lote <span className="text-danger"> *</span></label>
-                <input onChange={handleInputChange} value = {formEditDecreas.NUM_LOT} className='form-control' name='NUM_LOT' type="number" required/>
+                <input onChange={handleInputChange} value = {formEditDecreas.NUM_LOT} className='form-control' name='NUM_LOT' type="text" required/>
             </div>
             <div className="col-md-3 mt-2">
                 <label className='form-label' htmlFor="DAT_DECREASE">Fecha merma <span className="text-danger"> *</span></label>

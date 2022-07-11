@@ -103,7 +103,7 @@ const AddRoleForm = ({setSendRequest, setMessageError}) => {
             </div>
             <div className="col-md-7">
                 <label className='form-label'>Descripción del rol</label>
-                <textarea onChange={handleInputChange} className='form-control' rows={2} name='DES_ROLE' type="text"  maxLength={50}  wrap="hard"  required/>
+                <textarea onChange={handleInputChange} className='form-control' rows={2} name='DES_ROLE' type="text" required/>
             </div>
         </div>
         <h6 className='text-muted mb-4'>Otorgar permisos</h6>

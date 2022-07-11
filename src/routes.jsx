@@ -30,8 +30,6 @@ import Roles from "./pages/Dashboard/Seguridad/roles-permisos";
 import Page401 from "./pages/Error-Pages/Page401";
 import Page404 from "./pages/Error-Pages/Page404";
 import Bitacora from "./pages/Dashboard/Seguridad/Bitacora";
-import Welcome from "./pages/Dashboard/Welcome.jsx";
-
 
 const Pages = () => {
 
@@ -100,7 +98,6 @@ const Pages = () => {
             <Route path="graficas" element={<Graficas />}/>
             <Route path="roles-permisos" element={<Roles />}/>
             <Route path="bitacora" element={<Bitacora />}/>
-            <Route path="welcome" element={<Welcome /> }/>
         </Route>
         <Route path="/*" element={isLogged ? (<Page404 />) : (<Navigate to='/'/>)}></Route>
     </Routes>

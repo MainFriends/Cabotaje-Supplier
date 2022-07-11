@@ -13,42 +13,6 @@ import AddRoleForm from '../../../components/roles/AddRoleForm';
 import ViewPermissions from '../../../components/roles/ViewPermissions';
 import AddPermissions from '../../../components/roles/AddPermissions';
 
-import jsPDF from 'jspdf'
-import 'jspdf-autotable';
-import logo from '../../../assets/js/logo';
-import moment from 'moment';
-
-const dowlandPdfRoles = (filteredItems) => {
-    const doc = new jsPDF();
-    doc.text('Reporte de Roles - Cabotaje Supplier',55,30); 
-    const image = logo
-    doc.addImage(image, 'PNG', 10, 10,20,30,'Cabotaje');
-
-    const nombre = JSON.parse(localStorage.getItem("userSession"));
-    const nombreReporte = `${nombre.FIRST_NAME} ${nombre.LAST_NAME}`
-    doc.setFontSize(10)
-    doc.text(`${moment(new Date()).format('DD-MM-YYYY, h:mm:ss a')}` ,165, 13)
-    doc.text(`Impreso por: ${nombreReporte}`, 165, 7)
-
-    const row = filteredItems.map(fila => {
-        return [
-            fila.COD_ROLE,
-            fila.NAM_ROLE,
-            fila.DES_ROLE
-        ]
-    })  
-    doc.autoTable({
-        head: [['#', 'Rol', 'Descripcion']],
-        body: row.sort(),
-        startY: 45,
-        styles: {
-            fontSize: 8
-        }
-    })
-
-    doc.save('Roles - Cabotaje Supplier.pdf')
-}
-
 const Roles = () => {
     const [rows, setRows] = useState([]);
     const [filterText, setFilterText] = useState('');
@@ -147,7 +111,6 @@ const Roles = () => {
                         highlightOnHover
                         striped
                         persistTableHead 
-                        actions={<button onClick={() => dowlandPdfRoles(filteredItems)} className='btn btn-danger btn-sm'><i className="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}
                     />
 
                     <Modal 

@@ -17,39 +17,6 @@ import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 import logo from '../../../assets/js/logo';
 
-const dowlandPdfOrder = (filteredItems) => {
-    const doc = new jsPDF();
-    doc.text('Reporte de Pedidos - Cabotaje Supplier',55,30);    
-    const image = logo
-    doc.addImage(image, 'PNG', 10, 10,20,30,'Cabotaje');
-
-    const nombre = JSON.parse(localStorage.getItem("userSession"));
-    const nombreReporte = `${nombre.FIRST_NAME} ${nombre.LAST_NAME}`
-    doc.setFontSize(10)
-    doc.text(`${moment(new Date()).format('DD-MM-YYYY, h:mm:ss a')}` ,165, 13)
-    doc.text(`Impreso por: ${nombreReporte}`, 165, 7)
-    
-    const row = filteredItems.map(fila => {
-        const fecha = fila.DAT_ORDER
-        const fechaRequired = fila.DAT_REQUIRED
-        return  [
-            fila.COD_ORDER,
-            fila.NAM_SUPPLIER,
-            moment(fecha).format('DD-MM-YYYY'),
-            moment(fechaRequired).format('DD-MM-YYYY'),
-            fila.NAM_STATUS,
-            fila.USER_NAME
-        ]
-    })  
-    doc.autoTable({
-        head: [['# De pedido', 'Proveedor', 'Fecha de pedido', 'Fecha requerida', 'Estado', 'Empleado']],
-        body: row.sort(),
-        startY: 45,
-    })
-
-    doc.save('Pedidos - Cabotaje Supplier.pdf')
-}
-
 const Pedidos = () => {
     const [rows, setRows] = useState([]);
     const [filterText, setFilterText] = useState('');
@@ -58,6 +25,33 @@ const Pedidos = () => {
     const [sendRequest, setSendRequest] = useState(false);
     const [rowCOD, setRowCOD] = useState(null);
     const [permissions, setPermissions] = useState({});
+
+    const dowlandPdfOrder = () => {
+        const doc = new jsPDF();
+        doc.text('Reporte de Pedidos - Cabotaje Supplier',55,30);    
+        const image = logo
+        doc.addImage(image, 'PNG', 10, 10,20,30,'Cabotaje');
+        
+        const row = rows.map(fila => {
+            const fecha = fila.DAT_ORDER
+            const fechaRequired = fila.DAT_REQUIRED
+            return  [
+                fila.COD_ORDER,
+                fila.NAM_SUPPLIER,
+                moment(fecha).format('DD-MM-YYYY'),
+                moment(fechaRequired).format('DD-MM-YYYY'),
+                fila.NAM_STATUS,
+                fila.USER_NAME
+            ]
+        })  
+        doc.autoTable({
+            head: [['# De pedido', 'Proveedor', 'Fecha de pedido', 'Fecha requerida', 'Estado', 'Empleado']],
+            body: row.sort(),
+            startY: 45,
+        })
+
+        doc.save('Pedidos - Cabotaje Supplier.pdf')
+    }
     
     //definir las columnas
     const columns = [
@@ -177,7 +171,7 @@ const Pedidos = () => {
                         highlightOnHover
                         striped
                         persistTableHead 
-                        actions={<button onClick={() => dowlandPdfOrder(filteredItems)} className='btn btn-danger btn-sm'><i className="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}
+                        actions={<button onClick={() => dowlandPdfOrder()} className='btn btn-danger btn-sm'><i className="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}
 
                     />
                     <Modal 

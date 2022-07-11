@@ -11,40 +11,7 @@ import axios from '../../../config/axios';
 import token from '../../../helpers/getToken';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
-import logo from '../../../assets/js/logo';
-import moment from 'moment';  
-
-const dowlandPdfSupplier = (filteredItems) => {
-    const doc = new jsPDF();
-    doc.text('Reporte de Proveedores - Cabotaje Supplier',50,30);
-    const image = logo
-    doc.addImage(image, 'PNG', 10, 10,20,30,'Cabotaje'); 
-
-    const nombre = JSON.parse(localStorage.getItem("userSession"));
-    const nombreReporte = `${nombre.FIRST_NAME} ${nombre.LAST_NAME}`
-    doc.setFontSize(10)
-    doc.text(`${moment(new Date()).format('DD-MM-YYYY, h:mm:ss a')}` ,165, 13)
-    doc.text(`Impreso por: ${nombreReporte}`, 165, 7)
-    
-    const row = filteredItems.map(fila => [
-        fila.NAM_SUPPLIER,
-        fila.NAM_CONTACT,
-        fila.LAST_NAM_CONTACT,
-        fila.ADDRESS,
-        fila.NUM_PHONE_ONE,
-        fila.NUM_PHONE_TWO,
-        fila.EMAIL,
-        fila.NAM_CITY,
-        fila.ZIP_CODE
-    ])  
-    doc.autoTable({
-        head: [['Proveedor', 'Nombre del contacto', 'Apellido del contacto', 'Direccion', 'Tel 1', 'Tel 2', 'Email', 'Ciudad', 'Codigo postal']],
-        body: row.sort(),
-        startY: 45,
-    })
-
-    doc.save('Proveedores - Cabotaje Supplier.pdf')
-}
+import logo from '../../../assets/js/logo';   
 
 const Proveedor= () => {
     const [rows, setRows] = useState([]);
@@ -54,6 +21,32 @@ const Proveedor= () => {
     const [sendRequest, setSendRequest] = useState(false);
     const [rowCOD, setRowCOD] = useState(null);
     const [permissions, setPermissions] = useState({});
+
+    const dowlandPdfSupplier = () => {
+        const doc = new jsPDF();
+        doc.text('Reporte de Proveedores - Cabotaje Supplier',50,30);
+        const image = logo
+        doc.addImage(image, 'PNG', 10, 10,20,30,'Cabotaje'); 
+        
+        const row = rows.map(fila => [
+            fila.NAM_SUPPLIER,
+            fila.NAM_CONTACT,
+            fila.LAST_NAM_CONTACT,
+            fila.ADDRESS,
+            fila.NUM_PHONE_ONE,
+            fila.NUM_PHONE_TWO,
+            fila.EMAIL,
+            fila.NAM_CITY,
+            fila.ZIP_CODE
+        ])  
+        doc.autoTable({
+            head: [['Proveedor', 'Nombre del contacto', 'Apellido del contacto', 'Direccion', 'Tel 1', 'Tel 2', 'Email', 'Ciudad', 'Codigo postal']],
+            body: row.sort(),
+            startY: 45,
+        })
+
+        doc.save('Proveedores - Cabotaje Supplier.pdf')
+    }
     
     //definir las columnas
     const columns = [
@@ -176,7 +169,7 @@ const Proveedor= () => {
                         highlightOnHover
                         striped
                         persistTableHead
-                        actions={<button onClick={() => dowlandPdfSupplier(filteredItems)} className='btn btn-danger btn-sm'><i className="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}
+                        actions={<button onClick={() => dowlandPdfSupplier()} className='btn btn-danger btn-sm'><i className="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}
                     />
 
                     <Modal 

@@ -95,7 +95,7 @@ const AddUserForm = ({ setSendRequest, setMessageError }) => {
             minlenght={13}
             maxLength={13}
             type="text"
-            pattern="^[0-1][0-9]{12}" 
+            pattern="^[0-1][0-9]{12}"
             title="Identidad debe comenzar con cero o uno, contener 13 carácteres númericos, sin guiones ni espacios."
             required
           />
@@ -112,8 +112,6 @@ const AddUserForm = ({ setSendRequest, setMessageError }) => {
             pattern="^[a-zA-ZñÑáéíóú ]+$"
             title="Primer nombre no debe contener carácteres especiales y/o númericos."
             onInput={toUpperCase}
-            minLength={2}
-            maxLength={15}
             required
           />
         </div>
@@ -129,9 +127,6 @@ const AddUserForm = ({ setSendRequest, setMessageError }) => {
             pattern="^[a-zA-ZñÑáéíóú ]+$"
             title="Segundo nombre no debe contener carácteres especiales y/o númericos."
             onInput={toUpperCase}
-            minLength={2}
-            maxLength={15}
-            
             required
           />
         </div>
@@ -147,8 +142,6 @@ const AddUserForm = ({ setSendRequest, setMessageError }) => {
             pattern="^[a-zA-ZñÑáéíóú ]+$"
             title="Apellido no debe contener carácteres especiales y/o númericos."
             onInput={toUpperCase}
-            minLength={2}
-            maxLength={15}
             required
           />
         </div>
@@ -260,7 +253,6 @@ const AddUserForm = ({ setSendRequest, setMessageError }) => {
             type="text"
             pattern="^[a-zA-Z0-9ñÑØº-_ ]+$"
             onInput={toUpperCase}
-            maxLength={50}  wrap="hard" 
             required
           />
         </div>

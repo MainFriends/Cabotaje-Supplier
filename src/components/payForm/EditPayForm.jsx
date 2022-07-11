@@ -2,8 +2,11 @@ import { useState, useEffect } from "react";
 import axios from "../../config/axios";
 import token from "../../helpers/getToken";
 import moment from "moment";
+import AlertError from "../AlertError";
+import e from "cors";
 
 const EditPayForm = ({rowCOD, setSendRequest, setMessageError}) => {
+    const [errorMessage, setErrorMessage] = useState('');
     const [formEditPayForm, setFormEditPayForm] = useState({
         HOURS_WORKED: 0,
         AMO_GROSS: 0,
@@ -31,7 +34,7 @@ const EditPayForm = ({rowCOD, setSendRequest, setMessageError}) => {
             [e.target.name]: e.target.value
         })
     }
-
+    
     useEffect(() => {
         getNetSalary()
     }, [HOURS_WORKED, AMO_GROSS, BONUS, TOT_DEDUCTIONS])
@@ -52,6 +55,15 @@ const EditPayForm = ({rowCOD, setSendRequest, setMessageError}) => {
     const handleSubmitPayForm = (e) => {
         e.preventDefault();
 
+        if(formEditPayForm.TOT_DEDUCTIONS > netSalary && netSalary <= 0){
+            setErrorMessage('Las deducciones no pueden ser mayores o igual al salario');
+            setTimeout(() => {
+            setErrorMessage('')
+         }, 3000);
+         return
+        }
+
+
         axios.put(`/pay-form/${rowCOD}`, formEditPayForm, token())
            .then(res => {
                 document.querySelector('#closeEditPayForm').click();
@@ -66,6 +78,18 @@ const EditPayForm = ({rowCOD, setSendRequest, setMessageError}) => {
            })
     }
 
+    
+    useEffect(() => {
+        if(formEditPayForm.TOT_DEDUCTIONS >= netSalary && netSalary < 0){
+            setErrorMessage('Las deducciones no pueden ser mayores al salario');
+            setTimeout(() => {
+            setErrorMessage('')
+         }, 3000);
+         return
+        }
+     } , [netSalary])
+     
+
 
     return(
         <form id='editPayForm' onSubmit={handleSubmitPayForm} action='#'>
@@ -76,23 +100,23 @@ const EditPayForm = ({rowCOD, setSendRequest, setMessageError}) => {
             </div>
             <div className="col-md-3">
                 <label className='form-label mt-2' htmlFor="HOURS_WORKED">Dias Trabajados <span className="text-danger"> *</span> </label>
-                <input  onChange={handleInputChange} value={formEditPayForm?.HOURS_WORKED} className='form-control' name='HOURS_WORKED' type="number" required/>
+                <input  min="1" pattern="[0-9]+" onChange={handleInputChange} value={formEditPayForm?.HOURS_WORKED} className='form-control' name='HOURS_WORKED' type="number" required/>
             </div>
             <div className="col-md-3">
                 <label className='form-label mt-2' htmlFor="AMO_GROSS">Salario Base <span className="text-danger"> *</span> </label>
-                <input onChange={handleInputChange} value={formEditPayForm?.AMO_GROSS} className='form-control' name='AMO_GROSS' type="number" required/>
+                <input min="1" pattern="[0-9]+" onChange={handleInputChange} value={formEditPayForm?.AMO_GROSS} className='form-control' name='AMO_GROSS' type="number" required/>
             </div>
             <div className="col-md-3">
                 <label className='form-label mt-2' htmlFor="BONUS">Bonificaciones</label>
-                <input onChange={handleInputChange} value={formEditPayForm?.BONUS} className='form-control' name='BONUS' type="number" required/>
+                <input min="1" pattern="[0-9]+" onChange={handleInputChange} value={formEditPayForm?.BONUS} className='form-control' name='BONUS' type="number" required/>
             </div>
             <div className="col-md-3">
                 <label className='form-label mt-2' htmlFor="TOT_DEDUCTIONS">Deducciones <span className="text-danger"> *</span> </label>
-                <input onChange={handleInputChange} value={formEditPayForm?.TOT_DEDUCTIONS} className='form-control' name='TOT_DEDUCTIONS' type="number" required/>
+                <input min="1" pattern="[0-9]+" onChange={handleInputChange} value={formEditPayForm?.TOT_DEDUCTIONS} className='form-control' name='TOT_DEDUCTIONS' type="number" required/>
             </div>
             <div className="col-md-3">
                 <label className='form-label mt-2' htmlFor="NET_SALARY">Salario Neto <span className="text-danger"> *</span> </label>
-                <input className='form-control' value={netSalary} name='NET_SALARY' type="number" required disabled/>
+                <input min="1" pattern="[0-9]+" onChange={handleInputChange} className='form-control' value={netSalary} name='NET_SALARY' type="number" required disabled/>
             </div>
             <div className="col-md-4">
                 <label className='form-label mt-2' htmlFor="DAT_PAYMENT">Fecha de Pago <span className="text-danger"> *</span> </label>
@@ -101,8 +125,9 @@ const EditPayForm = ({rowCOD, setSendRequest, setMessageError}) => {
         </div>
         <div className="modal-footer">
             <button type="button" id='closeEditPayForm' className="btn btn-primary" data-dismiss="modal">Cerrar</button>
-            <button type='submit' className="btn btn-success">Guardar</button>
+            <button type='submit' id='succesEditPayForm' className="btn btn-success">Guardar</button>
         </div>
+        {errorMessage ? <AlertError message={errorMessage} /> : null} 
     </form>
     )
 }

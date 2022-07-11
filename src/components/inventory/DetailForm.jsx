@@ -91,7 +91,7 @@ const DetailForm = ({setSendRequest, setMessageError}) => {
             <div className="row mb-4">
                 <div className="col-2">
                     <label className='form-label' htmlFor="COD_PRODUCT">Código <span className="text-danger"> *</span></label>
-                    <input onChange={handleInputChange} name='COD_PRODUCT' className='form-control' type="number" min='1' required/>
+                    <input min = "1" pattern="[0-9]+" onChange={handleInputChange} name='COD_PRODUCT' className='form-control' type="number"  required/>
                 </div>
                 <div className="col-6">
                     <label className='form-label'>Producto <span className="text-danger"> *</span></label>
@@ -105,11 +105,11 @@ const DetailForm = ({setSendRequest, setMessageError}) => {
             <div className="row mb-4">
                 <div className="col-2">
                     <label className='form-label' htmlFor="CANT_PRODUCTS">Cantidad <span className="text-danger"> *</span></label>
-                    <input onChange={handleInputChange} className='form-control' name='CANT_PRODUCTS' type="number" min='1' required/>
+                    <input min = "1" pattern="[0-9]+" onChange={handleInputChange} className='form-control' name='CANT_PRODUCTS' type="number" required/>
                 </div>
                 <div className="col-3">
                     <label className='form-label' htmlFor="NUM_LOT">Número de Lote <span className="text-danger"> *</span></label>
-                    <input onChange={handleInputChange} className='form-control' name='NUM_LOT' type="number" min='1' required/>
+                    <input onChange={handleInputChange} className='form-control' name='NUM_LOT' type="text" min='1' required/>
                 </div>
                 <div className="col-4">
                     <label className='form-label'>Estado <span className="text-danger"> *</span></label>
@@ -121,7 +121,7 @@ const DetailForm = ({setSendRequest, setMessageError}) => {
                 </div>
                 <div className="col-3">
                     <label className='form-label' htmlFor="COD_ORDER">Código de orden</label>
-                    <input onChange={handleOrder} className='form-control' name='COD_ORDER' type="number" min='1'/>
+                    <input min = "1" pattern="[0-9]+" onChange={handleOrder} className='form-control' name='COD_ORDER' type="number"/>
                 </div>
             </div>
             <div className="row mb-4">

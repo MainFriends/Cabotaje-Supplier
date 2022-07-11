@@ -17,7 +17,7 @@ const Graphics = () => {
             />  
           </div>
           <div className="col-4">
-          <Card 
+            <Card 
           titulo='Usuarios con más ventas'
           component={<DoughnutChartEmployee />}
             />  
