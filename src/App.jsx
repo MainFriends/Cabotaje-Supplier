@@ -1,5 +1,5 @@
 import { UserContextProvider } from "./context/UserContext";
-import Pages from "./routes";
+import Pages from "./Routes";
 
 const App = () => {
 
