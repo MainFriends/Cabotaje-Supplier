@@ -188,7 +188,6 @@ const EditUserForm = ({rowCOD, setSendRequest, setMessageError}) => {
             <select
                 value={formEditUser.GENDER}
                 onChange={handleInputChange}
-                defaultValue={""}
                 className="form-control"
                 name="GENDER"
                 type="text"
@@ -345,7 +344,6 @@ const EditUserForm = ({rowCOD, setSendRequest, setMessageError}) => {
                 <select
                     value={formEditUser.COD_STATUS}
                     onChange={handleInputChange}
-                    defaultValue={""}
                     className="form-control"
                     name="COD_STATUS"
                     type="text"

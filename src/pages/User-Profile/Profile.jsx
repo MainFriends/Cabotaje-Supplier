@@ -51,7 +51,9 @@ const Profile = () => {
         axios.get('/profile-picture', token())
             .then(res => {
                 const {IMG_USER} = res.data[0];
-                setProfilePicture(Buffer.from(IMG_USER).toString('base64'));
+                if(IMG_USER){
+                    setProfilePicture(Buffer.from(IMG_USER).toString('base64'));
+                }
                 setSendRequest(false);
             })
     }, [sendRequest])

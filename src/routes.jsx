@@ -5,11 +5,11 @@ import axios from './config/axios';
 import token from './helpers/getToken';
 
 //Pages
-import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard";
-import Facturar from "./pages/Dashboard/Facturar-Venta";
-import Facturas from "./pages/Dashboard/Ventas";
-import Compras from "./pages/Dashboard/Compras";
+import Login from "./pages/Login/Login";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import Facturar from "./pages/Dashboard/Facturar-Venta/Facturar";
+import Facturas from "./pages/Dashboard/Ventas/Facturas";
+import Compras from "./pages/Dashboard/Compras/Compras";
 import Pedidos from "./pages/Dashboard/Compras/Pedidos";
 import Usuarios from "./pages/Dashboard/Personas/Usuarios";
 import Clientes from "./pages/Dashboard/Personas/Clientes";
@@ -23,14 +23,14 @@ import CuentasPagar from "./pages/Dashboard/Contabilidad/CuentasPagar";
 import Devoluciones from "./pages/Dashboard/Contabilidad/Devoluciones";
 import Rebajas from "./pages/Dashboard/Contabilidad/Rebajas";
 import PlanillaPago from "./pages/Dashboard/Contabilidad/PlanillaPago";
-import Graficas from "./pages/Dashboard/Graficas";
-import Profile from './pages/User-Profile';
+import Graficas from "./pages/Dashboard/Graficas/Graphics";
+import Profile from './pages/User-Profile/Profile';
 import Categorias from "./pages/Dashboard/Produccion/Categorias";
-import Roles from "./pages/Dashboard/Seguridad/roles-permisos";
+import Roles from "./pages/Dashboard/Seguridad/Roles";
 import Page401 from "./pages/Error-Pages/Page401";
 import Page404 from "./pages/Error-Pages/Page404";
 import Bitacora from "./pages/Dashboard/Seguridad/Bitacora";
-import Welcome from "./pages/Dashboard/Welcome.jsx";
+import Welcome from "./pages/Dashboard/Welcome";
 
 
 const Pages = () => {
