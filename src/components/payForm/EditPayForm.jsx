@@ -75,7 +75,7 @@ const EditPayForm = ({rowCOD, setSendRequest, setMessageError}) => {
                 <input className='form-control' value={`${formEditPayForm?.FIRST_NAME} ${formEditPayForm?.LAST_NAME}`} name='EMPLOYEE' type="text" required disabled/>
             </div>
             <div className="col-md-3">
-                <label className='form-label mt-2' htmlFor="HOURS_WORKED">Dias Trabajados <span className="text-danger"> *</span> </label>
+                <label className='form-label' htmlFor="HOURS_WORKED">Dias Trabajados <span className="text-danger"> *</span> </label>
                 <input  onChange={handleInputChange} value={formEditPayForm?.HOURS_WORKED} className='form-control' name='HOURS_WORKED' type="number" required/>
             </div>
             <div className="col-md-3">

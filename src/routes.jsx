@@ -77,7 +77,7 @@ const Pages = () => {
 
     return (
     <Routes>
-        <Route path="/" element={isLogged ? (<Navigate to='/dashboard'/>) : (<Login />)}/>
+        <Route path="/" element={isLogged ? (<Navigate to='/dashboard/welcome'/>) : (<Login />)}/>
         <Route path="/profile" element={isLogged ? (<Profile />) : (<Navigate to='/'/>)}/>
         <Route path="/facturar" element={isLogged ? (facturar ? <Facturar /> : <Page401 />) : (<Navigate to='/'/>)}/>
         <Route path="/dashboard" element={isLogged ? (<Dashboard />) : (<Navigate to='/'/>)}>

@@ -94,7 +94,7 @@ const SidebarItems = () => {
     return (
         
         <>
-            <li className={ "nav-item " + (pathname === 'welcome' ? "active" : "")}>
+            <li className={ "nav-item " + (pathname === '/dashboard/welcome' ? "active" : "")}>
                 <NavLink className={handleActive} to="welcome">
                 <i className="mr-2 fa-solid fa-at"></i>
                 <span>Inicio</span>

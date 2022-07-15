@@ -88,11 +88,11 @@ const AddPayForm = ({setSendRequest, setMessageError}) => {
     return(
         <form id='addPayForm' onSubmit={handleSubmitPayForm} action='#'>
         <div className="row mb-4">
-            <div className="col-md-3">
-                <label className='form-label' htmlFor="COD_USER">Código de empleado</label>
+            <div className="col-md-4">
+                <label className='form-label' htmlFor="COD_USER">Código de empleado <span className="text-danger"> *</span></label>
                 <input onChange={handleInputChange} className='form-control' name='COD_USER' type="number" required/>
             </div>
-            <div className="col-md-7">
+            <div className="col-md-6">
                 <label className='form-label' htmlFor="EMPLOYEE">Empleado</label>
                 <input className='form-control' value={employeeName} name='EMPLOYEE' type="text" required disabled/>
             </div>

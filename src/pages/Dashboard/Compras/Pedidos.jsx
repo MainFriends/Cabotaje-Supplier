@@ -97,7 +97,7 @@ const Pedidos = () => {
             name: 'ACCIONES',
             button: true,
             cell: row => <>
-                <button className={'btn btn-sm ' + (row.NAM_STATUS === 'Recibido' ? 'btn-warning ' : 'btn-success ') + 'mr-1' + (!permissions.UPD ? ' disabled' : null)} onClick={() => {handleStatus(row.NAM_STATUS,row.COD_ORDER)}} title={'Marcar como ' + (row.NAM_STATUS === 'Recibido' ? 'En proceso' : 'Recibido')} >{row.NAM_STATUS === 'Recibido' ? <i className="fa-solid fa-truck"></i> : <i className="fa-solid fa-check-to-slot"></i>}</button>
+                <button className={'btn btn-sm ' + (row.NAM_STATUS === 'Recibido' ? 'btn-warning ' : 'btn-success ') + 'mr-1 ' + (!permissions.UPD ? ' disabled' : null)} onClick={() => {handleStatus(row.NAM_STATUS,row.COD_ORDER)}} title={'Marcar como ' + (row.NAM_STATUS === 'Recibido' ? 'En proceso' : 'Recibido')} >{row.NAM_STATUS === 'Recibido' ? <i className="fa-solid fa-truck"></i> : <i className="fa-solid fa-check-to-slot"></i>}</button>
                 <button className='btn btn-sm btn-primary mr-1' data-toggle="modal" data-target='#viewOrderDetail' onClick={() => setRowCOD(row.COD_ORDER)}><i className="fa-solid fa-eye"></i></button>
                 <button className={'btn btn-sm btn-danger ' + (!permissions.DEL ? 'disabled' : null)}onClick={() => handleDelete(row.COD_ORDER)}><i className="fa-solid fa-trash"></i></button>
             </>

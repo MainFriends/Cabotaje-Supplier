@@ -27,7 +27,7 @@ const AddSalesReturn = ({setSendRequest, setMessageError}) => {
             setProductName(`${NAM_PRODUCT}`)
         })
         .catch(err => {
-            setProductName('Producto no encontrado.')
+            setProductName('Producto no encontrado')
         })
  },[formAddSalesReturn.COD_PRODUCT]); 
 
@@ -55,8 +55,8 @@ const AddSalesReturn = ({setSendRequest, setMessageError}) => {
     return(
         <form id='addFormSalesReturn' onSubmit={handleSubmitSalesReturn} action='#'>
             <div className="row mb-4">
-                <div className="col-md-3">
-                    <label className='form-label' htmlFor="COD_PRODUCT">Código del Producto</label>
+                <div className="col-md-4">
+                    <label className='form-label' htmlFor="COD_PRODUCT">Código del Producto <span className="text-danger"> *</span></label>
                     <input onChange={handleInputChange}  className='form-control'  name='COD_PRODUCT' type="number" required/>
                 </div>
                 <div className="col-md-5">

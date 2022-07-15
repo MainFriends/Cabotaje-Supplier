@@ -74,7 +74,7 @@ const Categoria = () => {
             name: 'ACCIONES',
             button: true,
             cell: row => <>
-                <button className={'btn btn-sm btn-warning mr-1' + (!permissions.UPD ? ' disabled' : null)} onClick={() => {setRowCOD(row.COD_CATEGORY)}} data-toggle="modal" data-target='#editFormCategory'><i className="fa-solid fa-pen-to-square"></i></button>
+                <button className={'btn btn-sm btn-warning mr-1 ' + (!permissions.UPD ? ' disabled' : null)} onClick={() => {setRowCOD(row.COD_CATEGORY)}} data-toggle="modal" data-target='#editFormCategory'><i className="fa-solid fa-pen-to-square"></i></button>
                 <button className={'btn btn-sm btn-danger ' + (!permissions.DEL ? 'disabled' : null)} onClick={() => handleDelete(row.COD_CATEGORY) }><i className="fa-solid fa-trash"></i></button>
             </>
         }
