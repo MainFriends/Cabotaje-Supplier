@@ -4,10 +4,13 @@ import React from 'react'
 const Page404 = () => {
   return (
      <><div>
-      <title>404 Error Page</title>
+      <title> 404 Página de error  </title>
     </div>
 
     <div id="error-page">
+         <body>
+            
+        </body>
         <div class="content">
           <h2 class="header" data-text="404">404</h2>
 
@@ -15,11 +18,15 @@ const Page404 = () => {
             Opps! Página no encontrada
           </h4>
           <p>
-          Lo sentimos, la página que buscas no existe. 
+          Lo sentimos, la página que buscas no existe. Si crees que algo está mal, reporta el problema.
           </p>
+          <div class="btns">
+            <a href=" ">Regresar al inicio</a>
+          </div>
         </div>
       </div></>
        
+
   )
 }
 
