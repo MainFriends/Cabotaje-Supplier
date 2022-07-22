@@ -58,6 +58,7 @@ const Proveedor= () => {
     //definir las columnas
     const columns = [
         {
+            id: "id",
             name: 'NOMBRE DEL PROVEEDOR ',
             selector: row => row.NAM_SUPPLIER,
             sortable: true,
@@ -175,7 +176,8 @@ const Proveedor= () => {
                         subHeaderComponent={subHeaderComponentMemo}
                         highlightOnHover
                         striped
-                        persistTableHead
+                        persistTableHead 
+                        defaultSortFieldId="id"
                         actions={<button onClick={() => dowlandPdfSupplier(filteredItems)} className='btn btn-danger btn-sm'><i className="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}
                     />
 

@@ -67,7 +67,8 @@ const Compras = () => {
     
     //definir las columnas
     const columns = [
-        {
+        {   
+            id: "id",
             name: '# DE FACTURA',
             selector: row => row.COD_INVOICE,
             sortable: true,
@@ -189,6 +190,8 @@ const Compras = () => {
                         highlightOnHover
                         striped
                         persistTableHead
+                        defaultSortFieldId="id"
+                        defaultSortAsc={false}
                         actions={<button onClick={() => dowlandPdfShoping(filteredItems)} className='btn btn-danger btn-sm'><i className="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}
 
                     />

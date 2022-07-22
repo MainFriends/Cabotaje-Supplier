@@ -66,6 +66,7 @@ const Clientes = () => {
             grow: 2
         },
         {
+            id: 'id',
             name: 'NOMBRE',
             selector: row => row.FIRST_NAME,
             sortable: true,
@@ -167,6 +168,7 @@ const Clientes = () => {
                         highlightOnHover
                         striped
                         persistTableHead
+                        defaultSortFieldId="id"
                         actions={<button onClick={() => dowlandPDFClient(filteredItems)} className='btn btn-danger btn-sm'><i className="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}
                     />
 

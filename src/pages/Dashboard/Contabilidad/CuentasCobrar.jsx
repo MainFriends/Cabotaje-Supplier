@@ -91,6 +91,7 @@ const CuentasCobrar = () => {
             format: row => `L ${row.TOT_BALANCE.toFixed(2)}`
         },
         {
+            id: "id",
             name: 'FECHA LIMITE',
             selector: row => row.DAT_LIMIT,
             sortable: true,
@@ -147,6 +148,8 @@ const CuentasCobrar = () => {
                         highlightOnHover
                         striped
                         persistTableHead
+                        defaultSortFieldId="id"
+                        defaultSortAsc={false}
                         actions={<button onClick={() => dowlandPdfReceivable(filteredItems)} className='btn btn-danger btn-sm'><i className="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}
                     />
                     <Modal 

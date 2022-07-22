@@ -53,6 +53,7 @@ const Rebajas = () => {
     //definir las columnas
     const columns = [
         {
+            id: "id",
             name: 'CODIGO',
             selector: row => row.COD_DISCOUNT,
             sortable: true,
@@ -132,6 +133,8 @@ const Rebajas = () => {
                         highlightOnHover
                         striped
                         persistTableHead
+                        defaultSortFieldId="id"
+                        defaultSortAsc={false}
                         actions={<button onClick={() => dowlandPdfRebates(filteredItems)} className='btn btn-danger btn-sm'><i className="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}
 
                     />

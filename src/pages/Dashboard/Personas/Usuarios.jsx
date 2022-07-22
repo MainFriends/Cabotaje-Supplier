@@ -71,6 +71,7 @@ const Usuarios = () => {
     //definir las columnas
     const columns = [
         {
+            id: "id",
             name: 'CÓDIGO',
             selector: row => row.COD_USER,
             sortable: true
@@ -237,6 +238,8 @@ const Usuarios = () => {
                         highlightOnHover
                         striped
                         persistTableHead
+                        defaultSortFieldId="id"
+                        defaultSortAsc={false}
                         actions={<button onClick={() => dowlandPDFUser(filteredItems)} className='btn btn-danger btn-sm'><i className="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}
 
                     />

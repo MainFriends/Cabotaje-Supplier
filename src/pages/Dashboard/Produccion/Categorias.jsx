@@ -56,6 +56,7 @@ const Categoria = () => {
     //definir las columnas
     const columns = [
         {
+            id: "id",
             name: 'CODIGO',
             selector: row => row.COD_CATEGORY,
             sortable: true,
@@ -140,7 +141,9 @@ const Categoria = () => {
                         subHeaderComponent={subHeaderComponentMemo}
                         highlightOnHover
                         striped
-                        persistTableHead
+                        persistTableHead 
+                        defaultSortFieldId="id"
+                        defaultSortAsc={false}
                         actions={<button onClick={() => dowlandPdfCategory(filteredItems)} className='btn btn-danger btn-sm'><i className="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}
 
                     />

@@ -67,6 +67,7 @@ const PlanillaPago = () => {
     //definir las columnas
     const columns = [
         {
+            id: "id",
             name: 'CODIGO',
             selector: row => row.COD_PAY_FORM,
             sortable: true,
@@ -185,7 +186,9 @@ const PlanillaPago = () => {
                         subHeaderComponent={subHeaderComponentMemo}
                         highlightOnHover
                         striped
-                        persistTableHead 
+                        persistTableHead
+                        defaultSortFieldId="id"
+                        defaultSortAsc={false} 
                         actions={<button onClick={() => dowlandPdfPayment(filteredItems)} className='btn btn-danger btn-sm'><i className="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}
                     />
 

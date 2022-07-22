@@ -104,6 +104,7 @@ const DevolucionesInv = () => {
             sortable: true,
         },
         {
+            id: "id",
             name: 'FECHA DEVOLUCIÓN',
             selector: row => row.DAT_RETURN,
             sortable: true,
@@ -179,6 +180,8 @@ const DevolucionesInv = () => {
                         highlightOnHover
                         striped
                         persistTableHead 
+                        defaultSortFieldId="id"
+                        defaultSortAsc={false}
                         actions={<button onClick={() => dowlandPdfReturns(filteredItems)} className='btn btn-danger btn-sm'><i className="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}
                     />
 

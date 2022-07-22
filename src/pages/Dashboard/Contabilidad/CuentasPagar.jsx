@@ -77,6 +77,7 @@ const CuentasPagar = () => {
             format: row => `L ${row.TOT_BALANCE.toFixed(2)}`
         },
         {
+            id: "id",
             name: 'FECHA LIMITE',
             selector: row => row.DATE_LIMIT,
             sortable: true,
@@ -153,6 +154,8 @@ const CuentasPagar = () => {
                         highlightOnHover
                         striped
                         persistTableHead 
+                        defaultSortFieldId="id"
+                        defaultSortAsc={false}
                         actions={<button onClick={() => dowlandPdfPay(filteredItems)} className='btn btn-danger btn-sm'><i className="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}
                     />
 

@@ -83,6 +83,7 @@ const MovimientosInventario = () => {
             sortable: true,
         },
         {
+            id: "id",
             name: 'FECHA MERMA',
             selector: row => row.DAT_TRANSACTION,
             sortable: true,
@@ -135,7 +136,9 @@ const MovimientosInventario = () => {
                         subHeaderComponent={subHeaderComponentMemo}
                         highlightOnHover
                         striped
-                        persistTableHead 
+                        persistTableHead  
+                        defaultSortFieldId="id"
+                        defaultSortAsc={false}
                         actions={<button onClick={() => dowlandPdf(filteredItems)} className='btn btn-danger btn-sm'><i className="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}
                     />
                 </div>
