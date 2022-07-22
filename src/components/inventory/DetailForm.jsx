@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from '../../config/axios';
 import token from '../../helpers/getToken';
 import { toUpperCase } from "../../helpers/Mayusculas";
+import moment from 'moment';
 
 
 const DetailForm = ({setSendRequest, setMessageError}) => {
@@ -127,11 +128,11 @@ const DetailForm = ({setSendRequest, setMessageError}) => {
             <div className="row mb-4">
                 <div className="col-4">
                     <label className='form-label' htmlFor="DAT_PURCHASE">Fecha de compra <span className="text-danger"> *</span></label>
-                    <input onChange={handleInputChange} className='form-control' name='DAT_PURCHASE' type="date" required/>
+                    <input max={moment().format('YYYY-MM-DD')} onChange={handleInputChange} className='form-control' name='DAT_PURCHASE' type="date" required/>
                 </div>
                 <div className="col-4">
                     <label className='form-label' htmlFor="DAT_EXP">Fecha de expiración <span className="text-danger"> *</span></label>
-                    <input onChange={handleInputChange} className='form-control' name='DAT_EXP' type="date" required/>
+                    <input min={moment().format('YYYY-MM-DD')} onChange={handleInputChange} className='form-control' name='DAT_EXP' type="date" required/>
                 </div>
             </div>
             <div className="modal-footer">

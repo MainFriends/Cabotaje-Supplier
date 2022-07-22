@@ -63,7 +63,7 @@ const EditDecreaseForm = ({rowCOD, setSendRequest, setMessageError}) => {
                 <label className='form-label' htmlFor="CONCEPT">Concepto <span className="text-danger"> *</span></label>
                 <textarea onChange={handleInputChange} value = {formEditDecreas.CONCEPT} className='form-control' name='CONCEPT' type="text" onInput={toUpperCase} required/>
             </div>
-            <div className="col-md-3 mt-2">
+            <div className="col-md-4 mt-2">
                 <label className='form-label' htmlFor="CANT_PRODUCTS">Cantidad Productos <span className="text-danger"> *</span></label>
                 <input onChange={handleInputChange} value = {formEditDecreas.CANT_PRODUCTS} className='form-control' name='CANT_PRODUCTS' type="number" required/>
             </div>
@@ -73,7 +73,7 @@ const EditDecreaseForm = ({rowCOD, setSendRequest, setMessageError}) => {
             </div>
             <div className="col-md-3 mt-2">
                 <label className='form-label' htmlFor="DAT_DECREASE">Fecha merma <span className="text-danger"> *</span></label>
-                <input onChange={handleInputChange} value = {moment(formEditDecreas?.DAT_DECREASE).format('YYYY-MM-DD')} className='form-control' name='DAT_DECREASE' type="date" required/>
+                <input max={moment().format('YYYY-MM-DD')} onChange={handleInputChange} value = {moment(formEditDecreas?.DAT_DECREASE).format('YYYY-MM-DD')} className='form-control' name='DAT_DECREASE' type="date" required/>
             </div>
         </div>
         

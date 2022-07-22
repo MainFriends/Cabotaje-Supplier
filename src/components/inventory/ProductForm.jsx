@@ -97,12 +97,12 @@ const ProductForm = ({setSendRequest, setMessageError}) => {
                     </select>
                 </div>
                 <div className="col-3">
-                    <label className='form-label' htmlFor="NORMAL_UNIT_PRICE">Precio de venta <span className="text-danger"> *</span></label>
-                    <input onChange={handleInputChange} className='form-control' min={0} name='NORMAL_UNIT_PRICE' type="number" required/>
+                    <label className='form-label' htmlFor="PURCHASE_PRICE">Precio de compra <span className="text-danger"> *</span></label>
+                    <input min={0} onChange={handleInputChange} className='form-control' name='PURCHASE_PRICE' type="number" required/>
                 </div>
                 <div className="col-3">
-                    <label className='form-label' htmlFor="PURCHASE_PRICE">Precio de compra <span className="text-danger"> *</span></label>
-                    <input onChange={handleInputChange} className='form-control' min={0} name='PURCHASE_PRICE' type="number" required/>
+                    <label className='form-label' htmlFor="NORMAL_UNIT_PRICE">Precio de venta <span className="text-danger"> *</span></label>
+                    <input min={formData.PURCHASE_PRICE} onChange={handleInputChange} className='form-control' name='NORMAL_UNIT_PRICE' type="number" required/>
                 </div>
                 <div className="col-2">
                     <label className='form-label' htmlFor="ISV">ISV <span className="text-danger"> *</span></label>

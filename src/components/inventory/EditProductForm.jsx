@@ -124,12 +124,12 @@ const EditProductForm = ({sendRequest, rowCOD, setSendRequest, setMessageError})
                     </select>
                 </div>
                 <div className="col-3">
-                    <label className='form-label' htmlFor="NORMAL_UNIT_PRICE">Precio de venta <span className="text-danger"> *</span></label>
-                    <input value={NORMAL_UNIT_PRICE} onChange={handleInputChange} className='form-control' min={0} name='NORMAL_UNIT_PRICE' type="number" required/>
+                    <label className='form-label' htmlFor="PURCHASE_PRICE">Precio de compra <span className="text-danger"> *</span></label>
+                    <input min={0} value={PURCHASE_PRICE} onChange={handleInputChange} className='form-control' name='PURCHASE_PRICE' type="number" required/>
                 </div>
                 <div className="col-3">
-                    <label className='form-label' htmlFor="PURCHASE_PRICE">Precio de compra <span className="text-danger"> *</span></label>
-                    <input value={PURCHASE_PRICE} onChange={handleInputChange} className='form-control' min={0} name='PURCHASE_PRICE' type="number" required/>
+                    <label className='form-label' htmlFor="NORMAL_UNIT_PRICE">Precio de venta <span className="text-danger"> *</span></label>
+                    <input min={PURCHASE_PRICE} value={NORMAL_UNIT_PRICE} onChange={handleInputChange} className='form-control' name='NORMAL_UNIT_PRICE' type="number" required/>
                 </div>
                 <div className="col-2">
                     <label className='form-label' htmlFor="ISV">ISV <span className="text-danger"> *</span></label>
@@ -149,10 +149,10 @@ const EditProductForm = ({sendRequest, rowCOD, setSendRequest, setMessageError})
                 <div className="col-5">
                     <label htmlFor="COD_TYP_PRODUCT">Tipo de producto <span className="text-danger"> *</span></label><br />
                     <label htmlFor="unidadEdit">
-                        <input onChange={handleInputChange} className="mr-2" id='unidadEdit' type="radio" value={1} name='COD_TYP_PRODUCT' required/>Unidad
+                        <input onChange={handleInputChange} className="mr-2" id='unidadEdit' type="radio" value={1} name='COD_TYP_PRODUCT' required checked={COD_TYP_PRODUCT == 1}/>Unidad
                     </label>
                     <label htmlFor="peso/volumenEdit">
-                        <input onChange={handleInputChange} className="ml-4 mr-2" id='peso/volumenEdit' value={2} type="radio" name='COD_TYP_PRODUCT'/>Peso/Volumen
+                        <input onChange={handleInputChange} className="ml-4 mr-2" id='peso/volumenEdit' value={2} type="radio" name='COD_TYP_PRODUCT' checked={COD_TYP_PRODUCT == 2}/>Peso/Volumen
                     </label>
                 </div>
             </div>

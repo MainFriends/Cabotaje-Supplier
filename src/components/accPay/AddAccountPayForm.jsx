@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "../../config/axios";
 import token from "../../helpers/getToken";
+import moment from 'moment';
 
 const AddAccountPayForm = ({setSendRequest, setMessageError}) => {
     const [formAddAccountPay, setFormAddAccountPay] = useState({
@@ -51,7 +52,7 @@ const AddAccountPayForm = ({setSendRequest, setMessageError}) => {
                 </div>
                 <div className="col-md-3 mt-3">
                     <label className='form-label' htmlFor="DATE_LIMIT">Fecha Límite <span className="text-danger"> *</span> </label>
-                    <input onChange={handleInputChange} className='form-control' name='DATE_LIMIT' type="date" required/>
+                    <input min={moment().format('YYYY-MM-DD')} onChange={handleInputChange} className='form-control' name='DATE_LIMIT' type="date" required/>
                 </div>
             </div>
             <div className="modal-footer">

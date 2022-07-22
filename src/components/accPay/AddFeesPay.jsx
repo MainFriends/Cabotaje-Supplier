@@ -1,5 +1,5 @@
 import {useState} from 'react';
-
+import moment from "moment";
 import axios from '../../config/axios';
 import token from '../../helpers/getToken';
 
@@ -54,7 +54,7 @@ const AddFeesPay = ({rowCOD, setMessageError, setSendRequest}) => {
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="DATE_PAY">Fecha <span className="text-danger"> *</span> </label>
-                    <input onChange={handleInputChange} className='form-control' name='DATE_PAY' type="date" required/>
+                    <input max={moment().format('YYYY-MM-DD')} onChange={handleInputChange} className='form-control' name='DATE_PAY' type="date" required/>
                 </div>
             </div>
                 <div className="modal-footer">

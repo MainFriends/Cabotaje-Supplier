@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "../../config/axios";
 import token from "../../helpers/getToken";
 import { toUpperCase } from "../../helpers/Mayusculas";
+import moment from "moment";
 
 const AddUserForm = ({ setSendRequest, setMessageError }) => {
   const [roles, setRoles] = useState([]);
@@ -230,6 +231,7 @@ const AddUserForm = ({ setSendRequest, setMessageError }) => {
             name="DAT_BIRTHDAY"
             type="DATE"
             min="1950-01-01"
+            max={moment().format('YYYY-MM-DD')}
             required
           />
         </div>

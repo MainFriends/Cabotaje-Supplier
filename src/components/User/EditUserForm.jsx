@@ -262,6 +262,7 @@ const EditUserForm = ({rowCOD, setSendRequest, setMessageError}) => {
                 name="DAT_BIRTHDAY"
                 type="DATE"
                 min="1950-01-01"
+                max={moment().format('YYYY-MM-DD')}
                 required
             />
           </div>

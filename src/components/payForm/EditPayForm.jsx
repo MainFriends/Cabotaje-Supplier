@@ -96,7 +96,7 @@ const EditPayForm = ({rowCOD, setSendRequest, setMessageError}) => {
             </div>
             <div className="col-md-4">
                 <label className='form-label mt-2' htmlFor="DAT_PAYMENT">Fecha de Pago <span className="text-danger"> *</span> </label>
-                <input onChange={handleInputChange} value={moment(formEditPayForm?.DAT_PAYMENT).format('YYYY-MM-DD')} className='form-control' name='DAT_PAYMENT' type="date" required/>
+                <input min={moment().format('YYYY-MM-DD')} onChange={handleInputChange} value={moment(formEditPayForm?.DAT_PAYMENT).format('YYYY-MM-DD')} className='form-control' name='DAT_PAYMENT' type="date" required/>
             </div>
         </div>
         <div className="modal-footer">

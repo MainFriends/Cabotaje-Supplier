@@ -2,6 +2,7 @@ import { useState } from "react"
 import axios from '../../config/axios'
 import token from '../../../src/helpers/getToken'
 import { toUpperCase } from "../../helpers/Mayusculas";
+import moment from "moment";
 
 const AddDecreaseForm = ({setSendRequest, setMessageError}) => {
  
@@ -49,8 +50,8 @@ const AddDecreaseForm = ({setSendRequest, setMessageError}) => {
                 <label className='form-label' htmlFor="CONCEPT">Concepto <span className="text-danger"> *</span></label>
                 <textarea onChange={handleInputChange} className='form-control' name='CONCEPT' type="text" pattern="^[a-zA-Z0-9ñÑØº-_ ]+$" onInput={toUpperCase} required/>
             </div>
-            <div className="col-md-3 mt-2">
-                <label className='form-label' htmlFor="CANT_PRODUCTS">Cantidad Productos <span className="text-danger"> *</span></label>
+            <div className="col-md-4 mt-2">
+                <label className='form-label' htmlFor="CANT_PRODUCTS">Cantidad productos <span className="text-danger"> *</span></label>
                 <input onChange={handleInputChange} className='form-control' name='CANT_PRODUCTS' type="number" required/>
             </div>
             <div className="col-md-3 mt-2">
@@ -59,7 +60,7 @@ const AddDecreaseForm = ({setSendRequest, setMessageError}) => {
             </div>
             <div className="col-md-3 mt-2">
                 <label className='form-label' htmlFor="DAT_DECREASE">Fecha merma <span className="text-danger"> *</span></label>
-                <input  onChange={handleInputChange} className='form-control' name='DAT_DECREASE' type="date" required/>
+                <input max={moment().format('YYYY-MM-DD')} onChange={handleInputChange} className='form-control' name='DAT_DECREASE' type="date" required/>
             </div>
         </div>
         <div className="modal-footer">

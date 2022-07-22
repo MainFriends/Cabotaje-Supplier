@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from '../../config/axios';
 import token from '../../helpers/getToken';
+import moment from "moment";
 
 const AddReturnProductForm = ({setSendRequest, setMessageError}) => {
 
@@ -72,7 +73,7 @@ const AddReturnProductForm = ({setSendRequest, setMessageError}) => {
                 </div>
                 <div className="col-md-6">
                     <label className='form-label' htmlFor="DAT_RETURN">Fecha devolución  <span className="text-danger"> *</span></label>
-                    <input onChange={handleInputChange} className='form-control' name='DAT_RETURN' type="date" required/>
+                    <input max={moment().format('YYYY-MM-DD')} onChange={handleInputChange} className='form-control' name='DAT_RETURN' type="date" required/>
                 </div>
             </div>
             

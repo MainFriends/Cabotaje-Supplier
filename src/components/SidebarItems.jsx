@@ -227,10 +227,10 @@ const SidebarItems = () => {
                         <div className="bg-white py-2 collapse-inner rounded">
                             <h6 className="collapse-header">Tablas</h6>
                             {
-                                viewProduccion().inventario ? <NavLink className="collapse-item" to="inventario">Inventario</NavLink> : null
+                                viewProduccion().categorias ? <NavLink className="collapse-item" to="categorias-inventario">Categorías</NavLink> : null
                             }
                             {
-                                viewProduccion().categorias ? <NavLink className="collapse-item" to="categorias-inventario">Categorías</NavLink> : null
+                                viewProduccion().inventario ? <NavLink className="collapse-item" to="inventario">Inventario</NavLink> : null
                             }
                             {
                                 viewProduccion().movimientos ? <NavLink className="collapse-item" to="movimientos-inventario">Movimientos</NavLink> : null
@@ -273,10 +273,10 @@ const SidebarItems = () => {
                                 viewContabilidad().cuentasPagar ? <NavLink className="collapse-item" to="cuentas-pagar">Cuentas por pagar</NavLink> : null
                             }
                             {
-                                viewContabilidad().devoluciones ? <NavLink className="collapse-item" to="devoluciones">Devoluciones V/C</NavLink> : null
+                                viewContabilidad().devoluciones ? <NavLink className="collapse-item" to="devoluciones">Devoluciones</NavLink> : null
                             }
                             {
-                                viewContabilidad().rebajas ? <NavLink className="collapse-item" to="rebajas">Rebajas V/C</NavLink> : null
+                                viewContabilidad().rebajas ? <NavLink className="collapse-item" to="rebajas">Rebajas</NavLink> : null
                             }
                             {
                                 viewContabilidad().planilla ? <NavLink className="collapse-item" to="planilla-pago">Planilla de pago</NavLink> : null

@@ -61,7 +61,7 @@ const EditSalesReturn = ({setSendRequest, rowCOD}) => {
                 </div>
                 <div className="col-md-4 mt-2">
                     <label className='form-label' htmlFor="DAT_RETURN">Fecha <span className="text-danger"> *</span> </label>
-                    <input className='form-control' value={moment(formEditSalesReturn.DAT_RETURN).format('YYYY-MM-DD')} onChange={handleInputChange} name='DAT_RETURN' type="date" required/>
+                    <input max={moment().format('YYYY-MM-DD')} className='form-control' value={moment(formEditSalesReturn.DAT_RETURN).format('YYYY-MM-DD')} onChange={handleInputChange} name='DAT_RETURN' type="date" required/>
                 </div>
             </div>
             <div className="modal-footer">

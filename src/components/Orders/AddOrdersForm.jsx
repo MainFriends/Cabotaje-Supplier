@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from '../../config/axios';
 import token from '../../helpers/getToken';
 import DataTable from 'react-data-table-component';
+import moment from "moment";
 
 
 const AddOrder = ({setSendRequest,setMessageError}) => {
@@ -233,7 +234,7 @@ const AddOrder = ({setSendRequest,setMessageError}) => {
                         </div>
                         <div className="col-md-4 mt-2">
                             <label className='form-label' htmlFor="DAT_REQUIRED">Fecha requerida<span className="text-danger"> *</span></label>
-                            <input onChange={handleInputChange} value={DAT_REQUIRED} className='form-control' name='DAT_REQUIRED' type="date" required/>
+                            <input min={moment().format('YYYY-MM-DD')} onChange={handleInputChange} value={DAT_REQUIRED} className='form-control' name='DAT_REQUIRED' type="date" required/>
                         </div>
                         <div className="col-md-4 mt-2">
                             <div className="mt-2">

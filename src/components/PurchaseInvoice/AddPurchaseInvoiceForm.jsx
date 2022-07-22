@@ -3,6 +3,7 @@ import axios from '../../config/axios';
 import token from '../../helpers/getToken';
 import DataTable from "react-data-table-component";
 import AlertError from "../AlertError";
+import moment from "moment";
 
 
 const AddFacturaForm = ({setSendRequest}) => {
@@ -287,7 +288,7 @@ const AddFacturaForm = ({setSendRequest}) => {
                 </div>
                 <div className="col-md-3 mt-2">
                     <label className='form-label' htmlFor="DAT_INVOICE">Fecha<span className="text-danger"> *</span></label>
-                    <input value={DAT_INVOICE} onChange={handleInputChange} className='form-control' name='DAT_INVOICE' type="date" required/>
+                    <input max={moment().format('YYYY-MM-DD')} value={DAT_INVOICE} onChange={handleInputChange} className='form-control' name='DAT_INVOICE' type="date" required/>
                 </div>
                 <div className="col-md-1">
                     <div className="mt-3">
