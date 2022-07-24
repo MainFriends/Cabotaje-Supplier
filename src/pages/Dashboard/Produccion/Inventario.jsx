@@ -69,7 +69,7 @@ const Inventario = () => {
     const columns = [
         {
             id: "id",
-            name: 'CÓDIGO',
+            name: 'SKU',
             selector: row => row.COD_PRODUCT,
             sortable: true,
         },
@@ -95,33 +95,6 @@ const Inventario = () => {
             name: 'CANTIDAD TOTAL',
             selector: row => row.CANT_TOTAL,
             sortable: true,
-        },
-        {
-            name: 'ISV',
-            selector: row => row.ISV,
-        },
-        {
-            name: 'PRECIO',
-            selector: row => row.NORMAL_UNIT_PRICE,
-            sortable: true,
-            format: row => `L ${row.NORMAL_UNIT_PRICE.toFixed(2)}`
-        },
-        {
-            name: 'COSTO',
-            selector: row => row.PURCHASE_PRICE,
-            sortable: true,
-            format: row => `L ${row.PURCHASE_PRICE.toFixed(2)}`
-        },
-        {
-            name: 'CANTIDAD AL POR MAYOR',
-            selector: row => row.WHOLESALE_CANT,
-            sortable: true,
-        },
-        {
-            name: 'PRECIO AL POR MAYOR',
-            selector: row => row.WHOLESALE_PRICE,
-            sortable: true,
-            format: row => `L ${row.WHOLESALE_PRICE.toFixed(2)}`
         },
         {
             name: 'CATEGORIA',

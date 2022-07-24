@@ -25,29 +25,21 @@ const getInventoryS = (req, res) =>{
 
 const addInventory = (req, res) => {
   const {
+    COD_PRODUCT,
     COD_SUPPLIER,
 	NAM_PRODUCT,
     DES_PRODUCT,
-    ISV,
-    NORMAL_UNIT_PRICE,
-    WHOLESALE_CANT,
-    WHOLESALE_PRICE,
-    PURCHASE_PRICE,
     COD_CATEGORY,
     COD_TYP_PRODUCT
     } = req.body
 
-    const sp = 'CALL SP_INS_INVENTORY(?,?,?,?,?,?,?,?,?,?)';
+    const sp = 'CALL SP_INS_INVENTORY(?,?,?,?,?,?)';
 
     mysqlConnect.query(sp,[
+        COD_PRODUCT,
         COD_SUPPLIER,
         NAM_PRODUCT,
         DES_PRODUCT,
-        ISV,
-        NORMAL_UNIT_PRICE,
-        WHOLESALE_CANT,
-        WHOLESALE_PRICE,
-        PURCHASE_PRICE,
         COD_CATEGORY,
         COD_TYP_PRODUCT
     ], (error, resultado) => {
@@ -66,27 +58,17 @@ const updateInventory = (req, res) =>{
         COD_SUPPLIER,
         NAM_PRODUCT,
         DES_PRODUCT,
-        ISV,
-        NORMAL_UNIT_PRICE,
-        WHOLESALE_CANT,
-        WHOLESALE_PRICE,
-        PURCHASE_PRICE,
         COD_CATEGORY,
         COD_TYP_PRODUCT
         } = req.body
     
-        const sp = 'CALL SP_UPD_INVENTORY(?,?,?,?,?,?,?,?,?,?,?)';
+        const sp = 'CALL SP_UPD_INVENTORY(?,?,?,?,?,?)';
     
         mysqlConnect.query(sp,[
         codInventory,
         COD_SUPPLIER,
         NAM_PRODUCT,
         DES_PRODUCT,
-        ISV,
-        NORMAL_UNIT_PRICE,
-        WHOLESALE_CANT,
-        WHOLESALE_PRICE,
-        PURCHASE_PRICE,
         COD_CATEGORY,
         COD_TYP_PRODUCT
         ], (error, resultado) => {

@@ -25,7 +25,12 @@ const getInventoryDetailS = (req, res) =>{
 
 const addInventoryDetail = (req, res) => {
   const {
-    COD_PRODUCT, 
+    COD_PRODUCT,
+    NORMAL_UNIT_PRICE,
+    PURCHASE_PRICE,
+    WHOLESALE_CANT,
+    WHOLESALE_PRICE,
+    ISV, 
 	DAT_PURCHASE, 
     DAT_EXP,
     CANT_PRODUCTS,
@@ -34,10 +39,15 @@ const addInventoryDetail = (req, res) => {
     COD_STATUS
     } = req.body
 
-    const sp = 'CALL SP_INS_INVENTORY_DETAIL(?,?,?,?,?,?,?)';
+    const sp = 'CALL SP_INS_INVENTORY_DETAIL(?,?,?,?,?,?,?,?,?,?,?,?)';
 
     mysqlConnect.query(sp,[
     COD_PRODUCT, 
+    NORMAL_UNIT_PRICE,
+    PURCHASE_PRICE,
+    WHOLESALE_CANT,
+    WHOLESALE_PRICE,
+    ISV,
     DAT_PURCHASE, 
     DAT_EXP,
     CANT_PRODUCTS,
@@ -57,7 +67,12 @@ const updateInventoryDetail = (req, res) =>{
     const {codInventoryDetail} = req.params;
 
     const {
-        COD_PRODUCT, 
+        COD_PRODUCT,
+        NORMAL_UNIT_PRICE,
+        PURCHASE_PRICE,
+        WHOLESALE_CANT,
+        WHOLESALE_PRICE,
+        ISV, 
         DAT_PURCHASE, 
         DAT_EXP,
         CANT_PRODUCTS,
@@ -66,11 +81,16 @@ const updateInventoryDetail = (req, res) =>{
         COD_STATUS
         } = req.body
     
-        const sp = 'CALL SP_UPD_INVENTORY_DETAIL(?,?,?,?,?,?,?,?)';
+        const sp = 'CALL SP_UPD_INVENTORY_DETAIL(?,?,?,?,?,?,?,?,?,?,?,?,?)';
     
         mysqlConnect.query(sp,[
         codInventoryDetail,
-        COD_PRODUCT, 
+        COD_PRODUCT,
+        NORMAL_UNIT_PRICE,
+        PURCHASE_PRICE,
+        WHOLESALE_CANT,
+        WHOLESALE_PRICE,
+        ISV, 
 	    DAT_PURCHASE, 
         DAT_EXP,
         CANT_PRODUCTS,

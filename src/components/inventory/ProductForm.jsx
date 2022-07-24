@@ -6,21 +6,16 @@ import { toUpperCase } from "../../helpers/Mayusculas";
 
 
 const ProductForm = ({setSendRequest, setMessageError}) => {
-    const [btnWholesale, setBtnWholesale] = useState(false);
     const [suppliers, setSuppliers] = useState([]);
     const [categories, setCategories] = useState([]);
     const [messageSuccess, setMessageSuccess] = useState('');
     const [formData, setFormData] = useState({
+        COD_PRODUCT: '',
         NAM_PRODUCT: '',
         DES_PRODUCT: '',
         COD_SUPPLIER: '',
-        ISV: '',
-        NORMAL_UNIT_PRICE: '',
-        PURCHASE_PRICE: '',
         COD_CATEGORY: '',
         COD_TYP_PRODUCT: 1,
-        WHOLESALE_CANT: 0,
-        WHOLESALE_PRICE: 0
     })
 
     useEffect(() => {
@@ -47,15 +42,23 @@ const ProductForm = ({setSendRequest, setMessageError}) => {
         e.preventDefault();
         axios.post('/inventory', formData, token())
             .then(res => {
-                handleOptionClose()
                 e.target.reset();
                 setSendRequest(true);
                 setMessageSuccess('Producto agregado correctamente.');
                 setTimeout(() => {
                     setMessageSuccess('')
                 }, 3000);
+                setFormData({
+                    COD_PRODUCT: '',
+                    NAM_PRODUCT: '',
+                    DES_PRODUCT: '',
+                    COD_SUPPLIER: '',
+                    COD_CATEGORY: '',
+                    COD_TYP_PRODUCT: 1,
+                })
             })
             .catch(err => {
+                console.log(err)
                 const {message} = err.response.data;
                 setMessageError(message)
 
@@ -65,28 +68,17 @@ const ProductForm = ({setSendRequest, setMessageError}) => {
             })
     }
 
-    const handleOptionClose = () => {
-        setFormData({
-            ...formData,
-            WHOLESALE_CANT: 0,
-            WHOLESALE_PRICE: 0
-        })
-        setBtnWholesale(false)
-    }
-
     return (
-        <form onSubmit={handleSubmit} action='#'>
+        <form onSubmit={handleSubmit} action='#' className="p-2">
             <div className="row mb-4">
+                <div className="col-4">
+                    <label className='form-label' htmlFor="COD_PRODUCT">SKU <span className="text-danger"> *</span></label>
+                    <input onChange={handleInputChange} className='form-control' name='COD_PRODUCT' type="text" title="Solamente se pueden ingresar letras" required/>
+                </div>
                 <div className="col-4">
                     <label className='form-label' htmlFor="NAM_PRODUCT">Nombre del producto <span className="text-danger"> *</span></label>
                     <input onChange={handleInputChange} className='form-control' name='NAM_PRODUCT' type="text" pattern="^[a-zA-ZñÑ_ ]+$" title="Solamente se pueden ingresar letras" onInput={toUpperCase}required/>
                 </div>
-                <div className="col-8">
-                    <label className='form-label' htmlFor="DES_PRODUCT">Descripción</label>
-                    <textarea onChange={handleInputChange} className='form-control' rows='2' name='DES_PRODUCT' type="text" pattern="^[a-zA-Z0-9ñÑØº-_ ]+$" onInput={toUpperCase} maxLength={50}  wrap="hard" required/>
-                </div>
-            </div>
-            <div className="row mb-4">
                 <div className="col-4">
                     <label className='form-label'>Proveedor <span className="text-danger"> *</span></label>
                     <select onChange={handleInputChange} defaultValue={'default'} name="COD_SUPPLIER" className="custom-select" required>
@@ -96,20 +88,12 @@ const ProductForm = ({setSendRequest, setMessageError}) => {
                         })}
                     </select>
                 </div>
-                <div className="col-3">
-                    <label className='form-label' htmlFor="PURCHASE_PRICE">Precio de compra <span className="text-danger"> *</span></label>
-                    <input min={0} onChange={handleInputChange} className='form-control' name='PURCHASE_PRICE' type="number" required/>
-                </div>
-                <div className="col-3">
-                    <label className='form-label' htmlFor="NORMAL_UNIT_PRICE">Precio de venta <span className="text-danger"> *</span></label>
-                    <input min={formData.PURCHASE_PRICE} onChange={handleInputChange} className='form-control' name='NORMAL_UNIT_PRICE' type="number" required/>
-                </div>
-                <div className="col-2">
-                    <label className='form-label' htmlFor="ISV">ISV <span className="text-danger"> *</span></label>
-                    <input onChange={handleInputChange} className='form-control' step="0.01" min={0} max={1} name='ISV' type="number" required/>
-                </div>
             </div>
             <div className="row mb-4">
+                <div className="col-7">
+                    <label className='form-label' htmlFor="DES_PRODUCT">Descripción</label>
+                    <textarea onChange={handleInputChange} className='form-control' rows='2' name='DES_PRODUCT' type="text" pattern="^[a-zA-Z0-9ñÑØº-_ ]+$" onInput={toUpperCase} maxLength={50}  wrap="hard" required/>
+                </div>
                 <div className="col-4">
                     <label className='form-label'>Categoria <span className="text-danger"> *</span></label>
                     <select onChange={handleInputChange} defaultValue={'default'} name="COD_CATEGORY" className="custom-select" required>
@@ -119,6 +103,8 @@ const ProductForm = ({setSendRequest, setMessageError}) => {
                         })}
                     </select>
                 </div>
+            </div>
+            <div className="row mb-4">
                 <div className="col-5">
                     <label htmlFor="COD_TYP_PRODUCT">Tipo de producto <span className="text-danger"> *</span></label><br />
                     <label htmlFor="unidad">
@@ -129,37 +115,6 @@ const ProductForm = ({setSendRequest, setMessageError}) => {
                     </label>
                 </div>
             </div>
-            {btnWholesale 
-                ?
-                <div className="row mb-4">
-                    <div className="col-4">
-                        <label className='form-label' htmlFor="WHOLESALE_CANT">Cantidad <span className="text-danger"> *</span></label>
-                        <input onChange={handleInputChange} className='form-control' min={0} name='WHOLESALE_CANT' type="number" required/>
-                        <small className="form-text text-muted">Establezca a partir de qué cantidad se determinará una venta al por mayor de este producto.</small>
-                    </div>
-                    <div className="col-4">
-                        <label className='form-label' htmlFor="WHOLESALE_PRICE">Precio unitario <span className="text-danger"> *</span></label>
-                        <input onChange={handleInputChange} className='form-control' min={0} name='WHOLESALE_PRICE' type="number" required/>
-                        <small className="form-text text-muted">Establezca el precio unitario que se determinará en la venta al por mayor.</small>
-                    </div>
-                    <div className="col-4 text-right mt-4 py-2">
-                        <button onClick={() => handleOptionClose()} type="button" className="btn btn-sm btn-danger mr-2"><i className="fa-solid fa-minus"></i></button>
-                        <small className="text-muted">Cancelar</small>
-                    </div>
-                </div>
-                :
-                null    
-            }
-            {
-                !btnWholesale 
-                &&
-                <div className="row mb-4">
-                    <div className="col-12 text-right">
-                        <button onClick={() => setBtnWholesale(true)} type="button" className="btn btn-sm btn-warning mr-2"><i className="fa-solid fa-plus"></i></button>
-                        <small className="text-muted">Agregar cantidad y precio de venta al por mayor</small>
-                    </div>
-                </div>
-            }
             <div className="modal-footer">
                 <button id="addProductInventory" data-toggle="modal" data-target='#addDetailProduct' type="button" className="btn btn-primary" data-dismiss="modal">Volver</button>
                 <button type='submit' className="btn btn-success">Guardar</button>
