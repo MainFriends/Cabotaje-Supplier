@@ -121,7 +121,6 @@ const mermas = () => {
         axios.get('/decrease', token())
             .then(res => {
                 const {data} = res;
-                console.log(data)
                 setRows(data);
                 setLoading(false);
                 setSendRequest(false);

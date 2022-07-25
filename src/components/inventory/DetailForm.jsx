@@ -4,16 +4,16 @@ import token from '../../helpers/getToken';
 import { toUpperCase } from "../../helpers/Mayusculas";
 import moment from 'moment';
 
-
 const DetailForm = ({setSendRequest, setMessageError}) => {
     const [btnWholesale, setBtnWholesale] = useState(false);
+    const [taxChecked, setTaxChecked] = useState(true);
     const [formData, setFormData] = useState({
         COD_PRODUCT: '',
         NORMAL_UNIT_PRICE: '',
         PURCHASE_PRICE: '',
         WHOLESALE_CANT: 0,
         WHOLESALE_PRICE: 0,
-        ISV: '',
+        ISV: 0.0,
         CANT_PRODUCTS: '',
         NUM_LOT: '',
         COD_STATUS: '',
@@ -71,10 +71,13 @@ const DetailForm = ({setSendRequest, setMessageError}) => {
                 e.target.reset();
                 closeModal();
                 setNameProduct('')
+                setTaxChecked(true);
                 setSendRequest(true);
             })
             .catch(err => {
                 const {message} = err.response.data;
+                console.log(err.response)
+                console.log(message)
                 setMessageError(message)
 
                 setTimeout(() => {
@@ -102,6 +105,15 @@ const DetailForm = ({setSendRequest, setMessageError}) => {
         })
         setBtnWholesale(false)
     }
+
+    useEffect(() => {
+        if(taxChecked){
+            setFormData({
+                ...formData,
+                ISV: 0.0
+            });
+        }
+    }, [taxChecked])
 
     return (
         <form onSubmit={handleSubmit} action='#'>
@@ -132,9 +144,28 @@ const DetailForm = ({setSendRequest, setMessageError}) => {
                     <label className='form-label' htmlFor="NORMAL_UNIT_PRICE">Precio de venta <span className="text-danger"> *</span></label>
                     <input min={formData.PURCHASE_PRICE} onChange={handleInputChange} className='form-control' name='NORMAL_UNIT_PRICE' type="number" required/>
                 </div>
-                <div className="col-2">
-                    <label className='form-label' htmlFor="ISV">ISV <span className="text-danger"> *</span></label>
-                    <input onChange={handleInputChange} className='form-control' step="0.01" min={0} max={1} name='ISV' type="number" required/>
+                {
+                    !taxChecked 
+                    ?
+                    <div className="col-2">
+                        <label htmlFor="ISV">ISV <span className="text-danger"> *</span></label><br />
+                        <label htmlFor="15%">
+                            <input onChange={handleInputChange} className="mr-2" id='15%' type="radio" value={0.15} name='ISV' required/>15%
+                        </label>
+                        <label htmlFor="18%">
+                            <input onChange={handleInputChange} className="ml-4 mr-2" id='18%' value={0.18} type="radio" name='ISV' />18%
+                        </label>
+                    </div>
+                    :
+                    null
+                }
+                <div className="col-2 mt-3 py-3">
+                    <div className="form-check">
+                        <label htmlFor="ISV" className="form-check-label">
+                        <input onChange={() => setTaxChecked(taxChecked ? (false) : (true))} className="form-check-input" type="checkbox" value={0.0} name="ISV" checked={taxChecked}/>
+                            Sin impuesto
+                        </label>
+                    </div>
                 </div>
             </div>
             <div className="row mb-4 mt-2">

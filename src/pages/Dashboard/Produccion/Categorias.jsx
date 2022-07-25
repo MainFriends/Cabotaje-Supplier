@@ -70,6 +70,7 @@ const Categoria = () => {
             name: 'DESCRIPCIÓN',
             selector: row => row.DESCRIPTION,
             sortable: true,
+            wrap:true
         },
         {
             name: 'ACCIONES',
@@ -95,7 +96,6 @@ const Categoria = () => {
         axios.get('/inventoryCategory', token())
             .then(res => {
                 const {data} = res;
-                console.log(data)
                 setRows(data);
                 setLoading(false);
                 setSendRequest(false);

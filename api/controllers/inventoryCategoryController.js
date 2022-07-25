@@ -36,7 +36,8 @@ const addCategory = (req, res) => {
     DESCRIPTION
     ], (error, resultado) => {
         if(error){
-            res.status(400).send({message: error.message});
+            const message = error.message.split(': ')[1];
+            res.status(400).send({message});
         }else{
             res.status(201).send({message: 'La categoría se ha agregado exitosamente'})
         }
@@ -47,19 +48,18 @@ const updateCategory = (req, res) =>{
     const {codCategory} = req.params;
 
     const {
-         NAM_CATEGORY,
         DESCRIPTION
         } = req.body
     
-        const sp = 'CALL SP_UPD_CATEGORY(?,?,?)';
+        const sp = 'CALL SP_UPD_CATEGORY(?,?)';
     
         mysqlConnect.query(sp,[
         codCategory,
-        NAM_CATEGORY,
          DESCRIPTION
         ], (error, resultado) => {
             if(error){
-                res.status(304).send({message: error.message});
+                const message = error.message.split(': ')[1];
+                res.status(304).send({message});
             }else{
                 res.status(200).send({message: 'La categoría se ha actualizado exitosamente'})
             }
@@ -71,7 +71,8 @@ const updateCategory = (req, res) =>{
         const sp  = 'CALL SP_DEL_CATEGORY(?)';
         mysqlConnect.query(sp, [codCategory], (error, resultado) => {
             if(error){
-                res.status(304).send({message: error.message});
+                const message = error.message.split(': ')[1];
+                res.status(304).send({message});    
             }else{
                 res.status(200).send({message: 'La categoría se ha eliminado exitosamente'})
             };

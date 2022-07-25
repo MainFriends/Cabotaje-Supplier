@@ -6,7 +6,6 @@ import { toUpperCase } from "../../helpers/Mayusculas";
 const EditCategoryForm = ({rowCOD, setSendRequest, setMessageError}) => {
 
     const [formEditCategor, setFormEditCategor] = useState({
-        NAM_CATEGORY: '',
         DESCRIPTION: ''
     })
 
@@ -44,13 +43,9 @@ const EditCategoryForm = ({rowCOD, setSendRequest, setMessageError}) => {
     return(
         <form id='editFormCategory' onSubmit={handleSubmitCategor} action='#'>
             <div className="row mb-4">
-            <div className="col-md-4">
-                    <label className='form-label' htmlFor="NAM_CATEGORY">Nombre de categoria<span className="text-danger"> *</span></label>
-                    <input onChange={handleInputChange} value = {formEditCategor.NAM_CATEGORY} className='form-control' name='NAM_CATEGORY' type="text" onInput={toUpperCase} required/>
-                </div>
-                <div className="col-md-4">
+                <div className="col-md-12">
                     <label className='form-label' htmlFor="DESCRIPTION">Descripción</label>
-                    <input onChange={handleInputChange} value = {formEditCategor.DESCRIPTION} className='form-control' name='DESCRIPTION' type="text" onInput={toUpperCase} maxLength={20}  wrap="hard" required/>
+                    <textarea onChange={handleInputChange} cols="2" rows="3" value = {formEditCategor.DESCRIPTION ? formEditCategor.DESCRIPTION : ''} className='form-control' name='DESCRIPTION' onInput={toUpperCase} required/>
                 </div>
             </div>
             <div className="modal-footer">

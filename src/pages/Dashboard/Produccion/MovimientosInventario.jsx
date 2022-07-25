@@ -58,7 +58,7 @@ const MovimientosInventario = () => {
     //definir las columnas
     const columns = [
          {
-            name: 'CODIGO PRODUCTO',
+            name: 'SKU',
             selector: row => row.COD_PRODUCT,
             sortable: true,
         },
@@ -68,23 +68,24 @@ const MovimientosInventario = () => {
             sortable: true,
         },
          {
-            name: 'TIPO DE TRANSACCION',
+            name: 'TIPO DE TRANSACCIÓN',
             selector: row => row.TYP_TRANSACTION,
             sortable: true,
         },
         {
-            name: 'CANTIDAD PRODUCTOS',
+            name: 'CANTIDAD',
             selector: row => row.CANT,
             sortable: true,
+            format: row => (row.TYP_TRANSACTION == 'Entrada' ? (<span><i className="fa-solid fa-circle-arrow-up text-success"></i> {row.CANT}</span>) : (<span><i className="fa-solid fa-circle-arrow-down text-danger"></i> {row.CANT}</span>)),
         },
         {
-            name: 'NUMERO DE LOTE',
+            name: 'NÚMERO DE LOTE',
             selector: row => row.NUM_LOT,
             sortable: true,
         },
         {
             id: "id",
-            name: 'FECHA MERMA',
+            name: 'FECHA',
             selector: row => row.DAT_TRANSACTION,
             sortable: true,
             format : row => moment(row.DAT_TRANSACTION).format('DD-MM-YYYY')
@@ -105,7 +106,6 @@ const MovimientosInventario = () => {
         axios.get('/inventoryTransactions', token())
             .then(res => {
                 const {data} = res;
-                console.log(data)
                 setRows(data);
                 setLoading(false);
                 setSendRequest(false);

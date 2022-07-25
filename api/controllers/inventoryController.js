@@ -44,7 +44,8 @@ const addInventory = (req, res) => {
         COD_TYP_PRODUCT
     ], (error, resultado) => {
         if(error){
-            res.status(400).send({message: error.message});
+            const message = error.message.split(': ')[1];
+            res.status(400).send({message});
         }else{
             res.status(201).send({message: 'El inventario se ha agregado exitosamente'})
         }
@@ -73,7 +74,8 @@ const updateInventory = (req, res) =>{
         COD_TYP_PRODUCT
         ], (error, resultado) => {
             if(error){
-                res.status(304).send({message: error.message});
+                const message = error.message.split(': ')[1];
+                res.status(304).send({message});
             }else{
                 res.status(200).send({message: 'El inventario se ha actualizado exitosamente'})
             }
@@ -85,7 +87,8 @@ const updateInventory = (req, res) =>{
         const sp  = 'CALL SP_DEL_INVENTORY(?)';
         mysqlConnect.query(sp, [codInventory], (error, resultado) => {
             if(error){
-                res.status(304).send({message: error.message});
+                const message = error.message.split(': ')[1];
+                res.status(304).send({message});
             }else{
                 res.status(200).send({message: 'El inventario se ha eliminado exitosamente'})
             };

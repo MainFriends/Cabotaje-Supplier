@@ -5,7 +5,7 @@ import {paginationComponentOptions} from '../../helpers/datatablesOptions'
 import axios from '../../config/axios';
 import token from '../../helpers/getToken';
 
-const ViewDetail = ({rowCOD}) => {
+const ViewDetail = ({sendRequest, rowCOD}) => {
     const [rows, setRows] = useState([]);
 
     useEffect(() => {
@@ -13,7 +13,7 @@ const ViewDetail = ({rowCOD}) => {
             axios.get(`/inventoryDetail/${rowCOD}`, token())
                 .then(res => setRows(res.data))
         }
-    }, [rowCOD])
+    }, [rowCOD, sendRequest])
 
     const columns = [
         {
@@ -73,7 +73,8 @@ const ViewDetail = ({rowCOD}) => {
         {
             name: '# ORDEN',
             selector: row => row.COD_ORDER,
-            format: row => row.COD_ORDER === null ? ('Sin orden relacionada') : (row.COD_ORDER)
+            format: row => row.COD_ORDER === null ? ('Sin orden relacionada') : (row.COD_ORDER),
+            wrap: 2
         },
     ];
 

@@ -76,8 +76,7 @@ const Inventario = () => {
         {
             name: 'PROVEEDOR',
             selector: row => row.NAM_SUPPLIER,
-            sortable: true,
-            grow: 2
+            sortable: true
         },
         {
             name: 'PRODUCTO',
@@ -185,6 +184,7 @@ const Inventario = () => {
                         idModal='addDetailProduct'
                         title='Agregar detalle'
                         messageError={messageError}
+                        modalSize='xl'
                         content={<DetailForm setSendRequest={setSendRequest} setMessageError={setMessageError}/>}
                     />
 
@@ -192,7 +192,7 @@ const Inventario = () => {
                         idModal='viewDetailProduct'
                         title='Detalle de producto'
                         messageError={messageError}
-                        content={<ViewDetail rowCOD={rowCOD}/>}
+                        content={<ViewDetail sendRequest={sendRequest} rowCOD={rowCOD}/>}
                         modalSize='xl'
                     />
 
