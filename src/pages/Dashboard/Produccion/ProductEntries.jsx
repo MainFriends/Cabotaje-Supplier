@@ -6,8 +6,8 @@ import {useEffect, useState, useMemo} from 'react';
 import Spinner from '../../../components/Spinner';
 import FilterComponent from '../../../components/FilterComponent';
 import Modal from '../../../components/Modal';
-import AddReturnProductForm from '../../../components/ReturnProduct/AddReturnProductForm'
-import EditReturnProductForm from '../../../components/ReturnProduct/EditReturnProductForm';
+import AddProductEntriesForm from '../../../components/ProductEntries/AddProductEntriesForm'
+import EditProductEntriesForm from '../../../components/ProductEntries/EditProductEntriesForm';
 
 import {paginationComponentOptions} from '../../../helpers/datatablesOptions';
 import axios from '../../../config/axios';
@@ -64,7 +64,7 @@ const DevolucionesInv = () => {
     //definir las columnas
     const columns = [
         {
-            name: 'CÓDIGO PRODUCTO',
+            name: 'SKU',
             selector: row => row.COD_PRODUCT,
             sortable: true,
         },
@@ -74,28 +74,23 @@ const DevolucionesInv = () => {
             sortable: true,
         },
         {
-            name: 'CONCEPTO',
-            selector: row => row.CONCEPT,
-            sortable: true,
-        },
-        {
-            name: 'CANTIDAD PRODUCTO',
-            selector: row => row.CANT_PRODUCT,
-            sortable: true,
-        },
-        {
             name: 'DESCRIPCIÓN',
-            selector: row => row.DES_RETURN,
+            selector: row => row.DES_ENTRIE,
+            sortable: true,
+        },
+        {
+            name: 'TIPO DE ENTRADA',
+            selector: row => row.NAM_TYPE,
+            sortable: true,
+        },
+        {
+            name: 'CANTIDAD',
+            selector: row => row.CANT_PRODUCT,
             sortable: true,
         },
         {
             name: 'NÚMERO DE LOTE',
             selector: row => row.NUM_LOT,
-            sortable: true,
-        },
-        {
-            name: 'MOVIMIENTO',
-            selector: row => row.MOVEMENT,
             sortable: true,
         },
         {
@@ -105,10 +100,10 @@ const DevolucionesInv = () => {
         },
         {
             id: "id",
-            name: 'FECHA DEVOLUCIÓN',
-            selector: row => row.DAT_RETURN,
+            name: 'FECHA',
+            selector: row => row.DAT_ENTRIES,
             sortable: true,
-            format : row => moment(row.DAT_RETURN).format('DD-MM-YYYY')
+            format : row => moment(row. DAT_RETURN).format('DD-MM-YYYY')
         },
         {
             name: 'ACCIONES',
@@ -132,7 +127,7 @@ const DevolucionesInv = () => {
 
     useEffect(() => {
         //PETICION GET
-        axios.get('/returnProduct', token())
+        axios.get('/product-entries', token())
             .then(res => {
                 const {data} = res;
                 setRows(data);
@@ -142,7 +137,7 @@ const DevolucionesInv = () => {
     },[sendRequest]);
 
     const handleDelete = (cod) => {
-        axios.delete(`/returnProduct/${cod}`, token())
+        axios.delete(`/product-entries/${cod}`, token())
             .then(res => setSendRequest(true))
     }
 
@@ -161,7 +156,7 @@ const DevolucionesInv = () => {
             :
             <div className="card shadow rounded">
                 <div className="card-header text-dark">
-                    Devoluciones
+                    Entradas
                 </div>
                 <div className="card-body">
                     <div className="row mt-2 ml-1">
@@ -187,16 +182,16 @@ const DevolucionesInv = () => {
 
                     <Modal 
                         idModal='addFormReturnProduct'
-                        title='Agregar devolución'
+                        title='Agregar entrada'
                         messageError={messageError}
-                        content={<AddReturnProductForm setSendRequest={setSendRequest} setMessageError={setMessageError}/>}
+                        content={<AddProductEntriesForm setSendRequest={setSendRequest} setMessageError={setMessageError}/>}
                     />
 
                     <Modal 
                         idModal='editFormReturnProduct'
-                        title='Actualizar devolución'
+                        title='Actualizar entrada'
                         messageError={messageError}
-                        content={<EditReturnProductForm rowCOD={rowCOD} setSendRequest={setSendRequest} setMessageError={setMessageError}/>}
+                        content={<EditProductEntriesForm rowCOD={rowCOD} setSendRequest={setSendRequest} setMessageError={setMessageError}/>}
                     />  
                 </div>
             </div> 

@@ -3,7 +3,7 @@ import axios from '../../config/axios';
 import token from '../../helpers/getToken';
 import moment from 'moment';
 
-const EditReturnProductForm = ({rowCOD, setSendRequest, setMessageError}) => {
+const EditProductEntriesForm = ({rowCOD, setSendRequest, setMessageError}) => {
 
     const [formEditReturnProduc, setFormEditReturnProduc] = useState({
         COD_PRODUCT: '',
@@ -99,4 +99,4 @@ const EditReturnProductForm = ({rowCOD, setSendRequest, setMessageError}) => {
 
 
 
-export default EditReturnProductForm;
+export default EditProductEntriesForm;

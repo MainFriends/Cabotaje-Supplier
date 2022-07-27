@@ -1,7 +1,7 @@
 const mysqlConnect = require('../config')
 
-const getReturnProduct = (req, res) =>{
-    const sp  = 'CALL SP_SEL_RETURN_PRODUCT(?)';
+const getProductEntriesAll = (req, res) =>{
+    const sp  = 'CALL SP_SEL_PRODUCT_ENTRIES(?)';
     mysqlConnect.query(sp, [0], (error, resultado) => {
         if(error){
             res.status(500).send({message :' Error en el servidor'});
@@ -11,10 +11,10 @@ const getReturnProduct = (req, res) =>{
     });
 };
 
-const getReturnProductS = (req, res) =>{
-    const {codReturnProduct} = req.params;
-    const sp  = 'CALL SP_SEL_RETURN_PRODUCT(?)';
-    mysqlConnect.query(sp, [codReturnProduct], (error, resultado) => {
+const getProductEntries = (req, res) =>{
+    const {codProductEntrie} = req.params;
+    const sp  = 'CALL SP_SEL_PRODUCT_ENTRIES(?)';
+    mysqlConnect.query(sp, [codProductEntrie], (error, resultado) => {
         if(error){
             res.status(500).send({message :' Error en el servidor'});
         }else{
@@ -23,66 +23,62 @@ const getReturnProductS = (req, res) =>{
     });
 }
 
-const addReturnProduct = (req, res) => {
+const addProductEntries = (req, res) => {
     const {COD_USER} = req.user
 
   const {
     COD_PRODUCT,
-    CONCEPT,
+    DES_ENTRIE,
+    COD_TYPE,
     CANT_PRODUCT,
     NUM_LOT,
-    MOVEMENT,
-    DES_RETURN,
-    DAT_RETURN
+    DAT_ENTRIES
     } = req.body
 
-    const sp = 'CALL SP_INS_RETURN_PRODUCT(?,?,?,?,?,?,?,?)';
+    const sp = 'CALL SP_INS_PRODUCT_ENTRIES(?,?,?,?,?,?,?)';
 
     mysqlConnect.query(sp,[
-    COD_PRODUCT,
-    CONCEPT,
-    CANT_PRODUCT,
-    NUM_LOT,
-    COD_USER,
-    MOVEMENT,
-    DES_RETURN,
-    DAT_RETURN
+        COD_PRODUCT,
+        DES_ENTRIE,
+        COD_TYPE,
+        CANT_PRODUCT,
+        NUM_LOT,
+        COD_USER,
+        DAT_ENTRIES
     ], (error, resultado) => {
         if(error){
             const message = error.message.split(': ')[1];
             res.status(400).send({message});
         }else{
-            res.status(201).send({message: 'La devolucion se ha agregado exitosamente'})
+            res.status(201).send({message: 'La entrada se ha agregado exitosamente'})
         }
     });
 }
 
-const updateReturnProduct = (req, res) =>{
-    const {codReturnProduct} = req.params;
+const updateProductEntries = (req, res) =>{
+    const {codProductEntrie} = req.params;
     const {COD_USER} = req.user
 
     const {
         COD_PRODUCT,
-        CONCEPT,
+        DES_ENTRIE,
+        COD_TYPE,
         CANT_PRODUCT,
         NUM_LOT,
-        MOVEMENT,
-        DES_RETURN,
-        DAT_RETURN
+        DAT_ENTRIES
         } = req.body
     
-        const sp = 'CALL SP_UPD_RETURN_PRODUCT(?,?,?,?,?,?,?,?,?)';
+        const sp = 'CALL SP_UPD_PRODUCT_ENTRIES(?,?,?,?,?,?,?,?)';
     
         mysqlConnect.query(sp,[
-        codReturnProduct,
+        codProductEntrie,
         COD_PRODUCT,
-        CONCEPT,
+        DES_ENTRIE,
+        COD_TYPE,
         CANT_PRODUCT,
         NUM_LOT,
         COD_USER,
-        MOVEMENT,
-        DES_RETURN,
-        DAT_RETURN
+        DAT_ENTRIES
         ], (error, resultado) => {
             if(error){
                 const message = error.message.split(': ')[1];
@@ -93,10 +89,10 @@ const updateReturnProduct = (req, res) =>{
         });
     }
 
-    const deleteReturnProduct = (req, res) =>{
-        const {codReturnProduct} = req.params;
-        const sp  = 'CALL SP_DEL_RETURN_PRODUCT(?)';
-        mysqlConnect.query(sp, [codReturnProduct], (error, resultado) => {
+    const deleteProductEntries = (req, res) =>{
+        const {codProductEntrie} = req.params;
+        const sp  = 'CALL SP_DEL_PRODUCT_ENTRIES(?)';
+        mysqlConnect.query(sp, [codProductEntrie], (error, resultado) => {
             if(error){
                 res.status(304).send({message: error.message});
             }else{
@@ -107,9 +103,9 @@ const updateReturnProduct = (req, res) =>{
 
 
 module.exports = {
-    getReturnProduct,
-    getReturnProductS,
-    addReturnProduct,
-    updateReturnProduct,
-    deleteReturnProduct
+    getProductEntriesAll,
+    getProductEntries,
+    addProductEntries,
+    updateProductEntries,
+    deleteProductEntries
 }

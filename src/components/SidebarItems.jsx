@@ -236,7 +236,7 @@ const SidebarItems = () => {
                                 viewProduccion().movimientos ? <NavLink className="collapse-item" to="movimientos-inventario">Movimientos</NavLink> : null
                             }
                             {
-                                viewProduccion().devoluciones ? <NavLink className="collapse-item" to="devoluciones-inventario">Devoluciones</NavLink> : null
+                                viewProduccion().devoluciones ? <NavLink className="collapse-item" to="entradas">Entradas</NavLink> : null
                             }
                             {
                                 viewProduccion().mermas ? <NavLink className="collapse-item" to="mermas">Mermas</NavLink> : null

@@ -16,7 +16,7 @@ import Clientes from "./pages/Dashboard/Personas/Clientes";
 import Proveedores from "./pages/Dashboard/Personas/Proveedores";
 import Inventario from "./pages/Dashboard/Produccion/Inventario";
 import MovimientosInventario from "./pages/Dashboard/Produccion/MovimientosInventario";
-import DevolucionesInv from "./pages/Dashboard/Produccion/DevolucionesInv";
+import ProductEntries from "./pages/Dashboard/Produccion/ProductEntries";
 import Mermas from "./pages/Dashboard/Produccion/Mermas";
 import CuentasCobrar from "./pages/Dashboard/Contabilidad/CuentasCobrar";
 import CuentasPagar from "./pages/Dashboard/Contabilidad/CuentasPagar";
@@ -90,7 +90,7 @@ const Pages = () => {
             <Route path="categorias-inventario" element={<Categorias />}/>
             <Route path="inventario" element={<Inventario />}/>
             <Route path="movimientos-inventario" element={<MovimientosInventario />}/>
-            <Route path="devoluciones-inventario" element={<DevolucionesInv />}/>
+            <Route path="entradas" element={<ProductEntries />}/>
             <Route path="mermas" element={<Mermas />}/>
             <Route path="cuentas-cobrar" element={<CuentasCobrar />}/>
             <Route path="cuentas-pagar" element={<CuentasPagar />}/>

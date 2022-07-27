@@ -33,7 +33,7 @@ const purchaseDetail = require('./routes/purchaseDetail');
 const inventory = require('./routes/inventory')
 const inventoryDetail = require('./routes/inventoryDetail')
 const decrease = require('./routes/decrease')
-const returnProduct = require('./routes/returnProduct')
+const productEntries = require('./routes/productEntries')
 //graficas
 const graphics = require('./routes/graphics.js');
 const inventoryTransactions = require('./routes/inventoryTransactions')
@@ -47,6 +47,8 @@ const parametricTables = require('./routes/parametricTables')
 //roles y permisos
 const bitacora = require('./routes/bitacora')
 const rolesAndPermissions = require('./routes/rolesAndPermissions');
+// Tipo de entradas y salidas
+const TypeEntriesOutputs = require('./routes/TypeEntriesOutputs');
 
 /* CREAR SERVIDOR */
 const app = express();
@@ -86,7 +88,7 @@ app.use('/api', purchaseDetail)
 app.use('/api', inventory)
 app.use('/api', inventoryDetail)
 app.use('/api', decrease)
-app.use('/api', returnProduct)
+app.use('/api', productEntries)
 //graficas
 app.use('/api', graphics)
 
@@ -101,6 +103,7 @@ app.use('/api', parametricTables)
 // roles y permisos
 app.use('/api', rolesAndPermissions)
 app.use('/api', bitacora)
+app.use('/api', TypeEntriesOutputs)
 
 //Mostrar UI
 app.use(express.static(path.join(__dirname, '../dist')));
