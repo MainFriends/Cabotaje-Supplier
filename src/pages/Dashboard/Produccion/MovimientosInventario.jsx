@@ -76,7 +76,7 @@ const MovimientosInventario = () => {
             name: 'CANTIDAD',
             selector: row => row.CANT,
             sortable: true,
-            format: row => (row.TYP_TRANSACTION == 'Entrada' ? (<span><i className="fa-solid fa-circle-arrow-up text-success"></i> {row.CANT}</span>) : (<span><i className="fa-solid fa-circle-arrow-down text-danger"></i> {row.CANT}</span>)),
+            format: row => (/^[Entrada]/.test(row.TYP_TRANSACTION) ? (<span><i className="fa-solid fa-circle-arrow-up text-success"></i> {row.CANT}</span>) : (<span><i className="fa-solid fa-circle-arrow-down text-danger"></i> {row.CANT}</span>)),
         },
         {
             name: 'NÚMERO DE LOTE',
@@ -88,7 +88,7 @@ const MovimientosInventario = () => {
             name: 'FECHA',
             selector: row => row.DAT_TRANSACTION,
             sortable: true,
-            format : row => moment(row.DAT_TRANSACTION).format('DD-MM-YYYY')
+            format : row => moment(row.DAT_TRANSACTION).format('DD-MM-YYYY h:mm:ss A')
         },
     ];
 

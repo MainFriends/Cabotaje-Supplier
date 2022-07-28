@@ -103,14 +103,14 @@ const DevolucionesInv = () => {
             name: 'FECHA',
             selector: row => row.DAT_ENTRIES,
             sortable: true,
-            format : row => moment(row. DAT_RETURN).format('DD-MM-YYYY')
+            format : row => moment(row.DAT_ENTRIES).format('DD-MM-YYYY')
         },
         {
             name: 'ACCIONES',
             button: true,
             cell: row => <>
-                <button className={'btn btn-sm btn-warning mr-1 ' + (!permissions.UPD ? 'disabled' : null)} onClick={() => {setRowCOD(row.COD_RETURN)}} data-toggle="modal" data-target='#editFormReturnProduct'><i className="fa-solid fa-pen-to-square"></i></button>
-                <button className={'btn btn-sm btn-danger ' + (!permissions.DEL ? 'disabled' : null)} onClick={() => handleDelete(row.COD_RETURN)}><i className="fa-solid fa-trash"></i></button>
+                <button className={'btn btn-sm btn-warning mr-1 ' + (!permissions.UPD ? 'disabled' : null)} onClick={() => {setRowCOD(row.COD_ENTRIES)}} data-toggle="modal" data-target='#editFormProductEntries'><i className="fa-solid fa-pen-to-square"></i></button>
+                <button className={'btn btn-sm btn-danger ' + (!permissions.DEL ? 'disabled' : null)} onClick={() => handleDelete(row.COD_ENTRIES)}><i className="fa-solid fa-trash"></i></button>
             </>
         }
     ];
@@ -188,7 +188,7 @@ const DevolucionesInv = () => {
                     />
 
                     <Modal 
-                        idModal='editFormReturnProduct'
+                        idModal='editFormProductEntries'
                         title='Actualizar entrada'
                         messageError={messageError}
                         content={<EditProductEntriesForm rowCOD={rowCOD} setSendRequest={setSendRequest} setMessageError={setMessageError}/>}

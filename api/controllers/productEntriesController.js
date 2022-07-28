@@ -13,6 +13,7 @@ const getProductEntriesAll = (req, res) =>{
 
 const getProductEntries = (req, res) =>{
     const {codProductEntrie} = req.params;
+    console.log(codProductEntrie)
     const sp  = 'CALL SP_SEL_PRODUCT_ENTRIES(?)';
     mysqlConnect.query(sp, [codProductEntrie], (error, resultado) => {
         if(error){
@@ -60,23 +61,17 @@ const updateProductEntries = (req, res) =>{
     const {COD_USER} = req.user
 
     const {
-        COD_PRODUCT,
         DES_ENTRIE,
         COD_TYPE,
-        CANT_PRODUCT,
-        NUM_LOT,
         DAT_ENTRIES
         } = req.body
     
-        const sp = 'CALL SP_UPD_PRODUCT_ENTRIES(?,?,?,?,?,?,?,?)';
+        const sp = 'CALL SP_UPD_PRODUCT_ENTRIES(?,?,?,?,?)';
     
         mysqlConnect.query(sp,[
         codProductEntrie,
-        COD_PRODUCT,
         DES_ENTRIE,
         COD_TYPE,
-        CANT_PRODUCT,
-        NUM_LOT,
         COD_USER,
         DAT_ENTRIES
         ], (error, resultado) => {
@@ -84,7 +79,7 @@ const updateProductEntries = (req, res) =>{
                 const message = error.message.split(': ')[1];
                 res.status(400).send({message});
             }else{
-                res.status(200).send({message: 'La devolucion se ha actualizado exitosamente'})
+                res.status(200).send({message: 'La entrada se ha actualizado exitosamente'})
             }
         });
     }
@@ -96,7 +91,7 @@ const updateProductEntries = (req, res) =>{
             if(error){
                 res.status(304).send({message: error.message});
             }else{
-                res.status(200).send({message: 'La devolucion se ha eliminado exitosamente'})
+                res.status(200).send({message: 'La entrada se ha eliminado exitosamente'})
             };
         });
     };

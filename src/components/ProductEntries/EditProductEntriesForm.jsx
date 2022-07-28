@@ -5,31 +5,37 @@ import moment from 'moment';
 
 const EditProductEntriesForm = ({rowCOD, setSendRequest, setMessageError}) => {
 
-    const [formEditReturnProduc, setFormEditReturnProduc] = useState({
-        COD_PRODUCT: '',
-        CONCEPT: '',
-        CANT_PRODUCT: '',
+    const [formEditProductEntries, setFormEditProductEntries] = useState({
+        NAM_PRODUCT: '',
         NUM_LOT: '',
-        MOVEMENT: '',
-        DES_RETURN: '',
-        DAT_RETURN: ''
+        DES_ENTRIE: '',
+        CANT_PRODUCT: '',
+        COD_TYPE: '',
+        DAT_ENTRIES: ''
     })
 
+    const [typeEntries, setTypeEntries] = useState([]);
+
     const handleInputChange = (e) => {
-        setFormEditReturnProduc({
-            ...formEditReturnProduc,
+        setFormEditProductEntries({
+            ...formEditProductEntries,
             [e.target.name]: e.target.value
         })
     }
 
     useEffect(() => {
+        axios.get('/type-entries', token())
+        .then(res => setTypeEntries(res.data))
+    }, [])
+
+    useEffect(() => {
         if(rowCOD){
-            axios.get(`/returnProduct/${rowCOD}`, token())
+            axios.get(`/product-entries/${rowCOD}`, token())
             .then(res => {
-                const {DAT_RETURN} = res.data[0]
-                setFormEditReturnProduc({
+                const {DAT_ENTRIES} = res.data[0]
+                setFormEditProductEntries({
                     ...res.data[0],
-                    DAT_RETURN: moment(DAT_RETURN).format('YYYY-MM-DD')
+                    DAT_ENTRIES: moment(DAT_ENTRIES).format('YYYY-MM-DD')
                 })
             })
         }
@@ -37,7 +43,7 @@ const EditProductEntriesForm = ({rowCOD, setSendRequest, setMessageError}) => {
 
     const handleSubmitReturnProduct = (e) => {
         e.preventDefault();
-        axios.put(`/returnProduct/${rowCOD}`,formEditReturnProduc, token())
+        axios.put(`/product-entries/${rowCOD}`,formEditProductEntries, token())
             .then(res => {
                 document.querySelector('#idCloseEditForm').click();
                 setSendRequest(true);
@@ -55,39 +61,38 @@ const EditProductEntriesForm = ({rowCOD, setSendRequest, setMessageError}) => {
     return(
         <form id='editFormReturnProduct' onSubmit={handleSubmitReturnProduct} action='#'>
             <div className="row mb-4">
-            <div className="col-md-6">
-                    <label className='form-label' htmlFor="COD_PRODUCT">Código producto <span className="text-danger"> *</span></label>
-                    <input onChange={handleInputChange} value = {formEditReturnProduc.COD_PRODUCT} className='form-control' name='COD_PRODUCT' type="text" required/>
-                </div>
-                <div className="col-md-6">
-                    <label className='form-label' htmlFor="CONCEPT">Concepto</label>
-                    <textarea onChange={handleInputChange} value = {formEditReturnProduc.CONCEPT} className='form-control' name='CONCEPT' type="text"  maxLength={50}  wrap="hard"  required/>
+                <div className="col-md-4 mt-2">
+                    <label className='form-label' htmlFor="NAM_PRODUCT">Producto</label>
+                    <input value = {formEditProductEntries.NAM_PRODUCT} className='form-control' name='NAM_PRODUCT' type="text" required disabled/>
                 </div>
                 <div className="col-md-4 mt-2">
-                    <label className='form-label' htmlFor="CANT_PRODUCT">Cantidad productos <span className="text-danger"> *</span></label>
-                    <input onChange={handleInputChange} value = {formEditReturnProduc.CANT_PRODUCT} className='form-control' name='CANT_PRODUCT' type="number" required/>
+                    <label className='form-label' htmlFor="NUM_LOT">Número de lote</label>
+                    <input value = {formEditProductEntries.NUM_LOT} className='form-control' name='NUM_LOT' type="text" required disabled/>
                 </div>
                 <div className="col-md-4 mt-2">
-                    <label className='form-label' htmlFor="NUM_LOT">Número de lote <span className="text-danger"> *</span></label>
-                    <input onChange={handleInputChange} value = {formEditReturnProduc.NUM_LOT} className='form-control' name='NUM_LOT' type="number" required/>
+                    <label className='form-label' htmlFor="CANT_PRODUCT">Cantidad <span className="text-danger"> *</span></label>
+                    <input onChange={handleInputChange} value = {formEditProductEntries.CANT_PRODUCT} className='form-control' name='CANT_PRODUCT' type="number" required disabled/>
                 </div>
                 <div className="col-md-6 mt-2">
-                    <label className='form-label' htmlFor="MOVEMENT">Movimiento <span className="text-danger"> *</span></label>
-                    <select onChange={handleInputChange} value = {formEditReturnProduc.MOVEMENT} className='form-control' name='MOVEMENT'  rows='3' cols='4' type="text" required>
-                     <option value=''>-Seleccionar-</option>
-                     <option value="1">Entrada</option>
-                     <option value="2">Salida</option>
+                    <label className='form-label' htmlFor="DES_ENTRIE">Descripción</label>
+                    <textarea onChange={handleInputChange} value = {formEditProductEntries.DES_ENTRIE} className='form-control' name='DES_ENTRIE' type="text"  wrap="hard"  required/>
+                </div>
+                <div className="col-md-6 mt-2">
+                    <label className='form-label' htmlFor="COD_TYPE">Tipo de entrada <span className="text-danger"> *</span></label>
+                    <select onChange={handleInputChange} value={formEditProductEntries.COD_TYPE} className='form-control' name='COD_TYPE' required>
+                    <option value=''>-Seleccionar-</option>
+                        {
+                            typeEntries.map(element => {
+                                return <option key={element.COD_TYPE} value={element.COD_TYPE}>{element.NAM_TYPE}</option>
+                            })
+                        }
                      </select>         
                 </div>
                 <div className="col-md-6 mt-2">
-                    <label className='form-label' htmlFor="DES_RETURN">Descripción</label>
-                    <textarea onChange={handleInputChange} value = {formEditReturnProduc.DES_RETURN} className='form-control' name='DES_RETURN' type="text"  maxLength={50}  wrap="hard"  required/>
+                    <label className='form-label' htmlFor="DAT_ENTRIES">Fecha <span className="text-danger"> *</span></label>
+                    <input max={moment().format('YYYY-MM-DD')} onChange={handleInputChange} value = {moment(formEditProductEntries?.DAT_ENTRIES).format('YYYY-MM-DD')} className='form-control' name='DAT_ENTRIES' type="date" required/>
                 </div>
-                <div className="col-md-6 mt-2">
-                    <label className='form-label' htmlFor="DAT_RETURN">Fecha devolución <span className="text-danger"> *</span></label>
-                    <input max={moment().format('YYYY-MM-DD')} onChange={handleInputChange} value = {moment(formEditReturnProduc?.DAT_RETURN).format('YYYY-MM-DD')} className='form-control' name='DAT_RETURN' type="date" required/>
-                </div>
-            </div>*
+            </div>
             <div className="modal-footer">
                 <button type="button" id='idCloseEditForm' className="btn btn-primary" data-dismiss="modal">Cerrar</button>
                 <button type='submit' className="btn btn-success">Guardar</button>
