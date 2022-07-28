@@ -4,7 +4,7 @@ import token from '../../../src/helpers/getToken'
 import moment from 'moment'
 import { toUpperCase } from "../../helpers/Mayusculas";
 
-const EditDecreaseForm = ({rowCOD, setSendRequest, setMessageError}) => {
+const EditProductOutput = ({rowCOD, setSendRequest, setMessageError}) => {
  
          const [formEditDecreas, setFormEditDecreas] = useState({
             COD_PRODUCT:'',
@@ -85,4 +85,4 @@ const EditDecreaseForm = ({rowCOD, setSendRequest, setMessageError}) => {
     )
 }
 
-export default EditDecreaseForm
+export default EditProductOutput

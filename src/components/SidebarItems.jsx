@@ -215,9 +215,9 @@ const SidebarItems = () => {
                 <li className={ "nav-item " + 
                         (pathname === '/dashboard/inventario' || 
                         pathname === '/dashboard/movimientos-inventario' || 
-                        pathname === '/dashboard/devoluciones-inventario' || 
+                        pathname === '/dashboard/entradas' || 
                         pathname === '/dashboard/categorias-inventario' || 
-                        pathname === '/dashboard/mermas' ? "active" : "")}>
+                        pathname === '/dashboard/salidas' ? "active" : "")}>
                     <a className="nav-link collapsed dinamic" href="#" data-toggle="collapse" data-target="#collapseProduccion"
                         aria-expanded="true" aria-controls="collapseTwo">
                         <i className="mr-2 fas fa-boxes"></i>
@@ -233,13 +233,13 @@ const SidebarItems = () => {
                                 viewProduccion().inventario ? <NavLink className="collapse-item" to="inventario">Inventario</NavLink> : null
                             }
                             {
-                                viewProduccion().movimientos ? <NavLink className="collapse-item" to="movimientos-inventario">Movimientos</NavLink> : null
-                            }
-                            {
                                 viewProduccion().devoluciones ? <NavLink className="collapse-item" to="entradas">Entradas</NavLink> : null
                             }
                             {
-                                viewProduccion().mermas ? <NavLink className="collapse-item" to="mermas">Mermas</NavLink> : null
+                                viewProduccion().mermas ? <NavLink className="collapse-item" to="salidas">Salidas</NavLink> : null
+                            }
+                            {
+                                viewProduccion().movimientos ? <NavLink className="collapse-item" to="movimientos-inventario">Movimientos</NavLink> : null
                             }
                         </div>
                     </div>

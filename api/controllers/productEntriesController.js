@@ -13,7 +13,6 @@ const getProductEntriesAll = (req, res) =>{
 
 const getProductEntries = (req, res) =>{
     const {codProductEntrie} = req.params;
-    console.log(codProductEntrie)
     const sp  = 'CALL SP_SEL_PRODUCT_ENTRIES(?)';
     mysqlConnect.query(sp, [codProductEntrie], (error, resultado) => {
         if(error){

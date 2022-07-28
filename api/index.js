@@ -32,7 +32,7 @@ const purchaseDetail = require('./routes/purchaseDetail');
 //inventario
 const inventory = require('./routes/inventory')
 const inventoryDetail = require('./routes/inventoryDetail')
-const decrease = require('./routes/decrease')
+const productOutputs = require('./routes/productOutputs')
 const productEntries = require('./routes/productEntries')
 //graficas
 const graphics = require('./routes/graphics.js');
@@ -87,7 +87,7 @@ app.use('/api', purchaseDetail)
 //inventario
 app.use('/api', inventory)
 app.use('/api', inventoryDetail)
-app.use('/api', decrease)
+app.use('/api', productOutputs)
 app.use('/api', productEntries)
 //graficas
 app.use('/api', graphics)

@@ -156,7 +156,7 @@ const DevolucionesInv = () => {
             :
             <div className="card shadow rounded">
                 <div className="card-header text-dark">
-                    Entradas
+                    Entradas de inventario
                 </div>
                 <div className="card-body">
                     <div className="row mt-2 ml-1">

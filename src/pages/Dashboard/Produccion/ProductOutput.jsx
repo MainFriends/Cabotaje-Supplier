@@ -5,8 +5,8 @@ import {useEffect, useState, useMemo} from 'react';
 import Spinner from '../../../components/Spinner';
 import FilterComponent from '../../../components/FilterComponent';
 import Modal from '../../../components/Modal';
-import AddDecreaseForm from '../../../components/decrease/AddDecreaseForm';
-import EditDecreaseForm from '../../../components/decrease/EditDecreaseForm';
+import AddProductOutput from '../../../components/ProductOutput/AddProductOutput';
+import EditProductOutput from '../../../components/ProductOutput/EditProductOutput';
 
 import {paginationComponentOptions} from '../../../helpers/datatablesOptions';
 import axios from '../../../config/axios'
@@ -46,10 +46,10 @@ const dowlandPdfLosses = (filteredItems) => {
         startY: 45
     })
 
-    doc.save('Mermas de inventario - Cabotaje Supplier.pdf')
+    doc.save('Salidas de inventario - Cabotaje Supplier.pdf')
 }
 
-const mermas = () => {
+const ProductOutput = () => {
     const [rows, setRows] = useState([]);
     const [filterText, setFilterText] = useState('');
     const [loading, setLoading] = useState(true);
@@ -61,7 +61,7 @@ const mermas = () => {
     //definir las columnas
     const columns = [
          {
-            name: 'CODIGO PRODUCTO',
+            name: 'SKU',
             selector: row => row.COD_PRODUCT,
             sortable: true,
         },
@@ -71,17 +71,22 @@ const mermas = () => {
             sortable: true,
         },
          {
-            name: 'CONCEPTO',
-            selector: row => row.CONCEPT,
+            name: 'DESCRIPCIÓN',
+            selector: row => row.DES_OUTPUT,
             sortable: true,
         },
         {
-            name: 'CANTIDAD PRODUCTOS',
-            selector: row => row.CANT_PRODUCTS,
+            name: 'TIPO DE SALIDA',
+            selector: row => row.NAM_TYPE,
             sortable: true,
         },
         {
-            name: 'NUMERO DE LOTE',
+            name: 'CANTIDAD',
+            selector: row => row.CANT_PRODUCT,
+            sortable: true,
+        },
+        {
+            name: 'NÚMERO DE LOTE',
             selector: row => row.NUM_LOT,
             sortable: true,
         },
@@ -92,17 +97,17 @@ const mermas = () => {
         },
         {
             id: "id",
-            name: 'FECHA MERMA',
-            selector: row => row.DAT_DECREASE,
+            name: 'FECHA',
+            selector: row => row.DAT_OUTPUT,
             sortable: true,
-            format : row => moment(row.DAT_DECREASE).format('DD-MM-YYYY')
+            format : row => moment(row.DAT_OUTPUT).format('DD-MM-YYYY')
         },
         {
             name: 'ACCIONES',
             button: true,
             cell: row => <>
-                <button className={'btn btn-sm btn-warning mr-1 ' + (!permissions.UPD ? 'disabled' : null)} onClick={() => {setRowCOD(row.COD_DECREASE)}} data-toggle="modal" data-target='#editDecrease'><i className="fa-solid fa-pen-to-square"></i></button>
-                <button className={'btn btn-sm btn-danger ' + (!permissions.DEL ? 'disabled' : null)} onClick={() => handleDelete(row.COD_DECREASE) }><i className="fa-solid fa-trash"></i></button>
+                <button className={'btn btn-sm btn-warning mr-1 ' + (!permissions.UPD ? 'disabled' : null)} onClick={() => {setRowCOD(row.COD_OUTPUT)}} data-toggle="modal" data-target='#editProductOutput'><i className="fa-solid fa-pen-to-square"></i></button>
+                <button className={'btn btn-sm btn-danger ' + (!permissions.DEL ? 'disabled' : null)} onClick={() => handleDelete(row.COD_OUTPUT) }><i className="fa-solid fa-trash"></i></button>
             </>
         }
     ];
@@ -118,7 +123,7 @@ const mermas = () => {
     }, [filterText]);
 
     useEffect(() => {
-        axios.get('/decrease', token())
+        axios.get('/product-outputs', token())
             .then(res => {
                 const {data} = res;
                 setRows(data);
@@ -129,7 +134,7 @@ const mermas = () => {
     },[sendRequest]);
 
     const handleDelete = (cod) => {
-        axios.delete(`/decrease/${cod}`, token())
+        axios.delete(`/product-outputs/${cod}`, token())
         .then(res => setSendRequest(true))
     }
 
@@ -148,12 +153,12 @@ const mermas = () => {
             :
             <div className="card shadow rounded">
                 <div className="card-header text-dark">
-                    Mermas
+                    Salidas de inventario
                 </div>
                 <div className="card-body">
                     <div className="row mt-2 ml-1">
                         <div className="col">
-                            <button className={'btn btn-sm btn-primary ' + (!permissions.INS ? 'disabled' : null)} data-toggle="modal" data-target='#addDecrease'><i className="fas fa-plus mr-2"></i>Agregar</button>
+                            <button className={'btn btn-sm btn-primary ' + (!permissions.INS ? 'disabled' : null)} data-toggle="modal" data-target='#addProductOutput'><i className="fas fa-plus mr-2"></i>Agregar</button>
                         </div>
                     </div>
                     <DataTable
@@ -173,21 +178,21 @@ const mermas = () => {
                     />
 
                     <Modal 
-                        idModal='addDecrease'
-                        title='Agregar Merma'
+                        idModal='addProductOutput'
+                        title='Agregar salida'
                         messageError={messageError}
-                        content={<AddDecreaseForm setSendRequest={setSendRequest} setMessageError={setMessageError}/>}
+                        content={<AddProductOutput setSendRequest={setSendRequest} setMessageError={setMessageError}/>}
                     />
 
                     <Modal 
-                        idModal='editDecrease'
-                        title='Actualizar Merma'
+                        idModal='editProductOutput'
+                        title='Actualizar salida'
                         messageError={messageError}
-                        content={<EditDecreaseForm rowCOD ={rowCOD} setSendRequest={setSendRequest} setMessageError={setMessageError}/>}
+                        content={<EditProductOutput rowCOD ={rowCOD} setSendRequest={setSendRequest} setMessageError={setMessageError}/>}
                     />
                 </div>
             </div> 
     )
 }
 
-export default mermas;
+export default ProductOutput;
