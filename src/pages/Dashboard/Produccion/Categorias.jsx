@@ -73,6 +73,12 @@ const Categoria = () => {
             wrap:true
         },
         {
+            name: 'ESTADO',
+            selector: row => row.NAM_STATUS,
+            sortable: true,
+            wrap:true
+        },
+        {
             name: 'ACCIONES',
             button: true,
             cell: row => <>

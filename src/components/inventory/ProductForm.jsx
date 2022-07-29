@@ -92,7 +92,7 @@ const ProductForm = ({setSendRequest, setMessageError}) => {
             <div className="row mb-4">
                 <div className="col-7">
                     <label className='form-label' htmlFor="DES_PRODUCT">Descripción</label>
-                    <textarea onChange={handleInputChange} className='form-control' rows='2' name='DES_PRODUCT' type="text" pattern="^[a-zA-Z0-9ñÑØº-_ ]+$" onInput={toUpperCase} maxLength={50}  wrap="hard" required/>
+                    <textarea onChange={handleInputChange} className='form-control' rows='2' name='DES_PRODUCT' type="text" pattern="^[a-zA-Z0-9ñÑØº-_ ]+$" onInput={toUpperCase}  wrap="hard" required/>
                 </div>
                 <div className="col-4">
                     <label className='form-label'>Categoria <span className="text-danger"> *</span></label>

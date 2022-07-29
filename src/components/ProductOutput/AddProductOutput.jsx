@@ -97,7 +97,7 @@ const AddProductOutput = ({setSendRequest, setMessageError}) => {
                             })
                         }
                      </select>         
-                </div>
+            </div>
             <div className="col-md-4 mt-2">
                 <label className='form-label' htmlFor="DAT_OUTPUT">Fecha <span className="text-danger"> *</span></label>
                 <input max={moment().format('YYYY-MM-DD')} onChange={handleInputChange} className='form-control' name='DAT_OUTPUT' type="date" required/>

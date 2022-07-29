@@ -26,14 +26,16 @@ const getCategoryS = (req, res) =>{
 const addCategory = (req, res) => {
   const {
     NAM_CATEGORY,
-    DESCRIPTION
+    DESCRIPTION,
+    COD_STATUS
     } = req.body
 
-    const sp = 'CALL SP_INS_CATEGORY(?,?)';
+    const sp = 'CALL SP_INS_CATEGORY(?,?,?)';
 
     mysqlConnect.query(sp,[
-    NAM_CATEGORY,
-    DESCRIPTION
+        NAM_CATEGORY.trim(),
+        DESCRIPTION,
+        COD_STATUS
     ], (error, resultado) => {
         if(error){
             const message = error.message.split(': ')[1];
@@ -48,14 +50,16 @@ const updateCategory = (req, res) =>{
     const {codCategory} = req.params;
 
     const {
-        DESCRIPTION
+        DESCRIPTION,
+        COD_STATUS
         } = req.body
     
-        const sp = 'CALL SP_UPD_CATEGORY(?,?)';
+        const sp = 'CALL SP_UPD_CATEGORY(?,?,?)';
     
         mysqlConnect.query(sp,[
-        codCategory,
-         DESCRIPTION
+            codCategory,
+            DESCRIPTION,
+            COD_STATUS
         ], (error, resultado) => {
             if(error){
                 const message = error.message.split(': ')[1];
