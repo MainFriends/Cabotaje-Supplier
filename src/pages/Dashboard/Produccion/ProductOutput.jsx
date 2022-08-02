@@ -70,7 +70,12 @@ const ProductOutput = () => {
             selector: row => row.NAM_PRODUCT,
             sortable: true,
         },
-         {
+        {
+            name: 'PROVEEDOR',
+            selector: row => row.NAM_SUPPLIER,
+            sortable: true,
+        },
+        {
             name: 'DESCRIPCIÓN',
             selector: row => row.DES_OUTPUT,
             sortable: true,

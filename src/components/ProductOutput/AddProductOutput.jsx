@@ -17,6 +17,9 @@ const AddProductOutput = ({setSendRequest, setMessageError}) => {
 
     const [typeOutputs, setTypeOutputs] = useState([]);
     const [nameProduct, setNameProduct] = useState('');
+    const [nameSupplier, setNameSupplier] = useState('');
+    const [setLotes, setNameLotes] = useState([]);
+
 
     const handleInputChange=(e)=>{
         setAddProductOutput({
@@ -27,16 +30,21 @@ const AddProductOutput = ({setSendRequest, setMessageError}) => {
 
     useEffect(() => {
         const input = document.querySelector('#nameProductoOutputValue');
+        const inputSupplier = document.querySelector('#nameSupplierOutputValue');
 
         if(formAddProductOutput.COD_PRODUCT){
             axios.get(`/inventory/${formAddProductOutput.COD_PRODUCT}`, token())
                 .then(res => {
                     input.classList.remove('is-invalid')
+                    inputSupplier.classList.remove('is-invalid')
                     setNameProduct(res.data[0].NAM_PRODUCT);
+                    setNameSupplier(res.data[0].NAM_SUPPLIER);
                 })
                 .catch(err => {
                     input.classList.add('is-invalid')
-                    setNameProduct('Producto no encontrado')
+                    inputSupplier.classList.add('is-invalid')
+                    setNameProduct('Producto no encontrado');
+                    setNameSupplier('Sin resultados');
                 })
         }
     }, [formAddProductOutput.COD_PRODUCT])
@@ -45,6 +53,13 @@ const AddProductOutput = ({setSendRequest, setMessageError}) => {
         axios.get('/type-outputs', token())
         .then(res => setTypeOutputs(res.data))
     }, [])
+
+    useEffect(() => {
+        if(formAddProductOutput.COD_PRODUCT){
+            axios.get(`/find-lotes/${formAddProductOutput.COD_PRODUCT}`, token())
+            .then(res => setNameLotes(res.data))
+        }
+    }, [formAddProductOutput.COD_PRODUCT])
 
     const handleSubmitDecrease = (e) => {
         e.preventDefault();
@@ -67,7 +82,7 @@ const AddProductOutput = ({setSendRequest, setMessageError}) => {
     return(
         <form id='addFormDecrease' onSubmit={handleSubmitDecrease} action='#'>
         <div className="row mb-4">
-            <div className="col-md-6">
+            <div className="col-md-4">
                 <label className='form-label' htmlFor="COD_PRODUCT">SKU <span className="text-danger"> *</span></label>
                 <input onChange={handleInputChange} className='form-control' name='COD_PRODUCT' type="text" required/>
             </div>
@@ -75,6 +90,10 @@ const AddProductOutput = ({setSendRequest, setMessageError}) => {
                 <label className='form-label'>Producto <span className="text-danger"> *</span></label>
                 <input id='nameProductoOutputValue' value={nameProduct} className='form-control' type="text" disabled/>
             </div>
+            <div className="col-4">
+                    <label className='form-label'>Proveedor <span className="text-danger"> *</span></label>
+                    <input id='nameSupplierOutputValue' value={nameSupplier} className='form-control' type="text" disabled/>
+                </div>
             <div className="col-md-8 mt-2">
                     <label className='form-label' htmlFor="DES_OUTPUT">Descripción</label>
                     <textarea onChange={handleInputChange} className='form-control' name='DES_OUTPUT' type="text" rows={3}  wrap="hard"  required/>
@@ -85,7 +104,14 @@ const AddProductOutput = ({setSendRequest, setMessageError}) => {
             </div>
             <div className="col-md-3 mt-2">
                 <label className='form-label' htmlFor="NUM_LOT">Número de lote <span className="text-danger"> *</span></label>
-                <input onChange={handleInputChange} className='form-control' name='NUM_LOT' type="text" required/>
+                <select onChange={handleInputChange} defaultValue={''} className='form-control' name='NUM_LOT' required>
+                        <option value=''>-Seleccionar-</option>
+                        {
+                            setLotes.map(element => {
+                                return <option key={element.NUM_LOT} value={element.NUM_LOT}>{element.NUM_LOT}</option>
+                            })
+                        }
+                </select> 
             </div>
             <div className="col-md-3 mt-2">
                     <label className='form-label' htmlFor="COD_TYPE">Tipo de salida  <span className="text-danger"> *</span></label>

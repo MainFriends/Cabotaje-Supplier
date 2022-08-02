@@ -74,6 +74,11 @@ const DevolucionesInv = () => {
             sortable: true,
         },
         {
+            name: 'PROVEEDOR',
+            selector: row => row.NAM_SUPPLIER,
+            sortable: true,
+        },
+        {
             name: 'DESCRIPCIÓN',
             selector: row => row.DES_ENTRIE,
             sortable: true,

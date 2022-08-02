@@ -11,7 +11,8 @@ const EditProductEntriesForm = ({rowCOD, setSendRequest, setMessageError}) => {
         DES_ENTRIE: '',
         CANT_PRODUCT: '',
         COD_TYPE: '',
-        DAT_ENTRIES: ''
+        DAT_ENTRIES: '',
+        NAM_SUPPLIER: ''
     })
 
     const [typeEntries, setTypeEntries] = useState([]);
@@ -65,13 +66,17 @@ const EditProductEntriesForm = ({rowCOD, setSendRequest, setMessageError}) => {
                     <label className='form-label' htmlFor="NAM_PRODUCT">Producto</label>
                     <input value = {formEditProductEntries.NAM_PRODUCT} className='form-control' name='NAM_PRODUCT' type="text" required disabled/>
                 </div>
-                <div className="col-md-4 mt-2">
+                <div className="col-md-3 mt-2">
                     <label className='form-label' htmlFor="NUM_LOT">Número de lote</label>
                     <input value = {formEditProductEntries.NUM_LOT} className='form-control' name='NUM_LOT' type="text" required disabled/>
                 </div>
-                <div className="col-md-4 mt-2">
-                    <label className='form-label' htmlFor="CANT_PRODUCT">Cantidad <span className="text-danger"> *</span></label>
-                    <input onChange={handleInputChange} value = {formEditProductEntries.CANT_PRODUCT} className='form-control' name='CANT_PRODUCT' type="number" required disabled/>
+                <div className="col-md-3 mt-2">
+                    <label className='form-label' htmlFor="NAM_SUPPLIER">Proveedor</label>
+                    <input value = {formEditProductEntries.NAM_SUPPLIER} className='form-control' name='NAM_SUPPLIER' type="text" required disabled/>
+                </div>
+                <div className="col-md-2 mt-2">
+                    <label className='form-label' htmlFor="CANT_PRODUCT">Cantidad</label>
+                    <input value = {formEditProductEntries.CANT_PRODUCT} className='form-control' name='CANT_PRODUCT' type="number" required disabled/>
                 </div>
                 <div className="col-md-6 mt-2">
                     <label className='form-label' htmlFor="DES_ENTRIE">Descripción</label>

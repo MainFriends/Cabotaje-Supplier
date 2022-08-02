@@ -9,10 +9,10 @@ const DetailForm = ({setSendRequest, setMessageError}) => {
     const [taxChecked, setTaxChecked] = useState(true);
     const [formData, setFormData] = useState({
         COD_PRODUCT: '',
-        NORMAL_UNIT_PRICE: '',
-        PURCHASE_PRICE: '',
+        NORMAL_UNIT_PRICE: "0.00",
+        PURCHASE_PRICE: "0.00",
         WHOLESALE_CANT: 0,
-        WHOLESALE_PRICE: 0,
+        WHOLESALE_PRICE: "0.00",
         ISV: 0.0,
         CANT_PRODUCTS: '',
         NUM_LOT: '',
@@ -33,6 +33,8 @@ const DetailForm = ({setSendRequest, setMessageError}) => {
             [e.target.name]: e.target.value
         })
     }
+
+
 
     useEffect(() => {
         const input = document.querySelector('#nameProduct');
@@ -76,8 +78,6 @@ const DetailForm = ({setSendRequest, setMessageError}) => {
             })
             .catch(err => {
                 const {message} = err.response.data;
-                console.log(err.response)
-                console.log(message)
                 setMessageError(message)
 
                 setTimeout(() => {
@@ -115,6 +115,13 @@ const DetailForm = ({setSendRequest, setMessageError}) => {
         }
     }, [taxChecked])
 
+    const formatedValue = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: parseFloat(e.target.value).toFixed(2)
+        })
+    }
+
     return (
         <form onSubmit={handleSubmit} action='#'>
             <div className="row mb-6">
@@ -138,11 +145,11 @@ const DetailForm = ({setSendRequest, setMessageError}) => {
                 </div>
                 <div className="col-3">
                     <label className='form-label' htmlFor="PURCHASE_PRICE">Precio de compra <span className="text-danger"> *</span></label>
-                    <input min={0} onChange={handleInputChange} className='form-control' name='PURCHASE_PRICE' type="number" required/>
+                    <input min={0.00} onChange={handleInputChange} onBlur={formatedValue} value={formData.PURCHASE_PRICE} step="0.01" className='form-control text-right' name='PURCHASE_PRICE' type="number" required/>
                 </div>
                 <div className="col-3">
                     <label className='form-label' htmlFor="NORMAL_UNIT_PRICE">Precio de venta <span className="text-danger"> *</span></label>
-                    <input min={formData.PURCHASE_PRICE} onChange={handleInputChange} className='form-control' name='NORMAL_UNIT_PRICE' type="number" required/>
+                    <input min={formData.PURCHASE_PRICE} step="0.01" onChange={handleInputChange} className='form-control text-right' onBlur={formatedValue} value={formData.NORMAL_UNIT_PRICE} name='NORMAL_UNIT_PRICE' type="number" required/>
                 </div>
                 {
                     !taxChecked 
@@ -206,7 +213,7 @@ const DetailForm = ({setSendRequest, setMessageError}) => {
                     </div>
                     <div className="col-4">
                         <label className='form-label' htmlFor="WHOLESALE_PRICE">Precio unitario <span className="text-danger"> *</span></label>
-                        <input onChange={handleInputChange} className='form-control' min={0} name='WHOLESALE_PRICE' type="number" required/>
+                        <input value={formData.WHOLESALE_PRICE} onChange={handleInputChange} onBlur={formatedValue} step="0.01" className='form-control text-right' min={0.00} name='WHOLESALE_PRICE' type="number" required/>
                         <small className="form-text text-muted">Establezca el precio unitario que se determinará en la venta al por mayor.</small>
                     </div>
                     <div className="col-4 text-right mt-4 py-2">
