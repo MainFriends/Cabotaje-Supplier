@@ -7,27 +7,26 @@ import AlertError from "../AlertError";
 const SaleInformation = ({setsaleInvoice, saleInvoice, setCurrentPage, setCorrelativeInvoice, correlativeInvoice, currentPage }) => {
 
   const [errorMessage, setErrorMessage] = useState('');
+  const [dateTime, setDateTime] = useState(moment().format('DD-MM-YYYY hh:mm:ss a'))
 
   const {RTN} = saleInvoice;
 
   useEffect(() => {
-    if(saleInvoice.COD_USER){
-      axios.get(`/user/${saleInvoice.COD_USER}`, token())
-        .then(res => {
-          const {FIRST_NAME, LAST_NAME} = res.data[0];
-          setsaleInvoice({
-            ...saleInvoice,
-            NAM_USER: `${FIRST_NAME} ${LAST_NAME}`
-          })
+    axios.get(`/find-user`, token())
+      .then(res => {
+        const {FIRST_NAME, LAST_NAME} = res.data[0];
+        setsaleInvoice({
+          ...saleInvoice,
+          NAM_USER: `${FIRST_NAME} ${LAST_NAME}`
         })
-        .catch(err => {
-          setsaleInvoice({
-            ...saleInvoice,
-            NAM_USER: `Usuario no encontrado`
-          })
-        })
-    }
-  }, [saleInvoice.COD_USER])
+      })
+  }, [])
+
+  useEffect(() => {
+    setTimeout(() => {
+      setDateTime(moment().format('DD-MM-YYYY hh:mm:ss a'))
+    }, 1000);
+  }, [dateTime])
 
   useEffect(() => {
     axios.get('/correlative', token())
@@ -148,17 +147,6 @@ const SaleInformation = ({setsaleInvoice, saleInvoice, setCurrentPage, setCorrel
                   <i className="mr-1 fa-solid fa-user"></i> Usuario
                 </label>
               </div>
-              <div className="col-3">
-                <input
-                  className="form-control form-control form-control-sm"
-                  type="number"
-                  onChange={handleInputChange}
-                  value={saleInvoice.COD_USER}
-                  autoFocus
-                  name='COD_USER'
-                  min={1}
-                />
-              </div>
               <div className="col-6">
                 <input
                   className="form-control form-control form-control-sm"
@@ -174,12 +162,12 @@ const SaleInformation = ({setsaleInvoice, saleInvoice, setCurrentPage, setCorrel
                 <i className="mr-1 fa-solid fa-calendar-days"></i> Fecha
                 </label>
               </div>
-              <div className="col-4">
+              <div className="col-5">
                 <input
                   className="form-control form-control form-control-sm"
                   type="text"
                   disabled
-                  value={moment().format('DD-MM-YYYY')}
+                  value={dateTime}
                 />
               </div>
             </div>

@@ -10,5 +10,6 @@ router.post('/user', [userExtractor, verifyRolePersons], userController.addUser)
 router.put('/user/:codUser', [userExtractor, verifyRolePersons], userController.updateUser);
 router.delete('/user/:codUser', [userExtractor, verifyRolePersons], userController.deleteUser);
 router.get('/pass-dat-exp', [userExtractor, verifyRolePersons], userController.getDate);
+router.get('/find-user', [userExtractor, verifyRolePersons], userController.getFindUser);
 
 module.exports = router;

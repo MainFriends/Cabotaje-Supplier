@@ -1,7 +1,4 @@
 import {useState, useEffect} from 'react'
-import NavbarAlerts from "./NavbarAlerts";
-import NavbarMessages from "./NavbarMessages";
-import NavbarSearch from "./NavbarSearch";
 import NavbarUserDropdown from "./NavbarUserDropdown";
 import axios from '../config/axios';
 import token from '../helpers/getToken';

@@ -260,7 +260,7 @@ const SidebarItems = () => {
                     <a className="nav-link collapsed dinamic" href="#" data-toggle="collapse" data-target="#collapseContabilidad"
                         aria-expanded="true" aria-controls="collapseTwo">
                         <i className="mr-2 fas fa-coins"></i>
-                        <span>Contabilidad</span>
+                        <span>Gestión contable</span>
                     </a>
                     <div className="collapse" id="collapseContabilidad"  aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div className="bg-white py-2 collapse-inner rounded">

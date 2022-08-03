@@ -12,6 +12,19 @@ const getUsers = (req, res) => {
     });
 };
 
+const getFindUser = (req, res) => {
+    const {COD_USER} = req.user;
+    const sp = 'CALL SP_SEL_USER(?)';
+    mysqlConnect.query(sp, [COD_USER], (err, result) => {
+        if(err){
+            const message = err.message.split(': ')[1];
+            res.status(500).send({message});
+        }else{
+            res.status(200).json(result[0])
+        }
+    });
+}
+
 const getUser = (req, res) => {
     const {codUser} = req.params;
     const sp = 'CALL SP_SEL_USER(?)';
@@ -168,5 +181,6 @@ module.exports = {
     addUser,
     updateUser,
     deleteUser,
-    getDate
+    getDate,
+    getFindUser
 };

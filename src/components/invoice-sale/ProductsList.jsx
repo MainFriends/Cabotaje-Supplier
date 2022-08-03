@@ -8,6 +8,13 @@ import AlertError from '../AlertError';
 
 const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeInvoice, productListSale, setproductListSale}) => {
     const [errorMessage, setErrorMessage] = useState('');
+    const [dateTime, setDateTime] = useState(moment().format('DD-MM-YYYY hh:mm'));
+
+    useEffect(() => {
+        setTimeout(() => {
+          setDateTime(moment().format('DD-MM-YYYY hh:mm'))
+        }, 60000);
+    }, [dateTime]);
 
     useEffect(() => {
         setsaleInvoice({
@@ -128,7 +135,7 @@ const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeI
                     type="text" 
                     className="form-control form-control-sm" 
                     disabled
-                    value={moment().format('DD-MM-YYYY')}
+                    value={dateTime}
                     />
                 </div>
             </div>
