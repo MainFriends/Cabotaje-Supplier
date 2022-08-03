@@ -105,6 +105,12 @@ const EditUserForm = ({rowCOD, setSendRequest, setMessageError}) => {
         }
   }, [formEditUser.USER_PASSWORD, isNewPasswordGenerate])
 
+  useEffect(() => {
+    if(rowCOD){
+      setIsNewPasswordGenerate(false);
+    }
+  }, [rowCOD])
+
     return(
         <form id="editFormUser" onSubmit={handleSubmitUser} action="#">
         <h6 className="text-muted">Información general de empleado</h6>

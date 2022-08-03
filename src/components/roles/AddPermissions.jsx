@@ -14,6 +14,9 @@ const AddPermissions = ({rowCOD, setSendRequestPermissions, setMessageError}) =>
 
     const [modules, setModules] = useState([]);
     const [tables, setTables] = useState([]);
+    const [checked, setCheked] = useState(false);
+    const [disabled, setDisabled] = useState(false);
+
 
     const handleInputChange = (e) => {
         if(e.target.name === 'INS' || e.target.name === 'QUE' || e.target.name === 'UPD' || e.target.name === 'DEL'){
@@ -36,6 +39,16 @@ const AddPermissions = ({rowCOD, setSendRequestPermissions, setMessageError}) =>
         }
     }
 
+    useEffect(() => {
+        if(formDataPermissions.INS || formDataPermissions.UPD || formDataPermissions.DEL){
+            setCheked(true)
+            setDisabled(true)
+        }else{
+            setCheked(false)
+            setDisabled(false)
+        }
+    }, [formDataPermissions.INS, formDataPermissions.UPD, formDataPermissions.DEL])
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -44,6 +57,8 @@ const AddPermissions = ({rowCOD, setSendRequestPermissions, setMessageError}) =>
                 e.target.reset();
                 document.querySelector('#closeModalPermissions').click();
                 setSendRequestPermissions(true);
+                setCheked(false)
+                setDisabled(false)
                 setFormDataPermissions({
                     COD_MODULE: '',
                     COD_TABLE: '',
@@ -77,6 +92,20 @@ const AddPermissions = ({rowCOD, setSendRequestPermissions, setMessageError}) =>
                 }, 3000);
             })
     }, [])
+
+    useEffect(() => {
+        if(checked){
+            setFormDataPermissions({
+                ...formDataPermissions,
+                QUE: 1
+            })
+        }else{
+            setFormDataPermissions({
+                ...formDataPermissions,
+                QUE: 0
+            })
+        }
+    }, [checked])
 
     useEffect(() => {
         if(formDataPermissions.COD_MODULE){
@@ -133,7 +162,7 @@ const AddPermissions = ({rowCOD, setSendRequestPermissions, setMessageError}) =>
                 ?
                 <div className="col-4">
                     <div className="form-group form-check">
-                        <input onChange={handleInputChange} value={1} type="checkbox" className="form-check-input" name='QUE' id="QUE"/>
+                        <input onChange={() => checked ? setCheked(false) : setCheked(true)} value={1} type="checkbox" className="form-check-input" name='QUE' id="QUE" checked={checked} disabled={disabled} required/>
                         <label className="form-check-label" htmlFor="QUE"><i className="fa-solid fa-eye"></i> Visualizar</label>
                     </div>
                     {

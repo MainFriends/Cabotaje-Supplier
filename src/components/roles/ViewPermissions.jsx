@@ -59,7 +59,6 @@ const ViewPermissions = ({rowCOD, sendRequestPermissions, setSendRequestPermissi
             axios.get(`/permissions/${rowCOD.COD_ROLE}`, token())
             .then(res => {
                 setRowsData(res.data);
-                console.log(res.data)
                 setSendRequestPermissions(false)
             })
         }

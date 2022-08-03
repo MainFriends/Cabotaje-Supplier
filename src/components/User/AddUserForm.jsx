@@ -54,6 +54,8 @@ const AddUserForm = ({ setSendRequest, setMessageError }) => {
         document.querySelector("#idCloseAddForm").click();
         e.target.reset();
         setSendRequest(true);
+        cleanForm();
+        setIsPasswordValid(false);
       })
       .catch((err) => {
         const { message } = err.response.data;
@@ -80,6 +82,26 @@ const AddUserForm = ({ setSendRequest, setMessageError }) => {
             setIsPasswordValid(false);
         }
   }, [formAddUser.USER_PASSWORD])
+
+  const cleanForm = () => {
+    setFormAddUser({
+      IDENTITY: "",
+      FIRST_NAME: "",
+      MIDDLE_NAME: "",
+      LAST_NAME: "",
+      GENDER: "",
+      NUM_PHONE_ONE: "",
+      NUM_PHONE_TWO: "",
+      NUM_REFERENCE: "",
+      DAT_BIRTHDAY: "",
+      NAM_CITY: "",
+      ADDRESS: "",
+      COD_STATUS: "",
+      COD_ROLES: "",
+      USER_EMAIL: "",
+      USER_PASSWORD: "",
+    });
+  }
   
   return (
     <form id="addFormUser" onSubmit={handleSubmitUser} action="#">

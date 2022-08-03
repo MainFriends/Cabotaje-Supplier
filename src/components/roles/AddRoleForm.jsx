@@ -16,6 +16,9 @@ const AddRoleForm = ({setSendRequest, setMessageError}) => {
 
     const [modules, setModules] = useState([]);
     const [tables, setTables] = useState([]);
+    const [checked, setCheked] = useState(false);
+    const [disabled, setDisabled] = useState(false);
+
 
     const handleInputChange = (e) => {
         if(e.target.name === 'INS' || e.target.name === 'QUE' || e.target.name === 'UPD' || e.target.name === 'DEL'){
@@ -46,6 +49,18 @@ const AddRoleForm = ({setSendRequest, setMessageError}) => {
                 e.target.reset();
                 document.querySelector('#idCloseAddRole').click();
                 setSendRequest(true)
+                setCheked(false)
+                setDisabled(false)
+                setFormData({
+                    NAM_ROLE: '',
+                    DES_ROLE: '',
+                    COD_MODULE: '',
+                    COD_TABLE: '',
+                    QUE: 0,
+                    INS: 0,
+                    UPD: 0,
+                    DEL: 0
+                });
             })
             .catch(err => {
                 const {message} = err.response.data;
@@ -73,6 +88,16 @@ const AddRoleForm = ({setSendRequest, setMessageError}) => {
     }, [])
 
     useEffect(() => {
+        if(formData.INS || formData.UPD || formData.DEL){
+            setCheked(true)
+            setDisabled(true)
+        }else{
+            setCheked(false)
+            setDisabled(false)
+        }
+    }, [formData.INS, formData.UPD, formData.DEL])
+
+    useEffect(() => {
         if(formData.COD_MODULE){
             setFormData({
                 ...formData,
@@ -92,6 +117,20 @@ const AddRoleForm = ({setSendRequest, setMessageError}) => {
             })
         }
     }, [formData.COD_MODULE])
+
+    useEffect(() => {
+        if(checked){
+            setFormData({
+                ...formData,
+                QUE: 1
+            })
+        }else{
+            setFormData({
+                ...formData,
+                QUE: 0
+            })
+        }
+    }, [checked])
 
   return (
     <form onSubmit={handleSubmit} action='#'>
@@ -139,8 +178,8 @@ const AddRoleForm = ({setSendRequest, setMessageError}) => {
                 ?
                 <div className="col-4">
                     <div className="form-group form-check">
-                        <input onChange={handleInputChange} value={1} type="checkbox" className="form-check-input" name='QUE' id="QUE"/>
-                        <label className="form-check-label" htmlFor="QUE"><i className="fa-solid fa-eye"></i> Visualizar</label>
+                        <input onChange={() => checked ? setCheked(false) : setCheked(true)} value={1} type="checkbox" className="form-check-input" name='QUE' id="QUE" checked={checked} disabled={disabled} required/>
+                        <label className="form-check-label" htmlFor="QUE"><i className="fa-solid fa-eye"></i> Consultar</label>
                     </div>
                     {
                         formData.COD_TABLE != 10 &&

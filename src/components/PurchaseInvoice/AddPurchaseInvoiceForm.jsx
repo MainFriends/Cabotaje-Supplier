@@ -258,8 +258,8 @@ const AddFacturaForm = ({setSendRequest}) => {
                     <small className="text-muted text-sm">Opcional</small>
                 </div>
                 <div className="col-md-4">
-                    <label className='form-label' htmlFor="COD_PRODUCT">Código del producto<span className="text-danger"> *</span></label>
-                    <input value={userCodProduct} onChange={handleInputProduct} className='form-control' name='userCodProduct' type="number"/>
+                    <label className='form-label' htmlFor="COD_PRODUCT">SKU <span className="text-danger"> *</span></label>
+                    <input value={userCodProduct} onChange={handleInputProduct} className='form-control' name='userCodProduct' type="text"/>
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="NAM_PRODUCT">Nombre del producto </label>
