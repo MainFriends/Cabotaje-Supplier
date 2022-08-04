@@ -8,7 +8,7 @@ const EditProductEntriesForm = ({rowCOD, setSendRequest, setMessageError}) => {
     const [formEditProductEntries, setFormEditProductEntries] = useState({
         NAM_PRODUCT: '',
         NUM_LOT: '',
-        DES_ENTRIE: '',
+        DES_RETURN: '',
         CANT_PRODUCT: '',
         COD_TYPE: '',
         DAT_ENTRIES: '',
@@ -47,6 +47,7 @@ const EditProductEntriesForm = ({rowCOD, setSendRequest, setMessageError}) => {
         axios.put(`/product-entries/${rowCOD}`,formEditProductEntries, token())
             .then(res => {
                 document.querySelector('#idCloseEditForm').click();
+                e.target.reset();
                 setSendRequest(true);
             })
             .catch(err => {
@@ -76,11 +77,11 @@ const EditProductEntriesForm = ({rowCOD, setSendRequest, setMessageError}) => {
                 </div>
                 <div className="col-md-2 mt-2">
                     <label className='form-label' htmlFor="CANT_PRODUCT">Cantidad</label>
-                    <input value = {formEditProductEntries.CANT_PRODUCT} className='form-control' name='CANT_PRODUCT' type="number" required disabled/>
+                    <input onChange={handleInputChange} value = {formEditProductEntries.CANT_PRODUCT} className='form-control' name='CANT_PRODUCT' type="number" required disabled/>
                 </div>
                 <div className="col-md-6 mt-2">
-                    <label className='form-label' htmlFor="DES_ENTRIE">Descripción</label>
-                    <textarea onChange={handleInputChange} value = {formEditProductEntries.DES_ENTRIE} className='form-control' name='DES_ENTRIE' type="text"  wrap="hard"  required/>
+                    <label className='form-label' htmlFor="DES_RETURN">Descripción</label>
+                    <textarea onChange={handleInputChange} value = {formEditProductEntries.DES_RETURN} className='form-control' name='DES_RETURN' type="text"  wrap="hard"  required/>
                 </div>
                 <div className="col-md-6 mt-2">
                     <label className='form-label' htmlFor="COD_TYPE">Tipo de entrada <span className="text-danger"> *</span></label>

@@ -57,7 +57,7 @@ const DevolucionesInv = () => {
     const [filterText, setFilterText] = useState('');
     const [loading, setLoading] = useState(true);
     const [messageError, setMessageError] = useState('');
-    const [sendRequest, setSendRequest] = useState(false);
+    const [sendRequest, setSendRequest] = useState('false');
     const [rowCOD, setRowCOD] = useState(null);
     const [permissions, setPermissions] = useState({});
     

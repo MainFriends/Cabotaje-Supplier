@@ -131,3 +131,17 @@ INSERT INTO TYP_PRODUCT_OUTPUT(NAM_TYPE, DES_TYPE)
 VALUES('Devolución', 'Devoluciones a proveedores');
 INSERT INTO TYP_PRODUCT_OUTPUT(NAM_TYPE, DES_TYPE)
 VALUES('Merma', 'Mermas de productos');
+
+-- TIPOS DE ENTRADAS
+INSERT INTO TYP_PRODUCT_ENTRIES(NAM_TYPE, DES_TYPE)
+VALUES('Compra', 'Compra a proveedores');
+INSERT INTO TYP_PRODUCT_ENTRIES(NAM_TYPE, DES_TYPE)
+VALUES('Devolución', 'Devoluciones entrantes');
+
+-- TIPOS DE SALIDAS
+INSERT INTO TYP_PRODUCT_OUTPUT(NAM_TYPE, DES_TYPE)
+VALUES('Venta', 'Venta a proveedores');
+INSERT INTO TYP_PRODUCT_OUTPUT(NAM_TYPE, DES_TYPE)
+VALUES('Devolución', 'Devoluciones a proveedores');
+INSERT INTO TYP_PRODUCT_OUTPUT(NAM_TYPE, DES_TYPE)
+VALUES('Merma', 'Mermas de productos');
