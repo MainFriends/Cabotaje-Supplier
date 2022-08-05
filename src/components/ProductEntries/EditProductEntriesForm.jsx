@@ -8,7 +8,7 @@ const EditProductEntriesForm = ({rowCOD, setSendRequest, setMessageError}) => {
     const [formEditProductEntries, setFormEditProductEntries] = useState({
         NAM_PRODUCT: '',
         NUM_LOT: '',
-        DES_RETURN: '',
+        DES_ENTRIE: '',
         CANT_PRODUCT: '',
         COD_TYPE: '',
         DAT_ENTRIES: '',
@@ -80,8 +80,8 @@ const EditProductEntriesForm = ({rowCOD, setSendRequest, setMessageError}) => {
                     <input onChange={handleInputChange} value = {formEditProductEntries.CANT_PRODUCT} className='form-control' name='CANT_PRODUCT' type="number" required disabled/>
                 </div>
                 <div className="col-md-6 mt-2">
-                    <label className='form-label' htmlFor="DES_RETURN">Descripción</label>
-                    <textarea onChange={handleInputChange} value = {formEditProductEntries.DES_RETURN} className='form-control' name='DES_RETURN' type="text"  wrap="hard"  required/>
+                    <label className='form-label' htmlFor="DES_ENTRIE">Descripción</label>
+                    <textarea onChange={handleInputChange} value = {formEditProductEntries.DES_ENTRIE} className='form-control' name='DES_ENTRIE' type="text"  wrap="hard"  required/>
                 </div>
                 <div className="col-md-6 mt-2">
                     <label className='form-label' htmlFor="COD_TYPE">Tipo de entrada <span className="text-danger"> *</span></label>

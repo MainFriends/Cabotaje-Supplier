@@ -36,7 +36,7 @@ const dowlandPdfReturns = (filteredItems) => {
             fila.NAM_PRODUCT,
             fila.CONCEPT,
             fila.CANT_PRODUCT,
-            fila.DES_RETURN,
+            fila.DES_ENTRIE,
             fila.NUM_LOT,
             fila.MOVEMENT,
             fila.USER_NAME,
