@@ -7,8 +7,6 @@ import AlertError from "../AlertError";
 const SaleInformation = ({setsaleInvoice, saleInvoice, setCurrentPage, setCorrelativeInvoice, correlativeInvoice, currentPage }) => {
 
   const [errorMessage, setErrorMessage] = useState('');
-  const [dateTime, setDateTime] = useState(moment().format('DD-MM-YYYY hh:mm:ss a'))
-
   const {RTN} = saleInvoice;
 
   useEffect(() => {
@@ -21,12 +19,6 @@ const SaleInformation = ({setsaleInvoice, saleInvoice, setCurrentPage, setCorrel
         })
       })
   }, [])
-
-  useEffect(() => {
-    setTimeout(() => {
-      setDateTime(moment().format('DD-MM-YYYY hh:mm:ss a'))
-    }, 1000);
-  }, [dateTime])
 
   useEffect(() => {
     axios.get('/correlative', token())
@@ -167,7 +159,7 @@ const SaleInformation = ({setsaleInvoice, saleInvoice, setCurrentPage, setCorrel
                   className="form-control form-control form-control-sm"
                   type="text"
                   disabled
-                  value={dateTime}
+                  value={moment().format('DD-MM-YYYY hh:mm:ss a')}
                 />
               </div>
             </div>
