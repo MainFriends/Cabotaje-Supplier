@@ -49,6 +49,8 @@ const bitacora = require('./routes/bitacora')
 const rolesAndPermissions = require('./routes/rolesAndPermissions');
 // Tipo de entradas y salidas
 const TypeEntriesOutputs = require('./routes/TypeEntriesOutputs');
+// Información de la empresa
+const informationInformation = require('./routes/companyInformation')
 
 /* CREAR SERVIDOR */
 const app = express();
@@ -104,6 +106,8 @@ app.use('/api', parametricTables)
 app.use('/api', rolesAndPermissions)
 app.use('/api', bitacora)
 app.use('/api', TypeEntriesOutputs)
+app.use('/api', informationInformation)
+
 
 //Mostrar UI
 app.use(express.static(path.join(__dirname, '../dist')));

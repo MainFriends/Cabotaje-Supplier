@@ -11,9 +11,11 @@ import moment from 'moment';
 import {Buffer} from 'buffer';
 import ChangePassword from '../../components/user-profile/ChangePassword';
 import AlertError from '../../components/AlertError';
+import CompanyInformation from '../../components/user-profile/CompanyInformation';
 
 
 const Profile = () => {
+    document.title = "Cabotaje Supplier - Perfil"
     const [alertMessage, setAlertMessage] = useState({
         message: '',
         ok: ''
@@ -82,11 +84,12 @@ const Profile = () => {
                     <div className="list-group">
                         <a href="#" onClick={() => setPageActive('profileInformation')} className={'list-group-item list-group-item-action ' + (pageActive === 'profileInformation' && 'active')}>Información del perfil</a>
                         <a href="#" onClick={() => setPageActive('changePassword')} className={'list-group-item list-group-item-action ' + (pageActive === 'changePassword' && 'active')}>Cambiar contraseña</a>
+                        <a href="#" onClick={() => setPageActive('companyData')} className={'list-group-item list-group-item-action ' + (pageActive === 'companyData' && 'active')}>Información de la empresa</a>
                     </div>
                 </div>
                 <div className="col-md-8 mt-4">
-                    {pageActive === 'profileInformation'
-                    ?
+                    {pageActive === 'profileInformation' 
+                    && 
                     <InformationForm 
                     setSendRequest={setSendRequest}
                     profilePicture={profilePicture}
@@ -94,8 +97,14 @@ const Profile = () => {
                     setUserInformation={setUserInformation}
                     setAlertMessage={setAlertMessage}
                     />
-                    :
+                    }
+                    {pageActive === 'changePassword' 
+                    && 
                     <ChangePassword setAlertMessage={setAlertMessage}/>
+                    }
+                    {pageActive === 'companyData' 
+                    && 
+                    <CompanyInformation setAlertMessage={setAlertMessage}/>
                     }
                 </div>
             </div>
