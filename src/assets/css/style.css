@@ -80,3 +80,7 @@
 .text-module{
   font-size: 11px !important;
 }
+
+.custom-margin{
+  margin-top: 30px !important;
+}
