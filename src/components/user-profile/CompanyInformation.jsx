@@ -31,7 +31,21 @@ const CompanyInformation = ({setAlertMessage}) => {
                 message,
                 ok:true
             });
+            window.scrollTo(0, 0);
 
+
+            setTimeout(() => {
+                setAlertMessage({
+                    message: '',
+                    ok: ''
+                });
+            }, 3000);
+        })
+        .catch(err => {
+            setAlertMessage({
+                message: "Ha ocurrido un error al intentar guardar los cambios",
+                ok: false
+            })
 
             setTimeout(() => {
                 setAlertMessage({

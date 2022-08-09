@@ -12,6 +12,7 @@ import {Buffer} from 'buffer';
 import ChangePassword from '../../components/user-profile/ChangePassword';
 import AlertError from '../../components/AlertError';
 import CompanyInformation from '../../components/user-profile/CompanyInformation';
+import Settings from '../../components/user-profile/Settings';
 
 
 const Profile = () => {
@@ -84,6 +85,7 @@ const Profile = () => {
                     <div className="list-group">
                         <a href="#" onClick={() => setPageActive('profileInformation')} className={'list-group-item list-group-item-action ' + (pageActive === 'profileInformation' && 'active')}>Información del perfil</a>
                         <a href="#" onClick={() => setPageActive('changePassword')} className={'list-group-item list-group-item-action ' + (pageActive === 'changePassword' && 'active')}>Cambiar contraseña</a>
+                        <a href="#" onClick={() => setPageActive('settings')} className={'list-group-item list-group-item-action ' + (pageActive === 'settings' && 'active')}>Configuraciones del sistema</a>
                         <a href="#" onClick={() => setPageActive('companyData')} className={'list-group-item list-group-item-action ' + (pageActive === 'companyData' && 'active')}>Información de la empresa</a>
                     </div>
                 </div>
@@ -105,6 +107,10 @@ const Profile = () => {
                     {pageActive === 'companyData' 
                     && 
                     <CompanyInformation setAlertMessage={setAlertMessage}/>
+                    }
+                    {pageActive === 'settings' 
+                    && 
+                    <Settings setAlertMessage={setAlertMessage}/>
                     }
                 </div>
             </div>
