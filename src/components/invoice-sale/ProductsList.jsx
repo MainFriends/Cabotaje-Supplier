@@ -14,6 +14,23 @@ const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeI
     const [categories, setCategories] = useState([]);
     const [suppliers, setSuppliers] = useState([]);
     const [filterProduct, setFilterProduct] = useState([]);
+    const [filterCheck, setFilterCheck] = useState(false);
+    const [SKU, setSKU] = useState('');
+    const [productsInventory, setProductsInventory] = useState([]);
+    const [wholosalePriceCheck, setWholosalePriceCheck] = useState(false);
+    const [productSelected, setProductSelected] = useState({
+        SKU: '',
+        NAM_PRODUCT: '',
+        DES_PRODUCT: '',
+        NORMAL_UNIT_PRICE: '',
+        WHOLESALE_PRICE: '',
+        WHOLESALE_CANT: '',
+        NAM_TYPE_PRODUCT: '',
+        ISV: '',
+        CANT_TOTAL: '',
+        NAM_LOT: ''
+    })
+
     const [productFilters, setProductFilters] = useState({
         COD_SUPPLIER: '',
         COD_CATEGORY: ''
@@ -125,6 +142,11 @@ const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeI
         }
     ];
 
+    const handleFilterCheck = () => {
+        setFilterCheck(filterCheck ? (false) : (true));
+        setSKU('')
+    }
+
     const handleDelete = cod => {
         const findProduct = productListSale.filter(product => product.COD_PRODUCT !== cod);
 
@@ -146,6 +168,54 @@ const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeI
     
     const clearProductsList = () => {
         setproductListSale([])
+    }
+
+    const handleProductSelected = (e) => {
+        setSKU(e.target.value);
+    }
+
+    useEffect(() => {
+        if(SKU){
+            axios.get(`/inventoryDetail/${SKU}`, token())
+            .then(res => setProductsInventory(res.data));
+        }
+    }, [SKU])
+
+    const handleProductAdd = () => {
+        let PRICE;
+
+        const {
+            SKU,
+            NAM_PRODUCT,
+            DES_PRODUCT,
+            NORMAL_UNIT_PRICE,
+            WHOLESALE_PRICE,
+            WHOLESALE_CANT,
+            NAM_TYPE_PRODUCT,
+            ISV,
+            CANT_TOTAL
+        } = productSelected;
+
+        if(wholosalePriceCheck){
+            PRICE = WHOLESALE_PRICE;
+        }else{
+            PRICE = NORMAL_UNIT_PRICE;
+        }
+
+        const product = {
+            SKU,
+            NAM_PRODUCT,
+            DES_PRODUCT,
+            PRICE: PRICE - (PRICE * ISV),
+            CANT_PRODUCTS: cant,
+            ISV: ISV * PRICE,
+            TOTAL: cant * PRICE
+        }
+
+        setproductListSale([
+            ...productListSale,
+            product
+        ])
     }
 
   return (
@@ -198,37 +268,71 @@ const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeI
             </div>
         </div>
         <div className="row pl-3">
-            <div className="col-2">
-                <label className='form-label small'>Proveedores </label>
-                <select onChange={handleChange} defaultValue={''} name="COD_SUPPLIER" className="form-control form-control-sm" required>
-                    <option value={''}>Seleccionar</option>
-                    {suppliers.map(supplier => {
-                        return <option key={supplier.COD_SUPPLIER} value={supplier.COD_SUPPLIER}>{supplier.NAM_SUPPLIER}</option>
-                    })}
-                </select>
-            </div>
-            <div className="col-2">
-                <label className='form-label small'>Categorias </label>
-                <select onChange={handleChange} defaultValue={''} name="COD_CATEGORY" className="form-control form-control-sm" required>
-                    <option value={''}>Seleccionar</option>
-                    {categories.map(category => {
-                        return <option key={category.COD_CATEGORY} value={category.COD_CATEGORY}>{category.NAM_CATEGORY}</option>
-                    })}
-                </select>
-            </div>
-            <div className="col-3">
-                <label className='form-label small'>Seleccionar producto </label>
-                <select defaultValue={'default'} name="COD_PRODUCT" className="form-control form-control-sm" required>
-                    <option value={'default'}>Seleccionar</option>
-                    {filterProduct.map(product => {
-                        return <option key={product.COD_PRODUCT} value={product.COD_PRODUCT}>{product.NAM_PRODUCT}</option>
-                    })}
-                </select>
-            </div>
-            <div className="col-5 text-right mt-4">
+            {
+                filterCheck 
+                ?
+                <>
+                    <div className="col-2">
+                        <label className='form-label small'>Proveedores </label>
+                        <select tabindex="1" onChange={handleChange} defaultValue={''} name="COD_SUPPLIER" className="form-control form-control-sm" required>
+                            <option value={''}>Seleccionar</option>
+                            {suppliers.map(supplier => {
+                                return <option key={supplier.COD_SUPPLIER} value={supplier.COD_SUPPLIER}>{supplier.NAM_SUPPLIER}</option>
+                            })}
+                        </select>
+                    </div>
+                    <div className="col-2">
+                        <label className='form-label small'>Categorias </label>
+                        <select tabindex="2" onChange={handleChange} defaultValue={''} name="COD_CATEGORY" className="form-control form-control-sm" required>
+                            <option value={''}>Seleccionar</option>
+                            {categories.map(category => {
+                                return <option key={category.COD_CATEGORY} value={category.COD_CATEGORY}>{category.NAM_CATEGORY}</option>
+                            })}
+                        </select>
+                    </div>
+                    <div className="col-3">
+                        <label className='form-label small'>Seleccionar producto </label>
+                        <select onChange={handleProductSelected} tabindex="3" defaultValue={''} name="COD_PRODUCT" className="form-control form-control-sm" required>
+                            <option value={''}>Seleccionar</option>
+                            {filterProduct.map(product => {
+                                return <option key={product.COD_PRODUCT} value={product.COD_PRODUCT}>{product.NAM_PRODUCT}</option>
+                            })}
+                        </select>
+                    </div>
+                    <div className="col-1">
+                        <label className="form-label small">Cantidad</label>
+                        <input tabindex="4" className='form-control form-control-sm' type="text"/>
+                    </div>
+                </>
+                :
+                <div className="col-8 mt-4">
+                        <button className='btn btn-sm btn-primary' onClick={() => handleFilterCheck()}>Filtrar búsqueda</button>
+                </div>
+            }
+            <div className="col-4 text-right mt-4">
                 <button autoFocus className="btn btn-success mr-2" data-toggle="modal" data-target='#sale-inventory' data-placement="bottom" title="Agregar producto"><i className="fa-solid fa-plus"></i></button>
                 <button onClick={() => clearProductsList()} className="btn btn-info mr-3" data-toggle="tooltip" data-placement="bottom" title="Limpiar lista"><i className="fa-solid fa-broom"></i></button>
             </div>
+        </div>
+        <div className="row mt-2">
+            {
+                filterCheck 
+                ?
+                <>
+                <div className="col-2 ml-3">
+                    <label className="form-label small">SKU</label>
+                    <input className='form-control form-control-sm' value={SKU} type="text" disabled/>
+                </div>
+                <div className="col-1 ml-1 custom-margin pr-0 mr-0">
+                    <button tabindex="5" className='btn btn-sm btn-success' onClick={() => handleProductAdd()}>Agregar</button>
+                </div>
+                <div className="col-3 ml-1 custom-margin pl-0 ml-0">
+                    <button tabindex="6" className='btn btn-sm btn-primary' onClick={() => handleFilterCheck()}>Cancelar filtro</button>
+                </div>
+                </>
+                :
+                null
+            }
         </div>
         <div className="row justify-content-end mt-2 mr-2">
 

@@ -14,12 +14,30 @@ const login = (req, res) => {
             const message = err.message.split(': ')[1];
             res.status(400).send({message});
         }else{
+            let NUM_ATTEMPS_LOGIN;
             const [data] = result[0];
-            const {COD_USER, COD_ROLE, FIRST_NAME, LAST_NAME, USER_PASSWORD, COD_STATUS, DAT_EXP} = data;
+            const {COD_USER, COD_ROLE, FIRST_NAME, LAST_NAME, USER_PASSWORD, COD_STATUS, DAT_EXP, NUM_ATTEMPS} = data;
             
             const isPasswordCorrect = await bcrypt.compare(PASSWORD, USER_PASSWORD);
             
             if(isPasswordCorrect){
+                const procedure = 'CALL SP_SEL_SYSTEM_SETTINGS()';
+                
+                mysqlConnect.query(procedure, (error, result) => {
+                    if(error){
+                        res.status(200).send({message: 'Ha ocurrido un error al intentar iniciar sesión'})
+                    }else{
+                        NUM_ATTEMPS_LOGIN = JSON.stringify(result[0]);
+                        const NUM_ATTEMPS_PARSE = JSON.parse(NUM_ATTEMPS_LOGIN);
+
+                        if(NUM_ATTEMPS > NUM_ATTEMPS_PARSE[0].NUM_ATTEMPS_LOGIN){
+                            res.status(400).send({message: 'Sus credenciales de sesión han sido deshabilitadas. Ha sobrepasado el número de intentos, favor contactar con el administrador.'});
+                            return;
+                        }
+                    }
+                });
+                            
+
                 const DAT_EXP_FORMAT = moment(DAT_EXP).format('YYYY-MM-DD H:mm:ss');
                 const DAT_NOW = moment().format('YYYY-MM-DD H:mm:ss');
 
@@ -36,7 +54,6 @@ const login = (req, res) => {
                     return;
                 }
 
-
                 //generar token
                 const payload = {
                     COD_USER,
@@ -52,8 +69,25 @@ const login = (req, res) => {
                         res.send({FIRST_NAME, LAST_NAME, token});
                     }
                 })
+
+                const sp = 'CALL SP_UPD_NUM_ATTEMPS_LOGIN(?,?)';
+                mysqlConnect.query(sp,[
+                    'true',
+                    COD_USER
+                    ], (error, resultado) => {
+                    });
             }else{
-                res.status(400).send({message: 'El email o contraseña son incorrectos.'});
+                const sp = 'CALL SP_UPD_NUM_ATTEMPS_LOGIN(?,?)';
+                mysqlConnect.query(sp,[
+                    'false',
+                    COD_USER
+                    ], (error, resultado) => {
+                        if(error){
+                            res.status(200).send({message: 'Ha ocurrido un error al intentar iniciar sesión'})
+                        }else{
+                            res.status(400).send({message: 'El email o contraseña son incorrectos.'});
+                        }
+                    });
             }
         }
     })

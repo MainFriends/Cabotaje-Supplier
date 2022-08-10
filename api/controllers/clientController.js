@@ -1,4 +1,3 @@
-const { NULL } = require('mysql/lib/protocol/constants/types');
 const mysqlConnect= require('../config');
 
 
