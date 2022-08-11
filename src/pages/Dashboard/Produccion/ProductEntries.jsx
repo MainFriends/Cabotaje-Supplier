@@ -34,22 +34,22 @@ const dowlandPdfReturns = (filteredItems) => {
         return [
             fila.COD_PRODUCT,
             fila.NAM_PRODUCT,
-            fila.CONCEPT,
+            fila.NAM_SUPPLIER,
+            fila.DES_ENTRIES,
+            fila.NAME_TYPE,
             fila.CANT_PRODUCT,
-            fila.DES_ENTRIE,
             fila.NUM_LOT,
-            fila.MOVEMENT,
             fila.USER_NAME,
             moment(fecha).format('DD-MM-YYYY')
         ]
     })  
     doc.autoTable({
-        head: [['Codigo', 'Producto', 'Cantidad del producto', 'Descripcion', 'Numero de lote', 'Movimiento', 'Usuario', 'Fecha de devolucion', 'Empleado']],
+        head: [['SKU', 'Producto', 'Proveedor', 'Descripcion', 'Tipo de Entrada', 'Cantidad', 'Lote', 'Usuario', 'Fecha']],
         body: row.sort(),
         startY: 45,
     })
 
-    doc.save('Devoluciones - Cabotaje Supplier.pdf');
+    doc.save('Entradas - Cabotaje Supplier.pdf');
 }
 
 const DevolucionesInv = () => {
@@ -80,7 +80,7 @@ const DevolucionesInv = () => {
         },
         {
             name: 'DESCRIPCIÓN',
-            selector: row => row.DES_ENTRIE,
+            selector: row => row.DES_ENTRIES,
             sortable: true,
         },
         {

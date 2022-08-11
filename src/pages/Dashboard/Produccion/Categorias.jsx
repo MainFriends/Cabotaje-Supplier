@@ -33,10 +33,11 @@ const dowlandPdfCategory = (filteredItems) => {
     const row = filteredItems.map(fila => [
         fila.COD_CATEGORY,
         fila.NAM_CATEGORY,
-        fila.DESCRIPTION
+        fila.DESCRIPTION,
+        fila.NAM_STATUS
     ])  
     doc.autoTable({
-        head: [['#', 'Categoria', 'Descripcion']],
+        head: [['#', 'Categoria', 'Descripcion', 'Estado']],
         body: row.sort(),
         startY: 45,
     })

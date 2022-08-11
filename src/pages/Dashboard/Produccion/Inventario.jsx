@@ -36,16 +36,11 @@ const dowlandPdfInventory = (filteredItems) => {
         fila.NAM_PRODUCT,
         fila.DES_PRODUCT,
         fila.CANT_TOTAL,
-        fila.ISV,
-        fila.NORMAL_UNIT_PRICE,
-        fila.PURCHASE_PRICE,
-        fila.WHOLESALE_CANT,
-        fila.WHOLESALE_PRICE,
         fila.NAM_CATEGORY,
         fila.NAM_TYPE_PRODUCT
     ])  
     doc.autoTable({
-        head: [['Codigo', 'Proveedor', 'Producto', 'Descripcion', 'Cantidad', 'ISV', 'Precio', 'Costo', 'Cantidad', 'Precio al por mayor', 'Categoria', 'Tipo de producto']],
+        head: [['Codigo', 'Proveedor', 'Producto', 'Descripcion', 'Cantidad', 'Categoria', 'Tipo de producto']],
         body: row.sort(),
         startY: 45,
         styles: {

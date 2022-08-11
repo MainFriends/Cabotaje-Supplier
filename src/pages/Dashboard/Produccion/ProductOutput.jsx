@@ -33,15 +33,17 @@ const dowlandPdfLosses = (filteredItems) => {
         return [
             fila.COD_PRODUCT,
             fila.NAM_PRODUCT,
-            fila.CONCEPT,
-            fila.CANT_PRODUCTS,
+            fila.NAM_SUPPLIER,
+            fila.DES_OUTPUT,
+            fila.NAM_TYPE,
+            fila.CANT_PRODUCT,
             fila.NUM_LOT,
             fila.USER_NAME,
             moment(fecha).format('DD-MM-YYYY')
         ]
     })  
     doc.autoTable({
-        head: [['Codigo', 'Producto', 'Concepto', 'Cantidad de productos', 'Numero de lote', 'Usuario', 'Fecha de merma']],
+        head: [['SKU', 'Producto', 'Proveedor', 'Descripción', 'Tipo de Salida', 'Cantidad', 'Lote', 'Usuario', 'Fecha']],
         body: row.sort(),
         startY: 45
     })
