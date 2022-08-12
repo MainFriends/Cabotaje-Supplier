@@ -6,6 +6,18 @@ require('dotenv').config();
 
 const login = (req, res) => {
     const {EMAIL, PASSWORD} = req.body;
+    let NUM_ATTEMPS_PARSE;
+
+    const procedure = 'CALL SP_SEL_SYSTEM_SETTINGS()';
+            
+    mysqlConnect.query(procedure, (error, result) => {
+        if(error){
+            res.status(200).send({message: 'Ha ocurrido un error al intentar iniciar sesión'})
+        }else{
+            const NUM_ATTEMPS_LOGIN = JSON.stringify(result[0]);
+            NUM_ATTEMPS_PARSE = JSON.parse(NUM_ATTEMPS_LOGIN);
+        }
+    });
 
     const sp = 'CALL SP_LOGIN(?)';
 
@@ -14,30 +26,12 @@ const login = (req, res) => {
             const message = err.message.split(': ')[1];
             res.status(400).send({message});
         }else{
-            let NUM_ATTEMPS_LOGIN;
             const [data] = result[0];
             const {COD_USER, COD_ROLE, FIRST_NAME, LAST_NAME, USER_PASSWORD, COD_STATUS, DAT_EXP, NUM_ATTEMPS} = data;
             
             const isPasswordCorrect = await bcrypt.compare(PASSWORD, USER_PASSWORD);
             
             if(isPasswordCorrect){
-                const procedure = 'CALL SP_SEL_SYSTEM_SETTINGS()';
-                
-                mysqlConnect.query(procedure, (error, result) => {
-                    if(error){
-                        res.status(200).send({message: 'Ha ocurrido un error al intentar iniciar sesión'})
-                    }else{
-                        NUM_ATTEMPS_LOGIN = JSON.stringify(result[0]);
-                        const NUM_ATTEMPS_PARSE = JSON.parse(NUM_ATTEMPS_LOGIN);
-
-                        if(NUM_ATTEMPS > NUM_ATTEMPS_PARSE[0].NUM_ATTEMPS_LOGIN){
-                            res.status(400).send({message: 'Sus credenciales de sesión han sido deshabilitadas. Ha sobrepasado el número de intentos, favor contactar con el administrador.'});
-                            return;
-                        }
-                    }
-                });
-                            
-
                 const DAT_EXP_FORMAT = moment(DAT_EXP).format('YYYY-MM-DD H:mm:ss');
                 const DAT_NOW = moment().format('YYYY-MM-DD H:mm:ss');
 
@@ -51,6 +45,11 @@ const login = (req, res) => {
                 
                 if(hours < 0){
                     res.status(400).send({message: 'Sus credenciales de sesión han expirado, favor contactar con el administrador.'});
+                    return;
+                }
+                
+                if(NUM_ATTEMPS > NUM_ATTEMPS_PARSE[0].NUM_ATTEMPS_LOGIN){
+                    res.status(400).send({message: 'Sus credenciales de sesión han sido deshabilitadas. Ha sobrepasado el número de intentos, favor contactar con el administrador.'});
                     return;
                 }
 
