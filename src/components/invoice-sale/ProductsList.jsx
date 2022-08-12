@@ -18,6 +18,8 @@ const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeI
     const [SKU, setSKU] = useState('');
     const [productsInventory, setProductsInventory] = useState([]);
     const [wholosalePriceCheck, setWholosalePriceCheck] = useState(false);
+    const [stocks, setStocks] = useState(0);
+    const [cantUser, setCantUser] = useState(0);
     const [productSelected, setProductSelected] = useState({
         SKU: '',
         NAM_PRODUCT: '',
@@ -101,8 +103,12 @@ const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeI
     
     const columns = [
         {
-            name: 'CÓDIGO',
-            selector: row => row.COD_PRODUCT,
+            name: 'LOTE',
+            selector: row => row.NUM_LOT,
+        },
+        {
+            name: 'SKU',
+            selector: row => row.SKU,
         },
         {   
             name: 'PRODUCTO',
@@ -177,45 +183,65 @@ const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeI
     useEffect(() => {
         if(SKU){
             axios.get(`/inventoryDetail/${SKU}`, token())
-            .then(res => setProductsInventory(res.data));
+            .then(res => {
+                setProductsInventory(res.data);
+                const calculeStocks = res.data.reduce((acum, current) => acum + current.CANT_PRODUCTS, 0);
+                setStocks(calculeStocks);
+            });
         }
-    }, [SKU])
+    }, [SKU]);
 
     const handleProductAdd = () => {
-        let PRICE;
+        for(let i=0; i<productsInventory.length; i++){
+            const currentArray = productListSale.filter(row => row.SKU === SKU);
 
-        const {
-            SKU,
-            NAM_PRODUCT,
-            DES_PRODUCT,
-            NORMAL_UNIT_PRICE,
-            WHOLESALE_PRICE,
-            WHOLESALE_CANT,
-            NAM_TYPE_PRODUCT,
-            ISV,
-            CANT_TOTAL
-        } = productSelected;
+            let currentArrayCant = 0;
 
-        if(wholosalePriceCheck){
-            PRICE = WHOLESALE_PRICE;
-        }else{
-            PRICE = NORMAL_UNIT_PRICE;
+            if(currentArray){
+                currentArrayCant = currentArray.reduce((acum, current) => acum + parseFloat(current.CANT_PRODUCTS), 0)
+            }
+
+            if(cantUser > currentArrayCant){
+                let PRICE;
+    
+                const {
+                    NUM_LOT,
+                    COD_PRODUCT,
+                    NAM_PRODUCT,
+                    DES_PRODUCT,
+                    NORMAL_UNIT_PRICE,
+                    WHOLESALE_PRICE,
+                    WHOLESALE_CANT,
+                    NAM_TYPE_PRODUCT,
+                    ISV,
+                    CANT_PRODUCTS
+                } = productsInventory[i];
+        
+                if(wholosalePriceCheck){
+                    PRICE = WHOLESALE_PRICE;
+                }else{
+                    PRICE = NORMAL_UNIT_PRICE;
+                }
+        
+                const product = {
+                    NUM_LOT,
+                    SKU: COD_PRODUCT,
+                    NAM_PRODUCT,
+                    DES_PRODUCT,
+                    PRICE: PRICE - (PRICE * ISV),
+                    CANT_PRODUCTS: cantUser <= CANT_PRODUCTS ? cantUser : CANT_PRODUCTS - cantUser,
+                    ISV: ISV * PRICE,
+                    TOTAL: cantUser * PRICE
+                }
+
+                console.log(product)
+
+                setproductListSale([
+                    ...productListSale,
+                    product
+                ])
+            }
         }
-
-        const product = {
-            SKU,
-            NAM_PRODUCT,
-            DES_PRODUCT,
-            PRICE: PRICE - (PRICE * ISV),
-            CANT_PRODUCTS: cant,
-            ISV: ISV * PRICE,
-            TOTAL: cant * PRICE
-        }
-
-        setproductListSale([
-            ...productListSale,
-            product
-        ])
     }
 
   return (
@@ -274,7 +300,7 @@ const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeI
                 <>
                     <div className="col-2">
                         <label className='form-label small'>Proveedores </label>
-                        <select tabindex="1" onChange={handleChange} defaultValue={''} name="COD_SUPPLIER" className="form-control form-control-sm" required>
+                        <select tabIndex="1" onChange={handleChange} defaultValue={''} name="COD_SUPPLIER" className="form-control form-control-sm" required>
                             <option value={''}>Seleccionar</option>
                             {suppliers.map(supplier => {
                                 return <option key={supplier.COD_SUPPLIER} value={supplier.COD_SUPPLIER}>{supplier.NAM_SUPPLIER}</option>
@@ -283,7 +309,7 @@ const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeI
                     </div>
                     <div className="col-2">
                         <label className='form-label small'>Categorias </label>
-                        <select tabindex="2" onChange={handleChange} defaultValue={''} name="COD_CATEGORY" className="form-control form-control-sm" required>
+                        <select tabIndex="2" onChange={handleChange} defaultValue={''} name="COD_CATEGORY" className="form-control form-control-sm" required>
                             <option value={''}>Seleccionar</option>
                             {categories.map(category => {
                                 return <option key={category.COD_CATEGORY} value={category.COD_CATEGORY}>{category.NAM_CATEGORY}</option>
@@ -292,16 +318,17 @@ const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeI
                     </div>
                     <div className="col-3">
                         <label className='form-label small'>Seleccionar producto </label>
-                        <select onChange={handleProductSelected} tabindex="3" defaultValue={''} name="COD_PRODUCT" className="form-control form-control-sm" required>
+                        <select onChange={handleProductSelected} tabIndex="3" defaultValue={''} name="COD_PRODUCT" className="form-control form-control-sm" required>
                             <option value={''}>Seleccionar</option>
                             {filterProduct.map(product => {
                                 return <option key={product.COD_PRODUCT} value={product.COD_PRODUCT}>{product.NAM_PRODUCT}</option>
                             })}
                         </select>
+                        {SKU ? <small className='text-small text-secondary'>Existencias: {stocks}</small> : null }
                     </div>
                     <div className="col-1">
                         <label className="form-label small">Cantidad</label>
-                        <input tabindex="4" className='form-control form-control-sm' type="text"/>
+                        <input onChange={(e) => setCantUser(e.target.value)} tabIndex="4" className='form-control form-control-sm' type="text"/>
                     </div>
                 </>
                 :
@@ -324,10 +351,10 @@ const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeI
                     <input className='form-control form-control-sm' value={SKU} type="text" disabled/>
                 </div>
                 <div className="col-1 ml-1 custom-margin pr-0 mr-0">
-                    <button tabindex="5" className='btn btn-sm btn-success' onClick={() => handleProductAdd()}>Agregar</button>
+                    <button tabIndex="5" className='btn btn-sm btn-success' onClick={() => handleProductAdd()}>Agregar</button>
                 </div>
                 <div className="col-3 ml-1 custom-margin pl-0 ml-0">
-                    <button tabindex="6" className='btn btn-sm btn-primary' onClick={() => handleFilterCheck()}>Cancelar filtro</button>
+                    <button tabIndex="6" className='btn btn-sm btn-primary' onClick={() => handleFilterCheck()}>Cancelar filtro</button>
                 </div>
                 </>
                 :
