@@ -19,7 +19,9 @@ const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeI
     const [productsInventory, setProductsInventory] = useState([]);
     const [wholosalePriceCheck, setWholosalePriceCheck] = useState(false);
     const [stocks, setStocks] = useState(0);
-    const [cantUser, setCantUser] = useState(0);
+    const [stocksLote, setStocksLote] = useState(0);
+    const [cantUser, setCantUser] = useState('');
+    const [numLote, setNumLote] = useState('');
     const [productSelected, setProductSelected] = useState({
         SKU: '',
         NAM_PRODUCT: '',
@@ -103,12 +105,12 @@ const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeI
     
     const columns = [
         {
-            name: 'LOTE',
-            selector: row => row.NUM_LOT,
-        },
-        {
             name: 'SKU',
             selector: row => row.SKU,
+        },
+        {
+            name: 'LOTE',
+            selector: row => row.NUM_LOT,
         },
         {   
             name: 'PRODUCTO',
@@ -143,7 +145,7 @@ const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeI
             name: 'ELIMINAR',
             button: true,
             cell: row => <>
-                <button className='btn btn-sm btn-danger' onClick={() => handleDelete(row.COD_PRODUCT)}><i className="fa-solid fa-trash"></i></button>
+                <button className='btn btn-sm btn-danger' onClick={() => handleDelete(row.NUM_LOT)}><i className="fa-solid fa-trash"></i></button>
             </>
         }
     ];
@@ -153,8 +155,8 @@ const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeI
         setSKU('')
     }
 
-    const handleDelete = cod => {
-        const findProduct = productListSale.filter(product => product.COD_PRODUCT !== cod);
+    const handleDelete = NUM_LOT => {
+        const findProduct = productListSale.filter(product => product.NUM_LOT !== NUM_LOT);
 
         setproductListSale(findProduct);
     }
@@ -191,57 +193,91 @@ const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeI
         }
     }, [SKU]);
 
-    const handleProductAdd = () => {
-        for(let i=0; i<productsInventory.length; i++){
-            const currentArray = productListSale.filter(row => row.SKU === SKU);
-
-            let currentArrayCant = 0;
-
-            if(currentArray){
-                currentArrayCant = currentArray.reduce((acum, current) => acum + parseFloat(current.CANT_PRODUCTS), 0)
-            }
-
-            if(cantUser > currentArrayCant){
-                let PRICE;
-    
-                const {
-                    NUM_LOT,
-                    COD_PRODUCT,
-                    NAM_PRODUCT,
-                    DES_PRODUCT,
-                    NORMAL_UNIT_PRICE,
-                    WHOLESALE_PRICE,
-                    WHOLESALE_CANT,
-                    NAM_TYPE_PRODUCT,
-                    ISV,
-                    CANT_PRODUCTS
-                } = productsInventory[i];
-        
-                if(wholosalePriceCheck){
-                    PRICE = WHOLESALE_PRICE;
-                }else{
-                    PRICE = NORMAL_UNIT_PRICE;
-                }
-        
-                const product = {
-                    NUM_LOT,
-                    SKU: COD_PRODUCT,
-                    NAM_PRODUCT,
-                    DES_PRODUCT,
-                    PRICE: PRICE - (PRICE * ISV),
-                    CANT_PRODUCTS: cantUser <= CANT_PRODUCTS ? cantUser : CANT_PRODUCTS - cantUser,
-                    ISV: ISV * PRICE,
-                    TOTAL: cantUser * PRICE
-                }
-
-                console.log(product)
-
-                setproductListSale([
-                    ...productListSale,
-                    product
-                ])
-            }
+    useEffect(() => {
+        if(numLote){
+            const [product] = productsInventory.filter(row => row.NUM_LOT === numLote);
+            setStocksLote(product.CANT_PRODUCTS);
+            setProductSelected(product);
         }
+    }, [numLote])
+
+    const handleProductAdd = () => {
+
+        if(!numLote){
+            setErrorMessage('Seleccione un lote');
+
+            setTimeout(() => {
+                setErrorMessage('');
+            }, 3000);
+            return;
+        }
+
+        if(!cantUser){
+            setErrorMessage('Digite una cantidad válida');
+
+            setTimeout(() => {
+                setErrorMessage('');
+            }, 3000);
+            return;
+        }
+
+        if(cantUser > stocksLote){
+            setErrorMessage('No hay suficientes unidades');
+
+            setTimeout(() => {
+                setErrorMessage('');
+            }, 3000);
+            return;
+        }
+
+        let PRICE;
+
+        const {
+            NUM_LOT,
+            COD_PRODUCT,
+            NAM_PRODUCT,
+            DES_PRODUCT,
+            NORMAL_UNIT_PRICE,
+            WHOLESALE_PRICE,
+            WHOLESALE_CANT,
+            NAM_TYPE_PRODUCT,
+            ISV,
+            CANT_PRODUCTS
+        } = productSelected;
+
+        if(wholosalePriceCheck){
+            if(WHOLESALE_PRICE){
+                PRICE = WHOLESALE_PRICE;
+            }else{
+                setErrorMessage('No hay precio mayorista para el lote seleccionado.');
+
+                setTimeout(() => {
+                    setErrorMessage('');
+                }, 3000);
+                return;
+            }
+        }else{
+            PRICE = NORMAL_UNIT_PRICE;
+        }
+
+        const product = {
+            NUM_LOT,
+            SKU: COD_PRODUCT,
+            NAM_PRODUCT,
+            DES_PRODUCT,
+            PRICE: PRICE - (PRICE * ISV),
+            CANT_PRODUCTS: cantUser,
+            ISV: ISV * PRICE,
+            TOTAL: cantUser * PRICE
+        }
+
+        setproductListSale([
+            ...productListSale,
+            product
+        ])
+
+        setCantUser('');
+        setNumLote('');
     }
 
   return (
@@ -321,14 +357,24 @@ const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeI
                         <select onChange={handleProductSelected} tabIndex="3" defaultValue={''} name="COD_PRODUCT" className="form-control form-control-sm" required>
                             <option value={''}>Seleccionar</option>
                             {filterProduct.map(product => {
-                                return <option key={product.COD_PRODUCT} value={product.COD_PRODUCT}>{product.NAM_PRODUCT}</option>
+                                return <option key={product.NUM_LOT} value={product.COD_PRODUCT}>{product.NAM_PRODUCT}</option>
                             })}
                         </select>
-                        {SKU ? <small className='text-small text-secondary'>Existencias: {stocks}</small> : null }
+                        {SKU ? <small className='text-small text-secondary'>Existencias totales: {stocks}</small> : null }
+                    </div>
+                    <div className="col-2">
+                        <label className='form-label small'>Seleccionar lote </label>
+                        <select onChange={(e) => setNumLote(e.target.value)} tabIndex="4" value={numLote} name="NUM_LOT" className="form-control form-control-sm" required>
+                            <option value={''}>Seleccionar</option>
+                            {productsInventory.map(product => {
+                                return <option key={product.NUM_LOT} value={product.NUM_LOT}>{product.NUM_LOT}</option>
+                            })}
+                        </select>
+                        {numLote ? <small className='text-small text-secondary'>Existencias en lote: {stocksLote}</small> : null }
                     </div>
                     <div className="col-1">
                         <label className="form-label small">Cantidad</label>
-                        <input onChange={(e) => setCantUser(e.target.value)} tabIndex="4" className='form-control form-control-sm' type="text"/>
+                        <input value={cantUser} onChange={(e) => setCantUser(e.target.value)} tabIndex="4" className='form-control form-control-sm' type="text"/>
                     </div>
                 </>
                 :
@@ -336,8 +382,8 @@ const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeI
                         <button className='btn btn-sm btn-primary' onClick={() => handleFilterCheck()}>Filtrar búsqueda</button>
                 </div>
             }
-            <div className="col-4 text-right mt-4">
-                <button autoFocus className="btn btn-success mr-2" data-toggle="modal" data-target='#sale-inventory' data-placement="bottom" title="Agregar producto"><i className="fa-solid fa-plus"></i></button>
+            <div className="col-2 text-right mt-4">
+                {/* <button autoFocus className="btn btn-success mr-2" data-toggle="modal" data-target='#sale-inventory' data-placement="bottom" title="Agregar producto"><i className="fa-solid fa-plus"></i></button> */}
                 <button onClick={() => clearProductsList()} className="btn btn-info mr-3" data-toggle="tooltip" data-placement="bottom" title="Limpiar lista"><i className="fa-solid fa-broom"></i></button>
             </div>
         </div>
@@ -350,7 +396,13 @@ const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeI
                     <label className="form-label small">SKU</label>
                     <input className='form-control form-control-sm' value={SKU} type="text" disabled/>
                 </div>
-                <div className="col-1 ml-1 custom-margin pr-0 mr-0">
+                <div className="col-3 mt-4 py-2 px-0 mx-0">
+                    <div class="form-check form-check-inline">
+                        <input onChange={() => setWholosalePriceCheck(wholosalePriceCheck ? false : true)} class="form-check-input" type="checkbox" id="wholosalePrice" value="option1"/>
+                        <label class="form-check-label small" for="wholosalePrice">Aplicar precios mayoristas</label>
+                    </div>
+                </div>
+                <div className="col-1 custom-margin pr-0 mr-0">
                     <button tabIndex="5" className='btn btn-sm btn-success' onClick={() => handleProductAdd()}>Agregar</button>
                 </div>
                 <div className="col-3 ml-1 custom-margin pl-0 ml-0">

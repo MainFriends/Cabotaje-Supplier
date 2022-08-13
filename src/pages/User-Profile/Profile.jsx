@@ -13,6 +13,7 @@ import ChangePassword from '../../components/user-profile/ChangePassword';
 import AlertError from '../../components/AlertError';
 import CompanyInformation from '../../components/user-profile/CompanyInformation';
 import Settings from '../../components/user-profile/Settings';
+import BackupAndRestore from '../../components/user-profile/BackupAndRestore';
 
 
 const Profile = () => {
@@ -85,8 +86,18 @@ const Profile = () => {
                     <div className="list-group">
                         <a href="#" onClick={() => setPageActive('profileInformation')} className={'list-group-item list-group-item-action ' + (pageActive === 'profileInformation' && 'active')}>Información del perfil</a>
                         <a href="#" onClick={() => setPageActive('changePassword')} className={'list-group-item list-group-item-action ' + (pageActive === 'changePassword' && 'active')}>Cambiar contraseña</a>
-                        <a href="#" onClick={() => setPageActive('settings')} className={'list-group-item list-group-item-action ' + (pageActive === 'settings' && 'active')}>Configuraciones del sistema</a>
-                        <a href="#" onClick={() => setPageActive('companyData')} className={'list-group-item list-group-item-action ' + (pageActive === 'companyData' && 'active')}>Información de la empresa</a>
+                        {
+                            NAM_ROLE === 'Administrador'
+                            ?
+                            <>
+                            <a href="#" onClick={() => setPageActive('settings')} className={'list-group-item list-group-item-action ' + (pageActive === 'settings' && 'active')}>Configuraciones del sistema</a>
+                            <a href="#" onClick={() => setPageActive('companyData')} className={'list-group-item list-group-item-action ' + (pageActive === 'companyData' && 'active')}>Información de la empresa</a>
+                            <a href="#" onClick={() => setPageActive('backupAndRestore')} className={'list-group-item list-group-item-action ' + (pageActive === 'backupAndRestore' && 'active')}>Copia de seguridad</a>
+                            </>
+                            :
+                            null
+                        }
+                        
                     </div>
                 </div>
                 <div className="col-md-8 mt-4">
@@ -104,13 +115,17 @@ const Profile = () => {
                     && 
                     <ChangePassword setAlertMessage={setAlertMessage}/>
                     }
-                    {pageActive === 'companyData' 
+                    {pageActive === 'companyData'
                     && 
                     <CompanyInformation setAlertMessage={setAlertMessage}/>
                     }
-                    {pageActive === 'settings' 
+                    {pageActive === 'settings'
                     && 
                     <Settings setAlertMessage={setAlertMessage}/>
+                    }
+                    {pageActive === 'backupAndRestore'
+                    && 
+                    <BackupAndRestore setAlertMessage={setAlertMessage}/>
                     }
                 </div>
             </div>

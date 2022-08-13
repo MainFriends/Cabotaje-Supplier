@@ -15,23 +15,25 @@ const getDetail = (req, res) => {
 
 const addDetail = (req, res) => {
     const data = req.body;
-    const sp = 'CALL SP_INS_SALE_DETAIL(?,?,?,?,?)';
+    const sp = 'CALL SP_INS_SALE_DETAIL(?,?,?,?,?,?)';
     
     data.forEach(detail => {
         const {
-            COD_PRODUCT,
+            SKU,
             PRICE,
             CANT_PRODUCTS,
             DISCOUNT = 0,
-            TOTAL
+            TOTAL,
+            NUM_LOT
         } = detail;
 
         mysqlConnect.query(sp, [
-            COD_PRODUCT,
+            SKU,
             PRICE,
             CANT_PRODUCTS,
             DISCOUNT,
-            TOTAL
+            TOTAL,
+            NUM_LOT
         ]);
     });
 

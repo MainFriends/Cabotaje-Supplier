@@ -52,6 +52,7 @@ const TypeEntriesOutputs = require('./routes/TypeEntriesOutputs');
 // Información de la empresa
 const informationInformation = require('./routes/companyInformation')
 const systemSettings = require('./routes/systemSettings')
+const BackupAndRestore = require('./routes/BackupAndRestore')
 
 /* CREAR SERVIDOR */
 const app = express();
@@ -109,6 +110,7 @@ app.use('/api', bitacora)
 app.use('/api', TypeEntriesOutputs)
 app.use('/api', informationInformation)
 app.use('/api', systemSettings)
+app.use('/api', BackupAndRestore)
 
 
 //Mostrar UI

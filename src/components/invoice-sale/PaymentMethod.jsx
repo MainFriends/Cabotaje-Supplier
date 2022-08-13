@@ -40,8 +40,12 @@ export const PaymentMethod = ({saleInvoice, setsaleInvoice, setCurrentPage, corr
 
     const columns = [
         {
-            name: 'CÓDIGO',
-            selector: row => row.COD_PRODUCT,
+            name: 'SKU',
+            selector: row => row.SKU,
+        },
+        {
+            name: 'LOTE',
+            selector: row => row.NUM_LOT,
         },
         {   
             name: 'PRODUCTO',

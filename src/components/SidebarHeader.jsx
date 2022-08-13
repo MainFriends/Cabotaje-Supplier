@@ -12,7 +12,7 @@ const SidebarHeader = () => {
     }, [])
 
     return (
-        <Link className="sidebar-brand d-flex align-items-center justify-content-center" to="/dashboard">
+        <Link className="sidebar-brand d-flex align-items-center justify-content-center" to="/dashboard/welcome">
             <div className="sidebar-brand-icon">
                 <div className="logo-header"></div>
             </div>

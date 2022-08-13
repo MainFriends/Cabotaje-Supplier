@@ -27,9 +27,9 @@ const NavbarUserDropdown = ({profilePicture}) => {
                 aria-labelledby="userDropdown">
                 {pathname === '/profile' 
                 ?
-                <Link className="dropdown-item" to="/dashboard">
+                <Link className="dropdown-item" to="/dashboard/welcome">
                     <i className="fa-solid fa-chart-line mr-2 text-gray-800"></i>
-                    Dashboard
+                    Inicio
                 </Link>
                 :
                 <Link className="dropdown-item" to="/profile">

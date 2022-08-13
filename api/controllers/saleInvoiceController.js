@@ -27,9 +27,9 @@ const getInvoice = (req, res) => {
 }
 
 const addInvoice = (req, res) => {
+    const {COD_USER} = req.user;
     const {
         COD_CLIENT,
-        COD_USER, 
         SUBTOTAL,
         TOT_DISCOUNT = 0,
         TOT_ISV,
