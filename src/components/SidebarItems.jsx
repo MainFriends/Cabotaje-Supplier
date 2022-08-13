@@ -132,7 +132,7 @@ const SidebarItems = () => {
                 Módulos
             </div>
 
-            {
+            {/* {
                 viewVentas().modulo
                 ?
                 <li className={ "nav-item " + (pathname === '/dashboard/ventas' ? "active" : "")}>
@@ -181,7 +181,7 @@ const SidebarItems = () => {
                 </li>
                 :
                 null
-            }
+            } */}
 
             {
                 viewClientes().modulo
@@ -269,15 +269,15 @@ const SidebarItems = () => {
                                 viewContabilidad().cuentasCobrar ? <NavLink className="collapse-item" to="cuentas-cobrar">Cuentas por cobrar</NavLink> : null
                             
                             }
-                            {
+                            {/* {
                                 viewContabilidad().cuentasPagar ? <NavLink className="collapse-item" to="cuentas-pagar">Cuentas por pagar</NavLink> : null
-                            }
+                            } */}
                             {
                                 viewContabilidad().devoluciones ? <NavLink className="collapse-item" to="devoluciones">Devoluciones</NavLink> : null
                             }
-                            {
+                            {/* {
                                 viewContabilidad().rebajas ? <NavLink className="collapse-item" to="rebajas">Rebajas</NavLink> : null
-                            }
+                            } */}
                             {
                                 viewContabilidad().planilla ? <NavLink className="collapse-item" to="planilla-pago">Planilla de pago</NavLink> : null
                             }

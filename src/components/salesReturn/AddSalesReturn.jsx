@@ -57,8 +57,8 @@ const AddSalesReturn = ({setSendRequest, setMessageError}) => {
         <form id='addFormSalesReturn' onSubmit={handleSubmitSalesReturn} action='#'>
             <div className="row mb-4">
                 <div className="col-md-4">
-                    <label className='form-label' htmlFor="COD_PRODUCT">Código del Producto <span className="text-danger"> *</span></label>
-                    <input onChange={handleInputChange}  className='form-control'  name='COD_PRODUCT' type="number" required/>
+                    <label className='form-label' htmlFor="COD_PRODUCT">SKU <span className="text-danger"> *</span></label>
+                    <input onChange={handleInputChange}  className='form-control'  name='COD_PRODUCT' type="text" required/>
                 </div>
                 <div className="col-md-5">
                     <label className='form-label' htmlFor="PRODUCT">Producto</label>
