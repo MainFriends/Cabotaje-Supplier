@@ -7,7 +7,6 @@ import SaleSuccess from './SaleSuccess';
 import AlertError from '../AlertError';
 
 export const PaymentMethod = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeInvoice, productListSale, setproductListSale}) => {
-    const [efectivoRecibido, setEfectivoRecibido] = useState(0);
     const [cambio, setCambio] = useState(0);
     const [alertMessage, setAlertMessage] = useState('');
     const [saleMessage, setSaleMessage] = useState({
@@ -79,7 +78,10 @@ export const PaymentMethod = ({saleInvoice, setsaleInvoice, setCurrentPage, corr
     ];
 
     const handleInputChange = (e) => {
-        setEfectivoRecibido(e.target.value)
+        setsaleInvoice({
+            ...saleInvoice,
+            AMOUNT: e.target.value
+        })
     }
 
     const handleStateChange = (e) => {
@@ -90,18 +92,34 @@ export const PaymentMethod = ({saleInvoice, setsaleInvoice, setCurrentPage, corr
     }
 
     useEffect(() => {
-        setCambio(saleInvoice.TOT_SALE - efectivoRecibido)
-    }, [efectivoRecibido])
+        setCambio(saleInvoice.TOT_SALE - saleInvoice.AMOUNT)
+    }, [saleInvoice.AMOUNT])
 
     
     useEffect(() => {
-        if(efectivoRecibido<saleInvoice.TOT_SALE){
+        if(saleInvoice.AMOUNT<saleInvoice.TOT_SALE){
             setCambio(0)
           }
-      }, [efectivoRecibido])
+      }, [saleInvoice.AMOUNT])
 
 
     const onSubmit = () => {
+        if(saleInvoice.AMOUNT > TOT_SALE){
+            setAlertMessage('La cantidad recibida no puede ser mayor al total de la venta');
+            setTimeout(() => {
+                setAlertMessage('');
+            }, 3000);
+            return;
+        }
+
+        if(saleInvoice.AMOUNT < 0){
+            setAlertMessage('La cantidad recibida debe ser mayor a cero.');
+            setTimeout(() => {
+                setAlertMessage('');
+            }, 3000);
+            return;
+        }
+
         axios.post('/sale-invoice', saleInvoice, token())
             .then(res => {
                 sendDetail()
@@ -207,12 +225,12 @@ export const PaymentMethod = ({saleInvoice, setsaleInvoice, setCurrentPage, corr
             </div>
             <div className="col-3">
                 <label className="form-label">Cantidad recibida</label>
-                <input autoFocus onChange={handleInputChange} className='form-control' type="number" />
+                <input min={1} max={TOT_SALE} autoFocus onChange={handleInputChange} className='form-control' type="number" />
             </div>
-            <div className="col-2">
+            {/* <div className="col-2">
                 <label className="form-label">Cambio</label>
                 <input value={`L. ${cambio.toFixed(2)}`} className='form-control' type="text" disabled/>
-            </div>
+            </div> */}
         </div>
         {
             TYP_TO_SALE === 'Crédito'

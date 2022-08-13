@@ -37,10 +37,13 @@ const addInvoice = (req, res) => {
         TYP_TO_SALE,
         COD_TYP_PAY,
         DESCRIPTION = null,
-        DAT_LIMIT = null
+        DAT_LIMIT = null,
+        AMOUNT
     } = req.body;
 
-    const sp = 'CALL SP_INS_SALE_INVOICE(?,?,?,?,?,?,?,?,?,?)';
+    console.log(AMOUNT)
+
+    const sp = 'CALL SP_INS_SALE_INVOICE(?,?,?,?,?,?,?,?,?,?,?)';
 
     mysqlConnect.query(sp, [
         COD_CLIENT,
@@ -52,7 +55,8 @@ const addInvoice = (req, res) => {
         TYP_TO_SALE,
         COD_TYP_PAY,
         DESCRIPTION,
-        DAT_LIMIT 
+        DAT_LIMIT,
+        AMOUNT
     ], (err) => {
         if(err){
             const message = err.message.split(': ')[1];

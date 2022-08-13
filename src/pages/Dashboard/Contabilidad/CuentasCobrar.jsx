@@ -85,7 +85,13 @@ const CuentasCobrar = () => {
             sortable: true
         },
         {
-            name: 'MONTO',
+            name: 'MONTO INICIAL',
+            selector: row => row.STARTING_AMOUNT,
+            sortable: true,
+            format: row => `L ${row.STARTING_AMOUNT.toFixed(2)}`
+        },
+        {
+            name: 'MONTO PENDIENTE',
             selector: row => row.TOT_BALANCE,
             sortable: true,
             format: row => `L ${row.TOT_BALANCE.toFixed(2)}`
