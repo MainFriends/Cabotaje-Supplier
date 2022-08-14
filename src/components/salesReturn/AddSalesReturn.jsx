@@ -66,7 +66,7 @@ const AddSalesReturn = ({setSendRequest, setMessageError}) => {
                 </div>
                 <div className="col-md-5 mt-2">
                     <label className='form-label' htmlFor="DESCRIPTION">Descripción</label>
-                    <textarea className='form-control' onChange={handleInputChange} name='DESCRIPTION' type="text"  maxLength={50}  wrap="hard"  required/>
+                    <textarea onChange={handleInputChange} className='form-control' name='DESCRIPTION' type="text" rows={3}  wrap="hard"  required/>
                 </div>
                 <div className="col-md-3 mt-2">
                     <label className='form-label' htmlFor="CANT">Cantidad <span className="text-danger"> *</span> </label>

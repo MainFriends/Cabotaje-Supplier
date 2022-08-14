@@ -19,7 +19,7 @@ import logo from '../../../assets/js/logo';
 
 const dowlandPdfReturns = (filteredItems) => {
     const doc = new jsPDF();
-    doc.text('Reporte de Devoluciones - Cabotaje Supplier',50,30);   
+    doc.text('Reporte de Entradas - Cabotaje Supplier',50,30);   
     const image = logo
     doc.addImage(image, 'PNG', 10, 10,20,30,'Cabotaje');
 
