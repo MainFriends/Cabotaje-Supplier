@@ -73,6 +73,10 @@ const AddClientForm = ({setSendRequest, setMessageError}) => {
                     <label className='form-label' htmlFor="IDENTITY">Identidad<span className="text-danger"> *</span></label>
                     <input onChange={handleInputChange} className='form-control' name='IDENTITY'  minlenght={13} maxLength={13}  type="text" pattern="^[0-1][0-9]{12}"  title="Identidad debe comenzar con cero o uno, contener 13 carácteres númericos, sin guiones ni espacios." required/>
                 </div>
+                <div className="col-md-4 mt-2">
+                    <label className='form-label' htmlFor="RTN">RTN<span className="text-danger"> *</span></label>
+                    <input onChange={handleInputChange} className='form-control' name='RTN' type="text" minLength={14}  maxLength={14}  pattern="^[0-1][0-9]{13}" title="RTN debe comenzar con cero o uno, contener 14 carácteres númericos, sin guiones ni espacios." required/>
+                </div>
                 <div className="col-md-3 mt-2">
                     <label className='form-label' htmlFor="NUM_PHONE_ONE">Teléfono 1<span className="text-danger"> *</span></label>
                     <input onChange={handleInputChange} className='form-control' name='NUM_PHONE_ONE' type="tel" pattern="[0-9]{8}" minLength={8}  maxLength={8} title="El número telefónico debe contener 8 caracteres númericos, sin guiones ni espacios." required/>
@@ -85,10 +89,6 @@ const AddClientForm = ({setSendRequest, setMessageError}) => {
                 <div className="col-md-6 mt-2">
                     <label className='form-label' htmlFor="ADDRESS">Dirección<span className="text-danger"> *</span></label>
                     <textarea onChange={handleInputChange} className='form-control' name='ADDRESS'  rows='3' cols='4' type="text" pattern="^[a-zA-Z0-9ñÑØº-_ ]+$" onInput={toUpperCase} maxLength={50}  wrap="hard" required/>
-                </div>
-                <div className="col-md-6">
-                    <label className='form-label' htmlFor="RTN">RTN<span className="text-danger"> *</span></label>
-                    <input onChange={handleInputChange} className='form-control' name='RTN' type="text" minLength={14}  maxLength={14}  pattern="^[0-1][0-9]{13}" title="RTN debe comenzar con cero o uno, contener 14 carácteres númericos, sin guiones ni espacios." required/>
                 </div>
             </div>
             

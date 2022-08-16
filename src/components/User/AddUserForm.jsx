@@ -155,7 +155,6 @@ const AddUserForm = ({ setSendRequest, setMessageError }) => {
             onInput={toUpperCase}
             minLength={2}
             maxLength={15}
-            
             required
           />
         </div>
@@ -187,6 +186,7 @@ const AddUserForm = ({ setSendRequest, setMessageError }) => {
             title="Apellido no debe contener carácteres especiales y/o númericos."
             onInput={toUpperCase}
           />
+          <small className="form-text text-muted">Opcional</small>
         </div>
         <div className="col-md-4 mt-2">
           <label className="form-label" htmlFor="DAT_BIRTHDAY">
