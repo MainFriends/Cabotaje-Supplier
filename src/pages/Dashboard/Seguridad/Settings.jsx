@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import axios from '../../config/axios';
-import token from '../../helpers/getToken';
+import axios from '../../../config/axios';
+import token from '../../../helpers/getToken';
+import AlertSuccess from '../../../components/AlertSuccess';
+import AlertError from '../../../components/AlertError';
 
-const Settings = ({setAlertMessage}) => {
+const Settings = () => {
     const [systemSettings, setSystemSettings] = useState({
         NUM_DAYS_PASSWORD_EXPIRED: '',
         NUM_ATTEMPS_LOGIN: ''
+    });
+
+    const [alertMessage, setAlertMessage] = useState({
+        message: '',
+        ok: ''
     });
 
     useEffect(() => {
@@ -103,6 +110,10 @@ const Settings = ({setAlertMessage}) => {
             </div>
             <div className="modal-footer">
                 <button type="submit" className='btn btn-success'>Actualizar información</button>
+            </div>
+            <div className="col-12">
+                {alertMessage.ok ? <AlertSuccess message={alertMessage.message}/> : null}
+                {alertMessage.ok === false ? <AlertError message={alertMessage.message}/> : null}
             </div>
         </form>
      </>

@@ -132,7 +132,7 @@ const SidebarItems = () => {
                 Módulos
             </div>
 
-            {/* {
+            {
                 viewVentas().modulo
                 ?
                 <li className={ "nav-item " + (pathname === '/dashboard/ventas' ? "active" : "")}>
@@ -158,7 +158,7 @@ const SidebarItems = () => {
                 null
             }
 
-            {
+            {/* {
                 viewCompras().modulo
                 ?
                 <li className={ "nav-item " + (pathname === '/dashboard/compras' || pathname === '/dashboard/pedidos' ? "active" : "")}>
@@ -310,6 +310,15 @@ const SidebarItems = () => {
                                 }
                                 {
                                     viewSeguridad().bitacora ? <NavLink className="collapse-item" to="bitacora">Bitacora de usuarios</NavLink> : null
+                                }
+                                {
+                                    <NavLink className="collapse-item" to="configuraciones-sistema">Configuraciones</NavLink>
+                                }
+                                {
+                                    <NavLink className="collapse-item" to="company-information">Información de la empresa</NavLink>
+                                }
+                                {
+                                    <NavLink className="collapse-item" to="backup">Copias de seguridad</NavLink>
                                 }
                             </div>
                         </div>

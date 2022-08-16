@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import axios from '../../config/axios';
-import token from '../../helpers/getToken';
+import axios from '../../../config/axios';
+import token from '../../../helpers/getToken';
+import AlertSuccess from '../../../components/AlertSuccess';
+import AlertError from '../../../components/AlertError';
 
-const CompanyInformation = ({setAlertMessage}) => {
+const CompanyInformation = () => {
     const [companyData, setCompanyData] = useState({
         COMPANY_NAM: '',
         COMPANY_ADDRESS: '',
@@ -14,6 +16,11 @@ const CompanyInformation = ({setAlertMessage}) => {
         COMPANY_INSTAGRAM: '',
         COMPANY_WHATSAPP: '',
         USER_LAST_UPDATE: '',
+    });
+
+    const [alertMessage, setAlertMessage] = useState({
+        message: '',
+        ok: ''
     });
 
     useEffect(() => {
@@ -31,7 +38,6 @@ const CompanyInformation = ({setAlertMessage}) => {
                 message,
                 ok:true
             });
-            window.scrollTo(0, 0);
 
 
             setTimeout(() => {
@@ -145,7 +151,13 @@ const CompanyInformation = ({setAlertMessage}) => {
                 </div>
             </div>
             <div className="modal-footer">
-                <button type="submit" className='btn btn-success'>Actualizar información</button>
+                <button type="submit" className='btn btn-success mb-2'>Actualizar información</button>
+            </div>
+            <div className="row">
+                <div className="col-12">
+                {alertMessage.ok ? <AlertSuccess message={alertMessage.message}/> : null}
+                {alertMessage.ok === false ? <AlertError message={alertMessage.message}/> : null}
+                </div>
             </div>
         </form>
     </>
