@@ -18,7 +18,7 @@ import logo from '../../../assets/js/logo';
 
 const dowlandPdfLosses = (filteredItems) => {
     const doc = new jsPDF();
-    doc.text('Reporte de Mermas - Cabotaje Supplier',50,30); 
+    doc.text('Reporte de Salidas - Cabotaje Supplier',50,30); 
     const image = logo
     doc.addImage(image, 'PNG', 10, 10,20,30,'Cabotaje'); 
 

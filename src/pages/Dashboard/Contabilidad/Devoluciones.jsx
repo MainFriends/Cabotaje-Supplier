@@ -75,7 +75,6 @@ const Devoluciones = () => {
             name: 'DESCRIPCION',
             selector: row => row.DESCRIPTION,
             sortable: true,
-            allowOverflow: true
         },
         {
             name: 'CANTIDAD',

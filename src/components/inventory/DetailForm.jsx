@@ -188,10 +188,6 @@ const DetailForm = ({setSendRequest, setMessageError}) => {
                         <option value="4">Sin revisar</option>
                     </select>
                 </div>
-                <div className="col-3">
-                    <label className='form-label' htmlFor="COD_ORDER">Código de orden</label>
-                    <input onChange={handleOrder} className='form-control' name='COD_ORDER' type="number" min='1'/>
-                </div>
             </div>
             <div className="row mb-4">
                 <div className="col-4">
