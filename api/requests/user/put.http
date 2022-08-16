@@ -6,6 +6,7 @@ Content-Type: application/json
     "FIRST_NAME": "Mendel",
     "MIDDLE_NAME": "Brazchid",
     "LAST_NAME": "Aguilar",
+    "SECOND_LAST_NAME": "Mendez",
     "GENDER": "M",
     "NUM_PHONE_ONE": 88795976,
     "NUM_PHONE_REFERENCE": 78451236,

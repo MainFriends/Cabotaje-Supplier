@@ -93,8 +93,13 @@ const Usuarios = () => {
             sortable: true,
         },
         {
-            name: 'APELLIDO',
+            name: 'PRIMER APELLIDO',
             selector: row => row.LAST_NAME,
+            sortable: true,
+        },
+        {
+            name: 'SEGUNDO APELLIDO',
+            selector: row => row.SECOND_LAST_NAME,
             sortable: true,
         },
         {

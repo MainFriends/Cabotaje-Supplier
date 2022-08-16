@@ -5,7 +5,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDT0RfUk9MRSI6MSwiR
 {
     "IDENTITY":"080119992156",
     "FIRST_NAME":"Harry",
+    "MIDDLE_NAME": "Rodri",
     "LAST_NAME":"Maguire",
+    "SECOND_LAST_NAME": "CR",
     "ADDRESS":"Manchester",
     "NUM_PHONE_ONE":88741231,
     "RTN": "08180361045"

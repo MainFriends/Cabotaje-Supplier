@@ -67,13 +67,23 @@ const Clientes = () => {
         },
         {
             id: 'id',
-            name: 'NOMBRE',
+            name: 'PRIMER NOMBRE',
             selector: row => row.FIRST_NAME,
             sortable: true,
         },
         {
-            name: 'APELLIDO',
+            name: 'SEGUNDO NOMBRE',
+            selector: row => row.MIDDLE_NAME,
+            sortable: true,
+        },
+        {
+            name: 'PRIMER APELLIDO',
             selector: row => row.LAST_NAME,
+            sortable: true,
+        },
+        {
+            name: 'SEGUNDO APELLIDO',
+            selector: row => row.SECOND_LAST_NAME,
             sortable: true,
         },
         {

@@ -14,6 +14,7 @@ const EditUserForm = ({rowCOD, setSendRequest, setMessageError}) => {
         FIRST_NAME: '',
         MIDDLE_NAME: '',
         LAST_NAME: '',
+        SECOND_LAST_NAME: "",
         GENDER: '',
         NUM_PHONE_ONE: '',
         NUM_PHONE_TWO: '',
@@ -170,7 +171,7 @@ const EditUserForm = ({rowCOD, setSendRequest, setMessageError}) => {
           </div>
           <div className="col-md-4 mt-2">
             <label className="form-label" htmlFor="LAST_NAME">
-              Apellido<span className="text-danger"> *</span>
+              Primer apellido<span className="text-danger"> *</span>
             </label>
             <input
                 value={formEditUser.LAST_NAME}
@@ -181,12 +182,39 @@ const EditUserForm = ({rowCOD, setSendRequest, setMessageError}) => {
                 pattern="^[a-zA-ZñÑáéíóú ]+$"
                 title="Apellido no debe contener carácteres especiales y/o númericos."
                 onInput={toUpperCase}
-                minLength={2}
-                maxLength={15}
                 required
             />
           </div>
-  
+          <div className="col-md-4 mt-2">
+            <label className="form-label" htmlFor="SECOND_LAST_NAME">
+              Segundo apellido
+            </label>
+            <input
+                value={formEditUser.SECOND_LAST_NAME}
+                onChange={handleInputChange}
+                className="form-control"
+                name="SECOND_LAST_NAME"
+                type="text"
+                pattern="^[a-zA-ZñÑáéíóú ]+$"
+                title="Apellido no debe contener carácteres especiales y/o númericos."
+                onInput={toUpperCase}
+            />
+          </div>
+          <div className="col-md-4 mt-2">
+            <label className="form-label" htmlFor="DAT_BIRTHDAY">
+              Fecha de nacimiento<span className="text-danger"> *</span>
+            </label>
+            <input
+                value={moment(formEditUser.DAT_BIRTHDAY).format('YYYY-MM-DD')}
+                onChange={handleInputChange}
+                className="form-control"
+                name="DAT_BIRTHDAY"
+                type="DATE"
+                min="1950-01-01"
+                max={moment().format('YYYY-MM-DD')}
+                required
+            />
+          </div>
           <div className="col-md-4 mt-2">
             <label className="form-label" htmlFor="GENDER">
               Género<span className="text-danger"> *</span>
@@ -254,21 +282,6 @@ const EditUserForm = ({rowCOD, setSendRequest, setMessageError}) => {
                 minLength={8}
                 maxLength={8}
                 title="El número telefónico debe contener 8 caracteres númericos, sin guiones ni espacios."
-                required
-            />
-          </div>
-          <div className="col-md-4 mt-2">
-            <label className="form-label" htmlFor="DAT_BIRTHDAY">
-              Fecha de nacimiento<span className="text-danger"> *</span>
-            </label>
-            <input
-                value={moment(formEditUser.DAT_BIRTHDAY).format('YYYY-MM-DD')}
-                onChange={handleInputChange}
-                className="form-control"
-                name="DAT_BIRTHDAY"
-                type="DATE"
-                min="1950-01-01"
-                max={moment().format('YYYY-MM-DD')}
                 required
             />
           </div>

@@ -29,18 +29,22 @@ const addClient=  (req,res) =>{
     const {
         IDENTITY,
         FIRST_NAME,
+        MIDDLE_NAME,
         LAST_NAME,
+        SECOND_LAST_NAME,
         ADDRESS ,
         NUM_PHONE_ONE,
         NUM_PHONE_TWO = 0,
         RTN 
     } = req.body
-const sp= 'CALL SP_INS_CLIENT(?,?,?,?,?,?,?)';
+const sp= 'CALL SP_INS_CLIENT(?,?,?,?,?,?,?,?,?)';
     mysqlConnect.query(sp,[
 
         IDENTITY,
         FIRST_NAME,
+        MIDDLE_NAME,
         LAST_NAME,
+        SECOND_LAST_NAME,
         ADDRESS,
         NUM_PHONE_ONE,
         NUM_PHONE_TWO,
@@ -64,7 +68,9 @@ const updateClient= (req,res) =>{
     const {
         IDENTITY,
         FIRST_NAME,
+        MIDDLE_NAME,
         LAST_NAME,
+        SECOND_LAST_NAME,
         ADDRESS ,
         NUM_PHONE_ONE,
         NUM_PHONE_TWO = 0,
@@ -72,13 +78,15 @@ const updateClient= (req,res) =>{
 
     } = req.body
     
- const sp= 'CALL SP_UPD_CLIENT(?,?,?,?,?,?,?,?)';
+ const sp= 'CALL SP_UPD_CLIENT(?,?,?,?,?,?,?,?,?,?)';
     mysqlConnect.query(sp,[
 
         codClient,
         IDENTITY,
         FIRST_NAME,
+        MIDDLE_NAME,
         LAST_NAME,
+        SECOND_LAST_NAME,
         ADDRESS,
         NUM_PHONE_ONE,
         NUM_PHONE_TWO,

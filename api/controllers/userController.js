@@ -46,6 +46,7 @@ const addUser = async (req, res) => {
         FIRST_NAME,
         MIDDLE_NAME,
         LAST_NAME,
+        SECOND_LAST_NAME,
         GENDER,
         NUM_PHONE_ONE,
         NUM_PHONE_TWO = 0,
@@ -62,7 +63,7 @@ const addUser = async (req, res) => {
 
     const USER_PASSWORD_HASH = await bcrypt.hash(USER_PASSWORD, 10);
 
-    const sp = 'CALL SP_INS_USER(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+    const sp = 'CALL SP_INS_USER(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
 
     mysqlConnect.query(sp,
     [
@@ -70,6 +71,7 @@ const addUser = async (req, res) => {
         FIRST_NAME,
         MIDDLE_NAME,
         LAST_NAME,
+        SECOND_LAST_NAME,
         GENDER,
         NUM_PHONE_ONE,
         NUM_PHONE_TWO,
@@ -102,6 +104,7 @@ const updateUser = async (req, res) => {
         FIRST_NAME,
         MIDDLE_NAME,
         LAST_NAME,
+        SECOND_LAST_NAME,
         GENDER,
         NUM_PHONE_ONE,
         NUM_PHONE_TWO = 0,
@@ -119,7 +122,7 @@ const updateUser = async (req, res) => {
         USER_PASSWORD_HASH = await bcrypt.hash(USER_PASSWORD, 10);
     }
     
-    const sp = 'CALL SP_UPD_USER(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+    const sp = 'CALL SP_UPD_USER(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
 
     mysqlConnect.query(sp,
         [   
@@ -128,6 +131,7 @@ const updateUser = async (req, res) => {
             FIRST_NAME,
             MIDDLE_NAME,
             LAST_NAME,
+            SECOND_LAST_NAME,
             GENDER,
             NUM_PHONE_ONE,
             NUM_PHONE_TWO,

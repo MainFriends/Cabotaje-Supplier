@@ -293,7 +293,11 @@ const SidebarItems = () => {
                 ?
                     <li className={ "nav-item " + 
                             (pathname === '/dashboard/roles-permisos' ||
-                            pathname === '/dashboard/usuarios' ? "active" : "")}>
+                            pathname === '/dashboard/usuarios' ? "active" : "" ||
+                            pathname === '/dashboard/configuraciones-sistema' ? "active" : "" ||
+                            pathname === '/dashboard/bitacora' ? "active" : "" ||
+                            pathname === '/dashboard/company-information' ? "active" : "" ||
+                            pathname === '/dashboard/backup' ? "active" : "" )}>
                         <a className="nav-link collapsed dinamic" href="#" data-toggle="collapse" data-target="#collapseRoles"
                             aria-expanded="true" aria-controls="collapseTwo">
                             <i className="mr-2 fa-solid fa-shield"></i>
