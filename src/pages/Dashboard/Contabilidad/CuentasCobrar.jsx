@@ -59,7 +59,8 @@ const CuentasCobrar = () => {
     
     //definir las columnas
     const columns = [
-        {
+        {   
+            id: "id",
             name: 'CODIGO',
             selector: row => row.COD_ACC_RECEIVABLE,
             sortable: true,

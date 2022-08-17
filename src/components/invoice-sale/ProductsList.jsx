@@ -7,68 +7,23 @@ import moment from 'moment';
 import AlertError from '../AlertError';
 import axios from '../../config/axios';
 import token from '../../helpers/getToken';
+import ProductFilter from './ProductFilter';
 
 const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeInvoice, productListSale, setproductListSale}) => {
     const [errorMessage, setErrorMessage] = useState('');
-    const [productList, setProductList] = useState([]);
-    const [categories, setCategories] = useState([]);
-    const [suppliers, setSuppliers] = useState([]);
-    const [filterProduct, setFilterProduct] = useState([]);
-    const [filterCheck, setFilterCheck] = useState(false);
-    const [SKU, setSKU] = useState('');
-    const [productsInventory, setProductsInventory] = useState([]);
     const [wholosalePriceCheck, setWholosalePriceCheck] = useState(false);
-    const [stocks, setStocks] = useState(0);
-    const [stocksLote, setStocksLote] = useState(0);
-    const [cantUser, setCantUser] = useState('');
+    const [cantUser, setCantUser] = useState(1);
     const [numLote, setNumLote] = useState('');
-    const [productSelected, setProductSelected] = useState({
-        SKU: '',
-        NAM_PRODUCT: '',
-        DES_PRODUCT: '',
-        NORMAL_UNIT_PRICE: '',
-        WHOLESALE_PRICE: '',
-        WHOLESALE_CANT: '',
-        NAM_TYPE_PRODUCT: '',
-        ISV: '',
-        CANT_TOTAL: '',
-        NAM_LOT: ''
-    })
-
-    const [productFilters, setProductFilters] = useState({
-        COD_SUPPLIER: '',
-        COD_CATEGORY: ''
+    const [skuDigited, setSkuDigited] = useState('');
+    const [productDetail, setProductDetail] = useState([])
+    const [handleInputCant, setHandleInputCant] = useState({
+        id: '',
+        state: false
     });
-
-    const handleChange = (e) => {
-        setProductFilters({
-            ...productFilters,
-            [e.target.name]: e.target.value
-        })
-    }
-
-    useEffect(() => {
-        let products;
-
-        if(productFilters.COD_SUPPLIER && !productFilters.COD_CATEGORY){
-            products = productList.filter(product => product.COD_SUPPLIER == productFilters.COD_SUPPLIER);
-        }
-
-        if(!productFilters.COD_SUPPLIER && productFilters.COD_CATEGORY){
-            products = productList.filter(product => product.COD_CATEGORY == productFilters.COD_CATEGORY);
-        }
-        
-        if(productFilters.COD_SUPPLIER && productFilters.COD_CATEGORY){
-            products = productList.filter(product => product.COD_SUPPLIER == productFilters.COD_SUPPLIER && product.COD_CATEGORY == productFilters.COD_CATEGORY);
-        }
-
-        if(!productFilters.COD_SUPPLIER && !productFilters.COD_CATEGORY){
-            products = productList;
-        }
-
-        setFilterProduct(products);
-
-    }, [productFilters.COD_SUPPLIER, productFilters.COD_CATEGORY]);
+    const [handleInputLote, setHandleInputLote] = useState({
+        id: '',
+        state: false
+    });
 
     useEffect(() => {
         setsaleInvoice({
@@ -79,30 +34,97 @@ const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeI
         })
     }, [productListSale]);
 
-    useEffect(() => {
-        axios.get('/inventory', token())
-        .then(res => {
-            setProductList(res.data);
-            setFilterProduct(res.data)
-        })
-    }, [])
-
-    useEffect(() => {
-        axios.get('/categories', token())
-            .then(res => setCategories(res.data))
-    }, [])
-
-    useEffect(() => {
-        axios.get('/Supplier', token())
-            .then(res => setSuppliers(res.data))
-    }, [])
-
     const {
         SUBTOTAL,
         TOT_ISV,
         TOT_SALE
     } = saleInvoice;
-    
+
+    useEffect(() => {
+        const inputSKU = document.querySelector('#sku');
+        if(skuDigited){
+            let isProductExist = false;
+            const findProduct = productDetail.find(row => row.COD_PRODUCT == skuDigited);
+
+            if(findProduct){
+                if(wholosalePriceCheck){
+                    isProductExist = productListSale.some(row => row.NUM_LOT === findProduct.NUM_LOT && row.PRICE === findProduct.WHOLESALE_PRICE)
+                }else{
+                    isProductExist = productListSale.some(row => row.NUM_LOT === findProduct.NUM_LOT && row.PRICE === findProduct.NORMAL_UNIT_PRICE)
+                }
+
+                if(isProductExist){
+                    setErrorMessage('Producto ya se encuentra agregado');
+        
+                    setTimeout(() => {
+                        setErrorMessage('');
+                    }, 3000);
+                    return;
+                }
+
+                inputSKU.classList.remove('is-invalid');
+                inputSKU.classList.add('is-valid');
+
+                let PRICE;
+
+                const {
+                    NUM_LOT,
+                    COD_PRODUCT,
+                    NAM_PRODUCT,
+                    DES_PRODUCT,
+                    NORMAL_UNIT_PRICE,
+                    WHOLESALE_PRICE,
+                    WHOLESALE_CANT,
+                    NAM_TYPE_PRODUCT,
+                    ISV,
+                    CANT_PRODUCTS
+                } = findProduct;
+        
+                if(wholosalePriceCheck){
+                    if(WHOLESALE_PRICE){
+                        PRICE = WHOLESALE_PRICE;
+                    }else{
+                        setErrorMessage('No hay precio mayorista para el lote seleccionado.');
+        
+                        setTimeout(() => {
+                            setErrorMessage('');
+                        }, 3000);
+                        return;
+                    }
+                }else{
+                    PRICE = NORMAL_UNIT_PRICE;
+                }
+        
+                const product = {
+                    ID: moment().format('hh:mm:ss'),
+                    NUM_LOT,
+                    SKU: COD_PRODUCT,
+                    NAM_PRODUCT,
+                    DES_PRODUCT,
+                    PRICE: PRICE - (PRICE * ISV),
+                    CANT_PRODUCTS: 1,
+                    ISV: ISV * PRICE,
+                    TOTAL: 1 * PRICE
+                }
+        
+                setproductListSale([
+                    ...productListSale,
+                    product
+                ])
+                setNumLote('');
+                setCantUser(1);
+            }else{
+                inputSKU.classList.remove('is-valid');
+                inputSKU.classList.add('is-invalid');
+            }
+        }
+
+        if(skuDigited === ''){
+            inputSKU.classList.remove('is-valid');
+            inputSKU.classList.remove('is-invalid');
+        }
+    },[skuDigited])
+
     const columns = [
         {
             name: 'SKU',
@@ -111,6 +133,24 @@ const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeI
         {
             name: 'LOTE',
             selector: row => row.NUM_LOT,
+            format: row => {
+                if(handleInputLote.id === row.ID && handleInputLote.state){
+                    return <>
+                        <select autoFocus defaultValue={numLote} onChange={(e) => handleSelectLote(e, row.ID)} onBlur={() => setHandleInputLote({id: '', state: false})} className="form-control form-control-sm">
+                        {
+                            productDetail.map(product => {
+                                if(product.COD_PRODUCT === row.SKU){
+                                    return <option key={product.NUM_LOT} value={product.NUM_LOT}>{product.NUM_LOT}</option>
+                                }
+                            })
+                        } 
+                        </select>
+                    </>
+                }else{
+                    return <div onClick={() => handleClickInputLote(row.ID, row.NUM_LOT)}><i className="fa-solid fa-pen-to-square mr-3 text-primary"></i>{row.NUM_LOT}</div>
+                }
+            }
+        
         },
         {   
             name: 'PRODUCTO',
@@ -125,38 +165,44 @@ const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeI
         {
             name: 'CANTIDAD',
             selector: row => row.CANT_PRODUCTS,
+            format: row => (handleInputCant.id === row.ID && handleInputCant.state ? <input autoFocus min={1} value={cantUser} onChange={(e) => handleCantUser(e, row.ID, row.SKU, row.NUM_LOT)} onBlur={() => setHandleInputCant({id: '', state: false})} className="form-control form-control-sm" type="number" /> : <div onClick={() => handleClickInput(row.ID, row.CANT_PRODUCTS)}><i className="fa-solid fa-pen-to-square mr-3 text-primary"></i>{row.CANT_PRODUCTS}</div>)
         },
         {
             name: 'PRECIO',
             selector: row => row.PRICE,
-            format: row => `L ${row.PRICE.toFixed(2)}`
+            format: row => `L ${row.PRICE.toLocaleString('es-MX')}`
         },
         {
             name: 'ISV',
             selector: row => row.ISV,
-            format: row => `L ${row.ISV.toFixed(2)}`
+            format: row => `L ${row.ISV.toLocaleString('es-MX')}`
         },
         {
             name: 'TOTAL',
             selector: row => row.TOTAL,
-            format: row => `L ${row.TOTAL.toFixed(2)}`
+            format: row => `L ${row.TOTAL.toLocaleString('es-MX')}`
         },
         {
             name: 'ELIMINAR',
             button: true,
             cell: row => <>
-                <button className='btn btn-sm btn-danger' onClick={() => handleDelete(row.NUM_LOT)}><i className="fa-solid fa-trash"></i></button>
+                <button className='btn btn-sm btn-danger' onClick={() => handleDelete(row.ID)}><i className="fa-solid fa-trash"></i></button>
             </>
         }
     ];
 
-    const handleFilterCheck = () => {
-        setFilterCheck(filterCheck ? (false) : (true));
-        setSKU('')
+    const handleClickInputLote = (id, lote) => {
+        setHandleInputLote({id, state: true})
+        setNumLote(lote);
     }
 
-    const handleDelete = NUM_LOT => {
-        const findProduct = productListSale.filter(product => product.NUM_LOT !== NUM_LOT);
+    const handleClickInput = (id, cant) => {
+        setHandleInputCant({id, state: true})
+        setCantUser(cant);
+    }
+
+    const handleDelete = ID => {
+        const findProduct = productListSale.filter(product => product.ID !== ID);
 
         setproductListSale(findProduct);
     }
@@ -178,106 +224,58 @@ const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeI
         setproductListSale([])
     }
 
-    const handleProductSelected = (e) => {
-        setSKU(e.target.value);
+    useEffect(() => {
+            axios.get(`/inventoryDetail`, token())
+            .then(res => {
+                setProductDetail(res.data)
+            });
+    }, []);
+
+    const handleCantUser = (e, id, SKU, lote) => {
+        const findProduct = productDetail.find(row => row.COD_PRODUCT === SKU && row.NUM_LOT === lote);
+        if(e.target.value > findProduct.CANT_PRODUCTS){
+            setErrorMessage('No hay suficientes unidades de este lote');
+
+            setTimeout(() => {
+                setErrorMessage('');
+            }, 3000);
+            return;
+        }
+
+        if(e.target.value <= 0 && e.target.value !== ''){
+            setErrorMessage('La cantidad mínima es 1');
+
+            setTimeout(() => {
+                setErrorMessage('');
+            }, 3000);
+            return;
+        }
+
+        const pos = productListSale.findIndex(row => row.ID === id);
+        setCantUser(e.target.value);
+        productListSale[pos].CANT_PRODUCTS = e.target.value
+        productListSale[pos].TOTAL = e.target.value * productListSale[pos].PRICE
+        setproductListSale([
+            ...productListSale
+        ])
     }
 
-    useEffect(() => {
-        if(SKU){
-            axios.get(`/inventoryDetail/${SKU}`, token())
-            .then(res => {
-                setProductsInventory(res.data);
-                const calculeStocks = res.data.reduce((acum, current) => acum + current.CANT_PRODUCTS, 0);
-                setStocks(calculeStocks);
-            });
-        }
-    }, [SKU]);
-
-    useEffect(() => {
-        if(numLote){
-            const [product] = productsInventory.filter(row => row.NUM_LOT === numLote);
-            setStocksLote(product.CANT_PRODUCTS);
-            setProductSelected(product);
-        }
-    }, [numLote])
-
-    const handleProductAdd = () => {
-
-        if(!numLote){
-            setErrorMessage('Seleccione un lote');
+    const handleSelectLote = (e, id) => {
+        const isLoteExist = productListSale.some(row => row.NUM_LOT === e.target.value);
+        if(isLoteExist){
+            setErrorMessage('El lote seleccionado ya se ha agregado a la lista');
 
             setTimeout(() => {
                 setErrorMessage('');
             }, 3000);
             return;
         }
-
-        if(!cantUser){
-            setErrorMessage('Digite una cantidad válida');
-
-            setTimeout(() => {
-                setErrorMessage('');
-            }, 3000);
-            return;
-        }
-
-        if(cantUser > stocksLote){
-            setErrorMessage('No hay suficientes unidades');
-
-            setTimeout(() => {
-                setErrorMessage('');
-            }, 3000);
-            return;
-        }
-
-        let PRICE;
-
-        const {
-            NUM_LOT,
-            COD_PRODUCT,
-            NAM_PRODUCT,
-            DES_PRODUCT,
-            NORMAL_UNIT_PRICE,
-            WHOLESALE_PRICE,
-            WHOLESALE_CANT,
-            NAM_TYPE_PRODUCT,
-            ISV,
-            CANT_PRODUCTS
-        } = productSelected;
-
-        if(wholosalePriceCheck){
-            if(WHOLESALE_PRICE){
-                PRICE = WHOLESALE_PRICE;
-            }else{
-                setErrorMessage('No hay precio mayorista para el lote seleccionado.');
-
-                setTimeout(() => {
-                    setErrorMessage('');
-                }, 3000);
-                return;
-            }
-        }else{
-            PRICE = NORMAL_UNIT_PRICE;
-        }
-
-        const product = {
-            NUM_LOT,
-            SKU: COD_PRODUCT,
-            NAM_PRODUCT,
-            DES_PRODUCT,
-            PRICE: PRICE - (PRICE * ISV),
-            CANT_PRODUCTS: cantUser,
-            ISV: ISV * PRICE,
-            TOTAL: cantUser * PRICE
-        }
-
+        const pos = productListSale.findIndex(row => row.ID === id);
+        productListSale[pos].NUM_LOT = e.target.value
+        productListSale[pos].CANT_PRODUCTS = 1
         setproductListSale([
-            ...productListSale,
-            product
+            ...productListSale
         ])
-
-        setCantUser('');
-        setNumLote('');
     }
 
   return (
@@ -329,92 +327,22 @@ const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeI
                 <h6 className='ml-3 text-gray-700'>Lista de productos</h6>
             </div>
         </div>
-        <div className="row pl-3">
-            {
-                filterCheck 
-                ?
-                <>
-                    <div className="col-2">
-                        <label className='form-label small'>Proveedores </label>
-                        <select tabIndex="1" onChange={handleChange} defaultValue={''} name="COD_SUPPLIER" className="form-control form-control-sm" required>
-                            <option value={''}>Seleccionar</option>
-                            {suppliers.map(supplier => {
-                                return <option key={supplier.COD_SUPPLIER} value={supplier.COD_SUPPLIER}>{supplier.NAM_SUPPLIER}</option>
-                            })}
-                        </select>
-                    </div>
-                    <div className="col-2">
-                        <label className='form-label small'>Categorias </label>
-                        <select tabIndex="2" onChange={handleChange} defaultValue={''} name="COD_CATEGORY" className="form-control form-control-sm" required>
-                            <option value={''}>Seleccionar</option>
-                            {categories.map(category => {
-                                return <option key={category.COD_CATEGORY} value={category.COD_CATEGORY}>{category.NAM_CATEGORY}</option>
-                            })}
-                        </select>
-                    </div>
-                    <div className="col-3">
-                        <label className='form-label small'>Seleccionar producto </label>
-                        <select onChange={handleProductSelected} tabIndex="3" defaultValue={''} name="COD_PRODUCT" className="form-control form-control-sm" required>
-                            <option value={''}>Seleccionar</option>
-                            {filterProduct.map(product => {
-                                return <option key={product.NUM_LOT} value={product.COD_PRODUCT}>{product.NAM_PRODUCT}</option>
-                            })}
-                        </select>
-                        {SKU ? <small className='text-small text-secondary'>Existencias totales: {stocks}</small> : null }
-                    </div>
-                    <div className="col-2">
-                        <label className='form-label small'>Seleccionar lote </label>
-                        <select onChange={(e) => setNumLote(e.target.value)} tabIndex="4" value={numLote} name="NUM_LOT" className="form-control form-control-sm" required>
-                            <option value={''}>Seleccionar</option>
-                            {productsInventory.map(product => {
-                                return <option key={product.NUM_LOT} value={product.NUM_LOT}>{product.NUM_LOT}</option>
-                            })}
-                        </select>
-                        {numLote ? <small className='text-small text-secondary'>Existencias en lote: {stocksLote}</small> : null }
-                    </div>
-                    <div className="col-1">
-                        <label className="form-label small">Cantidad</label>
-                        <input value={cantUser} onChange={(e) => setCantUser(e.target.value)} tabIndex="4" className='form-control form-control-sm' type="text"/>
-                    </div>
-                </>
-                :
-                <div className="col-8 mt-4">
-                        <button className='btn btn-sm btn-primary' onClick={() => handleFilterCheck()}>Filtrar búsqueda</button>
-                </div>
-            }
-            <div className="col-2 text-right mt-4">
-                {/* <button autoFocus className="btn btn-success mr-2" data-toggle="modal" data-target='#sale-inventory' data-placement="bottom" title="Agregar producto"><i className="fa-solid fa-plus"></i></button> */}
-                <button onClick={() => clearProductsList()} className="btn btn-info mr-3" data-toggle="tooltip" data-placement="bottom" title="Limpiar lista"><i className="fa-solid fa-broom"></i></button>
+        <div className="row px-3">
+            <div className="col-3">
+                <label className="form-label small">SKU</label>
+                <input autoFocus id='sku' onChange={(e) => setSkuDigited(e.target.value.toUpperCase())} className='form-control form-control-sm' value={skuDigited} type="text"/>
             </div>
-        </div>
-        <div className="row mt-2">
-            {
-                filterCheck 
-                ?
-                <>
-                <div className="col-2 ml-3">
-                    <label className="form-label small">SKU</label>
-                    <input className='form-control form-control-sm' value={SKU} type="text" disabled/>
+            <div className="col-4 mt-4 py-2">
+                <div className="form-check form-check-inline">
+                        <input onChange={() => setWholosalePriceCheck(wholosalePriceCheck ? false : true)} className="form-check-input" type="checkbox" id="wholosalePrice" value="option1"/>
+                        <label className="form-check-label small" htmlFor="wholosalePrice">Aplicar precios mayoristas</label>
                 </div>
-                <div className="col-3 mt-4 py-2 px-0 mx-0">
-                    <div class="form-check form-check-inline">
-                        <input onChange={() => setWholosalePriceCheck(wholosalePriceCheck ? false : true)} class="form-check-input" type="checkbox" id="wholosalePrice" value="option1"/>
-                        <label class="form-check-label small" for="wholosalePrice">Aplicar precios mayoristas</label>
-                    </div>
-                </div>
-                <div className="col-1 custom-margin pr-0 mr-0">
-                    <button tabIndex="5" className='btn btn-sm btn-success' onClick={() => handleProductAdd()}>Agregar</button>
-                </div>
-                <div className="col-3 ml-1 custom-margin pl-0 ml-0">
-                    <button tabIndex="6" className='btn btn-sm btn-primary' onClick={() => handleFilterCheck()}>Cancelar filtro</button>
-                </div>
-                </>
-                :
-                null
-            }
-        </div>
-        <div className="row justify-content-end mt-2 mr-2">
-
+            </div>
+            <div className="col-5 text-right mt-3 py-2">
+                <button className='btn btn-success mr-2' data-toggle="modal" data-target='#product-filter' data-placement="bottom" title="Agregar producto"><i className="fa-solid fa-magnifying-glass"></i></button>
+                {/* <button autoFocus className="btn btn-success mr-2" data-toggle="modal" data-target='#sale-inventory' data-placement="bottom" title="Agregar producto"><i className="fa-solid fa-plus"></i></button> */}
+                <button onClick={() => clearProductsList()} className="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Limpiar lista"><i className="fa-solid fa-broom"></i></button>
+            </div>
         </div>
         <DataTable
             columns={columns}
@@ -432,17 +360,26 @@ const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeI
             />}
             modalSize='xl'
         />
+        <Modal 
+            idModal='product-filter'
+            title='Filtrar búsqueda'
+            content={<ProductFilter
+            wholosalePriceCheck={wholosalePriceCheck}
+            setproductListSale={setproductListSale}
+            productListSale={productListSale}
+        />}
+        />
         <hr />
         <div className="row">
-            <div className="col-10 text-right">
+            <div className="col-10 text-right pr-0">
                 <h6>Subtotal</h6>
-                <h6>ISV 15%</h6>
-                <h4>Total</h4>
+                <h6>Total ISV</h6>
+                <h6 className='font-weight-bold'>Total venta</h6>
             </div>
-            <div className="col-2">
-                <h6>{`L. ${SUBTOTAL.toFixed(2)}`}</h6>
-                <h6>{`L. ${TOT_ISV.toFixed(2)}`}</h6>
-                <h4>{`L. ${TOT_SALE.toFixed(2)}`}</h4>
+            <div className="col-2 text-right pr-4">
+                <h6>{`L. ${SUBTOTAL.toLocaleString('es-MX')}`}</h6>
+                <h6>{`L. ${TOT_ISV.toLocaleString('es-MX')}`}</h6>
+                <h6 className='font-weight-bold'>{`L. ${TOT_SALE.toLocaleString('es-MX')}`}</h6>
             </div>
         </div>
         <div className="modal-footer">

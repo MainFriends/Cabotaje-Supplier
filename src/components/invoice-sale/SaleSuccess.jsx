@@ -1,6 +1,6 @@
 import React from 'react'
 
-const SaleSuccess = ({saleMessage, setsaleInvoice, setCurrentPage, setproductListSale}) => {
+const SaleSuccess = ({saleMessage, setsaleInvoice, setCurrentPage, setproductListSale, cambio, saleInvoice}) => {
     const {message, ok} = saleMessage;
 
     const onCheck = () => {
@@ -45,6 +45,21 @@ const SaleSuccess = ({saleMessage, setsaleInvoice, setCurrentPage, setproductLis
                             <strong><i className="fa-solid fa-circle-check mr-3"></i></strong>{message}
                     </h3>
                 }
+                {
+                    saleInvoice.TYP_TO_SALE === 'Contado' && saleInvoice.COD_TYP_PAY == '1'
+                    ?
+                    <div className="row">
+                        <div className="col-6 text-right">
+                            <h1>Cambio</h1>
+                        </div>
+                        <div className="col-3">
+                            <input value={`L. ${cambio.toLocaleString('es-MX')}`} className='form-control form-control-lg' type="text" disabled/>
+                        </div>
+                    </div>
+                    :
+                    null
+                }
+
             </div>
                 <div className="modal-footer">
                     <button onClick={() => onCheck()} to='/facturar' type="button" className="btn btn-primary" data-dismiss="modal">Listo</button>

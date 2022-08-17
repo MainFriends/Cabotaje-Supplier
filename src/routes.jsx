@@ -82,7 +82,6 @@ const Pages = () => {
     <Routes>
         <Route path="/" element={isLogged ? (<Navigate to='/dashboard/welcome'/>) : (<Login />)}/>
         <Route path="/profile" element={isLogged ? (<Profile />) : (<Navigate to='/'/>)}/>
-        <Route path="/facturar" element={isLogged ? (facturar ? <Facturar /> : <Page401 />) : (<Navigate to='/'/>)}/>
         <Route path="/dashboard" element={isLogged ? (<Dashboard />) : (<Navigate to='/'/>)}>
             <Route path="ventas" element={<Facturas />}/>
             <Route path="compras" element={<Compras />}/>
@@ -107,6 +106,7 @@ const Pages = () => {
             <Route path="configuraciones-sistema" element={< Settings /> }/>
             <Route path="company-information" element={<CompanyInformation />}/>
             <Route path="backup" element={< BackupAndRestore /> }/>
+            <Route path="facturar" element={<Facturar />}/>
         </Route>
         <Route path="/*" element={isLogged ? (<Page404 />) : (<Navigate to='/'/>)}></Route>
     </Routes>

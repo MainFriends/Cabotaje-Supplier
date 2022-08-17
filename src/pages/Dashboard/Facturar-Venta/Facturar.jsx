@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
 import { PaymentMethod } from '../../../components/invoice-sale/PaymentMethod';
 import ProductsList from '../../../components/invoice-sale/ProductsList';
 import SaleInformation from '../../../components/invoice-sale/SaleInformation'
@@ -61,9 +60,6 @@ const Facturar = () => {
               setproductListSale={setproductListSale}
             />
           }
-        </div>
-        <div className="col-12 text-right mb-5">
-            <Link to='/dashboard' className='btn btn-danger'><i className="mr-2 fa-solid fa-circle-chevron-left"></i>Dashboard</Link>
         </div>
       </div>
     </div>

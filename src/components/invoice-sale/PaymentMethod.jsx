@@ -8,6 +8,7 @@ import AlertError from '../AlertError';
 
 export const PaymentMethod = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeInvoice, productListSale, setproductListSale}) => {
     const [cambio, setCambio] = useState(0);
+    const [error, setError] = useState(true);
     const [alertMessage, setAlertMessage] = useState('');
     const [saleMessage, setSaleMessage] = useState({
         message: '',
@@ -19,7 +20,8 @@ export const PaymentMethod = ({saleInvoice, setsaleInvoice, setCurrentPage, corr
         TOT_ISV,
         TOT_SALE,
         TYP_TO_SALE,
-        COD_CLIENT
+        COD_CLIENT,
+        COD_TYP_PAY
     } = saleInvoice;
 
     useEffect(() => {
@@ -63,17 +65,17 @@ export const PaymentMethod = ({saleInvoice, setsaleInvoice, setCurrentPage, corr
         {
             name: 'PRECIO',
             selector: row => row.PRICE,
-            format: row => `L ${row.PRICE.toFixed(2)}`
+            format: row => `L ${row.PRICE.toLocaleString('es-MX')}`
         },
         {
             name: 'ISV',
             selector: row => row.ISV,
-            format: row => `L ${row.ISV.toFixed(2)}`
+            format: row => `L ${row.ISV.toLocaleString('es-MX')}`
         },
         {
             name: 'TOTAL',
             selector: row => row.TOTAL,
-            format: row => `L ${row.TOTAL.toFixed(2)}`
+            format: row => `L ${row.TOTAL.toLocaleString('es-MX')}`
         }
     ];
 
@@ -92,9 +94,8 @@ export const PaymentMethod = ({saleInvoice, setsaleInvoice, setCurrentPage, corr
     }
 
     useEffect(() => {
-        setCambio(saleInvoice.TOT_SALE - saleInvoice.AMOUNT)
+        setCambio((saleInvoice.TOT_SALE - saleInvoice.AMOUNT)*-1)
     }, [saleInvoice.AMOUNT])
-
     
     useEffect(() => {
         if(saleInvoice.AMOUNT<saleInvoice.TOT_SALE){
@@ -102,22 +103,80 @@ export const PaymentMethod = ({saleInvoice, setsaleInvoice, setCurrentPage, corr
           }
       }, [saleInvoice.AMOUNT])
 
+    useEffect(() => {
+        setsaleInvoice({
+            ...saleInvoice,
+            AMOUNT: ''
+        })
+    },[TYP_TO_SALE])
 
     const onSubmit = () => {
-        if(saleInvoice.AMOUNT > TOT_SALE){
-            setAlertMessage('La cantidad recibida no puede ser mayor al total de la venta');
-            setTimeout(() => {
-                setAlertMessage('');
-            }, 3000);
-            return;
+        if(COD_TYP_PAY == '1' && TYP_TO_SALE === 'Contado'){
+            if(!saleInvoice.AMOUNT){
+                setAlertMessage('Debe de introducir la cantidad recibida.');
+                setTimeout(() => {
+                    setAlertMessage('');
+                }, 3000);
+                return;
+            }
+
+            if(saleInvoice.AMOUNT < 0){
+                setAlertMessage('La cantidad recibida debe ser mayor a cero.');
+                setTimeout(() => {
+                    setAlertMessage('');
+                }, 3000);
+                return;
+            }
+
+            if(saleInvoice.AMOUNT < TOT_SALE){
+                setAlertMessage('Si la venta es al contado, la cantidad recibida no debe ser menor al total de la venta.');
+                setTimeout(() => {
+                    setAlertMessage('');
+                }, 3000);
+                return;
+            }
         }
 
-        if(saleInvoice.AMOUNT < 0){
-            setAlertMessage('La cantidad recibida debe ser mayor a cero.');
+        if(TYP_TO_SALE === 'Crédito'){
+            if(!saleInvoice.AMOUNT){
+                setAlertMessage('Debe de introducir la cantidad recibida.');
+                setTimeout(() => {
+                    setAlertMessage('');
+                }, 3000);
+                return;
+            }
+
+            if(saleInvoice.AMOUNT < 0){
+                setAlertMessage('La cantidad recibida debe ser cero o mayor a cero.');
+                setTimeout(() => {
+                    setAlertMessage('');
+                }, 3000);
+                return;
+            }
+
+            if(saleInvoice.AMOUNT > TOT_SALE){
+            setAlertMessage('La cantidad recibida no puede ser mayor al total de la venta.');
             setTimeout(() => {
                 setAlertMessage('');
             }, 3000);
             return;
+            }
+
+            if(!saleInvoice.DAT_LIMIT){
+                setAlertMessage('Debe introducir una fecha límite de cobro.');
+                setTimeout(() => {
+                    setAlertMessage('');
+                }, 3000);
+                return;
+            }
+
+            if(!saleInvoice.DESCRIPTION){
+                setAlertMessage('Debe introducir una descripción para la cuentra por cobrar.');
+                setTimeout(() => {
+                    setAlertMessage('');
+                }, 3000);
+                return;
+            }
         }
 
         axios.post('/sale-invoice', saleInvoice, token())
@@ -180,7 +239,7 @@ export const PaymentMethod = ({saleInvoice, setsaleInvoice, setCurrentPage, corr
                 type="text" 
                 className="form-control form-control-sm" 
                 disabled
-                value={moment().format('DD-MM-YYYY')}
+                value={moment().format('DD-MM-YYYY hh:mm')}
                 />
             </div>
         </div>
@@ -195,15 +254,15 @@ export const PaymentMethod = ({saleInvoice, setsaleInvoice, setCurrentPage, corr
             striped
         />
         <div className="row mt-3">
-            <div className="col-10 text-right text-bold">
+            <div className="col-10 text-right pr-0">
                 <h6>Subtotal</h6>
-                <h6>ISV 15%</h6>
-                <h4>Total</h4>
+                <h6>Total ISV</h6>
+                <h6 className='font-weight-bold'>Total venta</h6>
             </div>
-            <div className="col-2">
-                <h6>{`L. ${SUBTOTAL.toFixed(2)}`}</h6>
-                <h6>{`L. ${TOT_ISV.toFixed(2)}`}</h6>
-                <h4>{`L. ${TOT_SALE.toFixed(2)}`}</h4>
+            <div className="col-2 text-right pr-4">
+                <h6>{`L. ${SUBTOTAL.toLocaleString('es-MX')}`}</h6>
+                <h6>{`L. ${TOT_ISV.toLocaleString('es-MX')}`}</h6>
+                <h6 className='font-weight-bold'>{`L. ${TOT_SALE.toLocaleString('es-MX')}`}</h6>
             </div>
         </div>
         <hr />
@@ -221,12 +280,19 @@ export const PaymentMethod = ({saleInvoice, setsaleInvoice, setCurrentPage, corr
                 <select onChange={handleStateChange} name='COD_TYP_PAY' defaultValue={'Contado'} className="form-control" required>
                     <option value="1">Efectivo</option>
                     <option value="2">Tarjeta</option>
+                    <option value="3">Transferencia</option>
                 </select>
             </div>
-            <div className="col-3">
-                <label className="form-label">Cantidad recibida</label>
-                <input min={1} max={TOT_SALE} autoFocus onChange={handleInputChange} className='form-control' type="number" />
-            </div>
+            {
+                COD_TYP_PAY == '1' || TYP_TO_SALE === 'Crédito'
+                ?
+                <div className="col-3">
+                    <label className="form-label">Cantidad recibida</label>
+                    <input min={1} max={TOT_SALE} value={saleInvoice.AMOUNT} autoFocus onChange={handleInputChange} className='form-control' type="number" />
+                </div>
+                :
+                null
+            }
             {/* <div className="col-2">
                 <label className="form-label">Cambio</label>
                 <input value={`L. ${cambio.toFixed(2)}`} className='form-control' type="text" disabled/>
@@ -238,7 +304,7 @@ export const PaymentMethod = ({saleInvoice, setsaleInvoice, setCurrentPage, corr
             <div className="row mt-3">
                 <div className="col-4 ml-1">
                     <label className="form-label">Fecha limite de cobro al crédito</label>
-                    <input onChange={handleStateChange} className='form-control' type="date" name='DAT_LIMIT'/>
+                    <input min={moment().format('YYYY-MM-DD')} onChange={handleStateChange} className='form-control' type="date" name='DAT_LIMIT'/>
                 </div>
                 <div className="col-6 ml-1">
                     <label className="form-label">Descripción de la cuenta por cobrar</label>
@@ -253,14 +319,24 @@ export const PaymentMethod = ({saleInvoice, setsaleInvoice, setCurrentPage, corr
         <button onClick={() => setCurrentPage(2)} className="btn btn-dark">
           <i className="fa-solid fa-chevron-left"></i>
         </button>
-        <button onClick={() => onSubmit()} className="btn btn-primary" data-toggle="modal" data-target="#saleSuccess">
-            <i className="fa-solid fa-circle-check mr-2"></i>Finalizar venta
-        </button>
+        {
+            (TYP_TO_SALE === 'Contado' && COD_TYP_PAY == 1 && (saleInvoice.AMOUNT < TOT_SALE || !saleInvoice.AMOUNT  || saleInvoice.AMOUNT < 0)) || (TYP_TO_SALE === 'Crédito' && (!saleInvoice.DAT_LIMIT || saleInvoice.AMOUNT < 0 || saleInvoice.AMOUNT > TOT_SALE || !saleInvoice.DESCRIPTION))
+            ?
+            <button onClick={() => onSubmit()} className="btn btn-primary">
+                <i className="fa-solid fa-circle-check mr-2"></i>Finalizar venta
+            </button>
+            :
+            <button onClick={() => onSubmit()} className="btn btn-primary" data-toggle="modal" data-target="#saleSuccess">
+                <i className="fa-solid fa-circle-check mr-2"></i>Finalizar venta
+            </button>
+        }
         <SaleSuccess 
             saleMessage={saleMessage}
             setsaleInvoice={setsaleInvoice}
             setCurrentPage={setCurrentPage}
             setproductListSale={setproductListSale}
+            cambio={cambio}
+            saleInvoice={saleInvoice}
         />
     </div>
     {alertMessage ? <AlertError message={alertMessage}/> : null}

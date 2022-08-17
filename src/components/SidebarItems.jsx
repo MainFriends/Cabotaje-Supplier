@@ -116,8 +116,8 @@ const SidebarItems = () => {
         {
             viewFacturar()
             ?
-            <li className={ "nav-item"}>
-            <NavLink className='nav-link' to="/facturar">
+            <li className={ "nav-item " + (pathname === '/dashboard/facturar' ? "active" : "")}>
+            <NavLink className='nav-link' to="/dashboard/facturar">
                 <i className="mr-2 fa-solid fa-cash-register"></i>
                 <span>Facturar</span>
             </NavLink>
