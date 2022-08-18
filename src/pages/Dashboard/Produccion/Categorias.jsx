@@ -16,34 +16,6 @@ import token from '../../../../src/helpers/getToken';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable';
 import logo from '../../../assets/js/logo';
-import moment from 'moment';
-
-const dowlandPdfCategory = (filteredItems) => {
-    const doc = new jsPDF();
-    doc.text('Reporte de Categorias - Cabotaje Supplier',55,30);   
-    const image = logo
-    doc.addImage(image, 'PNG', 10, 10,20,30,'Cabotaje');
-
-    const nombre = JSON.parse(localStorage.getItem("userSession"));
-    const nombreReporte = `${nombre.FIRST_NAME} ${nombre.LAST_NAME}`
-    doc.setFontSize(10)
-    doc.text(`${moment(new Date()).format('DD-MM-YYYY, h:mm:ss a')}` ,165, 13)
-    doc.text(`Impreso por: ${nombreReporte}`, 165, 7)
-
-    const row = filteredItems.map(fila => [
-        fila.COD_CATEGORY,
-        fila.NAM_CATEGORY,
-        fila.DESCRIPTION,
-        fila.NAM_STATUS
-    ])  
-    doc.autoTable({
-        head: [['#', 'Categoria', 'Descripcion', 'Estado']],
-        body: row.sort(),
-        startY: 45,
-    })
-
-    doc.save('Categorias de Inventario - Cabotaje Supplier.pdf')
-}
 
 const Categoria = () => {
     const [rows, setRows] = useState([]);
@@ -51,13 +23,31 @@ const Categoria = () => {
     const [loading, setLoading] = useState(true);
     const [messageError, setMessageError] = useState('');
     const [sendRequest, setSendRequest] = useState('false');
-    const [rowCOD, setRowCOD] = useState(null);
-    const [permissions, setPermissions] = useState({});
+    const [rowCOD, setRowCOD] = useState(null)
+
+    const dowlandPdfCategory = () => {
+        const doc = new jsPDF();
+        doc.text('Reporte de Categorias - Cabotaje Supplier',55,30);   
+        const image = logo
+        doc.addImage(image, 'PNG', 10, 10,20,30,'Cabotaje');
+
+        const row = rows.map(fila => [
+            fila.COD_CATEGORY,
+            fila.NAM_CATEGORY,
+            fila.DESCRIPTION
+        ])  
+        doc.autoTable({
+            head: [['#', 'Categoria', 'Descripcion']],
+            body: row.sort(),
+            startY: 45,
+        })
+
+        doc.save('Categorias de Inventario - Cabotaje Supplier.pdf')
+    }
     
     //definir las columnas
     const columns = [
         {
-            id: "id",
             name: 'CODIGO',
             selector: row => row.COD_CATEGORY,
             sortable: true,
@@ -71,20 +61,13 @@ const Categoria = () => {
             name: 'DESCRIPCIÓN',
             selector: row => row.DESCRIPTION,
             sortable: true,
-            wrap:true
-        },
-        {
-            name: 'ESTADO',
-            selector: row => row.NAM_STATUS,
-            sortable: true,
-            wrap:true
         },
         {
             name: 'ACCIONES',
             button: true,
             cell: row => <>
-                <button className={'btn btn-sm btn-warning mr-1 ' + (!permissions.UPD ? ' disabled' : null)} onClick={() => {setRowCOD(row.COD_CATEGORY)}} data-toggle="modal" data-target='#editFormCategory'><i className="fa-solid fa-pen-to-square"></i></button>
-                <button className={'btn btn-sm btn-danger ' + (!permissions.DEL ? 'disabled' : null)} onClick={() => handleDelete(row.COD_CATEGORY) }><i className="fa-solid fa-trash"></i></button>
+                <button className='btn btn-sm btn-warning mr-1' onClick={() => {setRowCOD(row.COD_CATEGORY)}} data-toggle="modal" data-target='#editFormCategory'><i className="fa-solid fa-pen-to-square"></i></button>
+                <button className='btn btn-sm btn-danger' onClick={() => handleDelete(row.COD_CATEGORY) }><i className="fa-solid fa-trash"></i></button>
             </>
         }
     ];
@@ -103,6 +86,7 @@ const Categoria = () => {
         axios.get('/inventoryCategory', token())
             .then(res => {
                 const {data} = res;
+                console.log(data)
                 setRows(data);
                 setLoading(false);
                 setSendRequest(false);
@@ -114,14 +98,6 @@ const Categoria = () => {
         axios.delete(`/inventoryCategory/${cod}`, token())
         .then(res => setSendRequest(true))
     }
-
-    useEffect(() => {
-        axios.get(`/user-permissions`,token())
-        .then(res => {
-            const result = res.data.find(row => row.COD_MODULE === 6 && row.COD_TABLE === 9)
-            setPermissions(result)
-        })
-    },[])
 
     return (
             loading
@@ -135,7 +111,7 @@ const Categoria = () => {
                 <div className="card-body">
                     <div className="row mt-2 ml-1">
                         <div className="col">
-                            <button className={'btn btn-sm btn-primary ' + (!permissions.INS ? 'disabled' : null)} data-toggle="modal" data-target='#addFormCategory'><i className="fas fa-plus mr-2"></i>Agregar</button>
+                            <button className='btn btn-sm btn-primary' data-toggle="modal" data-target='#addFormCategory'><i className="fas fa-plus mr-2"></i>Agregar Categoria</button>
                         </div>
                     </div>
                     <DataTable
@@ -148,10 +124,8 @@ const Categoria = () => {
                         subHeaderComponent={subHeaderComponentMemo}
                         highlightOnHover
                         striped
-                        persistTableHead 
-                        defaultSortFieldId="id"
-                        defaultSortAsc={false}
-                        actions={<button onClick={() => dowlandPdfCategory(filteredItems)} className='btn btn-danger btn-sm'><i className="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}
+                        persistTableHead
+                        actions={<button onClick={() => dowlandPdfCategory()} className='btn btn-danger btn-sm'><i className="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}
 
                     />
 

@@ -30,6 +30,14 @@ const BackupAndRestore = () => {
                 {alertMessage.ok === false ? <AlertError message={alertMessage.message}/> : null}
                 </div>
         </div>
+        <hr />
+        <button onClick={() => runRestore()} className="btn btn-primary">Realizar Restore</button>
+        <div className="row">
+                <div className="col-12">
+                {alertMessage.ok ? <AlertSuccess message={alertMessage.message}/> : null}
+                {alertMessage.ok === false ? <AlertError message={alertMessage.message}/> : null}
+                </div>
+        </div>
     </>
   )
 }

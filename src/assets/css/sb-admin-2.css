@@ -4502,6 +4502,45 @@ input[type="button"].btn-block {
   border: 1px solid #e3e6f0;
   border-radius: 0.35rem;
 }
+.card5 {
+  position: absolute;
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid #e3e6f0;
+  border-radius: 0.35rem;
+}
+
+.card2 {
+  position: absolute;
+  width: 550px;
+  right: 100000px;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 4px solid #e3e6f0;
+  border-radius: 0.35rem;
+}
+.card3 {
+  position: absolute;
+  width: 550px;
+  left: 530px;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 4px solid #e3e6f0;
+  border-radius: 0.35rem;
+}
 
 .card > hr {
   margin-right: 0;
@@ -4529,6 +4568,8 @@ input[type="button"].btn-block {
 .card > .list-group + .card-footer {
   border-top: 0;
 }
+
+
 
 .card-body {
   flex: 1 1 auto;
@@ -4560,6 +4601,14 @@ input[type="button"].btn-block {
 .card-header {
   padding: 0.75rem 1.25rem;
   margin-bottom: 0;
+  background-color: #f8f9fc;
+  border-bottom: 1px solid #e3e6f0;
+}
+
+.card-header2 {
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 0;
+  width: 550px;
   background-color: #f8f9fc;
   border-bottom: 1px solid #e3e6f0;
 }
