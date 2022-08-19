@@ -63,7 +63,8 @@ const SidebarItems = () => {
             categorias: permissions.some(row => row.COD_TABLE === 9),
             movimientos: permissions.some(row => row.COD_TABLE === 10),
             devoluciones: permissions.some(row => row.COD_TABLE === 11),
-            mermas: permissions.some(row => row.COD_TABLE === 12)
+            mermas: permissions.some(row => row.COD_TABLE === 12),
+            impuestos:permissions.some(row => row.COD_TABLE === 24)
         }
     }
 
@@ -88,7 +89,7 @@ const SidebarItems = () => {
     }
 
     const viewGraficas = () => {
-        return permissions.some(row => row.COD_MODULE === 9 && row.COD_TABLE === 21);
+        return permissions.some(row => row.COD_MODULE === 9 && row.COD_TABLE === 24);
     }
 
     return (
@@ -213,7 +214,8 @@ const SidebarItems = () => {
                 viewProduccion().modulo
                 ?
                 <li className={ "nav-item " + 
-                        (pathname === '/dashboard/inventario' || 
+                        (pathname === '/dashboard/inventario' ||
+                        pathname === '/dashboard/impuestos' ||
                         pathname === '/dashboard/movimientos-inventario' || 
                         pathname === '/dashboard/entradas' || 
                         pathname === '/dashboard/categorias-inventario' || 
@@ -231,6 +233,9 @@ const SidebarItems = () => {
                             }
                             {
                                 viewProduccion().inventario ? <NavLink className="collapse-item" to="inventario">Inventario</NavLink> : null
+                            }
+                            {
+                                viewProduccion().impuestos ? <NavLink className="collapse-item" to="impuestos">Impuestos</NavLink> : null
                             }
                             {
                                 viewProduccion().devoluciones ? <NavLink className="collapse-item" to="entradas">Entradas</NavLink> : null

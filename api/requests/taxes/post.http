@@ -1,0 +1,6 @@
+POST http://localhost:4000/api/taxes
+Content-Type:application/json
+
+{
+    TAX: 0.24
+}
