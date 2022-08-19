@@ -7,6 +7,7 @@ import moment from 'moment';
 const DetailForm = ({setSendRequest, setMessageError}) => {
     const [btnWholesale, setBtnWholesale] = useState(false);
     const [taxChecked, setTaxChecked] = useState(true);
+    const [taxes, setTaxes] = useState([]);
     const [formData, setFormData] = useState({
         COD_PRODUCT: '',
         NORMAL_UNIT_PRICE: "0.00",
@@ -122,6 +123,11 @@ const DetailForm = ({setSendRequest, setMessageError}) => {
         })
     }
 
+    useEffect(() => {
+        axios.get('/taxes', token())
+            .then(res => setTaxes(res.data));
+    },[])
+
     return (
         <form onSubmit={handleSubmit} action='#'>
             <div className="row mb-6">
@@ -155,13 +161,19 @@ const DetailForm = ({setSendRequest, setMessageError}) => {
                     !taxChecked 
                     ?
                     <div className="col-2">
-                        <label htmlFor="ISV">ISV <span className="text-danger"> *</span></label><br />
-                        <label htmlFor="15%">
-                            <input onChange={handleInputChange} className="mr-2" id='15%' type="radio" value={0.15} name='ISV' required/>15%
-                        </label>
-                        <label htmlFor="18%">
-                            <input onChange={handleInputChange} className="ml-4 mr-2" id='18%' value={0.18} type="radio" name='ISV' />18%
-                        </label>
+                <select
+                        onChange={handleInputChange}
+                        defaultValue={'default'}
+                        className="custom-select"
+                        name="COD_TAX"
+                        type="number"
+                        required
+                    >
+                    <option value={'default'}>Seleccionar</option>
+                    {taxes.map(taxes => {
+                            return <option key={taxes.COD_TAX} value={taxes.COD_TAX}>{taxes.TAX}</option>
+                        })}
+                </select>
                     </div>
                     :
                     null
