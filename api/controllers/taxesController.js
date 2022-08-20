@@ -61,9 +61,32 @@ const delTax = (req, res) => {
     })
 }
 
+const updateTax = (req, res) => {
+    const {codTax} = req.params;
+
+    const {
+        COD_STATUS
+    } = req.body;
+
+    const sp = "CALL SP_UPD_TAXES(?,?)";
+
+    mysqlConnect.query(sp, [
+        codTax,
+        COD_STATUS
+    ], (error, resultado) => {
+        if(error){
+            const message = error.message.split(': ')[1];
+            res.status(304).send({message});
+        }else{
+            res.status(200).send({message: 'El estado actual del impuesto se ha actualizado exitosamente'})
+        }
+    });
+}
+
 module.exports = {
     getTaxes, 
     getTax,
     addTax,
-    delTax
+    delTax,
+    updateTax
 }
