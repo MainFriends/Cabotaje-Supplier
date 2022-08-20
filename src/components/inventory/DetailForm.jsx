@@ -160,7 +160,7 @@ const DetailForm = ({setSendRequest, setMessageError}) => {
                 {
                     !taxChecked 
                     ?
-                    <div className="col-2">
+                    <div className="col-2 mt-3 py-3">
                 <select
                         onChange={handleInputChange}
                         defaultValue={'default'}
@@ -171,7 +171,7 @@ const DetailForm = ({setSendRequest, setMessageError}) => {
                     >
                     <option value={'default'}>Seleccionar</option>
                     {taxes.map(taxes => {
-                            return <option key={taxes.COD_TAX} value={taxes.COD_TAX}>{taxes.TAX}</option>
+                            return <option key={taxes.COD_TAX} value={taxes.TAX}>{taxes.TAX}</option>
                         })}
                 </select>
                     </div>
