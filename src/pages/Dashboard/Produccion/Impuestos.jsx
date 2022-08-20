@@ -6,6 +6,7 @@ import Spinner from '../../../components/Spinner';
 import FilterComponent from '../../../components/FilterComponent';
 import Modal from '../../../components/Modal';
 import AddTaxForm from '../../../components/taxes/AddTaxForm';
+import EditTaxForm from '../../../components/taxes/EditTaxForm';
 
 import {paginationComponentOptions} from '../../../helpers/datatablesOptions';
 import axios from '../../../config/axios'
@@ -38,6 +39,7 @@ const Impuestos = () => {
             name: 'ACCIONES',
             button: true,
             cell: row => <>
+                <button className={'btn btn-sm btn-warning mr-1 ' + (!permissions.UPD ? ' disabled' : null)} onClick={() => {setRowCOD(row.COD_TAX)}} data-toggle="modal" data-target='#editFormTax'><i className="fa-solid fa-pen-to-square"></i></button>
                 <button className={'btn btn-sm btn-danger '} onClick={() => handleDelete(row.COD_TAX) }><i className="fa-solid fa-trash"></i></button>
             </>
         }
@@ -113,6 +115,12 @@ const Impuestos = () => {
                         title='Agregar Impuesto'
                         messageError={messageError}
                         content={<AddTaxForm setSendRequest={setSendRequest} setMessageError={setMessageError}/>}
+                    />
+                    <Modal 
+                        idModal='editFormTax'
+                        title='Editar Impuesto'
+                        messageError={messageError}
+                        content={<EditTaxForm rowCOD ={rowCOD} setSendRequest={setSendRequest} setMessageError={setMessageError}/>}
                     />
                 </div>
             </div>
