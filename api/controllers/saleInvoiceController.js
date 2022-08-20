@@ -41,8 +41,6 @@ const addInvoice = (req, res) => {
         AMOUNT
     } = req.body;
 
-    console.log(AMOUNT)
-
     const sp = 'CALL SP_INS_SALE_INVOICE(?,?,?,?,?,?,?,?,?,?,?)';
 
     mysqlConnect.query(sp, [

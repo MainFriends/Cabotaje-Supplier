@@ -337,6 +337,7 @@ export const PaymentMethod = ({saleInvoice, setsaleInvoice, setCurrentPage, corr
             setproductListSale={setproductListSale}
             cambio={cambio}
             saleInvoice={saleInvoice}
+            productListSale={productListSale}
         />
     </div>
     {alertMessage ? <AlertError message={alertMessage}/> : null}
