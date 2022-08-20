@@ -64,7 +64,9 @@ const SidebarItems = () => {
             movimientos: permissions.some(row => row.COD_TABLE === 10),
             devoluciones: permissions.some(row => row.COD_TABLE === 11),
             mermas: permissions.some(row => row.COD_TABLE === 12),
-            impuestos:permissions.some(row => row.COD_TABLE === 24)
+            impuestos:permissions.some(row => row.COD_TABLE === 24),
+            typentries: permissions.some(row => row.COD_TABLE === 22),
+            typeOut: permissions.some(row => row.COD_TABLE === 23)
         }
     }
 
@@ -218,6 +220,8 @@ const SidebarItems = () => {
                         pathname === '/dashboard/impuestos' ||
                         pathname === '/dashboard/movimientos-inventario' || 
                         pathname === '/dashboard/entradas' || 
+                        pathname === '/dashboard/tipo-entradas' || 
+                        pathname === '/dashboard/tipo-salidas' || 
                         pathname === '/dashboard/categorias-inventario' || 
                         pathname === '/dashboard/salidas' ? "active" : "")}>
                     <a className="nav-link collapsed dinamic" href="#" data-toggle="collapse" data-target="#collapseProduccion"
@@ -238,7 +242,13 @@ const SidebarItems = () => {
                             <NavLink className="collapse-item" to="impuestos">Impuestos</NavLink>
                             
                             {
+                                viewProduccion().typentries ? <NavLink className="collapse-item" to="tipo-entradas">Tipos de entradas</NavLink> : null
+                            }   
+                            {
                                 viewProduccion().devoluciones ? <NavLink className="collapse-item" to="entradas">Entradas</NavLink> : null
+                            }
+                            {
+                                viewProduccion().typeOut ? <NavLink className="collapse-item" to="tipo-salidas">Tipos de salidas</NavLink> : null
                             }
                             {
                                 viewProduccion().mermas ? <NavLink className="collapse-item" to="salidas">Salidas</NavLink> : null

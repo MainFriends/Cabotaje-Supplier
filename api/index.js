@@ -35,6 +35,8 @@ const inventoryDetail = require('./routes/inventoryDetail')
 const productOutputs = require('./routes/productOutputs')
 const productEntries = require('./routes/productEntries')
 const taxes = require('./routes/taxes')
+const typeEntries = require('./routes/typeEntries')
+const typeOut = require('./routes/typeOut')
 //graficas
 const graphics = require('./routes/graphics.js');
 const inventoryTransactions = require('./routes/inventoryTransactions')
@@ -95,6 +97,8 @@ app.use('/api', inventoryDetail)
 app.use('/api', productOutputs)
 app.use('/api', productEntries)
 app.use('/api', taxes)
+app.use('/api', typeEntries)
+app.use('/api', typeOut)
 //graficas
 app.use('/api', graphics)
 

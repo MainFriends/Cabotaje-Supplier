@@ -31,6 +31,18 @@
   padding: 1px !important;
 }
 
+.card-body2{
+  padding: 0.1% !important;
+  width: 520px;
+  right: 300px;
+}
+
+.card-body3{
+  padding: 0.1% !important;
+  width: 520px;
+  right: 300px;
+}
+
 .col-form{
   margin-top: 40px;
 }

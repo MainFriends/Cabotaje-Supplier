@@ -18,7 +18,9 @@ import Inventario from "./pages/Dashboard/Produccion/Inventario";
 import Impuestos from "./pages/Dashboard/Produccion/Impuestos";
 import MovimientosInventario from "./pages/Dashboard/Produccion/MovimientosInventario";
 import ProductEntries from "./pages/Dashboard/Produccion/ProductEntries";
+import TypEntries from "./pages/Dashboard/Produccion/TypEntries";
 import ProductOutput from "./pages/Dashboard/Produccion/ProductOutput";
+import TypOut from "./pages/Dashboard/Produccion/TypOut";
 import CuentasCobrar from "./pages/Dashboard/Contabilidad/CuentasCobrar";
 import CuentasPagar from "./pages/Dashboard/Contabilidad/CuentasPagar";
 import Devoluciones from "./pages/Dashboard/Contabilidad/Devoluciones";
@@ -95,7 +97,9 @@ const Pages = () => {
             <Route path="impuestos" element={<Impuestos />}/>
             <Route path="movimientos-inventario" element={<MovimientosInventario />}/>
             <Route path="entradas" element={<ProductEntries />}/>
+            <Route path="tipo-entradas" element={<TypEntries />}/>
             <Route path="salidas" element={<ProductOutput />}/>
+            <Route path="tipo-salidas" element={<TypOut />}/>
             <Route path="cuentas-cobrar" element={<CuentasCobrar />}/>
             <Route path="cuentas-pagar" element={<CuentasPagar />}/>
             <Route path="devoluciones" element={<Devoluciones />}/>

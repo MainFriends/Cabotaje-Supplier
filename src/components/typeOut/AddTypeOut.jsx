@@ -3,23 +3,23 @@ import axios from '../../config/axios';
 import token from '../../helpers/getToken';
 import { toUpperCase } from "../../helpers/Mayusculas";
 
-const AddCategoryForm = ({setSendRequest, setMessageError}) => {
+const AddTypOut = ({setSendRequest, setMessageError}) => {
 
-    const [formAddCategor, setFormAddCategor] = useState({
-        NAM_CATEGORY: '',
-        DESCRIPTION:''
+    const [formAddTypOut, setFormAddTypOut] = useState({
+        NAM_TYPE: '',
+        DES_TYPE:''
     })
 
     const handleInputChange = (e) => {
-        setFormAddCategor({
-            ...formAddCategor,
+        setFormAddTypOut({
+            ...formAddTypOut,
             [e.target.name]: e.target.value
         })
     }
 
-    const handleSubmitCategor = (e) => {
+    const handleSubmitTypOut = (e) => {
         e.preventDefault();
-        axios.post('/inventoryCategory', formAddCategor, token())
+        axios.post('/typeOut', formAddTypOut, token())
             .then(res => {
                 document.querySelector('#idCloseAddForm').click();
                 e.target.reset();
@@ -28,7 +28,6 @@ const AddCategoryForm = ({setSendRequest, setMessageError}) => {
             .catch(err => {
                 const {message} = err.response.data;
                 setMessageError(message)
-
                 setTimeout(() => {
                     setMessageError('')
                 }, 3000);
@@ -36,18 +35,17 @@ const AddCategoryForm = ({setSendRequest, setMessageError}) => {
     }
 
     return(
-        <form id='addFormCategory' onSubmit={handleSubmitCategor} action='#'>
+        <form id='addTypOut' onSubmit={handleSubmitTypOut} action='#'>
             <div className="row mb-4">
                 <div className="col-md-4">
-                    <label className='form-label' htmlFor="NAM_CATEGORY">Nombre categoría</label>
-                    <input onChange={handleInputChange} className='form-control' name='NAM_CATEGORY' type="text" pattern="^[a-zA-ZñÑ]+$"  title="No debe contener caracteres numericos" onInput={toUpperCase}required/>
+                    <label className='form-label' htmlFor="NAM_TYPE">Tipo de salida<span className="text-danger">  *</span></label>
+                    <input onChange={handleInputChange} className='form-control' name='NAM_TYPE' type="text" pattern="^[a-zA-ZñÑ ]+$"  title="No debe contener caracteres numericos" onInput={toUpperCase}required/>
                 </div>
                 <div className="col-md-4">
-                    <label className='form-label' htmlFor="DESCRIPTION">Descripción</label>
-                    <input onChange={handleInputChange} className='form-control' name='DESCRIPTION' type="text" pattern="^[a-zA-Z0-9ñÑØº-_ ]+$" onInput={toUpperCase}  required/>
+                    <label className='form-label' htmlFor="DES_TYPE">Descripción<span className="text-danger"> *</span></label>
+                    <textarea onChange={handleInputChange} defaultValue={''} className='form-control' name='DES_TYPE' required/>
                 </div>
             </div>
-            
             <div className="modal-footer">
                 <button type="button" id='idCloseAddForm' className="btn btn-primary" data-dismiss="modal">Cerrar</button>
                 <button type='submit' className="btn btn-success">Guardar</button>
@@ -58,4 +56,4 @@ const AddCategoryForm = ({setSendRequest, setMessageError}) => {
 
 
 
-export default AddCategoryForm;
+export default AddTypOut;
