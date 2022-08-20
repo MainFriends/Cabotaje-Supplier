@@ -25,21 +25,20 @@ const Impuestos = () => {
     //definir las columnas
     const columns = [
         {
-            id: "id",
-            name: 'CODIGO',
-            selector: row => row.COD_TAX,
-            sortable: true,
-        },
-         {
             name: 'IMPUESTO',
             selector: row => row.TAX,
+            sortable: true,
+        },
+        {
+            name: 'ESTADO',
+            selector: row => row.NAM_STATUS,
             sortable: true,
         },
         {
             name: 'ACCIONES',
             button: true,
             cell: row => <>
-                <button className={'btn btn-sm btn-danger ' + (!permissions.DEL ? 'disabled' : null)} onClick={() => handleDelete(row.COD_TAX) }><i className="fa-solid fa-trash"></i></button>
+                <button className={'btn btn-sm btn-danger '} onClick={() => handleDelete(row.COD_TAX) }><i className="fa-solid fa-trash"></i></button>
             </>
         }
     ];
@@ -90,7 +89,7 @@ const Impuestos = () => {
                 <div className="card-body">
                     <div className="row mt-2 ml-1">
                         <div className="col">
-                            <button className={'btn btn-sm btn-primary ' + (!permissions.INS ? 'disabled' : null)} data-toggle="modal" data-target='#addFormTax'><i className="fas fa-plus mr-2"></i>Agregar</button>
+                            <button className={'btn btn-sm btn-primary'} data-toggle="modal" data-target='#addFormTax'><i className="fas fa-plus mr-2"></i>Agregar</button>
                         </div>
                     </div>
                     <DataTable

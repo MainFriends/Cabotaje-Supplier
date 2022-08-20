@@ -234,9 +234,9 @@ const SidebarItems = () => {
                             {
                                 viewProduccion().inventario ? <NavLink className="collapse-item" to="inventario">Inventario</NavLink> : null
                             }
-                            {
-                                viewProduccion().impuestos ? <NavLink className="collapse-item" to="impuestos">Impuestos</NavLink> : null
-                            }
+                            
+                            <NavLink className="collapse-item" to="impuestos">Impuestos</NavLink>
+                            
                             {
                                 viewProduccion().devoluciones ? <NavLink className="collapse-item" to="entradas">Entradas</NavLink> : null
                             }

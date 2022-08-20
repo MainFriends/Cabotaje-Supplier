@@ -28,13 +28,15 @@ const getTax = (req,res) => {
 
 const addTax = (req, res) => {
     const {
-        TAX
+        TAX,
+        COD_STATUS
     } = req.body;
 
-    const sp = 'CALL SP_INS_TAXES(?)'
+    const sp = 'CALL SP_INS_TAXES(?,?)'
 
     mysqlConnect.query(sp, [
-        TAX
+        TAX,
+        COD_STATUS
     ], (err) => {
 
         if(err){
