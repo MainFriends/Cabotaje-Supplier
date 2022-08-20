@@ -241,15 +241,15 @@ const SidebarItems = () => {
                             
                             <NavLink className="collapse-item" to="impuestos">Impuestos</NavLink>
                             
-                            {
-                                viewProduccion().typentries ? <NavLink className="collapse-item" to="tipo-entradas">Tipos de entradas</NavLink> : null
-                            }   
+                            
+                            <NavLink className="collapse-item" to="tipo-entradas">Tipos de entradas</NavLink>
+                               
                             {
                                 viewProduccion().devoluciones ? <NavLink className="collapse-item" to="entradas">Entradas</NavLink> : null
                             }
-                            {
-                                viewProduccion().typeOut ? <NavLink className="collapse-item" to="tipo-salidas">Tipos de salidas</NavLink> : null
-                            }
+                            
+                            <NavLink className="collapse-item" to="tipo-salidas">Tipos de salidas</NavLink>
+                            
                             {
                                 viewProduccion().mermas ? <NavLink className="collapse-item" to="salidas">Salidas</NavLink> : null
                             }

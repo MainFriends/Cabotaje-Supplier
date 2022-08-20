@@ -61,7 +61,7 @@ const updateTypOut = (req, res) =>{
         ], (error, resultado) => {
             if(error){
                 const message = error.message.split(': ')[1];
-                res.status(304).send({message});
+                res.status(400).send({message});
             }else{
                 res.status(200).send({message: 'El tipo de salida se ha actualizado exitosamente'})
             }

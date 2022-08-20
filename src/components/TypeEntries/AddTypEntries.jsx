@@ -39,7 +39,7 @@ const AddTypEntries = ({setSendRequest, setMessageError}) => {
             <div className="row mb-4">
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="NAM_TYPE">Tipo de entrada<span className="text-danger">  *</span></label>
-                    <input onChange={handleInputChange} className='form-control' name='NAM_TYPE' type="text" pattern="^[a-zA-ZñÑ ]+$"  title="No debe contener caracteres numericos" onInput={toUpperCase}required/>
+                    <input onChange={handleInputChange} className='form-control' name='NAM_TYPE' type="text" pattern="^[a-zA-ZñÑáéíóú ]+$" title="El tipo de entrada no debe contener números." onInput={toUpperCase}required/>
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="DES_TYPE">Descripción<span className="text-danger"> *</span></label>

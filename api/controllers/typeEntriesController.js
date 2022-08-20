@@ -61,7 +61,8 @@ const updateTypEntries = (req, res) =>{
         ], (error, resultado) => {
             if(error){
                 const message = error.message.split(': ')[1];
-                res.status(304).send({message});
+                console.log(message)
+                res.status(400).send({message});
             }else{
                 res.status(200).send({message: 'La categoría se ha actualizado exitosamente'})
             }
