@@ -8,7 +8,6 @@ import AlertError from '../AlertError';
 
 export const PaymentMethod = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeInvoice, productListSale, setproductListSale}) => {
     const [cambio, setCambio] = useState(0);
-    const [error, setError] = useState(true);
     const [alertMessage, setAlertMessage] = useState('');
     const [saleMessage, setSaleMessage] = useState({
         message: '',
@@ -23,21 +22,6 @@ export const PaymentMethod = ({saleInvoice, setsaleInvoice, setCurrentPage, corr
         COD_CLIENT,
         COD_TYP_PAY
     } = saleInvoice;
-
-    useEffect(() => {
-        if(COD_CLIENT === 1 && TYP_TO_SALE === 'Crédito'){
-            setsaleInvoice({
-                ...saleInvoice,
-                TYP_TO_SALE: 'Contado'
-            })
-
-            setAlertMessage('No es posible vender al crédito a un cliente sin registrar.');
-            
-            setTimeout(() => {
-                setAlertMessage('');
-            }, 3000);
-        }
-    }, [TYP_TO_SALE])
 
     const columns = [
         {
@@ -87,6 +71,15 @@ export const PaymentMethod = ({saleInvoice, setsaleInvoice, setCurrentPage, corr
     }
 
     const handleStateChange = (e) => {
+        if(COD_CLIENT === 1 && e.target.value === 'Crédito'){
+            setAlertMessage('No es posible vender al crédito a un cliente sin registrar.');
+            
+            setTimeout(() => {
+                setAlertMessage('');
+            }, 3000);
+            return;
+        }
+        
         setsaleInvoice({
             ...saleInvoice,
             [e.target.name]: e.target.value

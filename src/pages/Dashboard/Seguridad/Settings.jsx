@@ -59,9 +59,9 @@ const Settings = () => {
         })
     }
   return (
-     <>
+     <div className='p-4'>
         <h1 className="text-dark">Configuraciones del sistema</h1>
-        <hr />
+        <hr/>
         <form onSubmit={handleSubmit} action="#">
             <div className="row">
                 <div className="col-6">
@@ -116,7 +116,7 @@ const Settings = () => {
                 {alertMessage.ok === false ? <AlertError message={alertMessage.message}/> : null}
             </div>
         </form>
-     </>
+     </div>
   )
 }
 
