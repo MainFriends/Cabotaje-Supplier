@@ -66,6 +66,8 @@ const Facturas = () => {
             name: '# FACTURA',
             selector: row => row.COD_INVOICE,
             sortable: true,
+            format: row => `000-001-01-${('00000000'+row.COD_INVOICE).substr(-8,8)}`,
+            grow: 2
         },
         {
             name: 'CLIENTE',
