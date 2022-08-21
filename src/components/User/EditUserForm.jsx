@@ -31,7 +31,7 @@ const EditUserForm = ({rowCOD, setSendRequest, setMessageError}) => {
     const [isPasswordValid, setIsPasswordValid] = useState(false);
 
     useEffect(() => {
-        axios.get('/roles', token())
+        axios.get('/roles-user', token())
             .then(res => {
                 const arrayRoles = res.data.filter(rol => rol.COD_ROLE !== 2);
                 setRolesEdit(arrayRoles);
