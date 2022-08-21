@@ -88,6 +88,8 @@ const SaleInvoicePDF = ({saleInvoice,productListSale, correlativeInvoice}) => {
     const email = `Correo: ${companyData.COMPANY_EMAIL}`;
     const rtn = `RTN: ${saleInvoice.RTN}`;
     const totalApagar = `TOTAL A PAGAR L. ${saleInvoice.TOT_SALE}`
+    const isv = `TOTAL ISV L. ${saleInvoice.TOT_ISV}`
+    const subTotal = `SUBTOTAL L. ${saleInvoice.SUBTOTAL}`;
     
     
     const numeroFactura = `N° ${correlativeInvoice}`
@@ -115,7 +117,7 @@ const SaleInvoicePDF = ({saleInvoice,productListSale, correlativeInvoice}) => {
       <Text x="100" y="210" style={styles.text}>DESCRIPCION</Text>
       <Text x="350" y="210" style={styles.text}>PRECIO UNIT.</Text>
       <Text x="1" y="210" style={styles.text}>PRODUCTO</Text>
-      <Text x="510" y="210" style={styles.text}>TOTAL</Text>
+      <Text x="480" y="210" style={styles.text}>TOTAL</Text>
       {productListSale.map(row => { 
         const price = `L ${row.PRICE.toLocaleString('es-MX')}`
         const priceTotal = `L ${row.TOTAL.toLocaleString('es-MX')}`
@@ -125,18 +127,17 @@ const SaleInvoicePDF = ({saleInvoice,productListSale, correlativeInvoice}) => {
             <Text x="100" y={coors} style={styles.text}>{row.DES_PRODUCT}</Text>
             <Text x="390" y={coors} style={styles.text}>{price}</Text>
             <Text x="1" y={coors} style={styles.text}>{row.NAM_PRODUCT}</Text>
-            <Text x="510" y={coors} style={styles.text}>{priceTotal}</Text>
+            <Text x="480" y={coors} style={styles.text}>{priceTotal}</Text>
             </>
       })}
-      <Text x="365" y={coors > 510 ? coors + 50 : 510} style={styles.text}>Importe Exonerado L.</Text>
+      <Text x="365" y={coors + 70} style={styles.text}>Importe Exonerado L.</Text>
       <Text x="387" y={coors + 90} style={styles.text}>Importe Exento L.</Text>
       <Text x="350" y={coors + 110} style={styles.text}>Importe Gravado 18% L.</Text>
       <Text x="350" y={coors + 130} style={styles.text}>Importe Gravado 15% L.</Text>
-      <Text x="415" y={coors + 150} style={styles.text}>I.S.V. 18% L.</Text>
-      <Text x="415" y={coors + 170} style={styles.text}>I.S.V. 15% L.</Text>
-      <Text x="370" y={coors + 190} style={styles.text}>{totalApagar}</Text>
+      <Text x="403" y={coors + 150} style={styles.text}>{isv}</Text>
+      <Text x="370" y={coors + 170} style={styles.text}>{totalApagar}</Text>
       <Text x="1" y={coors + 50} style={styles.text}>La factura es beneficio de todos "Exijala"</Text>
-      <Text x="300" y={coors + 50} style={styles.text}>TOTAL L.</Text>
+      <Text x="405" y={coors + 50} style={styles.text}>{subTotal}</Text>
       <Text x="1" y={coors + 70}  style={styles.subtext}>DATOS DEL ADQUERIENTE EXONERADO</Text>
       <Text x="1" y={coors + 90} style={styles.subtext}>No. Orden de Compra Exenta:</Text>
       <Text x="1" y={coors + 110} style={styles.subtext}>No. Constancia de Registro de Exoneraciones:</Text>

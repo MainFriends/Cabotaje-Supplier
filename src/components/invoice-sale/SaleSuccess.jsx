@@ -18,7 +18,7 @@ const SaleSuccess = ({saleMessage, setsaleInvoice, setCurrentPage, setproductLis
                 TOT_SALE: 0,
                 TYP_TO_SALE: 'Contado',
                 COD_TYP_PAY: 1,
-                RTN: 0
+                RTN: ''
             })
             
             setproductListSale([])
