@@ -1,4 +1,4 @@
-POST http://localhost:4000/api/user
+POST http://159.223.189.149:3001/api/user
 Content-Type: application/json 
 
 {
