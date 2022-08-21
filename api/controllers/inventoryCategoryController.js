@@ -50,16 +50,14 @@ const updateCategory = (req, res) =>{
     const {codCategory} = req.params;
 
     const {
-        NAM_CATEGORY,
         DESCRIPTION,
         COD_STATUS
         } = req.body
     
-        const sp = 'CALL SP_UPD_CATEGORY(?,?,?,?)';
+        const sp = 'CALL SP_UPD_CATEGORY(?,?,?)';
     
         mysqlConnect.query(sp,[
             codCategory,
-            NAM_CATEGORY,
             DESCRIPTION,
             COD_STATUS
         ], (error, resultado) => {

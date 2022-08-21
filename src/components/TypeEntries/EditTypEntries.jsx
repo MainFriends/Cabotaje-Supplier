@@ -53,7 +53,7 @@ const EditTypEntrie= ({rowCOD, setSendRequest, setMessageError}) => {
             <div className="row mb-4">
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="NAM_TYPE">Tipo de entrada<span className="text-danger"> *</span></label>
-                    <input onChange={handleInputChange} value={formEditTypEntrie.NAM_TYPE ? formEditTypEntrie.NAM_TYPE : '' } pattern="^[a-zA-ZñÑáéíóú ]+$" title="El tipo de entrada no debe contener números." className='form-control' name='NAM_TYPE' type="text"minLength={1} maxLength={15}  pattern="^[a-zA-ZñÑáéíóú ]+$"   onInput={toUpperCase} required/>
+                    <input onChange={handleInputChange} value={formEditTypEntrie.NAM_TYPE ? formEditTypEntrie.NAM_TYPE : '' } pattern="^[a-zA-ZñÑáéíóú ]+$" title="El tipo de entrada no debe contener números." className='form-control' name='NAM_TYPE' type="text"minLength={1} maxLength={15} onInput={toUpperCase} required/>
                 </div>
                 <div className="col-md-4">
                     <label className='form-label' htmlFor="DES_TYPE">Descripción<span className="text-danger"> *</span></label>
