@@ -271,8 +271,16 @@ const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeI
             return;
         }
         const pos = productListSale.findIndex(row => row.ID === id);
+        const [newLot] = productDetail.filter(row => row.NUM_LOT === e.target.value)
+        const {
+            NORMAL_UNIT_PRICE,
+            WHOLESALE_PRICE,
+            ISV
+        } = newLot
         productListSale[pos].NUM_LOT = e.target.value
         productListSale[pos].CANT_PRODUCTS = 1
+        productListSale[pos].PRICE = NORMAL_UNIT_PRICE
+        productListSale[pos].ISV = ISV * NORMAL_UNIT_PRICE
         setproductListSale([
             ...productListSale
         ])

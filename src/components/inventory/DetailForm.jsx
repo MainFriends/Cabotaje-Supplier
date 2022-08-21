@@ -165,8 +165,7 @@ const DetailForm = ({setSendRequest, setMessageError}) => {
                         onChange={handleInputChange}
                         defaultValue={'default'}
                         className="custom-select"
-                        name="COD_TAX"
-                        type="number"
+                        name="ISV"
                         required
                     >
                     <option value={'default'}>Seleccionar</option>
