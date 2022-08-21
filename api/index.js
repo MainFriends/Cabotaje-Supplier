@@ -56,6 +56,7 @@ const TypeEntriesOutputs = require('./routes/TypeEntriesOutputs');
 const informationInformation = require('./routes/companyInformation')
 const systemSettings = require('./routes/systemSettings')
 const BackupAndRestore = require('./routes/BackupAndRestore')
+const securityQuestions = require('./routes/securityQuestions')
 
 /* CREAR SERVIDOR */
 const app = express();
@@ -117,6 +118,7 @@ app.use('/api', TypeEntriesOutputs)
 app.use('/api', informationInformation)
 app.use('/api', systemSettings)
 app.use('/api', BackupAndRestore)
+app.use('/api', securityQuestions)
 
 
 //Mostrar UI

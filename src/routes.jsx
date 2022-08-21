@@ -38,10 +38,12 @@ import CompanyInformation from "./pages/Dashboard/Seguridad/CompanyInformation";
 import BackupAndRestore from "./pages/Dashboard/Seguridad/BackupAndRestore";
 import SaleInvoicePDF from "./components/SaleInvoicePDF";
 import SecurityQuestions from "./pages/Dashboard/Seguridad/SecurityQuestions";
+import SecurityAnswer from "./pages/Dashboard/Seguridad/SecurityAnswer";
 
 
 const Pages = () => {
-
+    const [goDashboard, setGoDashboard] = useState(false);
+    const [userSecurity, setUserSecurity] = useState({});
     const {isLogged} = useUser();
     const [userRole, setUserRole] = useState(null);
     const [modules, setModules] = useState({
@@ -82,12 +84,22 @@ const Pages = () => {
         }
     }, [isLogged])
 
+    useEffect(() => {
+        if(isLogged){
+            axios.get('/login-security', token())
+            .then(res => {
+                setUserSecurity(res.data[0])
+            })
+        }
+    }, [isLogged])
+
     return (
     <Routes>
         <Route path="/" element={isLogged ? (<Navigate to='/dashboard/welcome'/>) : (<Login />)}/>
         <Route path="/profile" element={isLogged ? (<Profile />) : (<Navigate to='/'/>)}/>
         <Route path="/view-invoice" element={isLogged ? (<SaleInvoicePDF />) : (<Navigate to='/'/>)}/>
-        <Route path="/security-questions" element={isLogged ? (<SecurityQuestions />) : (<Navigate to='/'/>)}/>
+        <Route path="/security-questions" element={isLogged ? goDashboard ? (<Navigate to='/dashboard'/>) : (<SecurityQuestions setGoDashboard={setGoDashboard}/>) : (<Navigate to='/'/>)}/>
+        <Route path="/security-answer" element={isLogged ? goDashboard ? (<Navigate to='/dashboard'/>) : (<SecurityAnswer setGoDashboard={setGoDashboard}/>)  : (<Navigate to='/'/>)}/>
         <Route path="/dashboard" element={isLogged ? (<Dashboard />) : (<Navigate to='/'/>)}>
             <Route path="ventas" element={<Facturas />}/>
             <Route path="compras" element={<Compras />}/>

@@ -11,5 +11,6 @@ router.put('/user/:codUser', [userExtractor, verifyRolePersons], userController.
 router.delete('/user/:codUser', [userExtractor, verifyRolePersons], userController.deleteUser);
 router.get('/pass-dat-exp', [userExtractor, verifyRolePersons], userController.getDate);
 router.get('/find-user', [userExtractor, verifyRolePersons], userController.getFindUser);
+router.get('/login-security', userExtractor, userController.loginSecurity);
 
 module.exports = router;

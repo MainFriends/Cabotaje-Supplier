@@ -179,6 +179,18 @@ const getDate = (req, res) => {
     });
 };
 
+const loginSecurity=(req,res) => {
+    const {COD_USER} = req.user
+    const sp= 'CALL SP_SEL_SECURITY_LOGIN(?)';
+    mysqlConnect.query(sp, [COD_USER], (err,result) =>{
+        if(err){ 
+        res.status(500). send({message:'ERROR EN EL SERVIDOR'});
+        }else{
+        res.status(200).json(result[0]);
+        };
+    });
+};
+
 module.exports = {
     getUsers,
     getUser,
@@ -186,5 +198,6 @@ module.exports = {
     updateUser,
     deleteUser,
     getDate,
-    getFindUser
+    getFindUser,
+    loginSecurity
 };

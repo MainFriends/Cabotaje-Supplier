@@ -132,6 +132,20 @@ VALUES('Devolución', 'Devoluciones a proveedores');
 INSERT INTO TYP_PRODUCT_OUTPUT(NAM_TYPE, DES_TYPE)
 VALUES('Merma', 'Mermas de productos');
 
+-- PREGUNTAS DE SEGURIDAD
+INSERT INTO SECURITY_QUESTIONS(QUESTION)
+VALUES('¿Cuál era el apellido de tu profesora de tercero de primaria?');
+INSERT INTO SECURITY_QUESTIONS(QUESTION)
+VALUES('¿A qué universidad intentaste entrar pero finalmente no fuiste?');
+INSERT INTO SECURITY_QUESTIONS(QUESTION)
+VALUES('¿Con quién te diste tu primer beso?');
+INSERT INTO SECURITY_QUESTIONS(QUESTION)
+VALUES('¿A qué secundaria fuiste?');
+INSERT INTO SECURITY_QUESTIONS(QUESTION)
+VALUES('¿Cuál era el nombre de tu primer mascota?');
+INSERT INTO SECURITY_QUESTIONS(QUESTION)
+VALUES('¿Cuál es el nombre de tu primo favorito?');
+
 INSERT INTO COMPANY_DATA(COMPANY_NAM, COMPANY_ADDRESS, COMPANY_EMAIL, COMPANY_RTN, COMPANY_PHONE, COMPANY_LOCATION, COMPANY_FACEBOOK, COMPANY_INSTAGRAM, COMPANY_WHATSAPP, COD_USER)
 VALUES('Cabotaje Supplier', 'Colonia Kennedy', 'cabotajesupplier@gmail.com', NULL, 96615148, 'Tegucigalpa, Francisco Morazán', NULL, NULL, NULL, 1);
 
