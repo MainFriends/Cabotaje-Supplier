@@ -3,7 +3,7 @@ import {PDFDownloadLink} from '@react-pdf/renderer';
 import SaleInvoicePDF from '../SaleInvoicePDF';
 import Spinner from '../Spinner';
 
-const SaleSuccess = ({saleMessage, setsaleInvoice, setCurrentPage, setproductListSale, cambio, saleInvoice, productListSale}) => {
+const SaleSuccess = ({saleMessage, setsaleInvoice, setCurrentPage, setproductListSale, cambio, saleInvoice, productListSale, correlativeInvoice}) => {
     const {message, ok} = saleMessage;
     const onCheck = () => {
         if(ok){
@@ -18,7 +18,7 @@ const SaleSuccess = ({saleMessage, setsaleInvoice, setCurrentPage, setproductLis
                 TOT_SALE: 0,
                 TYP_TO_SALE: 'Contado',
                 COD_TYP_PAY: 1,
-                RTN: 0
+                RTN: ''
             })
             
             setproductListSale([])
@@ -72,7 +72,7 @@ const SaleSuccess = ({saleMessage, setsaleInvoice, setCurrentPage, setproductLis
             </div>
                 <div className="modal-footer">
                     <button onClick={() => onCheck()} type="button" className="btn btn-primary" data-dismiss="modal">Listo</button>
-                    {message ? ok ? <PDFDownloadLink document={<SaleInvoicePDF saleInvoice={saleInvoice} productListSale={productListSale}/>} fileName="factura.pdf">{({ blob, url, loading, error }) => <button type="button" className="btn btn-danger">Descargar factura</button>}</PDFDownloadLink> : null  : null}
+                    {message ? ok ? <PDFDownloadLink document={<SaleInvoicePDF correlativeInvoice={correlativeInvoice} saleInvoice={saleInvoice} productListSale={productListSale}/>} fileName="factura.pdf">{({ blob, url, loading, error }) => <button type="button" className="btn btn-danger">Descargar factura</button>}</PDFDownloadLink> : null  : null}
                 </div>
             </div>
         </div>

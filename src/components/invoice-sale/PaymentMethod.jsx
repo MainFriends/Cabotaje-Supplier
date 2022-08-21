@@ -202,7 +202,7 @@ export const PaymentMethod = ({saleInvoice, setsaleInvoice, setCurrentPage, corr
             <label className="col-sm-1 col-form-label pr-0">Factura</label>
             <div className="col-sm-2 px-0">
                 <input 
-                type="number" 
+                type="text" 
                 className="form-control form-control-sm" 
                 value={correlativeInvoice}
                 disabled
@@ -331,6 +331,7 @@ export const PaymentMethod = ({saleInvoice, setsaleInvoice, setCurrentPage, corr
             cambio={cambio}
             saleInvoice={saleInvoice}
             productListSale={productListSale}
+            correlativeInvoice={correlativeInvoice}
         />
     </div>
     {alertMessage ? <AlertError message={alertMessage}/> : null}

@@ -286,7 +286,7 @@ const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeI
                 <label className="col-sm-1 col-form-label pr-0">Factura</label>
                 <div className="col-sm-2 px-0">
                     <input 
-                    type="number" 
+                    type="text" 
                     className="form-control form-control-sm" 
                     value={correlativeInvoice}
                     disabled
