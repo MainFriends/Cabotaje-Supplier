@@ -4,6 +4,7 @@ const parametricTablesController = require('../controllers/parametricTablesContr
 const userExtractor = require('../middlewares/userExtractor');
 
 router.get('/list-categories', userExtractor, parametricTablesController.getCategories);
+router.get('/list-taxes', userExtractor, parametricTablesController.getTaxes);
 
 
 module.exports = router;

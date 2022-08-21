@@ -124,7 +124,7 @@ const DetailForm = ({setSendRequest, setMessageError}) => {
     }
 
     useEffect(() => {
-        axios.get('/taxes', token())
+        axios.get('/list-taxes', token())
             .then(res => setTaxes(res.data));
     },[])
 
@@ -160,20 +160,14 @@ const DetailForm = ({setSendRequest, setMessageError}) => {
                 {
                     !taxChecked 
                     ?
-                    <div className="col-2 mt-3 py-3">
-                <select
-                        onChange={handleInputChange}
-                        defaultValue={'default'}
-                        className="custom-select"
-                        name="COD_TAX"
-                        type="number"
-                        required
-                    >
-                    <option value={'default'}>Seleccionar</option>
-                    {taxes.map(taxes => {
+                    <div className="col-2">
+                    <label className='form-label' htmlFor="COD_TAX">Impuesto <span className="text-danger"> *</span></label>
+                    <select onChange={handleInputChange} defaultValue={'default'} name="COD_TAX" className="custom-select" required>
+                        <option value={'default'}>Seleccionar</option>
+                        {taxes.map(taxes=> {
                             return <option key={taxes.COD_TAX} value={taxes.TAX}>{taxes.TAX}</option>
                         })}
-                </select>
+                    </select>
                     </div>
                     :
                     null
