@@ -45,6 +45,8 @@ const Pages = () => {
     const [goDashboard, setGoDashboard] = useState(false);
     const [userSecurity, setUserSecurity] = useState({});
     const {isLogged} = useUser();
+    const [userNew, setUserNew] = useState(false);
+    const [requiredQuestion, setRequiredQuestion] = useState(false);
     const [userRole, setUserRole] = useState(null);
     const [modules, setModules] = useState({
         ventas: false,
@@ -53,6 +55,15 @@ const Pages = () => {
         produccion: false,
         contabilidad: false
     });
+
+    useEffect(() => {
+        const token = JSON.parse(window.localStorage.getItem('userSession'));
+        if(token){
+            const {USER_NEW, REQUIRED_QUESTIONS} = token;
+            setUserNew(USER_NEW)
+            setRequiredQuestion(REQUIRED_QUESTIONS)
+        }
+    }, [isLogged])
 
     const {
         facturar,
@@ -79,13 +90,6 @@ const Pages = () => {
 
     useEffect(() => {
         if(isLogged){
-            axios.get('/user-profile', token())
-            .then(res => setUserRole(res.data[0].COD_ROLE))
-        }
-    }, [isLogged])
-
-    useEffect(() => {
-        if(isLogged){
             axios.get('/login-security', token())
             .then(res => {
                 setUserSecurity(res.data[0])
@@ -95,12 +99,12 @@ const Pages = () => {
 
     return (
     <Routes>
+        <Route path="/security-answer" element={requiredQuestion ? goDashboard ? (<Navigate to='/dashboard'/>) : (<SecurityAnswer setGoDashboard={setGoDashboard}/>)  : (<Navigate to='/'/>)}/>
         <Route path="/" element={isLogged ? (<Navigate to='/dashboard/welcome'/>) : (<Login />)}/>
+        <Route path="/security-questions" element={isLogged ? goDashboard ? (<Navigate to='/dashboard'/>) : (<SecurityQuestions setGoDashboard={setGoDashboard}/>) : (<Navigate to='/'/>)}/>
         <Route path="/profile" element={isLogged ? (<Profile />) : (<Navigate to='/'/>)}/>
         <Route path="/view-invoice" element={isLogged ? (<SaleInvoicePDF />) : (<Navigate to='/'/>)}/>
-        <Route path="/security-questions" element={isLogged ? goDashboard ? (<Navigate to='/dashboard'/>) : (<SecurityQuestions setGoDashboard={setGoDashboard}/>) : (<Navigate to='/'/>)}/>
-        <Route path="/security-answer" element={isLogged ? goDashboard ? (<Navigate to='/dashboard'/>) : (<SecurityAnswer setGoDashboard={setGoDashboard}/>)  : (<Navigate to='/'/>)}/>
-        <Route path="/dashboard" element={isLogged ? (<Dashboard />) : (<Navigate to='/'/>)}>
+        <Route path="/dashboard" element={isLogged ? userNew === 'true' ? (<SecurityQuestions setGoDashboard={setGoDashboard} setUserNew={setUserNew}/>) : requiredQuestion === 'true' ? (<SecurityAnswer setGoDashboard={setGoDashboard} setRequiredQuestion={setRequiredQuestion}/>) : (<Dashboard />) : (<Navigate to='/'/>)}>
             <Route path="ventas" element={<Facturas />}/>
             <Route path="compras" element={<Compras />}/>
             <Route path="pedidos" element={<Pedidos />}/>

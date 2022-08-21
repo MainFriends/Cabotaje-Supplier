@@ -43,7 +43,7 @@ const addAnswer = (req,res) => {
 
 const getUserQuestions = (req,res) => {
     const {COD_USER} = req.user;
-    const sp= 'CALL SP_SEL_SECURITY_QUESTIONS()';
+    const sp= 'CALL SP_SEL_SECURITY_USER_QUESTION(?)';
     mysqlConnect.query(sp, [COD_USER], (err,result) =>{
         if(err){ 
             res.status(500).json(err);

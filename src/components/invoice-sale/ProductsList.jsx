@@ -254,7 +254,7 @@ const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeI
         const pos = productListSale.findIndex(row => row.ID === id);
         setCantUser(e.target.value);
         productListSale[pos].CANT_PRODUCTS = e.target.value
-        productListSale[pos].TOTAL = e.target.value * productListSale[pos].PRICE
+        productListSale[pos].TOTAL = e.target.value * (productListSale[pos].PRICE + productListSale[pos].ISV)
         setproductListSale([
             ...productListSale
         ])
@@ -279,8 +279,9 @@ const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeI
         } = newLot
         productListSale[pos].NUM_LOT = e.target.value
         productListSale[pos].CANT_PRODUCTS = 1
-        productListSale[pos].PRICE = NORMAL_UNIT_PRICE
+        productListSale[pos].PRICE = NORMAL_UNIT_PRICE - (NORMAL_UNIT_PRICE * ISV)
         productListSale[pos].ISV = ISV * NORMAL_UNIT_PRICE
+        productListSale[pos].TOTAL = 1 * NORMAL_UNIT_PRICE
         setproductListSale([
             ...productListSale
         ])

@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import axios from '../../../config/axios';
 import token from '../../../helpers/getToken';
 
-const SecurityQuestions = ({setGoDashboard}) => {
+const SecurityQuestions = ({setGoDashboard, setUserNew}) => {
     const [questions, setQuestions] = useState([]);
     const [questionsUser, setQuestionsUser] = useState({
         COD_QUESTION_1: '',
@@ -32,6 +32,7 @@ const SecurityQuestions = ({setGoDashboard}) => {
         axios.post('/security-answers',questionsUser, token())
         .then(res => {
             setGoDashboard(true)
+            setUserNew(false)
         })
         .catch(err => console.log(err))
     }

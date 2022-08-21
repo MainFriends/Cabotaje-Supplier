@@ -27,7 +27,7 @@ const login = (req, res) => {
             res.status(400).send({message});
         }else{
             const [data] = result[0];
-            const {COD_USER, COD_ROLE, FIRST_NAME, LAST_NAME, USER_PASSWORD, COD_STATUS, DAT_EXP, NUM_ATTEMPS} = data;
+            const {COD_USER, COD_ROLE, FIRST_NAME, LAST_NAME, USER_PASSWORD, COD_STATUS, DAT_EXP, NUM_ATTEMPS, USER_NEW, REQUIRED_QUESTIONS} = data;
             
             const isPasswordCorrect = await bcrypt.compare(PASSWORD, USER_PASSWORD);
             
@@ -58,14 +58,16 @@ const login = (req, res) => {
                     COD_USER,
                     COD_ROLE,
                     FIRST_NAME,
-                    LAST_NAME
+                    LAST_NAME,
+                    USER_NEW,
+                    REQUIRED_QUESTIONS
                 }
 
                 jwt.sign(payload, process.env.SECRET_KEY, {expiresIn: '15h'}, (err, token) => {
                     if(err){
                         res.status(500).send({message: 'Error al generar token'});
                     }else{
-                        res.send({FIRST_NAME, LAST_NAME, token});
+                        res.send({FIRST_NAME, LAST_NAME, token, USER_NEW, REQUIRED_QUESTIONS});
                     }
                 })
 

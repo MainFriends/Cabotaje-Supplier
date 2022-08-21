@@ -4,7 +4,7 @@ import AlertError from '../../../components/AlertError';
 import axios from '../../../config/axios';
 import token from '../../../helpers/getToken';
 
-const SecurityQuestions = ({setGoDashboard}) => {
+const SecurityQuestions = ({setGoDashboard, setRequiredQuestion}) => {
     const [questions, setQuestions] = useState([]);
     const [questionsUser, setQuestionsUser] = useState({
         COD_QUESTION_1: '',
@@ -20,6 +20,7 @@ const SecurityQuestions = ({setGoDashboard}) => {
         axios.get('/security-user-questions', token())
         .then(res => {
             setQuestions(res.data)
+            console.log(res.data)
             setQuestionsUser({
                 ...questionsUser,
                 COD_QUESTION_1: res.data[0].COD_QUESTION,
@@ -42,6 +43,7 @@ const SecurityQuestions = ({setGoDashboard}) => {
         axios.post('/security-compare-questions',questionsUser, token())
         .then(res => {
             setGoDashboard(true)
+            setRequiredQuestion(false)
         })
         .catch(err => {
             const {message} = err.response.data;
@@ -57,7 +59,7 @@ const SecurityQuestions = ({setGoDashboard}) => {
     <div className='container p-5'>
         <h4 className='text-dark'>Preguntas de seguridad</h4>
         <hr />
-        <p>Selecciona tres preguntas de seguridad. Estas preguntas nos ayudarán a verificar tu identidad si olvidas tu contraseña.</p>
+        <p>Response estas preguntas de seguridad. Estas preguntas nos ayudarán a verificar tu identidad.</p>
         <form onSubmit={handleSubmit} action="#">
             <div className="row">
                 <div className="col-10">
@@ -150,7 +152,7 @@ const SecurityQuestions = ({setGoDashboard}) => {
                     <button className='btn btn-primary' type="submit">Terminar</button>
                 </div>
             </div>
-            <div className="row">
+            <div className="row mt-3">
                 <div className="col-12">
                     {messageError ? <AlertError message={messageError}/> : null}
                 </div>

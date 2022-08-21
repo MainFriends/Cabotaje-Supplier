@@ -1923,7 +1923,6 @@ CREATE PROCEDURE SP_INS_ROLE(IN _NAM_ROLE VARCHAR(255),
 								_DES_ROLE TEXT,
                                 _COD_MODULE BIGINT,
                                  _COD_TABLE BIGINT,
-                                 _COD_STATUS BIGINT,
                                 _QUE BOOLEAN,
                                 _INS BOOLEAN,
                                 _UPD BOOLEAN,
@@ -1931,7 +1930,7 @@ CREATE PROCEDURE SP_INS_ROLE(IN _NAM_ROLE VARCHAR(255),
 )BEGIN
 	IF NOT EXISTS(SELECT * FROM ROLE WHERE NAM_ROLE = _NAM_ROLE) THEN
 		INSERT INTO ROLE(NAM_ROLE, DES_ROLE, COD_STATUS)
-        VALUES(_NAM_ROLE, _DES_ROLE, _COD_STATUS);
+        VALUES(_NAM_ROLE, _DES_ROLE, 1);
     ELSE
 		SIGNAL SQLSTATE '45000'
 		SET MESSAGE_TEXT = 'El nombre de rol ya se encuentra registrado.';
