@@ -1,29 +1,36 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from '../../config/axios';
 import token from '../../helpers/getToken';
 import { toUpperCase } from "../../helpers/Mayusculas";
 
-const EditCategoryForm = ({setSendRequest, setMessageError}) => {
+const EditCategoryForm = ({rowCOD, setSendRequest, setMessageError}) => {
 
-    const [formAddCategor, setFormAddCategor] = useState({
+    const [formEditCategor, setFormEditCategor] = useState({
         NAM_CATEGORY: '',
         DESCRIPTION:'',
         COD_STATUS: ''
     })
 
     const handleInputChange = (e) => {
-        setFormAddCategor({
-            ...formAddCategor,
+        setFormEditCategor({
+            ...formEditCategor,
             [e.target.name]: e.target.value
         })
     }
 
+    useEffect(() => {
+        if(rowCOD){
+            axios.get(`/inventoryCategory/${rowCOD}`, token())
+            .then(res => setFormEditCategor(res.data[0]))
+        }
+    }, [rowCOD]);
+
     const handleSubmitCategor = (e) => {
         e.preventDefault();
-        axios.post('/inventoryCategory', formAddCategor, token())
+
+        axios.put(`/inventoryCategory/${rowCOD}`, formEditCategor, token())
             .then(res => {
-                document.querySelector('#idCloseAddForm').click();
-                e.target.reset();
+                document.querySelector('#idCloseEditForm').click();
                 setSendRequest(true);
             })
             .catch(err => {
@@ -37,10 +44,10 @@ const EditCategoryForm = ({setSendRequest, setMessageError}) => {
     }
 
     return(
-        <form id='addFormCategory' onSubmit={handleSubmitCategor} action='#'>
+        <form id='editFormCategory' onSubmit={handleSubmitCategor} action='#'>
             <div className="row mb-4">
                 <div className="col-md-4">
-                    <label className='form-label' htmlFor="NAM_CATEGORY">Nombre categoría <span className="text-danger">  *</span></label>
+                    <label className='form-label' htmlFor="NAM_CATEGORY">Nombre Categoría <span className="text-danger">  *</span></label>
                     <input onChange={handleInputChange} className='form-control' name='NAM_CATEGORY' type="text" pattern="^[a-zA-ZñÑ ]+$"  title="No debe contener caracteres numericos" onInput={toUpperCase}required/>
                 </div>
                 <div className="col-md-4">
