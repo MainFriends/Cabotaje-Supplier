@@ -29,7 +29,7 @@ const AddUserForm = ({ setSendRequest, setMessageError }) => {
   const [isPasswordValid, setIsPasswordValid] = useState(false);
 
   useEffect(() => {
-    axios.get("/roles", token()).then((res) => {
+    axios.get("/roles-user", token()).then((res) => {
       const arrayRoles = res.data.filter((rol) => rol.COD_ROLE !== 2);
       setRoles(arrayRoles);
     });

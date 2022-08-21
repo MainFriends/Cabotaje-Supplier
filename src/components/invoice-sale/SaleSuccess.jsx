@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {PDFDownloadLink} from '@react-pdf/renderer';
 import SaleInvoicePDF from '../SaleInvoicePDF';
+import Spinner from '../Spinner';
 
 const SaleSuccess = ({saleMessage, setsaleInvoice, setCurrentPage, setproductListSale, cambio, saleInvoice, productListSale, correlativeInvoice}) => {
     const {message, ok} = saleMessage;
-
     const onCheck = () => {
         if(ok){
             setsaleInvoice({
@@ -37,35 +37,42 @@ const SaleSuccess = ({saleMessage, setsaleInvoice, setCurrentPage, setproductLis
             </div>
             <div className="modal-body">
                 {
-                    ok
+                    message
                     ?
-                        <h3 className="alert alert-success text-center mx-0" role="alert">
-                            <strong><i className="fa-solid fa-circle-check mr-3"></i></strong>{message}
-                        </h3>
+                    ok
+                        ?
+                            <h3 className="alert alert-success text-center mx-0" role="alert">
+                                <strong><i className="fa-solid fa-circle-check mr-3"></i></strong>{message}
+                            </h3>
+                        :
+                            <h3 className="alert alert-danger text-center mx-0" role="alert">
+                                    <strong><i className="fa-solid fa-circle-check mr-3"></i></strong>{message}
+                            </h3>
                     :
-                    <h3 className="alert alert-danger text-center mx-0" role="alert">
-                            <strong><i className="fa-solid fa-circle-check mr-3"></i></strong>{message}
-                    </h3>
+                    <Spinner />
                 }
                 {
-                    saleInvoice.TYP_TO_SALE === 'Contado' && saleInvoice.COD_TYP_PAY == '1'
+                    message && ok
                     ?
-                    <div className="row">
-                        <div className="col-6 text-right">
-                            <h1>Cambio</h1>
+                        saleInvoice.TYP_TO_SALE === 'Contado' && saleInvoice.COD_TYP_PAY == '1'
+                        ?
+                        <div className="row">
+                            <div className="col-6 text-right">
+                                <h1>Cambio</h1>
+                            </div>
+                            <div className="col-3">
+                                <input value={`L. ${cambio.toLocaleString('es-MX')}`} className='form-control form-control-lg' type="text" disabled/>
+                            </div>
                         </div>
-                        <div className="col-3">
-                            <input value={`L. ${cambio.toLocaleString('es-MX')}`} className='form-control form-control-lg' type="text" disabled/>
-                        </div>
-                    </div>
+                        :
+                        null
                     :
                     null
                 }
-
             </div>
                 <div className="modal-footer">
                     <button onClick={() => onCheck()} type="button" className="btn btn-primary" data-dismiss="modal">Listo</button>
-                    {ok ? <PDFDownloadLink document={<SaleInvoicePDF correlativeInvoice={correlativeInvoice} saleInvoice={saleInvoice} productListSale={productListSale}/>} fileName="factura.pdf">{({ blob, url, loading, error }) => <button type="button" className="btn btn-danger">Descargar factura</button>}</PDFDownloadLink> : null}
+                    {message ? ok ? <PDFDownloadLink document={<SaleInvoicePDF correlativeInvoice={correlativeInvoice} saleInvoice={saleInvoice} productListSale={productListSale}/>} fileName="factura.pdf">{({ blob, url, loading, error }) => <button type="button" className="btn btn-danger">Descargar factura</button>}</PDFDownloadLink> : null  : null}
                 </div>
             </div>
         </div>

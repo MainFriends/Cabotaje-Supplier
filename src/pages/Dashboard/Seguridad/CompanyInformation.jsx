@@ -69,7 +69,7 @@ const CompanyInformation = () => {
         })
     }
   return (
-    <>
+    <div className='p-4'>
         <h1 className="text-dark">Información de la empresa</h1>
         <hr />
         <form onSubmit={handleSubmit} action="#">
@@ -160,7 +160,7 @@ const CompanyInformation = () => {
                 </div>
             </div>
         </form>
-    </>
+    </div>
   )
 }
 

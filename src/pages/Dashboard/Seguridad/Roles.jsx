@@ -81,6 +81,11 @@ const Roles = () => {
             wrap:true
         },
         {
+            name: 'ESTADO',
+            button: true,
+            cell: row => row.COD_STATUS === 1 ? (<i onClick={() => updateStatus(row.COD_ROLE, row.COD_STATUS)} className={'text-success fa-solid fa-toggle-on fa-2xl'}></i>) : (<i onClick={() => updateStatus(row.COD_ROLE, row.COD_STATUS)} className={'fa-solid fa-toggle-off fa-2xl'}></i>) 
+        },
+        {
             name: 'ACCIONES',
             button: true,
             cell: row => <>
@@ -111,6 +116,18 @@ const Roles = () => {
 
     const handleDelete = (cod) => {
         axios.delete(`/roles/${cod}`, token())
+            .then(res => setSendRequest(true))
+    }
+
+    const updateStatus = (cod, roleStatus) => {
+        let status = 0;
+        console.log(roleStatus)
+        if(roleStatus === 1){
+            status = 2;
+        }else{
+            status = 1;
+        }
+        axios.put(`/roles/${cod}`, {status}, token())
             .then(res => setSendRequest(true))
     }
 

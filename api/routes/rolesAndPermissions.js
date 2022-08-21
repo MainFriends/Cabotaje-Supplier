@@ -4,7 +4,9 @@ const rolesAndPermissionsController = require('../controllers/rolesAndPermission
 const userExtractor = require('../middlewares/userExtractor');
 
 router.get('/roles', userExtractor, rolesAndPermissionsController.getRoles);
+router.get('/roles-user', userExtractor, rolesAndPermissionsController.getRolesUser);
 router.post('/roles', userExtractor, rolesAndPermissionsController.addRole);
+router.put('/roles/:codRole', userExtractor, rolesAndPermissionsController.updRole);
 router.delete('/roles/:codRole', userExtractor, rolesAndPermissionsController.delRole);
 router.get('/permissions/:codRole', userExtractor, rolesAndPermissionsController.getPermissions);
 router.get('/user-permissions', userExtractor, rolesAndPermissionsController.getUserPermissions);

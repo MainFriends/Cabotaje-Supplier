@@ -30,7 +30,6 @@ import Graficas from "./pages/Dashboard/Graficas/Graphics";
 import Profile from './pages/User-Profile/Profile';
 import Categorias from "./pages/Dashboard/Produccion/Categorias";
 import Roles from "./pages/Dashboard/Seguridad/Roles";
-import Page401 from "./pages/Error-Pages/Page401";
 import Page404 from "./pages/Error-Pages/Page404";
 import Bitacora from "./pages/Dashboard/Seguridad/Bitacora";
 import Welcome from "./pages/Dashboard/Welcome";
@@ -38,6 +37,7 @@ import Settings from "./pages/Dashboard/Seguridad/Settings";
 import CompanyInformation from "./pages/Dashboard/Seguridad/CompanyInformation";
 import BackupAndRestore from "./pages/Dashboard/Seguridad/BackupAndRestore";
 import SaleInvoicePDF from "./components/SaleInvoicePDF";
+import SecurityQuestions from "./pages/Dashboard/Seguridad/SecurityQuestions";
 
 
 const Pages = () => {
@@ -87,6 +87,7 @@ const Pages = () => {
         <Route path="/" element={isLogged ? (<Navigate to='/dashboard/welcome'/>) : (<Login />)}/>
         <Route path="/profile" element={isLogged ? (<Profile />) : (<Navigate to='/'/>)}/>
         <Route path="/view-invoice" element={isLogged ? (<SaleInvoicePDF />) : (<Navigate to='/'/>)}/>
+        <Route path="/security-questions" element={isLogged ? (<SecurityQuestions />) : (<Navigate to='/'/>)}/>
         <Route path="/dashboard" element={isLogged ? (<Dashboard />) : (<Navigate to='/'/>)}>
             <Route path="ventas" element={<Facturas />}/>
             <Route path="compras" element={<Compras />}/>

@@ -12,6 +12,18 @@ const getRoles = (req, res) => {
     })
 };
 
+const getRolesUser = (req, res) => {
+    const sp = 'CALL SP_SEL_ROLES_USER()';
+
+    mysqlConnect.query(sp, (err, result) => {
+        if(err){
+            res.status(500).send({message: "Error en el servidor."});
+        }else{
+            res.status(200).json(result[0]);
+        }
+    })
+};
+
 const addRole = (req, res) => {
     const sp = 'CALL SP_INS_ROLE(?,?,?,?,?,?,?,?)';
 
@@ -159,6 +171,28 @@ const getTables = (req, res) => {
     })
 };
 
+const updRole = (req, res) => {
+    const {codRole} = req.params;
+    const sp = 'CALL SP_UPD_ROLE(?,?)';
+    
+    const {
+        status
+    } = req.body
+
+    mysqlConnect.query(sp, [
+        codRole,
+        status
+    ], (err, result) => {
+        if(err){
+            const message = err.message.split(': ')[1];
+            res.status(400). send({message});
+        }else{
+            res.status(200).json({message: 'Actualización realizada correctamente'});
+        }
+    })
+};
+
+
 module.exports = {
     getRoles,
     addRole,
@@ -168,5 +202,7 @@ module.exports = {
     addPermissions,
     delPermissions,
     getModules,
-    getTables
+    getTables,
+    updRole,
+    getRolesUser
 }
