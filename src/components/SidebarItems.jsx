@@ -334,11 +334,11 @@ const SidebarItems = () => {
                                     <NavLink className="collapse-item" to="configuraciones-sistema">Configuraciones</NavLink>
                                 }
                                 {
-                                    <NavLink className="collapse-item" to="company-information">Información de la empresa</NavLink>
+                                    <NavLink className="collapse-item" to="company-information">Info de la empresa</NavLink>
                                 }
-                                {
+                                {/* {
                                     <NavLink className="collapse-item" to="backup">Copias de seguridad</NavLink>
-                                }
+                                } */}
                             </div>
                         </div>
                     </li>
