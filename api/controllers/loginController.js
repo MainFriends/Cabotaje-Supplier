@@ -61,14 +61,6 @@ const login = (req, res) => {
                     LAST_NAME
                 }
 
-                jwt.sign(payload, process.env.SECRET_KEY, {expiresIn: '15h'}, (err, token) => {
-                    if(err){
-                        res.status(500).send({message: 'Error al generar token'});
-                    }else{
-                        res.send({FIRST_NAME, LAST_NAME, token});
-                    }
-                })
-
                 const sp = 'CALL SP_UPD_NUM_ATTEMPS_LOGIN(?,?)';
                 mysqlConnect.query(sp,[
                     'true',
