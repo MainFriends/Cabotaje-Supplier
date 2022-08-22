@@ -150,7 +150,6 @@ const dowlandPdfCategory = (filteredItems) => {
                             persistTableHead 
                             defaultSortFieldId="id"
                             defaultSortAsc={false}
-                            actions={<button onClick={() => dowlandPdfCategory(filteredItems)} className='btn btn-danger btn-sm'><i className="fa-solid fa-file-pdf mr-2"></i>Descargar</button>}
     
                         />
     

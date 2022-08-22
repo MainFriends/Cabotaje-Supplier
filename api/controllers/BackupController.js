@@ -19,6 +19,7 @@ const runBackup = (req, res) => {
         .pipe(wstream)
         .on('finish', () => {
         console.log('DB Backup Completed!')
+            res.json({message: 'ok'})
         })
         .on('error', (err) => {
         console.log(err)

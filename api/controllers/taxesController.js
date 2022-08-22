@@ -76,9 +76,22 @@ const updateTax = (req, res) => {
     ], (error, resultado) => {
         if(error){
             const message = error.message.split(': ')[1];
-            res.status(304).send({message});
+            res.status(400).send({message});
         }else{
             res.status(200).send({message: 'El estado actual del impuesto se ha actualizado exitosamente'})
+        }
+    });
+}
+
+const getISV = (req, res) => {
+    const sp = 'CALL SP_SEL_ISV(?)';
+
+    mysqlConnect.query(sp, [0], (err, result) => {
+        if(err){
+            const message = err.message.split(': ')[1];
+            res.status(500).send({message});
+        }else{
+            res.status(200).json(result[0])
         }
     });
 }
@@ -88,5 +101,6 @@ module.exports = {
     getTax,
     addTax,
     delTax,
-    updateTax
+    updateTax,
+    getISV
 }

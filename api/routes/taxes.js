@@ -9,5 +9,6 @@ router.get('/taxes',  [userExtractor, verifyRoleProduction], taxesController.get
 router.post('/taxes', [userExtractor, verifyRoleProduction], taxesController.addTax);
 router.delete('/taxes/:codTax', [userExtractor, verifyRoleProduction], taxesController.delTax);
 router.put('/taxes/:codTax', [userExtractor, verifyRoleProduction], taxesController.updateTax);
+router.get('/all-isv', [userExtractor, verifyRoleProduction], taxesController.getISV);
 
 module.exports= router;

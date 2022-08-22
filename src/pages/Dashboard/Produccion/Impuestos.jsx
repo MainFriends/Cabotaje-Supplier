@@ -56,7 +56,7 @@ const Impuestos = () => {
     }, [filterText]);
 
     useEffect(() => {
-        axios.get('/taxes', token())
+        axios.get('/all-isv', token())
             .then(res => {
                 const {data} = res;
                 setRows(data);
