@@ -25,8 +25,9 @@ const dowlandPdfReceivable = (productListSale, saleInvoice, correlativeInvoice, 
     doc.text(`Correo: ${companyData.COMPANY_EMAIL}`, 35, 39);
     doc.text(`RTN: ${companyData.COMPANY_RTN}`, 35, 46);
     doc.setFontSize(10)
-    doc.text(`Nombre: ${saleInvoice.NAM_CLIENT}`, 15, 58);
-    doc.text(`RTN: ${saleInvoice.RTN}`,15, 65);
+    doc.text(`Usuario: ${nombreReporte}`, 15, 58);
+    doc.text(`Nombre: ${saleInvoice.NAM_CLIENT}`, 15, 65);
+    doc.text(`RTN: ${saleInvoice.RTN}`,15, 72);
     doc.text(`Fecha: ${moment(new Date()).format('DD-MM-YYYY, h:mm:ss a')}` ,143, 58)
     doc.text(`N° de factura: ${correlativeInvoice}`, 143, 65);
     doc.setFontSize(12)
@@ -60,7 +61,7 @@ const dowlandPdfReceivable = (productListSale, saleInvoice, correlativeInvoice, 
     doc.autoTable({
         head: [['PRODUCTO', 'DESCRIPCIÓN', 'CANTIDAD', 'PRECIO', 'ISV', 'TOTAL']],
         body: row.sort(),
-        startY: 70,
+        startY: 80,
         columnStyles: {
             3: {
                 halign: 'right'
