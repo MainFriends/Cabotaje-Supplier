@@ -297,7 +297,7 @@ export const PaymentMethod = ({saleInvoice, setsaleInvoice, setCurrentPage, corr
                 ?
                 <div className="col-3">
                     <label className="form-label">Cantidad recibida</label>
-                    <input min={1} max={TOT_SALE} value={saleInvoice.AMOUNT} autoFocus onChange={handleInputChange} onBlur={formatedValue} className='form-control text-right' type="text" name='AMOUNT'/>
+                    <input min={1} max={TOT_SALE} value={saleInvoice.AMOUNT} autoFocus onChange={handleInputChange}  className='form-control text-right' type="number" name='AMOUNT'/>
                 </div>
                 :
                 null

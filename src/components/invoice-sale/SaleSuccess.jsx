@@ -8,32 +8,59 @@ import axios from '../../config/axios';
 import token from '../../helpers/getToken';
 
 const dowlandPdfReceivable = (productListSale, saleInvoice, correlativeInvoice, companyData) => {
-    const doc = new jsPDF();
-    doc.text('Reporte de Cuentas por Cobrar - Cabotaje Supplier',40,30);    
+    const doc = new jsPDF();   
     const image = logo
-    doc.addImage(image, 'PNG', 10, 10,20,30,'Cabotaje');
+    doc.addImage(image, 'PNG', 10, 9,20,30,'Cabotaje');
   
     const nombre = JSON.parse(localStorage.getItem("userSession"));
-    const nombreReporte = `${nombre.FIRST_NAME} ${nombre.LAST_NAME}`
+    const nombreReporte = `${nombre.FIRST_NAME} ${nombre.LAST_NAME}`;
+
     doc.setFontSize(10)
-    doc.text(`${moment(new Date()).format('DD-MM-YYYY, h:mm:ss a')}` ,165, 13)
-    doc.text(`Impreso por: ${nombreReporte}`, 165, 7)
+    doc.text(`Factura proforma`, 170, 7)
+    doc.setFontSize(22)
+    doc.text(`${companyData.COMPANY_NAM.toUpperCase()}`,35,15);
+    doc.setFontSize(10)
+    doc.text(`Direccion: ${companyData.COMPANY_ADDRESS}`, 35,25);
+    doc.text(`Teléfono: ${companyData.COMPANY_PHONE}`, 35,32);
+    doc.text(`Correo: ${companyData.COMPANY_EMAIL}`, 35, 39);
+    doc.text(`RTN: ${companyData.COMPANY_RTN}`, 35, 46);
+    doc.setFontSize(10)
+    doc.text(`Nombre: ${saleInvoice.NAM_CLIENT}`, 15, 58);
+    doc.text(`RTN: ${saleInvoice.RTN}`,15, 65);
+    doc.text(`Fecha: ${moment(new Date()).format('DD-MM-YYYY, h:mm:ss a')}` ,143, 58)
+    doc.text(`N° de factura: ${correlativeInvoice}`, 143, 65);
+    doc.setFontSize(12)
+    doc.text(`SUBTOTAL:`, 150, 250);
+    doc.text(`TOTAL ISV:`, 151, 260);
+    doc.text(`TOTAL A PAGAR:`, 139,270)
+    doc.text(`_________________________________________________________________________________`,103, 240, {align: 'center'} )
+    doc.text(`L. ${saleInvoice.SUBTOTAL.toLocaleString('es-MX', {minimumFractionDigits: 2})}`,200,250, {align: 'right'})
+    doc.text(`L.${saleInvoice.TOT_ISV.toLocaleString('es-MX', {minimumFractionDigits: 2})}`,200,260, {align: 'right'})
+    doc.text(`L. ${saleInvoice.TOT_SALE.toLocaleString('es-MX', {minimumFractionDigits: 2})}`, 200, 270, {align: 'right'});
+    doc.setFontSize(8)
+    doc.text(`${companyData.COMPANY_LOCATION}`, 15, 270)
+    doc.text(`Pago al ${saleInvoice.TYP_TO_SALE.toLowerCase()}`,15,266);
+    
+    
+
+    
+
     
     const row = productListSale.map(fila => {
         return [
             fila.NAM_PRODUCT,
             fila.DES_PRODUCT,
             fila.CANT_PRODUCTS,
-            fila.PRICE.toLocaleString('es-MX', {minimumFractionDigits: 2}),
-            fila.ISV.toLocaleString('es-MX', {minimumFractionDigits: 2}),
-            fila.TOTAL.toLocaleString('es-MX', {minimumFractionDigits: 2})
+            `L. ${fila.PRICE.toLocaleString('es-MX', {minimumFractionDigits: 2})}`,
+            `L. ${fila.ISV.toLocaleString('es-MX', {minimumFractionDigits: 2})}`,
+            `L. ${fila.TOTAL.toLocaleString('es-MX', {minimumFractionDigits: 2})}`
         ]
     })  
 
     doc.autoTable({
         head: [['PRODUCTO', 'DESCRIPCIÓN', 'CANTIDAD', 'PRECIO', 'ISV', 'TOTAL']],
         body: row.sort(),
-        startY: 45,
+        startY: 70,
         columnStyles: {
             3: {
                 halign: 'right'
