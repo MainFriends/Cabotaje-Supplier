@@ -17,7 +17,7 @@ const SaleDetail = ({rowCOD}) => {
 
     const columns = [
         {
-            name: 'CÓDIGO DEL PRODUCTO',
+            name: 'SKU',
             selector: row => row.COD_PRODUCT,
         },
         {
@@ -32,17 +32,17 @@ const SaleDetail = ({rowCOD}) => {
         {
             name: 'PRECIO',
             selector: row => row.PRICE,
-            format: row => `L ${row.PRICE.toFixed(2)}`
+            format: row => `L ${row.PRICE.toLocaleString('es-MX', {minimumFractionDigits: 2})}`,
         },
         {
             name: 'DESCUENTO',
             selector: row => row.DISCOUNT,
-            format: row => `L ${row.DISCOUNT.toFixed(2)}`
+            format: row => `L ${row.DISCOUNT.toLocaleString('es-MX', {minimumFractionDigits: 2})}`
         },
         {
             name: 'TOTAL',
             selector: row => row.TOTAL,
-            format: row => `L ${row.TOTAL.toFixed(2)}`
+            format: row => `L ${row.TOTAL.toLocaleString('es-MX', {minimumFractionDigits: 2})}`
         },
     ];
 

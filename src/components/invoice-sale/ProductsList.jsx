@@ -170,17 +170,17 @@ const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeI
         {
             name: 'PRECIO',
             selector: row => row.PRICE,
-            format: row => `L ${row.PRICE.toLocaleString('es-MX')}`
+            format: row => `L ${row.PRICE.toLocaleString('es-MX', {minimumFractionDigits: 2})}`
         },
         {
             name: 'ISV',
             selector: row => row.ISV,
-            format: row => `L ${row.ISV.toLocaleString('es-MX')}`
+            format: row => `L ${row.ISV.toLocaleString('es-MX', {minimumFractionDigits: 2})}`
         },
         {
             name: 'TOTAL',
             selector: row => row.TOTAL,
-            format: row => `L ${row.TOTAL.toLocaleString('es-MX')}`
+            format: row => `L ${row.TOTAL.toLocaleString('es-MX', {minimumFractionDigits: 2})}`
         },
         {
             name: 'ELIMINAR',
@@ -386,9 +386,9 @@ const ProductsList = ({saleInvoice, setsaleInvoice, setCurrentPage, correlativeI
                 <h6 className='font-weight-bold'>Total venta</h6>
             </div>
             <div className="col-2 text-right pr-4">
-                <h6>{`L. ${SUBTOTAL.toLocaleString('es-MX')}`}</h6>
-                <h6>{`L. ${TOT_ISV.toLocaleString('es-MX')}`}</h6>
-                <h6 className='font-weight-bold'>{`L. ${TOT_SALE.toLocaleString('es-MX')}`}</h6>
+                <h6>{`L. ${SUBTOTAL.toLocaleString('es-MX', {minimumFractionDigits: 2})}`}</h6>
+                <h6>{`L. ${TOT_ISV.toLocaleString('es-MX', {minimumFractionDigits: 2})}`}</h6>
+                <h6 className='font-weight-bold'>{`L. ${TOT_SALE.toLocaleString('es-MX', {minimumFractionDigits: 2})}`}</h6>
             </div>
         </div>
         <div className="modal-footer">

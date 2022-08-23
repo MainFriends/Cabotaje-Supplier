@@ -25,9 +25,9 @@ const SaleInformation = ({setsaleInvoice, saleInvoice, setCurrentPage, setCorrel
       .then(res => {
         const {CORRELATIVO} = res.data[0];
         if(CORRELATIVO){
-          setCorrelativeInvoice(`000-001-01-${('00000000'+(CORRELATIVO+1)).substr(-8,8)}`)
+          setCorrelativeInvoice(CORRELATIVO+1)
         }else{
-          setCorrelativeInvoice('000-001-01-00000001')
+          setCorrelativeInvoice(1)
         }
       })
   }, [currentPage])

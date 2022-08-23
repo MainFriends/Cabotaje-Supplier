@@ -31,10 +31,10 @@ const dowlandPdfSales = (filteredItems) => {
         return [
             fila.COD_INVOICE,
             fila.CLIENT,
-            fila.SUBTOTAL,
-            fila.TOT_DISCOUNT,
-            fila.TOT_ISV,
-            fila.TOT_SALE,
+            fila.SUBTOTAL.toLocaleString('es-MX', {minimumFractionDigits: 2}),
+            fila.TOT_DISCOUNT.toLocaleString('es-MX', {minimumFractionDigits: 2}),
+            fila.TOT_ISV.toLocaleString('es-MX', {minimumFractionDigits: 2}),
+            fila.TOT_SALE.toLocaleString('es-MX', {minimumFractionDigits: 2}),
             fila.TYP_TO_SALE,
             fila.NAM_TYPE_PAY,
             fila.USER_NAME,
@@ -65,9 +65,7 @@ const Facturas = () => {
             id: "id",
             name: '# FACTURA',
             selector: row => row.COD_INVOICE,
-            sortable: true,
-            format: row => `000-001-01-${('00000000'+row.COD_INVOICE).substr(-8,8)}`,
-            grow: 2
+            sortable: true
         },
         {
             name: 'CLIENTE',
@@ -79,25 +77,29 @@ const Facturas = () => {
             name: 'SUBTOTAL',
             selector: row => row.SUBTOTAL,
             sortable: true,
-            format: row => `L ${row.SUBTOTAL.toFixed(2)}`
+            format: row => `L ${row.SUBTOTAL.toLocaleString('es-MX', {minimumFractionDigits: 2})}`,
+            right: true
         },
         {
             name: 'TOTAL DESCUENTO',
             selector: row => row.TOT_DISCOUNT,
             sortable: true,
-            format: row => `L ${row.TOT_DISCOUNT.toFixed(2)}`
+            format: row => `L ${row.TOT_DISCOUNT.toLocaleString('es-MX', {minimumFractionDigits: 2})}`,
+            right: true
         },
         {
             name: 'TOTAL ISV',
             selector: row => row.TOT_ISV,
             sortable: true,
-            format: row => `L ${row.TOT_ISV.toFixed(2)}`
+            format: row => `L ${row.TOT_ISV.toLocaleString('es-MX', {minimumFractionDigits: 2})}`,
+            right: true
         },
         {
             name: 'TOTAL VENTA',
             selector: row => row.TOT_SALE,
             sortable: true,
-            format: row => `L ${row.TOT_SALE.toFixed(2)}`
+            format: row => `L ${row.TOT_SALE.toLocaleString('es-MX', {minimumFractionDigits: 2})}`,
+            right: true
         },
         {
             name: 'TIPO DE TRANSACCIÓN',

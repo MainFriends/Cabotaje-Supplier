@@ -49,17 +49,17 @@ export const PaymentMethod = ({saleInvoice, setsaleInvoice, setCurrentPage, corr
         {
             name: 'PRECIO',
             selector: row => row.PRICE,
-            format: row => `L ${row.PRICE.toLocaleString('es-MX')}`
+            format: row => `L ${row.PRICE.toLocaleString('es-MX', {minimumFractionDigits: 2})}`
         },
         {
             name: 'ISV',
             selector: row => row.ISV,
-            format: row => `L ${row.ISV.toLocaleString('es-MX')}`
+            format: row => `L ${row.ISV.toLocaleString('es-MX', {minimumFractionDigits: 2})}`
         },
         {
             name: 'TOTAL',
             selector: row => row.TOTAL,
-            format: row => `L ${row.TOTAL.toLocaleString('es-MX')}`
+            format: row => `L ${row.TOTAL.toLocaleString('es-MX', {minimumFractionDigits: 2})}`
         }
     ];
 
@@ -194,6 +194,22 @@ export const PaymentMethod = ({saleInvoice, setsaleInvoice, setCurrentPage, corr
             })
     }
 
+    const formatedValue = (e) => {
+        const isNumber = /^[0-9]/
+
+        if(isNumber.test(saleInvoice.AMOUNT)){
+            setsaleInvoice({
+                ...saleInvoice,
+                AMOUNT: parseFloat(e.target.value).toLocaleString('es-MX', {minimumFractionDigits: 2})
+            })
+        }else{
+            setsaleInvoice({
+                ...saleInvoice,
+                AMOUNT: ''
+            })
+        }
+    }
+
   return (
     <div className="card text-dark card-facturar shadow">
     <div className="card-header">Finalizar venta</div>
@@ -253,9 +269,9 @@ export const PaymentMethod = ({saleInvoice, setsaleInvoice, setCurrentPage, corr
                 <h6 className='font-weight-bold'>Total venta</h6>
             </div>
             <div className="col-2 text-right pr-4">
-                <h6>{`L. ${SUBTOTAL.toLocaleString('es-MX')}`}</h6>
-                <h6>{`L. ${TOT_ISV.toLocaleString('es-MX')}`}</h6>
-                <h6 className='font-weight-bold'>{`L. ${TOT_SALE.toLocaleString('es-MX')}`}</h6>
+                <h6>{`L. ${SUBTOTAL.toLocaleString('es-MX', {minimumFractionDigits: 2})}`}</h6>
+                <h6>{`L. ${TOT_ISV.toLocaleString('es-MX', {minimumFractionDigits: 2})}`}</h6>
+                <h6 className='font-weight-bold'>{`L. ${TOT_SALE.toLocaleString('es-MX', {minimumFractionDigits: 2})}`}</h6>
             </div>
         </div>
         <hr />
@@ -281,7 +297,7 @@ export const PaymentMethod = ({saleInvoice, setsaleInvoice, setCurrentPage, corr
                 ?
                 <div className="col-3">
                     <label className="form-label">Cantidad recibida</label>
-                    <input min={1} max={TOT_SALE} value={saleInvoice.AMOUNT} autoFocus onChange={handleInputChange} className='form-control' type="number" />
+                    <input min={1} max={TOT_SALE} value={saleInvoice.AMOUNT} autoFocus onChange={handleInputChange} onBlur={formatedValue} className='form-control text-right' type="text" name='AMOUNT'/>
                 </div>
                 :
                 null

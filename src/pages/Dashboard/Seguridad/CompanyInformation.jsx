@@ -103,13 +103,13 @@ const CompanyInformation = () => {
                         <div className="col-6">
                             <div className="form-group">
                                 <label>RTN</label>
-                                <input onChange={handleInputChange} value={companyData.COMPANY_RTN} className="form-control text-dark" type="text" name="COMPANY_RTN" required/>
+                                <input minLength={14}  maxLength={14} pattern="^[0-9]{14}" onChange={handleInputChange} value={companyData.COMPANY_RTN} className="form-control text-dark" type="text" name="COMPANY_RTN" required title="RTN debe contener 14 carácteres númericos, sin guiones ni espacios."/>
                             </div>
                         </div>
                         <div className="col-6">
                             <div className="form-group">
                                 <label>Teléfono</label>
-                                <input onChange={handleInputChange} value={companyData.COMPANY_PHONE} className="form-control text-dark" type="text" name="COMPANY_PHONE" required/>
+                                <input minLength={8}  maxLength={8} pattern="^[0-9]{8}" onChange={handleInputChange} value={companyData.COMPANY_PHONE} className="form-control text-dark" type="text" name="COMPANY_PHONE" title="Teléfono debe contener 8 carácteres númericos, sin guiones ni espacios." required/>
                             </div>
                         </div>
                     </div>
@@ -139,7 +139,7 @@ const CompanyInformation = () => {
                         </div>
                         <div className="col-8">
                             <div className="form-group">
-                                <input onChange={handleInputChange} value={companyData.COMPANY_WHATSAPP} className="form-control text-dark" type="text" name="COMPANY_WHATSAPP" required/>
+                                <input minLength={8}  maxLength={8} pattern="^[0-9]{8}" onChange={handleInputChange} value={companyData.COMPANY_WHATSAPP} className="form-control text-dark" type="text" name="COMPANY_WHATSAPP" title="Teléfono debe contener 8 carácteres númericos, sin guiones ni espacios." required/>
                             </div>
                         </div>
                     </div>
