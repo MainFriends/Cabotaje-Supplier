@@ -293,9 +293,9 @@ const SidebarItems = () => {
                             {/* {
                                 viewContabilidad().rebajas ? <NavLink className="collapse-item" to="rebajas">Rebajas</NavLink> : null
                             } */}
-                            {
+                            {/*
                                 viewContabilidad().planilla ? <NavLink className="collapse-item" to="planilla-pago">Planilla de pago</NavLink> : null
-                            }
+                        */}
                         </div>
                     </div>
                 </li>

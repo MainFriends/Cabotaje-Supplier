@@ -25,7 +25,6 @@ import CuentasCobrar from "./pages/Dashboard/Contabilidad/CuentasCobrar";
 import CuentasPagar from "./pages/Dashboard/Contabilidad/CuentasPagar";
 import Devoluciones from "./pages/Dashboard/Contabilidad/Devoluciones";
 import Rebajas from "./pages/Dashboard/Contabilidad/Rebajas";
-import PlanillaPago from "./pages/Dashboard/Contabilidad/PlanillaPago";
 import Graficas from "./pages/Dashboard/Graficas/Graphics";
 import Profile from './pages/User-Profile/Profile';
 import Categorias from "./pages/Dashboard/Produccion/Categorias";
@@ -121,7 +120,6 @@ const Pages = () => {
             <Route path="cuentas-pagar" element={<CuentasPagar />}/>
             <Route path="devoluciones" element={<Devoluciones />}/>
             <Route path="rebajas" element={<Rebajas />}/>
-            <Route path="planilla-pago" element={<PlanillaPago />}/>
             <Route path="graficas" element={<Graficas />}/>
             <Route path="roles-permisos" element={<Roles />}/>
             <Route path="bitacora" element={<Bitacora />}/>
